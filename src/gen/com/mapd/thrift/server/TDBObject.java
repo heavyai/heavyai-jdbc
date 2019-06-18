@@ -593,13 +593,13 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
           case 3: // PRIVS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list266 = iprot.readListBegin();
-                struct.privs = new java.util.ArrayList<java.lang.Boolean>(_list266.size);
-                boolean _elem267;
-                for (int _i268 = 0; _i268 < _list266.size; ++_i268)
+                org.apache.thrift.protocol.TList _list274 = iprot.readListBegin();
+                struct.privs = new java.util.ArrayList<java.lang.Boolean>(_list274.size);
+                boolean _elem275;
+                for (int _i276 = 0; _i276 < _list274.size; ++_i276)
                 {
-                  _elem267 = iprot.readBool();
-                  struct.privs.add(_elem267);
+                  _elem275 = iprot.readBool();
+                  struct.privs.add(_elem275);
                 }
                 iprot.readListEnd();
               }
@@ -645,9 +645,9 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
         oprot.writeFieldBegin(PRIVS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.BOOL, struct.privs.size()));
-          for (boolean _iter269 : struct.privs)
+          for (boolean _iter277 : struct.privs)
           {
-            oprot.writeBool(_iter269);
+            oprot.writeBool(_iter277);
           }
           oprot.writeListEnd();
         }
@@ -698,9 +698,9 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
       if (struct.isSetPrivs()) {
         {
           oprot.writeI32(struct.privs.size());
-          for (boolean _iter270 : struct.privs)
+          for (boolean _iter278 : struct.privs)
           {
-            oprot.writeBool(_iter270);
+            oprot.writeBool(_iter278);
           }
         }
       }
@@ -723,13 +723,13 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
       }
       if (incoming.get(2)) {
         {
-          org.apache.thrift.protocol.TList _list271 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.BOOL, iprot.readI32());
-          struct.privs = new java.util.ArrayList<java.lang.Boolean>(_list271.size);
-          boolean _elem272;
-          for (int _i273 = 0; _i273 < _list271.size; ++_i273)
+          org.apache.thrift.protocol.TList _list279 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.BOOL, iprot.readI32());
+          struct.privs = new java.util.ArrayList<java.lang.Boolean>(_list279.size);
+          boolean _elem280;
+          for (int _i281 = 0; _i281 < _list279.size; ++_i281)
           {
-            _elem272 = iprot.readBool();
-            struct.privs.add(_elem272);
+            _elem280 = iprot.readBool();
+            struct.privs.add(_elem280);
           }
         }
         struct.setPrivsIsSet(true);

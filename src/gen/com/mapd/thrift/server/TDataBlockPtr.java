@@ -155,14 +155,14 @@ public class TDataBlockPtr extends org.apache.thrift.TUnion<TDataBlockPtr, TData
           if (field.type == VAR_LEN_DATA_FIELD_DESC.type) {
             java.util.List<TVarLen> var_len_data;
             {
-              org.apache.thrift.protocol.TList _list184 = iprot.readListBegin();
-              var_len_data = new java.util.ArrayList<TVarLen>(_list184.size);
-              TVarLen _elem185;
-              for (int _i186 = 0; _i186 < _list184.size; ++_i186)
+              org.apache.thrift.protocol.TList _list192 = iprot.readListBegin();
+              var_len_data = new java.util.ArrayList<TVarLen>(_list192.size);
+              TVarLen _elem193;
+              for (int _i194 = 0; _i194 < _list192.size; ++_i194)
               {
-                _elem185 = new TVarLen();
-                _elem185.read(iprot);
-                var_len_data.add(_elem185);
+                _elem193 = new TVarLen();
+                _elem193.read(iprot);
+                var_len_data.add(_elem193);
               }
               iprot.readListEnd();
             }
@@ -191,9 +191,9 @@ public class TDataBlockPtr extends org.apache.thrift.TUnion<TDataBlockPtr, TData
         java.util.List<TVarLen> var_len_data = (java.util.List<TVarLen>)value_;
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, var_len_data.size()));
-          for (TVarLen _iter187 : var_len_data)
+          for (TVarLen _iter195 : var_len_data)
           {
-            _iter187.write(oprot);
+            _iter195.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -215,14 +215,14 @@ public class TDataBlockPtr extends org.apache.thrift.TUnion<TDataBlockPtr, TData
         case VAR_LEN_DATA:
           java.util.List<TVarLen> var_len_data;
           {
-            org.apache.thrift.protocol.TList _list188 = iprot.readListBegin();
-            var_len_data = new java.util.ArrayList<TVarLen>(_list188.size);
-            TVarLen _elem189;
-            for (int _i190 = 0; _i190 < _list188.size; ++_i190)
+            org.apache.thrift.protocol.TList _list196 = iprot.readListBegin();
+            var_len_data = new java.util.ArrayList<TVarLen>(_list196.size);
+            TVarLen _elem197;
+            for (int _i198 = 0; _i198 < _list196.size; ++_i198)
             {
-              _elem189 = new TVarLen();
-              _elem189.read(iprot);
-              var_len_data.add(_elem189);
+              _elem197 = new TVarLen();
+              _elem197.read(iprot);
+              var_len_data.add(_elem197);
             }
             iprot.readListEnd();
           }
@@ -246,9 +246,9 @@ public class TDataBlockPtr extends org.apache.thrift.TUnion<TDataBlockPtr, TData
         java.util.List<TVarLen> var_len_data = (java.util.List<TVarLen>)value_;
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, var_len_data.size()));
-          for (TVarLen _iter191 : var_len_data)
+          for (TVarLen _iter199 : var_len_data)
           {
-            _iter191.write(oprot);
+            _iter199.write(oprot);
           }
           oprot.writeListEnd();
         }

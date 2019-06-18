@@ -17143,14 +17143,14 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list282 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TServerStatus>(_list282.size);
-                  TServerStatus _elem283;
-                  for (int _i284 = 0; _i284 < _list282.size; ++_i284)
+                  org.apache.thrift.protocol.TList _list290 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TServerStatus>(_list290.size);
+                  TServerStatus _elem291;
+                  for (int _i292 = 0; _i292 < _list290.size; ++_i292)
                   {
-                    _elem283 = new TServerStatus();
-                    _elem283.read(iprot);
-                    struct.success.add(_elem283);
+                    _elem291 = new TServerStatus();
+                    _elem291.read(iprot);
+                    struct.success.add(_elem291);
                   }
                   iprot.readListEnd();
                 }
@@ -17187,9 +17187,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TServerStatus _iter285 : struct.success)
+            for (TServerStatus _iter293 : struct.success)
             {
-              _iter285.write(oprot);
+              _iter293.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -17228,9 +17228,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TServerStatus _iter286 : struct.success)
+            for (TServerStatus _iter294 : struct.success)
             {
-              _iter286.write(oprot);
+              _iter294.write(oprot);
             }
           }
         }
@@ -17245,14 +17245,14 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list287 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TServerStatus>(_list287.size);
-            TServerStatus _elem288;
-            for (int _i289 = 0; _i289 < _list287.size; ++_i289)
+            org.apache.thrift.protocol.TList _list295 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TServerStatus>(_list295.size);
+            TServerStatus _elem296;
+            for (int _i297 = 0; _i297 < _list295.size; ++_i297)
             {
-              _elem288 = new TServerStatus();
-              _elem288.read(iprot);
-              struct.success.add(_elem288);
+              _elem296 = new TServerStatus();
+              _elem296.read(iprot);
+              struct.success.add(_elem296);
             }
           }
           struct.setSuccessIsSet(true);
@@ -18859,13 +18859,13 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list290 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<java.lang.String>(_list290.size);
-                  java.lang.String _elem291;
-                  for (int _i292 = 0; _i292 < _list290.size; ++_i292)
+                  org.apache.thrift.protocol.TList _list298 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<java.lang.String>(_list298.size);
+                  java.lang.String _elem299;
+                  for (int _i300 = 0; _i300 < _list298.size; ++_i300)
                   {
-                    _elem291 = iprot.readString();
-                    struct.success.add(_elem291);
+                    _elem299 = iprot.readString();
+                    struct.success.add(_elem299);
                   }
                   iprot.readListEnd();
                 }
@@ -18902,9 +18902,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.lang.String _iter293 : struct.success)
+            for (java.lang.String _iter301 : struct.success)
             {
-              oprot.writeString(_iter293);
+              oprot.writeString(_iter301);
             }
             oprot.writeListEnd();
           }
@@ -18943,9 +18943,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.lang.String _iter294 : struct.success)
+            for (java.lang.String _iter302 : struct.success)
             {
-              oprot.writeString(_iter294);
+              oprot.writeString(_iter302);
             }
           }
         }
@@ -18960,13 +18960,13 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list295 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.success = new java.util.ArrayList<java.lang.String>(_list295.size);
-            java.lang.String _elem296;
-            for (int _i297 = 0; _i297 < _list295.size; ++_i297)
+            org.apache.thrift.protocol.TList _list303 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new java.util.ArrayList<java.lang.String>(_list303.size);
+            java.lang.String _elem304;
+            for (int _i305 = 0; _i305 < _list303.size; ++_i305)
             {
-              _elem296 = iprot.readString();
-              struct.success.add(_elem296);
+              _elem304 = iprot.readString();
+              struct.success.add(_elem304);
             }
           }
           struct.setSuccessIsSet(true);
@@ -19738,13 +19738,13 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list298 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<java.lang.String>(_list298.size);
-                  java.lang.String _elem299;
-                  for (int _i300 = 0; _i300 < _list298.size; ++_i300)
+                  org.apache.thrift.protocol.TList _list306 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<java.lang.String>(_list306.size);
+                  java.lang.String _elem307;
+                  for (int _i308 = 0; _i308 < _list306.size; ++_i308)
                   {
-                    _elem299 = iprot.readString();
-                    struct.success.add(_elem299);
+                    _elem307 = iprot.readString();
+                    struct.success.add(_elem307);
                   }
                   iprot.readListEnd();
                 }
@@ -19781,9 +19781,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.lang.String _iter301 : struct.success)
+            for (java.lang.String _iter309 : struct.success)
             {
-              oprot.writeString(_iter301);
+              oprot.writeString(_iter309);
             }
             oprot.writeListEnd();
           }
@@ -19822,9 +19822,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.lang.String _iter302 : struct.success)
+            for (java.lang.String _iter310 : struct.success)
             {
-              oprot.writeString(_iter302);
+              oprot.writeString(_iter310);
             }
           }
         }
@@ -19839,13 +19839,13 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list303 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.success = new java.util.ArrayList<java.lang.String>(_list303.size);
-            java.lang.String _elem304;
-            for (int _i305 = 0; _i305 < _list303.size; ++_i305)
+            org.apache.thrift.protocol.TList _list311 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new java.util.ArrayList<java.lang.String>(_list311.size);
+            java.lang.String _elem312;
+            for (int _i313 = 0; _i313 < _list311.size; ++_i313)
             {
-              _elem304 = iprot.readString();
-              struct.success.add(_elem304);
+              _elem312 = iprot.readString();
+              struct.success.add(_elem312);
             }
           }
           struct.setSuccessIsSet(true);
@@ -20617,13 +20617,13 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list306 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<java.lang.String>(_list306.size);
-                  java.lang.String _elem307;
-                  for (int _i308 = 0; _i308 < _list306.size; ++_i308)
+                  org.apache.thrift.protocol.TList _list314 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<java.lang.String>(_list314.size);
+                  java.lang.String _elem315;
+                  for (int _i316 = 0; _i316 < _list314.size; ++_i316)
                   {
-                    _elem307 = iprot.readString();
-                    struct.success.add(_elem307);
+                    _elem315 = iprot.readString();
+                    struct.success.add(_elem315);
                   }
                   iprot.readListEnd();
                 }
@@ -20660,9 +20660,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.lang.String _iter309 : struct.success)
+            for (java.lang.String _iter317 : struct.success)
             {
-              oprot.writeString(_iter309);
+              oprot.writeString(_iter317);
             }
             oprot.writeListEnd();
           }
@@ -20701,9 +20701,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.lang.String _iter310 : struct.success)
+            for (java.lang.String _iter318 : struct.success)
             {
-              oprot.writeString(_iter310);
+              oprot.writeString(_iter318);
             }
           }
         }
@@ -20718,13 +20718,13 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list311 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.success = new java.util.ArrayList<java.lang.String>(_list311.size);
-            java.lang.String _elem312;
-            for (int _i313 = 0; _i313 < _list311.size; ++_i313)
+            org.apache.thrift.protocol.TList _list319 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new java.util.ArrayList<java.lang.String>(_list319.size);
+            java.lang.String _elem320;
+            for (int _i321 = 0; _i321 < _list319.size; ++_i321)
             {
-              _elem312 = iprot.readString();
-              struct.success.add(_elem312);
+              _elem320 = iprot.readString();
+              struct.success.add(_elem320);
             }
           }
           struct.setSuccessIsSet(true);
@@ -21499,14 +21499,14 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list314 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TTableMeta>(_list314.size);
-                  TTableMeta _elem315;
-                  for (int _i316 = 0; _i316 < _list314.size; ++_i316)
+                  org.apache.thrift.protocol.TList _list322 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TTableMeta>(_list322.size);
+                  TTableMeta _elem323;
+                  for (int _i324 = 0; _i324 < _list322.size; ++_i324)
                   {
-                    _elem315 = new TTableMeta();
-                    _elem315.read(iprot);
-                    struct.success.add(_elem315);
+                    _elem323 = new TTableMeta();
+                    _elem323.read(iprot);
+                    struct.success.add(_elem323);
                   }
                   iprot.readListEnd();
                 }
@@ -21543,9 +21543,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TTableMeta _iter317 : struct.success)
+            for (TTableMeta _iter325 : struct.success)
             {
-              _iter317.write(oprot);
+              _iter325.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -21584,9 +21584,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TTableMeta _iter318 : struct.success)
+            for (TTableMeta _iter326 : struct.success)
             {
-              _iter318.write(oprot);
+              _iter326.write(oprot);
             }
           }
         }
@@ -21601,14 +21601,14 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list319 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TTableMeta>(_list319.size);
-            TTableMeta _elem320;
-            for (int _i321 = 0; _i321 < _list319.size; ++_i321)
+            org.apache.thrift.protocol.TList _list327 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TTableMeta>(_list327.size);
+            TTableMeta _elem328;
+            for (int _i329 = 0; _i329 < _list327.size; ++_i329)
             {
-              _elem320 = new TTableMeta();
-              _elem320.read(iprot);
-              struct.success.add(_elem320);
+              _elem328 = new TTableMeta();
+              _elem328.read(iprot);
+              struct.success.add(_elem328);
             }
           }
           struct.setSuccessIsSet(true);
@@ -24258,13 +24258,13 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list322 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<java.lang.String>(_list322.size);
-                  java.lang.String _elem323;
-                  for (int _i324 = 0; _i324 < _list322.size; ++_i324)
+                  org.apache.thrift.protocol.TList _list330 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<java.lang.String>(_list330.size);
+                  java.lang.String _elem331;
+                  for (int _i332 = 0; _i332 < _list330.size; ++_i332)
                   {
-                    _elem323 = iprot.readString();
-                    struct.success.add(_elem323);
+                    _elem331 = iprot.readString();
+                    struct.success.add(_elem331);
                   }
                   iprot.readListEnd();
                 }
@@ -24301,9 +24301,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.lang.String _iter325 : struct.success)
+            for (java.lang.String _iter333 : struct.success)
             {
-              oprot.writeString(_iter325);
+              oprot.writeString(_iter333);
             }
             oprot.writeListEnd();
           }
@@ -24342,9 +24342,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.lang.String _iter326 : struct.success)
+            for (java.lang.String _iter334 : struct.success)
             {
-              oprot.writeString(_iter326);
+              oprot.writeString(_iter334);
             }
           }
         }
@@ -24359,13 +24359,13 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list327 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.success = new java.util.ArrayList<java.lang.String>(_list327.size);
-            java.lang.String _elem328;
-            for (int _i329 = 0; _i329 < _list327.size; ++_i329)
+            org.apache.thrift.protocol.TList _list335 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new java.util.ArrayList<java.lang.String>(_list335.size);
+            java.lang.String _elem336;
+            for (int _i337 = 0; _i337 < _list335.size; ++_i337)
             {
-              _elem328 = iprot.readString();
-              struct.success.add(_elem328);
+              _elem336 = iprot.readString();
+              struct.success.add(_elem336);
             }
           }
           struct.setSuccessIsSet(true);
@@ -25140,14 +25140,14 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list330 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TDBInfo>(_list330.size);
-                  TDBInfo _elem331;
-                  for (int _i332 = 0; _i332 < _list330.size; ++_i332)
+                  org.apache.thrift.protocol.TList _list338 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TDBInfo>(_list338.size);
+                  TDBInfo _elem339;
+                  for (int _i340 = 0; _i340 < _list338.size; ++_i340)
                   {
-                    _elem331 = new TDBInfo();
-                    _elem331.read(iprot);
-                    struct.success.add(_elem331);
+                    _elem339 = new TDBInfo();
+                    _elem339.read(iprot);
+                    struct.success.add(_elem339);
                   }
                   iprot.readListEnd();
                 }
@@ -25184,9 +25184,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TDBInfo _iter333 : struct.success)
+            for (TDBInfo _iter341 : struct.success)
             {
-              _iter333.write(oprot);
+              _iter341.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -25225,9 +25225,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TDBInfo _iter334 : struct.success)
+            for (TDBInfo _iter342 : struct.success)
             {
-              _iter334.write(oprot);
+              _iter342.write(oprot);
             }
           }
         }
@@ -25242,14 +25242,14 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list335 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TDBInfo>(_list335.size);
-            TDBInfo _elem336;
-            for (int _i337 = 0; _i337 < _list335.size; ++_i337)
+            org.apache.thrift.protocol.TList _list343 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TDBInfo>(_list343.size);
+            TDBInfo _elem344;
+            for (int _i345 = 0; _i345 < _list343.size; ++_i345)
             {
-              _elem336 = new TDBInfo();
-              _elem336.read(iprot);
-              struct.success.add(_elem336);
+              _elem344 = new TDBInfo();
+              _elem344.read(iprot);
+              struct.success.add(_elem344);
             }
           }
           struct.setSuccessIsSet(true);
@@ -29128,14 +29128,14 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list338 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TNodeMemoryInfo>(_list338.size);
-                  TNodeMemoryInfo _elem339;
-                  for (int _i340 = 0; _i340 < _list338.size; ++_i340)
+                  org.apache.thrift.protocol.TList _list346 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TNodeMemoryInfo>(_list346.size);
+                  TNodeMemoryInfo _elem347;
+                  for (int _i348 = 0; _i348 < _list346.size; ++_i348)
                   {
-                    _elem339 = new TNodeMemoryInfo();
-                    _elem339.read(iprot);
-                    struct.success.add(_elem339);
+                    _elem347 = new TNodeMemoryInfo();
+                    _elem347.read(iprot);
+                    struct.success.add(_elem347);
                   }
                   iprot.readListEnd();
                 }
@@ -29172,9 +29172,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TNodeMemoryInfo _iter341 : struct.success)
+            for (TNodeMemoryInfo _iter349 : struct.success)
             {
-              _iter341.write(oprot);
+              _iter349.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -29213,9 +29213,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TNodeMemoryInfo _iter342 : struct.success)
+            for (TNodeMemoryInfo _iter350 : struct.success)
             {
-              _iter342.write(oprot);
+              _iter350.write(oprot);
             }
           }
         }
@@ -29230,14 +29230,14 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list343 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TNodeMemoryInfo>(_list343.size);
-            TNodeMemoryInfo _elem344;
-            for (int _i345 = 0; _i345 < _list343.size; ++_i345)
+            org.apache.thrift.protocol.TList _list351 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TNodeMemoryInfo>(_list351.size);
+            TNodeMemoryInfo _elem352;
+            for (int _i353 = 0; _i353 < _list351.size; ++_i353)
             {
-              _elem344 = new TNodeMemoryInfo();
-              _elem344.read(iprot);
-              struct.success.add(_elem344);
+              _elem352 = new TNodeMemoryInfo();
+              _elem352.read(iprot);
+              struct.success.add(_elem352);
             }
           }
           struct.setSuccessIsSet(true);
@@ -41618,16 +41618,16 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map346 = iprot.readMapBegin();
-                  struct.success = new java.util.HashMap<java.lang.String,TColumnType>(2*_map346.size);
-                  java.lang.String _key347;
-                  TColumnType _val348;
-                  for (int _i349 = 0; _i349 < _map346.size; ++_i349)
+                  org.apache.thrift.protocol.TMap _map354 = iprot.readMapBegin();
+                  struct.success = new java.util.HashMap<java.lang.String,TColumnType>(2*_map354.size);
+                  java.lang.String _key355;
+                  TColumnType _val356;
+                  for (int _i357 = 0; _i357 < _map354.size; ++_i357)
                   {
-                    _key347 = iprot.readString();
-                    _val348 = new TColumnType();
-                    _val348.read(iprot);
-                    struct.success.put(_key347, _val348);
+                    _key355 = iprot.readString();
+                    _val356 = new TColumnType();
+                    _val356.read(iprot);
+                    struct.success.put(_key355, _val356);
                   }
                   iprot.readMapEnd();
                 }
@@ -41664,10 +41664,10 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (java.util.Map.Entry<java.lang.String, TColumnType> _iter350 : struct.success.entrySet())
+            for (java.util.Map.Entry<java.lang.String, TColumnType> _iter358 : struct.success.entrySet())
             {
-              oprot.writeString(_iter350.getKey());
-              _iter350.getValue().write(oprot);
+              oprot.writeString(_iter358.getKey());
+              _iter358.getValue().write(oprot);
             }
             oprot.writeMapEnd();
           }
@@ -41706,10 +41706,10 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.util.Map.Entry<java.lang.String, TColumnType> _iter351 : struct.success.entrySet())
+            for (java.util.Map.Entry<java.lang.String, TColumnType> _iter359 : struct.success.entrySet())
             {
-              oprot.writeString(_iter351.getKey());
-              _iter351.getValue().write(oprot);
+              oprot.writeString(_iter359.getKey());
+              _iter359.getValue().write(oprot);
             }
           }
         }
@@ -41724,16 +41724,16 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map352 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.HashMap<java.lang.String,TColumnType>(2*_map352.size);
-            java.lang.String _key353;
-            TColumnType _val354;
-            for (int _i355 = 0; _i355 < _map352.size; ++_i355)
+            org.apache.thrift.protocol.TMap _map360 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.HashMap<java.lang.String,TColumnType>(2*_map360.size);
+            java.lang.String _key361;
+            TColumnType _val362;
+            for (int _i363 = 0; _i363 < _map360.size; ++_i363)
             {
-              _key353 = iprot.readString();
-              _val354 = new TColumnType();
-              _val354.read(iprot);
-              struct.success.put(_key353, _val354);
+              _key361 = iprot.readString();
+              _val362 = new TColumnType();
+              _val362.read(iprot);
+              struct.success.put(_key361, _val362);
             }
           }
           struct.setSuccessIsSet(true);
@@ -42712,14 +42712,14 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list356 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<com.mapd.thrift.calciteserver.TCompletionHint>(_list356.size);
-                  com.mapd.thrift.calciteserver.TCompletionHint _elem357;
-                  for (int _i358 = 0; _i358 < _list356.size; ++_i358)
+                  org.apache.thrift.protocol.TList _list364 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<com.mapd.thrift.calciteserver.TCompletionHint>(_list364.size);
+                  com.mapd.thrift.calciteserver.TCompletionHint _elem365;
+                  for (int _i366 = 0; _i366 < _list364.size; ++_i366)
                   {
-                    _elem357 = new com.mapd.thrift.calciteserver.TCompletionHint();
-                    _elem357.read(iprot);
-                    struct.success.add(_elem357);
+                    _elem365 = new com.mapd.thrift.calciteserver.TCompletionHint();
+                    _elem365.read(iprot);
+                    struct.success.add(_elem365);
                   }
                   iprot.readListEnd();
                 }
@@ -42756,9 +42756,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (com.mapd.thrift.calciteserver.TCompletionHint _iter359 : struct.success)
+            for (com.mapd.thrift.calciteserver.TCompletionHint _iter367 : struct.success)
             {
-              _iter359.write(oprot);
+              _iter367.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -42797,9 +42797,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (com.mapd.thrift.calciteserver.TCompletionHint _iter360 : struct.success)
+            for (com.mapd.thrift.calciteserver.TCompletionHint _iter368 : struct.success)
             {
-              _iter360.write(oprot);
+              _iter368.write(oprot);
             }
           }
         }
@@ -42814,14 +42814,14 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list361 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<com.mapd.thrift.calciteserver.TCompletionHint>(_list361.size);
-            com.mapd.thrift.calciteserver.TCompletionHint _elem362;
-            for (int _i363 = 0; _i363 < _list361.size; ++_i363)
+            org.apache.thrift.protocol.TList _list369 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<com.mapd.thrift.calciteserver.TCompletionHint>(_list369.size);
+            com.mapd.thrift.calciteserver.TCompletionHint _elem370;
+            for (int _i371 = 0; _i371 < _list369.size; ++_i371)
             {
-              _elem362 = new com.mapd.thrift.calciteserver.TCompletionHint();
-              _elem362.read(iprot);
-              struct.success.add(_elem362);
+              _elem370 = new com.mapd.thrift.calciteserver.TCompletionHint();
+              _elem370.read(iprot);
+              struct.success.add(_elem370);
             }
           }
           struct.setSuccessIsSet(true);
@@ -45744,25 +45744,25 @@ public class MapD {
             case 4: // TABLE_COL_NAMES
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map364 = iprot.readMapBegin();
-                  struct.table_col_names = new java.util.HashMap<java.lang.String,java.util.List<java.lang.String>>(2*_map364.size);
-                  java.lang.String _key365;
-                  java.util.List<java.lang.String> _val366;
-                  for (int _i367 = 0; _i367 < _map364.size; ++_i367)
+                  org.apache.thrift.protocol.TMap _map372 = iprot.readMapBegin();
+                  struct.table_col_names = new java.util.HashMap<java.lang.String,java.util.List<java.lang.String>>(2*_map372.size);
+                  java.lang.String _key373;
+                  java.util.List<java.lang.String> _val374;
+                  for (int _i375 = 0; _i375 < _map372.size; ++_i375)
                   {
-                    _key365 = iprot.readString();
+                    _key373 = iprot.readString();
                     {
-                      org.apache.thrift.protocol.TList _list368 = iprot.readListBegin();
-                      _val366 = new java.util.ArrayList<java.lang.String>(_list368.size);
-                      java.lang.String _elem369;
-                      for (int _i370 = 0; _i370 < _list368.size; ++_i370)
+                      org.apache.thrift.protocol.TList _list376 = iprot.readListBegin();
+                      _val374 = new java.util.ArrayList<java.lang.String>(_list376.size);
+                      java.lang.String _elem377;
+                      for (int _i378 = 0; _i378 < _list376.size; ++_i378)
                       {
-                        _elem369 = iprot.readString();
-                        _val366.add(_elem369);
+                        _elem377 = iprot.readString();
+                        _val374.add(_elem377);
                       }
                       iprot.readListEnd();
                     }
-                    struct.table_col_names.put(_key365, _val366);
+                    struct.table_col_names.put(_key373, _val374);
                   }
                   iprot.readMapEnd();
                 }
@@ -45827,14 +45827,14 @@ public class MapD {
           oprot.writeFieldBegin(TABLE_COL_NAMES_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, struct.table_col_names.size()));
-            for (java.util.Map.Entry<java.lang.String, java.util.List<java.lang.String>> _iter371 : struct.table_col_names.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.util.List<java.lang.String>> _iter379 : struct.table_col_names.entrySet())
             {
-              oprot.writeString(_iter371.getKey());
+              oprot.writeString(_iter379.getKey());
               {
-                oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, _iter371.getValue().size()));
-                for (java.lang.String _iter372 : _iter371.getValue())
+                oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, _iter379.getValue().size()));
+                for (java.lang.String _iter380 : _iter379.getValue())
                 {
-                  oprot.writeString(_iter372);
+                  oprot.writeString(_iter380);
                 }
                 oprot.writeListEnd();
               }
@@ -45906,14 +45906,14 @@ public class MapD {
         if (struct.isSetTable_col_names()) {
           {
             oprot.writeI32(struct.table_col_names.size());
-            for (java.util.Map.Entry<java.lang.String, java.util.List<java.lang.String>> _iter373 : struct.table_col_names.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.util.List<java.lang.String>> _iter381 : struct.table_col_names.entrySet())
             {
-              oprot.writeString(_iter373.getKey());
+              oprot.writeString(_iter381.getKey());
               {
-                oprot.writeI32(_iter373.getValue().size());
-                for (java.lang.String _iter374 : _iter373.getValue())
+                oprot.writeI32(_iter381.getValue().size());
+                for (java.lang.String _iter382 : _iter381.getValue())
                 {
-                  oprot.writeString(_iter374);
+                  oprot.writeString(_iter382);
                 }
               }
             }
@@ -45949,24 +45949,24 @@ public class MapD {
         }
         if (incoming.get(3)) {
           {
-            org.apache.thrift.protocol.TMap _map375 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, iprot.readI32());
-            struct.table_col_names = new java.util.HashMap<java.lang.String,java.util.List<java.lang.String>>(2*_map375.size);
-            java.lang.String _key376;
-            java.util.List<java.lang.String> _val377;
-            for (int _i378 = 0; _i378 < _map375.size; ++_i378)
+            org.apache.thrift.protocol.TMap _map383 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, iprot.readI32());
+            struct.table_col_names = new java.util.HashMap<java.lang.String,java.util.List<java.lang.String>>(2*_map383.size);
+            java.lang.String _key384;
+            java.util.List<java.lang.String> _val385;
+            for (int _i386 = 0; _i386 < _map383.size; ++_i386)
             {
-              _key376 = iprot.readString();
+              _key384 = iprot.readString();
               {
-                org.apache.thrift.protocol.TList _list379 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-                _val377 = new java.util.ArrayList<java.lang.String>(_list379.size);
-                java.lang.String _elem380;
-                for (int _i381 = 0; _i381 < _list379.size; ++_i381)
+                org.apache.thrift.protocol.TList _list387 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+                _val385 = new java.util.ArrayList<java.lang.String>(_list387.size);
+                java.lang.String _elem388;
+                for (int _i389 = 0; _i389 < _list387.size; ++_i389)
                 {
-                  _elem380 = iprot.readString();
-                  _val377.add(_elem380);
+                  _elem388 = iprot.readString();
+                  _val385.add(_elem388);
                 }
               }
-              struct.table_col_names.put(_key376, _val377);
+              struct.table_col_names.put(_key384, _val385);
             }
           }
           struct.setTable_col_namesIsSet(true);
@@ -48160,14 +48160,14 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list382 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TFrontendView>(_list382.size);
-                  TFrontendView _elem383;
-                  for (int _i384 = 0; _i384 < _list382.size; ++_i384)
+                  org.apache.thrift.protocol.TList _list390 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TFrontendView>(_list390.size);
+                  TFrontendView _elem391;
+                  for (int _i392 = 0; _i392 < _list390.size; ++_i392)
                   {
-                    _elem383 = new TFrontendView();
-                    _elem383.read(iprot);
-                    struct.success.add(_elem383);
+                    _elem391 = new TFrontendView();
+                    _elem391.read(iprot);
+                    struct.success.add(_elem391);
                   }
                   iprot.readListEnd();
                 }
@@ -48204,9 +48204,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TFrontendView _iter385 : struct.success)
+            for (TFrontendView _iter393 : struct.success)
             {
-              _iter385.write(oprot);
+              _iter393.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -48245,9 +48245,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TFrontendView _iter386 : struct.success)
+            for (TFrontendView _iter394 : struct.success)
             {
-              _iter386.write(oprot);
+              _iter394.write(oprot);
             }
           }
         }
@@ -48262,14 +48262,14 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list387 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TFrontendView>(_list387.size);
-            TFrontendView _elem388;
-            for (int _i389 = 0; _i389 < _list387.size; ++_i389)
+            org.apache.thrift.protocol.TList _list395 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TFrontendView>(_list395.size);
+            TFrontendView _elem396;
+            for (int _i397 = 0; _i397 < _list395.size; ++_i397)
             {
-              _elem388 = new TFrontendView();
-              _elem388.read(iprot);
-              struct.success.add(_elem388);
+              _elem396 = new TFrontendView();
+              _elem396.read(iprot);
+              struct.success.add(_elem396);
             }
           }
           struct.setSuccessIsSet(true);
@@ -51951,14 +51951,14 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list390 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TDashboard>(_list390.size);
-                  TDashboard _elem391;
-                  for (int _i392 = 0; _i392 < _list390.size; ++_i392)
+                  org.apache.thrift.protocol.TList _list398 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TDashboard>(_list398.size);
+                  TDashboard _elem399;
+                  for (int _i400 = 0; _i400 < _list398.size; ++_i400)
                   {
-                    _elem391 = new TDashboard();
-                    _elem391.read(iprot);
-                    struct.success.add(_elem391);
+                    _elem399 = new TDashboard();
+                    _elem399.read(iprot);
+                    struct.success.add(_elem399);
                   }
                   iprot.readListEnd();
                 }
@@ -51995,9 +51995,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TDashboard _iter393 : struct.success)
+            for (TDashboard _iter401 : struct.success)
             {
-              _iter393.write(oprot);
+              _iter401.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -52036,9 +52036,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TDashboard _iter394 : struct.success)
+            for (TDashboard _iter402 : struct.success)
             {
-              _iter394.write(oprot);
+              _iter402.write(oprot);
             }
           }
         }
@@ -52053,14 +52053,14 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list395 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TDashboard>(_list395.size);
-            TDashboard _elem396;
-            for (int _i397 = 0; _i397 < _list395.size; ++_i397)
+            org.apache.thrift.protocol.TList _list403 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TDashboard>(_list403.size);
+            TDashboard _elem404;
+            for (int _i405 = 0; _i405 < _list403.size; ++_i405)
             {
-              _elem396 = new TDashboard();
-              _elem396.read(iprot);
-              struct.success.add(_elem396);
+              _elem404 = new TDashboard();
+              _elem404.read(iprot);
+              struct.success.add(_elem404);
             }
           }
           struct.setSuccessIsSet(true);
@@ -56240,13 +56240,13 @@ public class MapD {
             case 3: // GROUPS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list398 = iprot.readListBegin();
-                  struct.groups = new java.util.ArrayList<java.lang.String>(_list398.size);
-                  java.lang.String _elem399;
-                  for (int _i400 = 0; _i400 < _list398.size; ++_i400)
+                  org.apache.thrift.protocol.TList _list406 = iprot.readListBegin();
+                  struct.groups = new java.util.ArrayList<java.lang.String>(_list406.size);
+                  java.lang.String _elem407;
+                  for (int _i408 = 0; _i408 < _list406.size; ++_i408)
                   {
-                    _elem399 = iprot.readString();
-                    struct.groups.add(_elem399);
+                    _elem407 = iprot.readString();
+                    struct.groups.add(_elem407);
                   }
                   iprot.readListEnd();
                 }
@@ -56258,13 +56258,13 @@ public class MapD {
             case 4: // OBJECTS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list401 = iprot.readListBegin();
-                  struct.objects = new java.util.ArrayList<java.lang.String>(_list401.size);
-                  java.lang.String _elem402;
-                  for (int _i403 = 0; _i403 < _list401.size; ++_i403)
+                  org.apache.thrift.protocol.TList _list409 = iprot.readListBegin();
+                  struct.objects = new java.util.ArrayList<java.lang.String>(_list409.size);
+                  java.lang.String _elem410;
+                  for (int _i411 = 0; _i411 < _list409.size; ++_i411)
                   {
-                    _elem402 = iprot.readString();
-                    struct.objects.add(_elem402);
+                    _elem410 = iprot.readString();
+                    struct.objects.add(_elem410);
                   }
                   iprot.readListEnd();
                 }
@@ -56317,9 +56317,9 @@ public class MapD {
           oprot.writeFieldBegin(GROUPS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.groups.size()));
-            for (java.lang.String _iter404 : struct.groups)
+            for (java.lang.String _iter412 : struct.groups)
             {
-              oprot.writeString(_iter404);
+              oprot.writeString(_iter412);
             }
             oprot.writeListEnd();
           }
@@ -56329,9 +56329,9 @@ public class MapD {
           oprot.writeFieldBegin(OBJECTS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.objects.size()));
-            for (java.lang.String _iter405 : struct.objects)
+            for (java.lang.String _iter413 : struct.objects)
             {
-              oprot.writeString(_iter405);
+              oprot.writeString(_iter413);
             }
             oprot.writeListEnd();
           }
@@ -56391,18 +56391,18 @@ public class MapD {
         if (struct.isSetGroups()) {
           {
             oprot.writeI32(struct.groups.size());
-            for (java.lang.String _iter406 : struct.groups)
+            for (java.lang.String _iter414 : struct.groups)
             {
-              oprot.writeString(_iter406);
+              oprot.writeString(_iter414);
             }
           }
         }
         if (struct.isSetObjects()) {
           {
             oprot.writeI32(struct.objects.size());
-            for (java.lang.String _iter407 : struct.objects)
+            for (java.lang.String _iter415 : struct.objects)
             {
-              oprot.writeString(_iter407);
+              oprot.writeString(_iter415);
             }
           }
         }
@@ -56428,26 +56428,26 @@ public class MapD {
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TList _list408 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.groups = new java.util.ArrayList<java.lang.String>(_list408.size);
-            java.lang.String _elem409;
-            for (int _i410 = 0; _i410 < _list408.size; ++_i410)
+            org.apache.thrift.protocol.TList _list416 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.groups = new java.util.ArrayList<java.lang.String>(_list416.size);
+            java.lang.String _elem417;
+            for (int _i418 = 0; _i418 < _list416.size; ++_i418)
             {
-              _elem409 = iprot.readString();
-              struct.groups.add(_elem409);
+              _elem417 = iprot.readString();
+              struct.groups.add(_elem417);
             }
           }
           struct.setGroupsIsSet(true);
         }
         if (incoming.get(3)) {
           {
-            org.apache.thrift.protocol.TList _list411 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.objects = new java.util.ArrayList<java.lang.String>(_list411.size);
-            java.lang.String _elem412;
-            for (int _i413 = 0; _i413 < _list411.size; ++_i413)
+            org.apache.thrift.protocol.TList _list419 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.objects = new java.util.ArrayList<java.lang.String>(_list419.size);
+            java.lang.String _elem420;
+            for (int _i421 = 0; _i421 < _list419.size; ++_i421)
             {
-              _elem412 = iprot.readString();
-              struct.objects.add(_elem412);
+              _elem420 = iprot.readString();
+              struct.objects.add(_elem420);
             }
           }
           struct.setObjectsIsSet(true);
@@ -57502,13 +57502,13 @@ public class MapD {
             case 3: // GROUPS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list414 = iprot.readListBegin();
-                  struct.groups = new java.util.ArrayList<java.lang.String>(_list414.size);
-                  java.lang.String _elem415;
-                  for (int _i416 = 0; _i416 < _list414.size; ++_i416)
+                  org.apache.thrift.protocol.TList _list422 = iprot.readListBegin();
+                  struct.groups = new java.util.ArrayList<java.lang.String>(_list422.size);
+                  java.lang.String _elem423;
+                  for (int _i424 = 0; _i424 < _list422.size; ++_i424)
                   {
-                    _elem415 = iprot.readString();
-                    struct.groups.add(_elem415);
+                    _elem423 = iprot.readString();
+                    struct.groups.add(_elem423);
                   }
                   iprot.readListEnd();
                 }
@@ -57520,13 +57520,13 @@ public class MapD {
             case 4: // OBJECTS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list417 = iprot.readListBegin();
-                  struct.objects = new java.util.ArrayList<java.lang.String>(_list417.size);
-                  java.lang.String _elem418;
-                  for (int _i419 = 0; _i419 < _list417.size; ++_i419)
+                  org.apache.thrift.protocol.TList _list425 = iprot.readListBegin();
+                  struct.objects = new java.util.ArrayList<java.lang.String>(_list425.size);
+                  java.lang.String _elem426;
+                  for (int _i427 = 0; _i427 < _list425.size; ++_i427)
                   {
-                    _elem418 = iprot.readString();
-                    struct.objects.add(_elem418);
+                    _elem426 = iprot.readString();
+                    struct.objects.add(_elem426);
                   }
                   iprot.readListEnd();
                 }
@@ -57571,9 +57571,9 @@ public class MapD {
           oprot.writeFieldBegin(GROUPS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.groups.size()));
-            for (java.lang.String _iter420 : struct.groups)
+            for (java.lang.String _iter428 : struct.groups)
             {
-              oprot.writeString(_iter420);
+              oprot.writeString(_iter428);
             }
             oprot.writeListEnd();
           }
@@ -57583,9 +57583,9 @@ public class MapD {
           oprot.writeFieldBegin(OBJECTS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.objects.size()));
-            for (java.lang.String _iter421 : struct.objects)
+            for (java.lang.String _iter429 : struct.objects)
             {
-              oprot.writeString(_iter421);
+              oprot.writeString(_iter429);
             }
             oprot.writeListEnd();
           }
@@ -57639,18 +57639,18 @@ public class MapD {
         if (struct.isSetGroups()) {
           {
             oprot.writeI32(struct.groups.size());
-            for (java.lang.String _iter422 : struct.groups)
+            for (java.lang.String _iter430 : struct.groups)
             {
-              oprot.writeString(_iter422);
+              oprot.writeString(_iter430);
             }
           }
         }
         if (struct.isSetObjects()) {
           {
             oprot.writeI32(struct.objects.size());
-            for (java.lang.String _iter423 : struct.objects)
+            for (java.lang.String _iter431 : struct.objects)
             {
-              oprot.writeString(_iter423);
+              oprot.writeString(_iter431);
             }
           }
         }
@@ -57673,26 +57673,26 @@ public class MapD {
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TList _list424 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.groups = new java.util.ArrayList<java.lang.String>(_list424.size);
-            java.lang.String _elem425;
-            for (int _i426 = 0; _i426 < _list424.size; ++_i426)
+            org.apache.thrift.protocol.TList _list432 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.groups = new java.util.ArrayList<java.lang.String>(_list432.size);
+            java.lang.String _elem433;
+            for (int _i434 = 0; _i434 < _list432.size; ++_i434)
             {
-              _elem425 = iprot.readString();
-              struct.groups.add(_elem425);
+              _elem433 = iprot.readString();
+              struct.groups.add(_elem433);
             }
           }
           struct.setGroupsIsSet(true);
         }
         if (incoming.get(3)) {
           {
-            org.apache.thrift.protocol.TList _list427 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.objects = new java.util.ArrayList<java.lang.String>(_list427.size);
-            java.lang.String _elem428;
-            for (int _i429 = 0; _i429 < _list427.size; ++_i429)
+            org.apache.thrift.protocol.TList _list435 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.objects = new java.util.ArrayList<java.lang.String>(_list435.size);
+            java.lang.String _elem436;
+            for (int _i437 = 0; _i437 < _list435.size; ++_i437)
             {
-              _elem428 = iprot.readString();
-              struct.objects.add(_elem428);
+              _elem436 = iprot.readString();
+              struct.objects.add(_elem436);
             }
           }
           struct.setObjectsIsSet(true);
@@ -58931,14 +58931,14 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list430 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TDashboardGrantees>(_list430.size);
-                  TDashboardGrantees _elem431;
-                  for (int _i432 = 0; _i432 < _list430.size; ++_i432)
+                  org.apache.thrift.protocol.TList _list438 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TDashboardGrantees>(_list438.size);
+                  TDashboardGrantees _elem439;
+                  for (int _i440 = 0; _i440 < _list438.size; ++_i440)
                   {
-                    _elem431 = new TDashboardGrantees();
-                    _elem431.read(iprot);
-                    struct.success.add(_elem431);
+                    _elem439 = new TDashboardGrantees();
+                    _elem439.read(iprot);
+                    struct.success.add(_elem439);
                   }
                   iprot.readListEnd();
                 }
@@ -58975,9 +58975,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TDashboardGrantees _iter433 : struct.success)
+            for (TDashboardGrantees _iter441 : struct.success)
             {
-              _iter433.write(oprot);
+              _iter441.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -59016,9 +59016,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TDashboardGrantees _iter434 : struct.success)
+            for (TDashboardGrantees _iter442 : struct.success)
             {
-              _iter434.write(oprot);
+              _iter442.write(oprot);
             }
           }
         }
@@ -59033,14 +59033,14 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list435 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TDashboardGrantees>(_list435.size);
-            TDashboardGrantees _elem436;
-            for (int _i437 = 0; _i437 < _list435.size; ++_i437)
+            org.apache.thrift.protocol.TList _list443 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TDashboardGrantees>(_list443.size);
+            TDashboardGrantees _elem444;
+            for (int _i445 = 0; _i445 < _list443.size; ++_i445)
             {
-              _elem436 = new TDashboardGrantees();
-              _elem436.read(iprot);
-              struct.success.add(_elem436);
+              _elem444 = new TDashboardGrantees();
+              _elem444.read(iprot);
+              struct.success.add(_elem444);
             }
           }
           struct.setSuccessIsSet(true);
@@ -61527,14 +61527,14 @@ public class MapD {
             case 3: // ROWS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list438 = iprot.readListBegin();
-                  struct.rows = new java.util.ArrayList<TRow>(_list438.size);
-                  TRow _elem439;
-                  for (int _i440 = 0; _i440 < _list438.size; ++_i440)
+                  org.apache.thrift.protocol.TList _list446 = iprot.readListBegin();
+                  struct.rows = new java.util.ArrayList<TRow>(_list446.size);
+                  TRow _elem447;
+                  for (int _i448 = 0; _i448 < _list446.size; ++_i448)
                   {
-                    _elem439 = new TRow();
-                    _elem439.read(iprot);
-                    struct.rows.add(_elem439);
+                    _elem447 = new TRow();
+                    _elem447.read(iprot);
+                    struct.rows.add(_elem447);
                   }
                   iprot.readListEnd();
                 }
@@ -61572,9 +61572,9 @@ public class MapD {
           oprot.writeFieldBegin(ROWS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.rows.size()));
-            for (TRow _iter441 : struct.rows)
+            for (TRow _iter449 : struct.rows)
             {
-              _iter441.write(oprot);
+              _iter449.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -61617,9 +61617,9 @@ public class MapD {
         if (struct.isSetRows()) {
           {
             oprot.writeI32(struct.rows.size());
-            for (TRow _iter442 : struct.rows)
+            for (TRow _iter450 : struct.rows)
             {
-              _iter442.write(oprot);
+              _iter450.write(oprot);
             }
           }
         }
@@ -61639,14 +61639,14 @@ public class MapD {
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TList _list443 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.rows = new java.util.ArrayList<TRow>(_list443.size);
-            TRow _elem444;
-            for (int _i445 = 0; _i445 < _list443.size; ++_i445)
+            org.apache.thrift.protocol.TList _list451 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.rows = new java.util.ArrayList<TRow>(_list451.size);
+            TRow _elem452;
+            for (int _i453 = 0; _i453 < _list451.size; ++_i453)
             {
-              _elem444 = new TRow();
-              _elem444.read(iprot);
-              struct.rows.add(_elem444);
+              _elem452 = new TRow();
+              _elem452.read(iprot);
+              struct.rows.add(_elem452);
             }
           }
           struct.setRowsIsSet(true);
@@ -62515,14 +62515,14 @@ public class MapD {
             case 3: // COLS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list446 = iprot.readListBegin();
-                  struct.cols = new java.util.ArrayList<TColumn>(_list446.size);
-                  TColumn _elem447;
-                  for (int _i448 = 0; _i448 < _list446.size; ++_i448)
+                  org.apache.thrift.protocol.TList _list454 = iprot.readListBegin();
+                  struct.cols = new java.util.ArrayList<TColumn>(_list454.size);
+                  TColumn _elem455;
+                  for (int _i456 = 0; _i456 < _list454.size; ++_i456)
                   {
-                    _elem447 = new TColumn();
-                    _elem447.read(iprot);
-                    struct.cols.add(_elem447);
+                    _elem455 = new TColumn();
+                    _elem455.read(iprot);
+                    struct.cols.add(_elem455);
                   }
                   iprot.readListEnd();
                 }
@@ -62560,9 +62560,9 @@ public class MapD {
           oprot.writeFieldBegin(COLS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.cols.size()));
-            for (TColumn _iter449 : struct.cols)
+            for (TColumn _iter457 : struct.cols)
             {
-              _iter449.write(oprot);
+              _iter457.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -62605,9 +62605,9 @@ public class MapD {
         if (struct.isSetCols()) {
           {
             oprot.writeI32(struct.cols.size());
-            for (TColumn _iter450 : struct.cols)
+            for (TColumn _iter458 : struct.cols)
             {
-              _iter450.write(oprot);
+              _iter458.write(oprot);
             }
           }
         }
@@ -62627,14 +62627,14 @@ public class MapD {
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TList _list451 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.cols = new java.util.ArrayList<TColumn>(_list451.size);
-            TColumn _elem452;
-            for (int _i453 = 0; _i453 < _list451.size; ++_i453)
+            org.apache.thrift.protocol.TList _list459 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.cols = new java.util.ArrayList<TColumn>(_list459.size);
+            TColumn _elem460;
+            for (int _i461 = 0; _i461 < _list459.size; ++_i461)
             {
-              _elem452 = new TColumn();
-              _elem452.read(iprot);
-              struct.cols.add(_elem452);
+              _elem460 = new TColumn();
+              _elem460.read(iprot);
+              struct.cols.add(_elem460);
             }
           }
           struct.setColsIsSet(true);
@@ -64451,14 +64451,14 @@ public class MapD {
             case 3: // ROWS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list454 = iprot.readListBegin();
-                  struct.rows = new java.util.ArrayList<TStringRow>(_list454.size);
-                  TStringRow _elem455;
-                  for (int _i456 = 0; _i456 < _list454.size; ++_i456)
+                  org.apache.thrift.protocol.TList _list462 = iprot.readListBegin();
+                  struct.rows = new java.util.ArrayList<TStringRow>(_list462.size);
+                  TStringRow _elem463;
+                  for (int _i464 = 0; _i464 < _list462.size; ++_i464)
                   {
-                    _elem455 = new TStringRow();
-                    _elem455.read(iprot);
-                    struct.rows.add(_elem455);
+                    _elem463 = new TStringRow();
+                    _elem463.read(iprot);
+                    struct.rows.add(_elem463);
                   }
                   iprot.readListEnd();
                 }
@@ -64496,9 +64496,9 @@ public class MapD {
           oprot.writeFieldBegin(ROWS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.rows.size()));
-            for (TStringRow _iter457 : struct.rows)
+            for (TStringRow _iter465 : struct.rows)
             {
-              _iter457.write(oprot);
+              _iter465.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -64541,9 +64541,9 @@ public class MapD {
         if (struct.isSetRows()) {
           {
             oprot.writeI32(struct.rows.size());
-            for (TStringRow _iter458 : struct.rows)
+            for (TStringRow _iter466 : struct.rows)
             {
-              _iter458.write(oprot);
+              _iter466.write(oprot);
             }
           }
         }
@@ -64563,14 +64563,14 @@ public class MapD {
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TList _list459 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.rows = new java.util.ArrayList<TStringRow>(_list459.size);
-            TStringRow _elem460;
-            for (int _i461 = 0; _i461 < _list459.size; ++_i461)
+            org.apache.thrift.protocol.TList _list467 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.rows = new java.util.ArrayList<TStringRow>(_list467.size);
+            TStringRow _elem468;
+            for (int _i469 = 0; _i469 < _list467.size; ++_i469)
             {
-              _elem460 = new TStringRow();
-              _elem460.read(iprot);
-              struct.rows.add(_elem460);
+              _elem468 = new TStringRow();
+              _elem468.read(iprot);
+              struct.rows.add(_elem468);
             }
           }
           struct.setRowsIsSet(true);
@@ -66670,14 +66670,14 @@ public class MapD {
             case 3: // ROW_DESC
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list462 = iprot.readListBegin();
-                  struct.row_desc = new java.util.ArrayList<TColumnType>(_list462.size);
-                  TColumnType _elem463;
-                  for (int _i464 = 0; _i464 < _list462.size; ++_i464)
+                  org.apache.thrift.protocol.TList _list470 = iprot.readListBegin();
+                  struct.row_desc = new java.util.ArrayList<TColumnType>(_list470.size);
+                  TColumnType _elem471;
+                  for (int _i472 = 0; _i472 < _list470.size; ++_i472)
                   {
-                    _elem463 = new TColumnType();
-                    _elem463.read(iprot);
-                    struct.row_desc.add(_elem463);
+                    _elem471 = new TColumnType();
+                    _elem471.read(iprot);
+                    struct.row_desc.add(_elem471);
                   }
                   iprot.readListEnd();
                 }
@@ -66732,9 +66732,9 @@ public class MapD {
           oprot.writeFieldBegin(ROW_DESC_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.row_desc.size()));
-            for (TColumnType _iter465 : struct.row_desc)
+            for (TColumnType _iter473 : struct.row_desc)
             {
-              _iter465.write(oprot);
+              _iter473.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -66793,9 +66793,9 @@ public class MapD {
         if (struct.isSetRow_desc()) {
           {
             oprot.writeI32(struct.row_desc.size());
-            for (TColumnType _iter466 : struct.row_desc)
+            for (TColumnType _iter474 : struct.row_desc)
             {
-              _iter466.write(oprot);
+              _iter474.write(oprot);
             }
           }
         }
@@ -66821,14 +66821,14 @@ public class MapD {
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TList _list467 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.row_desc = new java.util.ArrayList<TColumnType>(_list467.size);
-            TColumnType _elem468;
-            for (int _i469 = 0; _i469 < _list467.size; ++_i469)
+            org.apache.thrift.protocol.TList _list475 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.row_desc = new java.util.ArrayList<TColumnType>(_list475.size);
+            TColumnType _elem476;
+            for (int _i477 = 0; _i477 < _list475.size; ++_i477)
             {
-              _elem468 = new TColumnType();
-              _elem468.read(iprot);
-              struct.row_desc.add(_elem468);
+              _elem476 = new TColumnType();
+              _elem476.read(iprot);
+              struct.row_desc.add(_elem476);
             }
           }
           struct.setRow_descIsSet(true);
@@ -69014,14 +69014,14 @@ public class MapD {
             case 5: // ROW_DESC
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list470 = iprot.readListBegin();
-                  struct.row_desc = new java.util.ArrayList<TColumnType>(_list470.size);
-                  TColumnType _elem471;
-                  for (int _i472 = 0; _i472 < _list470.size; ++_i472)
+                  org.apache.thrift.protocol.TList _list478 = iprot.readListBegin();
+                  struct.row_desc = new java.util.ArrayList<TColumnType>(_list478.size);
+                  TColumnType _elem479;
+                  for (int _i480 = 0; _i480 < _list478.size; ++_i480)
                   {
-                    _elem471 = new TColumnType();
-                    _elem471.read(iprot);
-                    struct.row_desc.add(_elem471);
+                    _elem479 = new TColumnType();
+                    _elem479.read(iprot);
+                    struct.row_desc.add(_elem479);
                   }
                   iprot.readListEnd();
                 }
@@ -69078,9 +69078,9 @@ public class MapD {
           oprot.writeFieldBegin(ROW_DESC_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.row_desc.size()));
-            for (TColumnType _iter473 : struct.row_desc)
+            for (TColumnType _iter481 : struct.row_desc)
             {
-              _iter473.write(oprot);
+              _iter481.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -69143,9 +69143,9 @@ public class MapD {
         if (struct.isSetRow_desc()) {
           {
             oprot.writeI32(struct.row_desc.size());
-            for (TColumnType _iter474 : struct.row_desc)
+            for (TColumnType _iter482 : struct.row_desc)
             {
-              _iter474.write(oprot);
+              _iter482.write(oprot);
             }
           }
         }
@@ -69177,14 +69177,14 @@ public class MapD {
         }
         if (incoming.get(4)) {
           {
-            org.apache.thrift.protocol.TList _list475 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.row_desc = new java.util.ArrayList<TColumnType>(_list475.size);
-            TColumnType _elem476;
-            for (int _i477 = 0; _i477 < _list475.size; ++_i477)
+            org.apache.thrift.protocol.TList _list483 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.row_desc = new java.util.ArrayList<TColumnType>(_list483.size);
+            TColumnType _elem484;
+            for (int _i485 = 0; _i485 < _list483.size; ++_i485)
             {
-              _elem476 = new TColumnType();
-              _elem476.read(iprot);
-              struct.row_desc.add(_elem476);
+              _elem484 = new TColumnType();
+              _elem484.read(iprot);
+              struct.row_desc.add(_elem484);
             }
           }
           struct.setRow_descIsSet(true);
@@ -72515,13 +72515,13 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list478 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<java.lang.String>(_list478.size);
-                  java.lang.String _elem479;
-                  for (int _i480 = 0; _i480 < _list478.size; ++_i480)
+                  org.apache.thrift.protocol.TList _list486 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<java.lang.String>(_list486.size);
+                  java.lang.String _elem487;
+                  for (int _i488 = 0; _i488 < _list486.size; ++_i488)
                   {
-                    _elem479 = iprot.readString();
-                    struct.success.add(_elem479);
+                    _elem487 = iprot.readString();
+                    struct.success.add(_elem487);
                   }
                   iprot.readListEnd();
                 }
@@ -72558,9 +72558,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.lang.String _iter481 : struct.success)
+            for (java.lang.String _iter489 : struct.success)
             {
-              oprot.writeString(_iter481);
+              oprot.writeString(_iter489);
             }
             oprot.writeListEnd();
           }
@@ -72599,9 +72599,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.lang.String _iter482 : struct.success)
+            for (java.lang.String _iter490 : struct.success)
             {
-              oprot.writeString(_iter482);
+              oprot.writeString(_iter490);
             }
           }
         }
@@ -72616,13 +72616,13 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list483 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.success = new java.util.ArrayList<java.lang.String>(_list483.size);
-            java.lang.String _elem484;
-            for (int _i485 = 0; _i485 < _list483.size; ++_i485)
+            org.apache.thrift.protocol.TList _list491 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new java.util.ArrayList<java.lang.String>(_list491.size);
+            java.lang.String _elem492;
+            for (int _i493 = 0; _i493 < _list491.size; ++_i493)
             {
-              _elem484 = iprot.readString();
-              struct.success.add(_elem484);
+              _elem492 = iprot.readString();
+              struct.success.add(_elem492);
             }
           }
           struct.setSuccessIsSet(true);
@@ -73610,14 +73610,14 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list486 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TGeoFileLayerInfo>(_list486.size);
-                  TGeoFileLayerInfo _elem487;
-                  for (int _i488 = 0; _i488 < _list486.size; ++_i488)
+                  org.apache.thrift.protocol.TList _list494 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TGeoFileLayerInfo>(_list494.size);
+                  TGeoFileLayerInfo _elem495;
+                  for (int _i496 = 0; _i496 < _list494.size; ++_i496)
                   {
-                    _elem487 = new TGeoFileLayerInfo();
-                    _elem487.read(iprot);
-                    struct.success.add(_elem487);
+                    _elem495 = new TGeoFileLayerInfo();
+                    _elem495.read(iprot);
+                    struct.success.add(_elem495);
                   }
                   iprot.readListEnd();
                 }
@@ -73654,9 +73654,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TGeoFileLayerInfo _iter489 : struct.success)
+            for (TGeoFileLayerInfo _iter497 : struct.success)
             {
-              _iter489.write(oprot);
+              _iter497.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -73695,9 +73695,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TGeoFileLayerInfo _iter490 : struct.success)
+            for (TGeoFileLayerInfo _iter498 : struct.success)
             {
-              _iter490.write(oprot);
+              _iter498.write(oprot);
             }
           }
         }
@@ -73712,14 +73712,14 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list491 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TGeoFileLayerInfo>(_list491.size);
-            TGeoFileLayerInfo _elem492;
-            for (int _i493 = 0; _i493 < _list491.size; ++_i493)
+            org.apache.thrift.protocol.TList _list499 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TGeoFileLayerInfo>(_list499.size);
+            TGeoFileLayerInfo _elem500;
+            for (int _i501 = 0; _i501 < _list499.size; ++_i501)
             {
-              _elem492 = new TGeoFileLayerInfo();
-              _elem492.read(iprot);
-              struct.success.add(_elem492);
+              _elem500 = new TGeoFileLayerInfo();
+              _elem500.read(iprot);
+              struct.success.add(_elem500);
             }
           }
           struct.setSuccessIsSet(true);
@@ -77036,14 +77036,14 @@ public class MapD {
             case 2: // ROW_DESC
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list494 = iprot.readListBegin();
-                  struct.row_desc = new java.util.ArrayList<TColumnType>(_list494.size);
-                  TColumnType _elem495;
-                  for (int _i496 = 0; _i496 < _list494.size; ++_i496)
+                  org.apache.thrift.protocol.TList _list502 = iprot.readListBegin();
+                  struct.row_desc = new java.util.ArrayList<TColumnType>(_list502.size);
+                  TColumnType _elem503;
+                  for (int _i504 = 0; _i504 < _list502.size; ++_i504)
                   {
-                    _elem495 = new TColumnType();
-                    _elem495.read(iprot);
-                    struct.row_desc.add(_elem495);
+                    _elem503 = new TColumnType();
+                    _elem503.read(iprot);
+                    struct.row_desc.add(_elem503);
                   }
                   iprot.readListEnd();
                 }
@@ -77084,9 +77084,9 @@ public class MapD {
           oprot.writeFieldBegin(ROW_DESC_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.row_desc.size()));
-            for (TColumnType _iter497 : struct.row_desc)
+            for (TColumnType _iter505 : struct.row_desc)
             {
-              _iter497.write(oprot);
+              _iter505.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -77129,9 +77129,9 @@ public class MapD {
         if (struct.isSetRow_desc()) {
           {
             oprot.writeI32(struct.row_desc.size());
-            for (TColumnType _iter498 : struct.row_desc)
+            for (TColumnType _iter506 : struct.row_desc)
             {
-              _iter498.write(oprot);
+              _iter506.write(oprot);
             }
           }
         }
@@ -77151,14 +77151,14 @@ public class MapD {
         }
         if (incoming.get(1)) {
           {
-            org.apache.thrift.protocol.TList _list499 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.row_desc = new java.util.ArrayList<TColumnType>(_list499.size);
-            TColumnType _elem500;
-            for (int _i501 = 0; _i501 < _list499.size; ++_i501)
+            org.apache.thrift.protocol.TList _list507 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.row_desc = new java.util.ArrayList<TColumnType>(_list507.size);
+            TColumnType _elem508;
+            for (int _i509 = 0; _i509 < _list507.size; ++_i509)
             {
-              _elem500 = new TColumnType();
-              _elem500.read(iprot);
-              struct.row_desc.add(_elem500);
+              _elem508 = new TColumnType();
+              _elem508.read(iprot);
+              struct.row_desc.add(_elem508);
             }
           }
           struct.setRow_descIsSet(true);
@@ -79120,62 +79120,62 @@ public class MapD {
             case 2: // MERGED_DATA
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map502 = iprot.readMapBegin();
-                  struct.merged_data = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>>(2*_map502.size);
-                  java.lang.String _key503;
-                  java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>> _val504;
-                  for (int _i505 = 0; _i505 < _map502.size; ++_i505)
+                  org.apache.thrift.protocol.TMap _map510 = iprot.readMapBegin();
+                  struct.merged_data = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>>(2*_map510.size);
+                  java.lang.String _key511;
+                  java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>> _val512;
+                  for (int _i513 = 0; _i513 < _map510.size; ++_i513)
                   {
-                    _key503 = iprot.readString();
+                    _key511 = iprot.readString();
                     {
-                      org.apache.thrift.protocol.TMap _map506 = iprot.readMapBegin();
-                      _val504 = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>(2*_map506.size);
-                      java.lang.String _key507;
-                      java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>> _val508;
-                      for (int _i509 = 0; _i509 < _map506.size; ++_i509)
+                      org.apache.thrift.protocol.TMap _map514 = iprot.readMapBegin();
+                      _val512 = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>(2*_map514.size);
+                      java.lang.String _key515;
+                      java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>> _val516;
+                      for (int _i517 = 0; _i517 < _map514.size; ++_i517)
                       {
-                        _key507 = iprot.readString();
+                        _key515 = iprot.readString();
                         {
-                          org.apache.thrift.protocol.TMap _map510 = iprot.readMapBegin();
-                          _val508 = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>(2*_map510.size);
-                          java.lang.String _key511;
-                          java.util.Map<java.lang.String,java.util.List<TRenderDatum>> _val512;
-                          for (int _i513 = 0; _i513 < _map510.size; ++_i513)
+                          org.apache.thrift.protocol.TMap _map518 = iprot.readMapBegin();
+                          _val516 = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>(2*_map518.size);
+                          java.lang.String _key519;
+                          java.util.Map<java.lang.String,java.util.List<TRenderDatum>> _val520;
+                          for (int _i521 = 0; _i521 < _map518.size; ++_i521)
                           {
-                            _key511 = iprot.readString();
+                            _key519 = iprot.readString();
                             {
-                              org.apache.thrift.protocol.TMap _map514 = iprot.readMapBegin();
-                              _val512 = new java.util.HashMap<java.lang.String,java.util.List<TRenderDatum>>(2*_map514.size);
-                              java.lang.String _key515;
-                              java.util.List<TRenderDatum> _val516;
-                              for (int _i517 = 0; _i517 < _map514.size; ++_i517)
+                              org.apache.thrift.protocol.TMap _map522 = iprot.readMapBegin();
+                              _val520 = new java.util.HashMap<java.lang.String,java.util.List<TRenderDatum>>(2*_map522.size);
+                              java.lang.String _key523;
+                              java.util.List<TRenderDatum> _val524;
+                              for (int _i525 = 0; _i525 < _map522.size; ++_i525)
                               {
-                                _key515 = iprot.readString();
+                                _key523 = iprot.readString();
                                 {
-                                  org.apache.thrift.protocol.TList _list518 = iprot.readListBegin();
-                                  _val516 = new java.util.ArrayList<TRenderDatum>(_list518.size);
-                                  TRenderDatum _elem519;
-                                  for (int _i520 = 0; _i520 < _list518.size; ++_i520)
+                                  org.apache.thrift.protocol.TList _list526 = iprot.readListBegin();
+                                  _val524 = new java.util.ArrayList<TRenderDatum>(_list526.size);
+                                  TRenderDatum _elem527;
+                                  for (int _i528 = 0; _i528 < _list526.size; ++_i528)
                                   {
-                                    _elem519 = new TRenderDatum();
-                                    _elem519.read(iprot);
-                                    _val516.add(_elem519);
+                                    _elem527 = new TRenderDatum();
+                                    _elem527.read(iprot);
+                                    _val524.add(_elem527);
                                   }
                                   iprot.readListEnd();
                                 }
-                                _val512.put(_key515, _val516);
+                                _val520.put(_key523, _val524);
                               }
                               iprot.readMapEnd();
                             }
-                            _val508.put(_key511, _val512);
+                            _val516.put(_key519, _val520);
                           }
                           iprot.readMapEnd();
                         }
-                        _val504.put(_key507, _val508);
+                        _val512.put(_key515, _val516);
                       }
                       iprot.readMapEnd();
                     }
-                    struct.merged_data.put(_key503, _val504);
+                    struct.merged_data.put(_key511, _val512);
                   }
                   iprot.readMapEnd();
                 }
@@ -79208,29 +79208,29 @@ public class MapD {
           oprot.writeFieldBegin(MERGED_DATA_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, struct.merged_data.size()));
-            for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>> _iter521 : struct.merged_data.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>> _iter529 : struct.merged_data.entrySet())
             {
-              oprot.writeString(_iter521.getKey());
+              oprot.writeString(_iter529.getKey());
               {
-                oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, _iter521.getValue().size()));
-                for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>> _iter522 : _iter521.getValue().entrySet())
+                oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, _iter529.getValue().size()));
+                for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>> _iter530 : _iter529.getValue().entrySet())
                 {
-                  oprot.writeString(_iter522.getKey());
+                  oprot.writeString(_iter530.getKey());
                   {
-                    oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, _iter522.getValue().size()));
-                    for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.List<TRenderDatum>>> _iter523 : _iter522.getValue().entrySet())
+                    oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, _iter530.getValue().size()));
+                    for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.List<TRenderDatum>>> _iter531 : _iter530.getValue().entrySet())
                     {
-                      oprot.writeString(_iter523.getKey());
+                      oprot.writeString(_iter531.getKey());
                       {
-                        oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, _iter523.getValue().size()));
-                        for (java.util.Map.Entry<java.lang.String, java.util.List<TRenderDatum>> _iter524 : _iter523.getValue().entrySet())
+                        oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, _iter531.getValue().size()));
+                        for (java.util.Map.Entry<java.lang.String, java.util.List<TRenderDatum>> _iter532 : _iter531.getValue().entrySet())
                         {
-                          oprot.writeString(_iter524.getKey());
+                          oprot.writeString(_iter532.getKey());
                           {
-                            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, _iter524.getValue().size()));
-                            for (TRenderDatum _iter525 : _iter524.getValue())
+                            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, _iter532.getValue().size()));
+                            for (TRenderDatum _iter533 : _iter532.getValue())
                             {
-                              _iter525.write(oprot);
+                              _iter533.write(oprot);
                             }
                             oprot.writeListEnd();
                           }
@@ -79279,29 +79279,29 @@ public class MapD {
         if (struct.isSetMerged_data()) {
           {
             oprot.writeI32(struct.merged_data.size());
-            for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>> _iter526 : struct.merged_data.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>> _iter534 : struct.merged_data.entrySet())
             {
-              oprot.writeString(_iter526.getKey());
+              oprot.writeString(_iter534.getKey());
               {
-                oprot.writeI32(_iter526.getValue().size());
-                for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>> _iter527 : _iter526.getValue().entrySet())
+                oprot.writeI32(_iter534.getValue().size());
+                for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>> _iter535 : _iter534.getValue().entrySet())
                 {
-                  oprot.writeString(_iter527.getKey());
+                  oprot.writeString(_iter535.getKey());
                   {
-                    oprot.writeI32(_iter527.getValue().size());
-                    for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.List<TRenderDatum>>> _iter528 : _iter527.getValue().entrySet())
+                    oprot.writeI32(_iter535.getValue().size());
+                    for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.List<TRenderDatum>>> _iter536 : _iter535.getValue().entrySet())
                     {
-                      oprot.writeString(_iter528.getKey());
+                      oprot.writeString(_iter536.getKey());
                       {
-                        oprot.writeI32(_iter528.getValue().size());
-                        for (java.util.Map.Entry<java.lang.String, java.util.List<TRenderDatum>> _iter529 : _iter528.getValue().entrySet())
+                        oprot.writeI32(_iter536.getValue().size());
+                        for (java.util.Map.Entry<java.lang.String, java.util.List<TRenderDatum>> _iter537 : _iter536.getValue().entrySet())
                         {
-                          oprot.writeString(_iter529.getKey());
+                          oprot.writeString(_iter537.getKey());
                           {
-                            oprot.writeI32(_iter529.getValue().size());
-                            for (TRenderDatum _iter530 : _iter529.getValue())
+                            oprot.writeI32(_iter537.getValue().size());
+                            for (TRenderDatum _iter538 : _iter537.getValue())
                             {
-                              _iter530.write(oprot);
+                              _iter538.write(oprot);
                             }
                           }
                         }
@@ -79326,58 +79326,58 @@ public class MapD {
         }
         if (incoming.get(1)) {
           {
-            org.apache.thrift.protocol.TMap _map531 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, iprot.readI32());
-            struct.merged_data = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>>(2*_map531.size);
-            java.lang.String _key532;
-            java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>> _val533;
-            for (int _i534 = 0; _i534 < _map531.size; ++_i534)
+            org.apache.thrift.protocol.TMap _map539 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, iprot.readI32());
+            struct.merged_data = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>>(2*_map539.size);
+            java.lang.String _key540;
+            java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>> _val541;
+            for (int _i542 = 0; _i542 < _map539.size; ++_i542)
             {
-              _key532 = iprot.readString();
+              _key540 = iprot.readString();
               {
-                org.apache.thrift.protocol.TMap _map535 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, iprot.readI32());
-                _val533 = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>(2*_map535.size);
-                java.lang.String _key536;
-                java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>> _val537;
-                for (int _i538 = 0; _i538 < _map535.size; ++_i538)
+                org.apache.thrift.protocol.TMap _map543 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, iprot.readI32());
+                _val541 = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>(2*_map543.size);
+                java.lang.String _key544;
+                java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>> _val545;
+                for (int _i546 = 0; _i546 < _map543.size; ++_i546)
                 {
-                  _key536 = iprot.readString();
+                  _key544 = iprot.readString();
                   {
-                    org.apache.thrift.protocol.TMap _map539 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, iprot.readI32());
-                    _val537 = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>(2*_map539.size);
-                    java.lang.String _key540;
-                    java.util.Map<java.lang.String,java.util.List<TRenderDatum>> _val541;
-                    for (int _i542 = 0; _i542 < _map539.size; ++_i542)
+                    org.apache.thrift.protocol.TMap _map547 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, iprot.readI32());
+                    _val545 = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>(2*_map547.size);
+                    java.lang.String _key548;
+                    java.util.Map<java.lang.String,java.util.List<TRenderDatum>> _val549;
+                    for (int _i550 = 0; _i550 < _map547.size; ++_i550)
                     {
-                      _key540 = iprot.readString();
+                      _key548 = iprot.readString();
                       {
-                        org.apache.thrift.protocol.TMap _map543 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, iprot.readI32());
-                        _val541 = new java.util.HashMap<java.lang.String,java.util.List<TRenderDatum>>(2*_map543.size);
-                        java.lang.String _key544;
-                        java.util.List<TRenderDatum> _val545;
-                        for (int _i546 = 0; _i546 < _map543.size; ++_i546)
+                        org.apache.thrift.protocol.TMap _map551 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, iprot.readI32());
+                        _val549 = new java.util.HashMap<java.lang.String,java.util.List<TRenderDatum>>(2*_map551.size);
+                        java.lang.String _key552;
+                        java.util.List<TRenderDatum> _val553;
+                        for (int _i554 = 0; _i554 < _map551.size; ++_i554)
                         {
-                          _key544 = iprot.readString();
+                          _key552 = iprot.readString();
                           {
-                            org.apache.thrift.protocol.TList _list547 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-                            _val545 = new java.util.ArrayList<TRenderDatum>(_list547.size);
-                            TRenderDatum _elem548;
-                            for (int _i549 = 0; _i549 < _list547.size; ++_i549)
+                            org.apache.thrift.protocol.TList _list555 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+                            _val553 = new java.util.ArrayList<TRenderDatum>(_list555.size);
+                            TRenderDatum _elem556;
+                            for (int _i557 = 0; _i557 < _list555.size; ++_i557)
                             {
-                              _elem548 = new TRenderDatum();
-                              _elem548.read(iprot);
-                              _val545.add(_elem548);
+                              _elem556 = new TRenderDatum();
+                              _elem556.read(iprot);
+                              _val553.add(_elem556);
                             }
                           }
-                          _val541.put(_key544, _val545);
+                          _val549.put(_key552, _val553);
                         }
                       }
-                      _val537.put(_key540, _val541);
+                      _val545.put(_key548, _val549);
                     }
                   }
-                  _val533.put(_key536, _val537);
+                  _val541.put(_key544, _val545);
                 }
               }
-              struct.merged_data.put(_key532, _val533);
+              struct.merged_data.put(_key540, _val541);
             }
           }
           struct.setMerged_dataIsSet(true);
@@ -82484,16 +82484,16 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map550 = iprot.readMapBegin();
-                  struct.success = new java.util.HashMap<java.lang.String,TColumnType>(2*_map550.size);
-                  java.lang.String _key551;
-                  TColumnType _val552;
-                  for (int _i553 = 0; _i553 < _map550.size; ++_i553)
+                  org.apache.thrift.protocol.TMap _map558 = iprot.readMapBegin();
+                  struct.success = new java.util.HashMap<java.lang.String,TColumnType>(2*_map558.size);
+                  java.lang.String _key559;
+                  TColumnType _val560;
+                  for (int _i561 = 0; _i561 < _map558.size; ++_i561)
                   {
-                    _key551 = iprot.readString();
-                    _val552 = new TColumnType();
-                    _val552.read(iprot);
-                    struct.success.put(_key551, _val552);
+                    _key559 = iprot.readString();
+                    _val560 = new TColumnType();
+                    _val560.read(iprot);
+                    struct.success.put(_key559, _val560);
                   }
                   iprot.readMapEnd();
                 }
@@ -82530,10 +82530,10 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (java.util.Map.Entry<java.lang.String, TColumnType> _iter554 : struct.success.entrySet())
+            for (java.util.Map.Entry<java.lang.String, TColumnType> _iter562 : struct.success.entrySet())
             {
-              oprot.writeString(_iter554.getKey());
-              _iter554.getValue().write(oprot);
+              oprot.writeString(_iter562.getKey());
+              _iter562.getValue().write(oprot);
             }
             oprot.writeMapEnd();
           }
@@ -82572,10 +82572,10 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.util.Map.Entry<java.lang.String, TColumnType> _iter555 : struct.success.entrySet())
+            for (java.util.Map.Entry<java.lang.String, TColumnType> _iter563 : struct.success.entrySet())
             {
-              oprot.writeString(_iter555.getKey());
-              _iter555.getValue().write(oprot);
+              oprot.writeString(_iter563.getKey());
+              _iter563.getValue().write(oprot);
             }
           }
         }
@@ -82590,16 +82590,16 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map556 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.HashMap<java.lang.String,TColumnType>(2*_map556.size);
-            java.lang.String _key557;
-            TColumnType _val558;
-            for (int _i559 = 0; _i559 < _map556.size; ++_i559)
+            org.apache.thrift.protocol.TMap _map564 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.HashMap<java.lang.String,TColumnType>(2*_map564.size);
+            java.lang.String _key565;
+            TColumnType _val566;
+            for (int _i567 = 0; _i567 < _map564.size; ++_i567)
             {
-              _key557 = iprot.readString();
-              _val558 = new TColumnType();
-              _val558.read(iprot);
-              struct.success.put(_key557, _val558);
+              _key565 = iprot.readString();
+              _val566 = new TColumnType();
+              _val566.read(iprot);
+              struct.success.put(_key565, _val566);
             }
           }
           struct.setSuccessIsSet(true);
@@ -83477,14 +83477,14 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list560 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TColumnType>(_list560.size);
-                  TColumnType _elem561;
-                  for (int _i562 = 0; _i562 < _list560.size; ++_i562)
+                  org.apache.thrift.protocol.TList _list568 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TColumnType>(_list568.size);
+                  TColumnType _elem569;
+                  for (int _i570 = 0; _i570 < _list568.size; ++_i570)
                   {
-                    _elem561 = new TColumnType();
-                    _elem561.read(iprot);
-                    struct.success.add(_elem561);
+                    _elem569 = new TColumnType();
+                    _elem569.read(iprot);
+                    struct.success.add(_elem569);
                   }
                   iprot.readListEnd();
                 }
@@ -83521,9 +83521,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TColumnType _iter563 : struct.success)
+            for (TColumnType _iter571 : struct.success)
             {
-              _iter563.write(oprot);
+              _iter571.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -83562,9 +83562,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TColumnType _iter564 : struct.success)
+            for (TColumnType _iter572 : struct.success)
             {
-              _iter564.write(oprot);
+              _iter572.write(oprot);
             }
           }
         }
@@ -83579,14 +83579,14 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list565 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TColumnType>(_list565.size);
-            TColumnType _elem566;
-            for (int _i567 = 0; _i567 < _list565.size; ++_i567)
+            org.apache.thrift.protocol.TList _list573 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TColumnType>(_list573.size);
+            TColumnType _elem574;
+            for (int _i575 = 0; _i575 < _list573.size; ++_i575)
             {
-              _elem566 = new TColumnType();
-              _elem566.read(iprot);
-              struct.success.add(_elem566);
+              _elem574 = new TColumnType();
+              _elem574.read(iprot);
+              struct.success.add(_elem574);
             }
           }
           struct.setSuccessIsSet(true);
@@ -84358,13 +84358,13 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list568 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<java.lang.String>(_list568.size);
-                  java.lang.String _elem569;
-                  for (int _i570 = 0; _i570 < _list568.size; ++_i570)
+                  org.apache.thrift.protocol.TList _list576 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<java.lang.String>(_list576.size);
+                  java.lang.String _elem577;
+                  for (int _i578 = 0; _i578 < _list576.size; ++_i578)
                   {
-                    _elem569 = iprot.readString();
-                    struct.success.add(_elem569);
+                    _elem577 = iprot.readString();
+                    struct.success.add(_elem577);
                   }
                   iprot.readListEnd();
                 }
@@ -84401,9 +84401,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.lang.String _iter571 : struct.success)
+            for (java.lang.String _iter579 : struct.success)
             {
-              oprot.writeString(_iter571);
+              oprot.writeString(_iter579);
             }
             oprot.writeListEnd();
           }
@@ -84442,9 +84442,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.lang.String _iter572 : struct.success)
+            for (java.lang.String _iter580 : struct.success)
             {
-              oprot.writeString(_iter572);
+              oprot.writeString(_iter580);
             }
           }
         }
@@ -84459,13 +84459,13 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list573 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.success = new java.util.ArrayList<java.lang.String>(_list573.size);
-            java.lang.String _elem574;
-            for (int _i575 = 0; _i575 < _list573.size; ++_i575)
+            org.apache.thrift.protocol.TList _list581 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new java.util.ArrayList<java.lang.String>(_list581.size);
+            java.lang.String _elem582;
+            for (int _i583 = 0; _i583 < _list581.size; ++_i583)
             {
-              _elem574 = iprot.readString();
-              struct.success.add(_elem574);
+              _elem582 = iprot.readString();
+              struct.success.add(_elem582);
             }
           }
           struct.setSuccessIsSet(true);
@@ -85344,14 +85344,14 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list576 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TDBObject>(_list576.size);
-                  TDBObject _elem577;
-                  for (int _i578 = 0; _i578 < _list576.size; ++_i578)
+                  org.apache.thrift.protocol.TList _list584 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TDBObject>(_list584.size);
+                  TDBObject _elem585;
+                  for (int _i586 = 0; _i586 < _list584.size; ++_i586)
                   {
-                    _elem577 = new TDBObject();
-                    _elem577.read(iprot);
-                    struct.success.add(_elem577);
+                    _elem585 = new TDBObject();
+                    _elem585.read(iprot);
+                    struct.success.add(_elem585);
                   }
                   iprot.readListEnd();
                 }
@@ -85388,9 +85388,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TDBObject _iter579 : struct.success)
+            for (TDBObject _iter587 : struct.success)
             {
-              _iter579.write(oprot);
+              _iter587.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -85429,9 +85429,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TDBObject _iter580 : struct.success)
+            for (TDBObject _iter588 : struct.success)
             {
-              _iter580.write(oprot);
+              _iter588.write(oprot);
             }
           }
         }
@@ -85446,14 +85446,14 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list581 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TDBObject>(_list581.size);
-            TDBObject _elem582;
-            for (int _i583 = 0; _i583 < _list581.size; ++_i583)
+            org.apache.thrift.protocol.TList _list589 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TDBObject>(_list589.size);
+            TDBObject _elem590;
+            for (int _i591 = 0; _i591 < _list589.size; ++_i591)
             {
-              _elem582 = new TDBObject();
-              _elem582.read(iprot);
-              struct.success.add(_elem582);
+              _elem590 = new TDBObject();
+              _elem590.read(iprot);
+              struct.success.add(_elem590);
             }
           }
           struct.setSuccessIsSet(true);
@@ -86452,14 +86452,14 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list584 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TDBObject>(_list584.size);
-                  TDBObject _elem585;
-                  for (int _i586 = 0; _i586 < _list584.size; ++_i586)
+                  org.apache.thrift.protocol.TList _list592 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TDBObject>(_list592.size);
+                  TDBObject _elem593;
+                  for (int _i594 = 0; _i594 < _list592.size; ++_i594)
                   {
-                    _elem585 = new TDBObject();
-                    _elem585.read(iprot);
-                    struct.success.add(_elem585);
+                    _elem593 = new TDBObject();
+                    _elem593.read(iprot);
+                    struct.success.add(_elem593);
                   }
                   iprot.readListEnd();
                 }
@@ -86496,9 +86496,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TDBObject _iter587 : struct.success)
+            for (TDBObject _iter595 : struct.success)
             {
-              _iter587.write(oprot);
+              _iter595.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -86537,9 +86537,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TDBObject _iter588 : struct.success)
+            for (TDBObject _iter596 : struct.success)
             {
-              _iter588.write(oprot);
+              _iter596.write(oprot);
             }
           }
         }
@@ -86554,14 +86554,14 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list589 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TDBObject>(_list589.size);
-            TDBObject _elem590;
-            for (int _i591 = 0; _i591 < _list589.size; ++_i591)
+            org.apache.thrift.protocol.TList _list597 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TDBObject>(_list597.size);
+            TDBObject _elem598;
+            for (int _i599 = 0; _i599 < _list597.size; ++_i599)
             {
-              _elem590 = new TDBObject();
-              _elem590.read(iprot);
-              struct.success.add(_elem590);
+              _elem598 = new TDBObject();
+              _elem598.read(iprot);
+              struct.success.add(_elem598);
             }
           }
           struct.setSuccessIsSet(true);
@@ -87437,13 +87437,13 @@ public class MapD {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list592 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<java.lang.String>(_list592.size);
-                  java.lang.String _elem593;
-                  for (int _i594 = 0; _i594 < _list592.size; ++_i594)
+                  org.apache.thrift.protocol.TList _list600 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<java.lang.String>(_list600.size);
+                  java.lang.String _elem601;
+                  for (int _i602 = 0; _i602 < _list600.size; ++_i602)
                   {
-                    _elem593 = iprot.readString();
-                    struct.success.add(_elem593);
+                    _elem601 = iprot.readString();
+                    struct.success.add(_elem601);
                   }
                   iprot.readListEnd();
                 }
@@ -87480,9 +87480,9 @@ public class MapD {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.lang.String _iter595 : struct.success)
+            for (java.lang.String _iter603 : struct.success)
             {
-              oprot.writeString(_iter595);
+              oprot.writeString(_iter603);
             }
             oprot.writeListEnd();
           }
@@ -87521,9 +87521,9 @@ public class MapD {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.lang.String _iter596 : struct.success)
+            for (java.lang.String _iter604 : struct.success)
             {
-              oprot.writeString(_iter596);
+              oprot.writeString(_iter604);
             }
           }
         }
@@ -87538,13 +87538,13 @@ public class MapD {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list597 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.success = new java.util.ArrayList<java.lang.String>(_list597.size);
-            java.lang.String _elem598;
-            for (int _i599 = 0; _i599 < _list597.size; ++_i599)
+            org.apache.thrift.protocol.TList _list605 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new java.util.ArrayList<java.lang.String>(_list605.size);
+            java.lang.String _elem606;
+            for (int _i607 = 0; _i607 < _list605.size; ++_i607)
             {
-              _elem598 = iprot.readString();
-              struct.success.add(_elem598);
+              _elem606 = iprot.readString();
+              struct.success.add(_elem606);
             }
           }
           struct.setSuccessIsSet(true);
