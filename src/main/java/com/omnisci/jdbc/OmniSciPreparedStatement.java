@@ -375,8 +375,9 @@ class OmniSciPreparedStatement implements PreparedStatement {
           } catch (TException ex) {
             throw new SQLException(ex.toString());
           }
+          List<String> columnsInInsert = Arrays.asList(listOfFields);
           for (int i = 0; i < fieldsOrder.length; i++) {
-            fieldsOrder[i] = listOfColumns.indexOf(listOfFields[i].toLowerCase());
+            fieldsOrder[i] = columnsInInsert.indexOf(listOfColumns.get(i).toLowerCase());
             if (fieldsOrder[i] == -1) {
               throw new SQLException(
                       "Column " + listOfFields[i].toLowerCase() + " does not exist");
