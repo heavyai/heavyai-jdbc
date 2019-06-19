@@ -11,18 +11,16 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("TStepResult");
 
   private static final org.apache.thrift.protocol.TField SERIALIZED_ROWS_FIELD_DESC = new org.apache.thrift.protocol.TField("serialized_rows", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-  private static final org.apache.thrift.protocol.TField UNCOMPRESSED_SIZE_FIELD_DESC = new org.apache.thrift.protocol.TField("uncompressed_size", org.apache.thrift.protocol.TType.I64, (short)2);
-  private static final org.apache.thrift.protocol.TField EXECUTION_FINISHED_FIELD_DESC = new org.apache.thrift.protocol.TField("execution_finished", org.apache.thrift.protocol.TType.BOOL, (short)3);
-  private static final org.apache.thrift.protocol.TField MERGE_TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("merge_type", org.apache.thrift.protocol.TType.I32, (short)4);
-  private static final org.apache.thrift.protocol.TField SHARDED_FIELD_DESC = new org.apache.thrift.protocol.TField("sharded", org.apache.thrift.protocol.TType.BOOL, (short)5);
-  private static final org.apache.thrift.protocol.TField ROW_DESC_FIELD_DESC = new org.apache.thrift.protocol.TField("row_desc", org.apache.thrift.protocol.TType.LIST, (short)6);
-  private static final org.apache.thrift.protocol.TField NODE_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("node_id", org.apache.thrift.protocol.TType.I32, (short)7);
+  private static final org.apache.thrift.protocol.TField EXECUTION_FINISHED_FIELD_DESC = new org.apache.thrift.protocol.TField("execution_finished", org.apache.thrift.protocol.TType.BOOL, (short)2);
+  private static final org.apache.thrift.protocol.TField MERGE_TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("merge_type", org.apache.thrift.protocol.TType.I32, (short)3);
+  private static final org.apache.thrift.protocol.TField SHARDED_FIELD_DESC = new org.apache.thrift.protocol.TField("sharded", org.apache.thrift.protocol.TType.BOOL, (short)4);
+  private static final org.apache.thrift.protocol.TField ROW_DESC_FIELD_DESC = new org.apache.thrift.protocol.TField("row_desc", org.apache.thrift.protocol.TType.LIST, (short)5);
+  private static final org.apache.thrift.protocol.TField NODE_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("node_id", org.apache.thrift.protocol.TType.I32, (short)6);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TStepResultStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TStepResultTupleSchemeFactory();
 
   public com.mapd.thrift.server.TSerializedRows serialized_rows; // required
-  public long uncompressed_size; // required
   public boolean execution_finished; // required
   /**
    * 
@@ -36,16 +34,15 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     SERIALIZED_ROWS((short)1, "serialized_rows"),
-    UNCOMPRESSED_SIZE((short)2, "uncompressed_size"),
-    EXECUTION_FINISHED((short)3, "execution_finished"),
+    EXECUTION_FINISHED((short)2, "execution_finished"),
     /**
      * 
      * @see TMergeType
      */
-    MERGE_TYPE((short)4, "merge_type"),
-    SHARDED((short)5, "sharded"),
-    ROW_DESC((short)6, "row_desc"),
-    NODE_ID((short)7, "node_id");
+    MERGE_TYPE((short)3, "merge_type"),
+    SHARDED((short)4, "sharded"),
+    ROW_DESC((short)5, "row_desc"),
+    NODE_ID((short)6, "node_id");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -62,17 +59,15 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
       switch(fieldId) {
         case 1: // SERIALIZED_ROWS
           return SERIALIZED_ROWS;
-        case 2: // UNCOMPRESSED_SIZE
-          return UNCOMPRESSED_SIZE;
-        case 3: // EXECUTION_FINISHED
+        case 2: // EXECUTION_FINISHED
           return EXECUTION_FINISHED;
-        case 4: // MERGE_TYPE
+        case 3: // MERGE_TYPE
           return MERGE_TYPE;
-        case 5: // SHARDED
+        case 4: // SHARDED
           return SHARDED;
-        case 6: // ROW_DESC
+        case 5: // ROW_DESC
           return ROW_DESC;
-        case 7: // NODE_ID
+        case 6: // NODE_ID
           return NODE_ID;
         default:
           return null;
@@ -114,18 +109,15 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
   }
 
   // isset id assignments
-  private static final int __UNCOMPRESSED_SIZE_ISSET_ID = 0;
-  private static final int __EXECUTION_FINISHED_ISSET_ID = 1;
-  private static final int __SHARDED_ISSET_ID = 2;
-  private static final int __NODE_ID_ISSET_ID = 3;
+  private static final int __EXECUTION_FINISHED_ISSET_ID = 0;
+  private static final int __SHARDED_ISSET_ID = 1;
+  private static final int __NODE_ID_ISSET_ID = 2;
   private byte __isset_bitfield = 0;
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
     tmpMap.put(_Fields.SERIALIZED_ROWS, new org.apache.thrift.meta_data.FieldMetaData("serialized_rows", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.mapd.thrift.server.TSerializedRows.class)));
-    tmpMap.put(_Fields.UNCOMPRESSED_SIZE, new org.apache.thrift.meta_data.FieldMetaData("uncompressed_size", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
     tmpMap.put(_Fields.EXECUTION_FINISHED, new org.apache.thrift.meta_data.FieldMetaData("execution_finished", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     tmpMap.put(_Fields.MERGE_TYPE, new org.apache.thrift.meta_data.FieldMetaData("merge_type", org.apache.thrift.TFieldRequirementType.DEFAULT, 
@@ -145,7 +137,6 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
 
   public TStepResult(
     com.mapd.thrift.server.TSerializedRows serialized_rows,
-    long uncompressed_size,
     boolean execution_finished,
     TMergeType merge_type,
     boolean sharded,
@@ -154,8 +145,6 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
   {
     this();
     this.serialized_rows = serialized_rows;
-    this.uncompressed_size = uncompressed_size;
-    setUncompressed_sizeIsSet(true);
     this.execution_finished = execution_finished;
     setExecution_finishedIsSet(true);
     this.merge_type = merge_type;
@@ -174,7 +163,6 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
     if (other.isSetSerialized_rows()) {
       this.serialized_rows = new com.mapd.thrift.server.TSerializedRows(other.serialized_rows);
     }
-    this.uncompressed_size = other.uncompressed_size;
     this.execution_finished = other.execution_finished;
     if (other.isSetMerge_type()) {
       this.merge_type = other.merge_type;
@@ -197,8 +185,6 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
   @Override
   public void clear() {
     this.serialized_rows = null;
-    setUncompressed_sizeIsSet(false);
-    this.uncompressed_size = 0;
     setExecution_finishedIsSet(false);
     this.execution_finished = false;
     this.merge_type = null;
@@ -231,29 +217,6 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
     if (!value) {
       this.serialized_rows = null;
     }
-  }
-
-  public long getUncompressed_size() {
-    return this.uncompressed_size;
-  }
-
-  public TStepResult setUncompressed_size(long uncompressed_size) {
-    this.uncompressed_size = uncompressed_size;
-    setUncompressed_sizeIsSet(true);
-    return this;
-  }
-
-  public void unsetUncompressed_size() {
-    __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __UNCOMPRESSED_SIZE_ISSET_ID);
-  }
-
-  /** Returns true if field uncompressed_size is set (has been assigned a value) and false otherwise */
-  public boolean isSetUncompressed_size() {
-    return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __UNCOMPRESSED_SIZE_ISSET_ID);
-  }
-
-  public void setUncompressed_sizeIsSet(boolean value) {
-    __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __UNCOMPRESSED_SIZE_ISSET_ID, value);
   }
 
   public boolean isExecution_finished() {
@@ -406,14 +369,6 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
       }
       break;
 
-    case UNCOMPRESSED_SIZE:
-      if (value == null) {
-        unsetUncompressed_size();
-      } else {
-        setUncompressed_size((java.lang.Long)value);
-      }
-      break;
-
     case EXECUTION_FINISHED:
       if (value == null) {
         unsetExecution_finished();
@@ -462,9 +417,6 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
     case SERIALIZED_ROWS:
       return getSerialized_rows();
 
-    case UNCOMPRESSED_SIZE:
-      return getUncompressed_size();
-
     case EXECUTION_FINISHED:
       return isExecution_finished();
 
@@ -493,8 +445,6 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
     switch (field) {
     case SERIALIZED_ROWS:
       return isSetSerialized_rows();
-    case UNCOMPRESSED_SIZE:
-      return isSetUncompressed_size();
     case EXECUTION_FINISHED:
       return isSetExecution_finished();
     case MERGE_TYPE:
@@ -530,15 +480,6 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
       if (!(this_present_serialized_rows && that_present_serialized_rows))
         return false;
       if (!this.serialized_rows.equals(that.serialized_rows))
-        return false;
-    }
-
-    boolean this_present_uncompressed_size = true;
-    boolean that_present_uncompressed_size = true;
-    if (this_present_uncompressed_size || that_present_uncompressed_size) {
-      if (!(this_present_uncompressed_size && that_present_uncompressed_size))
-        return false;
-      if (this.uncompressed_size != that.uncompressed_size)
         return false;
     }
 
@@ -598,8 +539,6 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
     if (isSetSerialized_rows())
       hashCode = hashCode * 8191 + serialized_rows.hashCode();
 
-    hashCode = hashCode * 8191 + org.apache.thrift.TBaseHelper.hashCode(uncompressed_size);
-
     hashCode = hashCode * 8191 + ((execution_finished) ? 131071 : 524287);
 
     hashCode = hashCode * 8191 + ((isSetMerge_type()) ? 131071 : 524287);
@@ -631,16 +570,6 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
     }
     if (isSetSerialized_rows()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.serialized_rows, other.serialized_rows);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = java.lang.Boolean.valueOf(isSetUncompressed_size()).compareTo(other.isSetUncompressed_size());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetUncompressed_size()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.uncompressed_size, other.uncompressed_size);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -721,10 +650,6 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
     } else {
       sb.append(this.serialized_rows);
     }
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("uncompressed_size:");
-    sb.append(this.uncompressed_size);
     first = false;
     if (!first) sb.append(", ");
     sb.append("execution_finished:");
@@ -811,15 +736,7 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 2: // UNCOMPRESSED_SIZE
-            if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
-              struct.uncompressed_size = iprot.readI64();
-              struct.setUncompressed_sizeIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 3: // EXECUTION_FINISHED
+          case 2: // EXECUTION_FINISHED
             if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
               struct.execution_finished = iprot.readBool();
               struct.setExecution_finishedIsSet(true);
@@ -827,7 +744,7 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 4: // MERGE_TYPE
+          case 3: // MERGE_TYPE
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
               struct.merge_type = com.mapd.thrift.server.TMergeType.findByValue(iprot.readI32());
               struct.setMerge_typeIsSet(true);
@@ -835,7 +752,7 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 5: // SHARDED
+          case 4: // SHARDED
             if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
               struct.sharded = iprot.readBool();
               struct.setShardedIsSet(true);
@@ -843,7 +760,7 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 6: // ROW_DESC
+          case 5: // ROW_DESC
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
                 org.apache.thrift.protocol.TList _list64 = iprot.readListBegin();
@@ -862,7 +779,7 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 7: // NODE_ID
+          case 6: // NODE_ID
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
               struct.node_id = iprot.readI32();
               struct.setNode_idIsSet(true);
@@ -890,9 +807,6 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
         struct.serialized_rows.write(oprot);
         oprot.writeFieldEnd();
       }
-      oprot.writeFieldBegin(UNCOMPRESSED_SIZE_FIELD_DESC);
-      oprot.writeI64(struct.uncompressed_size);
-      oprot.writeFieldEnd();
       oprot.writeFieldBegin(EXECUTION_FINISHED_FIELD_DESC);
       oprot.writeBool(struct.execution_finished);
       oprot.writeFieldEnd();
@@ -940,30 +854,24 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
       if (struct.isSetSerialized_rows()) {
         optionals.set(0);
       }
-      if (struct.isSetUncompressed_size()) {
+      if (struct.isSetExecution_finished()) {
         optionals.set(1);
       }
-      if (struct.isSetExecution_finished()) {
+      if (struct.isSetMerge_type()) {
         optionals.set(2);
       }
-      if (struct.isSetMerge_type()) {
+      if (struct.isSetSharded()) {
         optionals.set(3);
       }
-      if (struct.isSetSharded()) {
+      if (struct.isSetRow_desc()) {
         optionals.set(4);
       }
-      if (struct.isSetRow_desc()) {
+      if (struct.isSetNode_id()) {
         optionals.set(5);
       }
-      if (struct.isSetNode_id()) {
-        optionals.set(6);
-      }
-      oprot.writeBitSet(optionals, 7);
+      oprot.writeBitSet(optionals, 6);
       if (struct.isSetSerialized_rows()) {
         struct.serialized_rows.write(oprot);
-      }
-      if (struct.isSetUncompressed_size()) {
-        oprot.writeI64(struct.uncompressed_size);
       }
       if (struct.isSetExecution_finished()) {
         oprot.writeBool(struct.execution_finished);
@@ -991,29 +899,25 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TStepResult struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(7);
+      java.util.BitSet incoming = iprot.readBitSet(6);
       if (incoming.get(0)) {
         struct.serialized_rows = new com.mapd.thrift.server.TSerializedRows();
         struct.serialized_rows.read(iprot);
         struct.setSerialized_rowsIsSet(true);
       }
       if (incoming.get(1)) {
-        struct.uncompressed_size = iprot.readI64();
-        struct.setUncompressed_sizeIsSet(true);
-      }
-      if (incoming.get(2)) {
         struct.execution_finished = iprot.readBool();
         struct.setExecution_finishedIsSet(true);
       }
-      if (incoming.get(3)) {
+      if (incoming.get(2)) {
         struct.merge_type = com.mapd.thrift.server.TMergeType.findByValue(iprot.readI32());
         struct.setMerge_typeIsSet(true);
       }
-      if (incoming.get(4)) {
+      if (incoming.get(3)) {
         struct.sharded = iprot.readBool();
         struct.setShardedIsSet(true);
       }
-      if (incoming.get(5)) {
+      if (incoming.get(4)) {
         {
           org.apache.thrift.protocol.TList _list69 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
           struct.row_desc = new java.util.ArrayList<TColumnType>(_list69.size);
@@ -1027,7 +931,7 @@ public class TStepResult implements org.apache.thrift.TBase<TStepResult, TStepRe
         }
         struct.setRow_descIsSet(true);
       }
-      if (incoming.get(6)) {
+      if (incoming.get(5)) {
         struct.node_id = iprot.readI32();
         struct.setNode_idIsSet(true);
       }

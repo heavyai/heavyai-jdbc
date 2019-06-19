@@ -958,14 +958,14 @@ public class TTableDetails implements org.apache.thrift.TBase<TTableDetails, TTa
           case 1: // ROW_DESC
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list152 = iprot.readListBegin();
-                struct.row_desc = new java.util.ArrayList<TColumnType>(_list152.size);
-                TColumnType _elem153;
-                for (int _i154 = 0; _i154 < _list152.size; ++_i154)
+                org.apache.thrift.protocol.TList _list160 = iprot.readListBegin();
+                struct.row_desc = new java.util.ArrayList<TColumnType>(_list160.size);
+                TColumnType _elem161;
+                for (int _i162 = 0; _i162 < _list160.size; ++_i162)
                 {
-                  _elem153 = new TColumnType();
-                  _elem153.read(iprot);
-                  struct.row_desc.add(_elem153);
+                  _elem161 = new TColumnType();
+                  _elem161.read(iprot);
+                  struct.row_desc.add(_elem161);
                 }
                 iprot.readListEnd();
               }
@@ -1057,9 +1057,9 @@ public class TTableDetails implements org.apache.thrift.TBase<TTableDetails, TTa
         oprot.writeFieldBegin(ROW_DESC_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.row_desc.size()));
-          for (TColumnType _iter155 : struct.row_desc)
+          for (TColumnType _iter163 : struct.row_desc)
           {
-            _iter155.write(oprot);
+            _iter163.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -1144,9 +1144,9 @@ public class TTableDetails implements org.apache.thrift.TBase<TTableDetails, TTa
       if (struct.isSetRow_desc()) {
         {
           oprot.writeI32(struct.row_desc.size());
-          for (TColumnType _iter156 : struct.row_desc)
+          for (TColumnType _iter164 : struct.row_desc)
           {
-            _iter156.write(oprot);
+            _iter164.write(oprot);
           }
         }
       }
@@ -1182,14 +1182,14 @@ public class TTableDetails implements org.apache.thrift.TBase<TTableDetails, TTa
       java.util.BitSet incoming = iprot.readBitSet(9);
       if (incoming.get(0)) {
         {
-          org.apache.thrift.protocol.TList _list157 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.row_desc = new java.util.ArrayList<TColumnType>(_list157.size);
-          TColumnType _elem158;
-          for (int _i159 = 0; _i159 < _list157.size; ++_i159)
+          org.apache.thrift.protocol.TList _list165 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.row_desc = new java.util.ArrayList<TColumnType>(_list165.size);
+          TColumnType _elem166;
+          for (int _i167 = 0; _i167 < _list165.size; ++_i167)
           {
-            _elem158 = new TColumnType();
-            _elem158.read(iprot);
-            struct.row_desc.add(_elem158);
+            _elem166 = new TColumnType();
+            _elem166.read(iprot);
+            struct.row_desc.add(_elem166);
           }
         }
         struct.setRow_descIsSet(true);

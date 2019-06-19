@@ -12,38 +12,41 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
 
   private static final org.apache.thrift.protocol.TField TABLE_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("table_name", org.apache.thrift.protocol.TType.STRING, (short)1);
   private static final org.apache.thrift.protocol.TField NUM_COLS_FIELD_DESC = new org.apache.thrift.protocol.TField("num_cols", org.apache.thrift.protocol.TType.I64, (short)2);
-  private static final org.apache.thrift.protocol.TField COL_DATUM_TYPES_FIELD_DESC = new org.apache.thrift.protocol.TField("col_datum_types", org.apache.thrift.protocol.TType.LIST, (short)3);
   private static final org.apache.thrift.protocol.TField IS_VIEW_FIELD_DESC = new org.apache.thrift.protocol.TField("is_view", org.apache.thrift.protocol.TType.BOOL, (short)4);
   private static final org.apache.thrift.protocol.TField IS_REPLICATED_FIELD_DESC = new org.apache.thrift.protocol.TField("is_replicated", org.apache.thrift.protocol.TType.BOOL, (short)5);
   private static final org.apache.thrift.protocol.TField SHARD_COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("shard_count", org.apache.thrift.protocol.TType.I64, (short)6);
   private static final org.apache.thrift.protocol.TField MAX_ROWS_FIELD_DESC = new org.apache.thrift.protocol.TField("max_rows", org.apache.thrift.protocol.TType.I64, (short)7);
   private static final org.apache.thrift.protocol.TField TABLE_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("table_id", org.apache.thrift.protocol.TType.I64, (short)8);
   private static final org.apache.thrift.protocol.TField MAX_TABLE_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("max_table_id", org.apache.thrift.protocol.TType.I64, (short)9);
+  private static final org.apache.thrift.protocol.TField COL_TYPES_FIELD_DESC = new org.apache.thrift.protocol.TField("col_types", org.apache.thrift.protocol.TType.LIST, (short)10);
+  private static final org.apache.thrift.protocol.TField COL_NAMES_FIELD_DESC = new org.apache.thrift.protocol.TField("col_names", org.apache.thrift.protocol.TType.LIST, (short)11);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TTableMetaStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TTableMetaTupleSchemeFactory();
 
   public java.lang.String table_name; // required
   public long num_cols; // required
-  public java.util.List<com.mapd.thrift.server.TDatumType> col_datum_types; // required
   public boolean is_view; // required
   public boolean is_replicated; // required
   public long shard_count; // required
   public long max_rows; // required
   public long table_id; // required
   public long max_table_id; // required
+  public java.util.List<com.mapd.thrift.server.TTypeInfo> col_types; // required
+  public java.util.List<java.lang.String> col_names; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     TABLE_NAME((short)1, "table_name"),
     NUM_COLS((short)2, "num_cols"),
-    COL_DATUM_TYPES((short)3, "col_datum_types"),
     IS_VIEW((short)4, "is_view"),
     IS_REPLICATED((short)5, "is_replicated"),
     SHARD_COUNT((short)6, "shard_count"),
     MAX_ROWS((short)7, "max_rows"),
     TABLE_ID((short)8, "table_id"),
-    MAX_TABLE_ID((short)9, "max_table_id");
+    MAX_TABLE_ID((short)9, "max_table_id"),
+    COL_TYPES((short)10, "col_types"),
+    COL_NAMES((short)11, "col_names");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -62,8 +65,6 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
           return TABLE_NAME;
         case 2: // NUM_COLS
           return NUM_COLS;
-        case 3: // COL_DATUM_TYPES
-          return COL_DATUM_TYPES;
         case 4: // IS_VIEW
           return IS_VIEW;
         case 5: // IS_REPLICATED
@@ -76,6 +77,10 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
           return TABLE_ID;
         case 9: // MAX_TABLE_ID
           return MAX_TABLE_ID;
+        case 10: // COL_TYPES
+          return COL_TYPES;
+        case 11: // COL_NAMES
+          return COL_NAMES;
         default:
           return null;
       }
@@ -131,9 +136,6 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.NUM_COLS, new org.apache.thrift.meta_data.FieldMetaData("num_cols", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
-    tmpMap.put(_Fields.COL_DATUM_TYPES, new org.apache.thrift.meta_data.FieldMetaData("col_datum_types", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
-            new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, com.mapd.thrift.server.TDatumType.class))));
     tmpMap.put(_Fields.IS_VIEW, new org.apache.thrift.meta_data.FieldMetaData("is_view", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     tmpMap.put(_Fields.IS_REPLICATED, new org.apache.thrift.meta_data.FieldMetaData("is_replicated", org.apache.thrift.TFieldRequirementType.DEFAULT, 
@@ -146,6 +148,12 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
     tmpMap.put(_Fields.MAX_TABLE_ID, new org.apache.thrift.meta_data.FieldMetaData("max_table_id", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
+    tmpMap.put(_Fields.COL_TYPES, new org.apache.thrift.meta_data.FieldMetaData("col_types", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.mapd.thrift.server.TTypeInfo.class))));
+    tmpMap.put(_Fields.COL_NAMES, new org.apache.thrift.meta_data.FieldMetaData("col_names", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TTableMeta.class, metaDataMap);
   }
@@ -156,19 +164,19 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
   public TTableMeta(
     java.lang.String table_name,
     long num_cols,
-    java.util.List<com.mapd.thrift.server.TDatumType> col_datum_types,
     boolean is_view,
     boolean is_replicated,
     long shard_count,
     long max_rows,
     long table_id,
-    long max_table_id)
+    long max_table_id,
+    java.util.List<com.mapd.thrift.server.TTypeInfo> col_types,
+    java.util.List<java.lang.String> col_names)
   {
     this();
     this.table_name = table_name;
     this.num_cols = num_cols;
     setNum_colsIsSet(true);
-    this.col_datum_types = col_datum_types;
     this.is_view = is_view;
     setIs_viewIsSet(true);
     this.is_replicated = is_replicated;
@@ -181,6 +189,8 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
     setTable_idIsSet(true);
     this.max_table_id = max_table_id;
     setMax_table_idIsSet(true);
+    this.col_types = col_types;
+    this.col_names = col_names;
   }
 
   /**
@@ -192,19 +202,23 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
       this.table_name = other.table_name;
     }
     this.num_cols = other.num_cols;
-    if (other.isSetCol_datum_types()) {
-      java.util.List<com.mapd.thrift.server.TDatumType> __this__col_datum_types = new java.util.ArrayList<com.mapd.thrift.server.TDatumType>(other.col_datum_types.size());
-      for (com.mapd.thrift.server.TDatumType other_element : other.col_datum_types) {
-        __this__col_datum_types.add(other_element);
-      }
-      this.col_datum_types = __this__col_datum_types;
-    }
     this.is_view = other.is_view;
     this.is_replicated = other.is_replicated;
     this.shard_count = other.shard_count;
     this.max_rows = other.max_rows;
     this.table_id = other.table_id;
     this.max_table_id = other.max_table_id;
+    if (other.isSetCol_types()) {
+      java.util.List<com.mapd.thrift.server.TTypeInfo> __this__col_types = new java.util.ArrayList<com.mapd.thrift.server.TTypeInfo>(other.col_types.size());
+      for (com.mapd.thrift.server.TTypeInfo other_element : other.col_types) {
+        __this__col_types.add(new com.mapd.thrift.server.TTypeInfo(other_element));
+      }
+      this.col_types = __this__col_types;
+    }
+    if (other.isSetCol_names()) {
+      java.util.List<java.lang.String> __this__col_names = new java.util.ArrayList<java.lang.String>(other.col_names);
+      this.col_names = __this__col_names;
+    }
   }
 
   public TTableMeta deepCopy() {
@@ -216,7 +230,6 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
     this.table_name = null;
     setNum_colsIsSet(false);
     this.num_cols = 0;
-    this.col_datum_types = null;
     setIs_viewIsSet(false);
     this.is_view = false;
     setIs_replicatedIsSet(false);
@@ -229,6 +242,8 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
     this.table_id = 0;
     setMax_table_idIsSet(false);
     this.max_table_id = 0;
+    this.col_types = null;
+    this.col_names = null;
   }
 
   public java.lang.String getTable_name() {
@@ -276,45 +291,6 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
 
   public void setNum_colsIsSet(boolean value) {
     __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __NUM_COLS_ISSET_ID, value);
-  }
-
-  public int getCol_datum_typesSize() {
-    return (this.col_datum_types == null) ? 0 : this.col_datum_types.size();
-  }
-
-  public java.util.Iterator<com.mapd.thrift.server.TDatumType> getCol_datum_typesIterator() {
-    return (this.col_datum_types == null) ? null : this.col_datum_types.iterator();
-  }
-
-  public void addToCol_datum_types(com.mapd.thrift.server.TDatumType elem) {
-    if (this.col_datum_types == null) {
-      this.col_datum_types = new java.util.ArrayList<com.mapd.thrift.server.TDatumType>();
-    }
-    this.col_datum_types.add(elem);
-  }
-
-  public java.util.List<com.mapd.thrift.server.TDatumType> getCol_datum_types() {
-    return this.col_datum_types;
-  }
-
-  public TTableMeta setCol_datum_types(java.util.List<com.mapd.thrift.server.TDatumType> col_datum_types) {
-    this.col_datum_types = col_datum_types;
-    return this;
-  }
-
-  public void unsetCol_datum_types() {
-    this.col_datum_types = null;
-  }
-
-  /** Returns true if field col_datum_types is set (has been assigned a value) and false otherwise */
-  public boolean isSetCol_datum_types() {
-    return this.col_datum_types != null;
-  }
-
-  public void setCol_datum_typesIsSet(boolean value) {
-    if (!value) {
-      this.col_datum_types = null;
-    }
   }
 
   public boolean isIs_view() {
@@ -455,6 +431,84 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
     __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __MAX_TABLE_ID_ISSET_ID, value);
   }
 
+  public int getCol_typesSize() {
+    return (this.col_types == null) ? 0 : this.col_types.size();
+  }
+
+  public java.util.Iterator<com.mapd.thrift.server.TTypeInfo> getCol_typesIterator() {
+    return (this.col_types == null) ? null : this.col_types.iterator();
+  }
+
+  public void addToCol_types(com.mapd.thrift.server.TTypeInfo elem) {
+    if (this.col_types == null) {
+      this.col_types = new java.util.ArrayList<com.mapd.thrift.server.TTypeInfo>();
+    }
+    this.col_types.add(elem);
+  }
+
+  public java.util.List<com.mapd.thrift.server.TTypeInfo> getCol_types() {
+    return this.col_types;
+  }
+
+  public TTableMeta setCol_types(java.util.List<com.mapd.thrift.server.TTypeInfo> col_types) {
+    this.col_types = col_types;
+    return this;
+  }
+
+  public void unsetCol_types() {
+    this.col_types = null;
+  }
+
+  /** Returns true if field col_types is set (has been assigned a value) and false otherwise */
+  public boolean isSetCol_types() {
+    return this.col_types != null;
+  }
+
+  public void setCol_typesIsSet(boolean value) {
+    if (!value) {
+      this.col_types = null;
+    }
+  }
+
+  public int getCol_namesSize() {
+    return (this.col_names == null) ? 0 : this.col_names.size();
+  }
+
+  public java.util.Iterator<java.lang.String> getCol_namesIterator() {
+    return (this.col_names == null) ? null : this.col_names.iterator();
+  }
+
+  public void addToCol_names(java.lang.String elem) {
+    if (this.col_names == null) {
+      this.col_names = new java.util.ArrayList<java.lang.String>();
+    }
+    this.col_names.add(elem);
+  }
+
+  public java.util.List<java.lang.String> getCol_names() {
+    return this.col_names;
+  }
+
+  public TTableMeta setCol_names(java.util.List<java.lang.String> col_names) {
+    this.col_names = col_names;
+    return this;
+  }
+
+  public void unsetCol_names() {
+    this.col_names = null;
+  }
+
+  /** Returns true if field col_names is set (has been assigned a value) and false otherwise */
+  public boolean isSetCol_names() {
+    return this.col_names != null;
+  }
+
+  public void setCol_namesIsSet(boolean value) {
+    if (!value) {
+      this.col_names = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, java.lang.Object value) {
     switch (field) {
     case TABLE_NAME:
@@ -470,14 +524,6 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
         unsetNum_cols();
       } else {
         setNum_cols((java.lang.Long)value);
-      }
-      break;
-
-    case COL_DATUM_TYPES:
-      if (value == null) {
-        unsetCol_datum_types();
-      } else {
-        setCol_datum_types((java.util.List<com.mapd.thrift.server.TDatumType>)value);
       }
       break;
 
@@ -529,6 +575,22 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
       }
       break;
 
+    case COL_TYPES:
+      if (value == null) {
+        unsetCol_types();
+      } else {
+        setCol_types((java.util.List<com.mapd.thrift.server.TTypeInfo>)value);
+      }
+      break;
+
+    case COL_NAMES:
+      if (value == null) {
+        unsetCol_names();
+      } else {
+        setCol_names((java.util.List<java.lang.String>)value);
+      }
+      break;
+
     }
   }
 
@@ -539,9 +601,6 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
 
     case NUM_COLS:
       return getNum_cols();
-
-    case COL_DATUM_TYPES:
-      return getCol_datum_types();
 
     case IS_VIEW:
       return isIs_view();
@@ -561,6 +620,12 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
     case MAX_TABLE_ID:
       return getMax_table_id();
 
+    case COL_TYPES:
+      return getCol_types();
+
+    case COL_NAMES:
+      return getCol_names();
+
     }
     throw new java.lang.IllegalStateException();
   }
@@ -576,8 +641,6 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
       return isSetTable_name();
     case NUM_COLS:
       return isSetNum_cols();
-    case COL_DATUM_TYPES:
-      return isSetCol_datum_types();
     case IS_VIEW:
       return isSetIs_view();
     case IS_REPLICATED:
@@ -590,6 +653,10 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
       return isSetTable_id();
     case MAX_TABLE_ID:
       return isSetMax_table_id();
+    case COL_TYPES:
+      return isSetCol_types();
+    case COL_NAMES:
+      return isSetCol_names();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -624,15 +691,6 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
       if (!(this_present_num_cols && that_present_num_cols))
         return false;
       if (this.num_cols != that.num_cols)
-        return false;
-    }
-
-    boolean this_present_col_datum_types = true && this.isSetCol_datum_types();
-    boolean that_present_col_datum_types = true && that.isSetCol_datum_types();
-    if (this_present_col_datum_types || that_present_col_datum_types) {
-      if (!(this_present_col_datum_types && that_present_col_datum_types))
-        return false;
-      if (!this.col_datum_types.equals(that.col_datum_types))
         return false;
     }
 
@@ -690,6 +748,24 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
         return false;
     }
 
+    boolean this_present_col_types = true && this.isSetCol_types();
+    boolean that_present_col_types = true && that.isSetCol_types();
+    if (this_present_col_types || that_present_col_types) {
+      if (!(this_present_col_types && that_present_col_types))
+        return false;
+      if (!this.col_types.equals(that.col_types))
+        return false;
+    }
+
+    boolean this_present_col_names = true && this.isSetCol_names();
+    boolean that_present_col_names = true && that.isSetCol_names();
+    if (this_present_col_names || that_present_col_names) {
+      if (!(this_present_col_names && that_present_col_names))
+        return false;
+      if (!this.col_names.equals(that.col_names))
+        return false;
+    }
+
     return true;
   }
 
@@ -703,10 +779,6 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
 
     hashCode = hashCode * 8191 + org.apache.thrift.TBaseHelper.hashCode(num_cols);
 
-    hashCode = hashCode * 8191 + ((isSetCol_datum_types()) ? 131071 : 524287);
-    if (isSetCol_datum_types())
-      hashCode = hashCode * 8191 + col_datum_types.hashCode();
-
     hashCode = hashCode * 8191 + ((is_view) ? 131071 : 524287);
 
     hashCode = hashCode * 8191 + ((is_replicated) ? 131071 : 524287);
@@ -718,6 +790,14 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
     hashCode = hashCode * 8191 + org.apache.thrift.TBaseHelper.hashCode(table_id);
 
     hashCode = hashCode * 8191 + org.apache.thrift.TBaseHelper.hashCode(max_table_id);
+
+    hashCode = hashCode * 8191 + ((isSetCol_types()) ? 131071 : 524287);
+    if (isSetCol_types())
+      hashCode = hashCode * 8191 + col_types.hashCode();
+
+    hashCode = hashCode * 8191 + ((isSetCol_names()) ? 131071 : 524287);
+    if (isSetCol_names())
+      hashCode = hashCode * 8191 + col_names.hashCode();
 
     return hashCode;
   }
@@ -746,16 +826,6 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
     }
     if (isSetNum_cols()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.num_cols, other.num_cols);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = java.lang.Boolean.valueOf(isSetCol_datum_types()).compareTo(other.isSetCol_datum_types());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetCol_datum_types()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.col_datum_types, other.col_datum_types);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -820,6 +890,26 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.valueOf(isSetCol_types()).compareTo(other.isSetCol_types());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetCol_types()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.col_types, other.col_types);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = java.lang.Boolean.valueOf(isSetCol_names()).compareTo(other.isSetCol_names());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetCol_names()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.col_names, other.col_names);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -852,14 +942,6 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
     sb.append(this.num_cols);
     first = false;
     if (!first) sb.append(", ");
-    sb.append("col_datum_types:");
-    if (this.col_datum_types == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.col_datum_types);
-    }
-    first = false;
-    if (!first) sb.append(", ");
     sb.append("is_view:");
     sb.append(this.is_view);
     first = false;
@@ -882,6 +964,22 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
     if (!first) sb.append(", ");
     sb.append("max_table_id:");
     sb.append(this.max_table_id);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("col_types:");
+    if (this.col_types == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.col_types);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("col_names:");
+    if (this.col_names == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.col_names);
+    }
     first = false;
     sb.append(")");
     return sb.toString();
@@ -944,27 +1042,6 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 3: // COL_DATUM_TYPES
-            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
-              {
-                org.apache.thrift.protocol.TList _list144 = iprot.readListBegin();
-                struct.col_datum_types = new java.util.ArrayList<com.mapd.thrift.server.TDatumType>(_list144.size);
-                com.mapd.thrift.server.TDatumType _elem145;
-                for (int _i146 = 0; _i146 < _list144.size; ++_i146)
-                {
-                  _elem145 = com.mapd.thrift.server.TDatumType.findByValue(iprot.readI32());
-                  if (_elem145 != null)
-                  {
-                    struct.col_datum_types.add(_elem145);
-                  }
-                }
-                iprot.readListEnd();
-              }
-              struct.setCol_datum_typesIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
           case 4: // IS_VIEW
             if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
               struct.is_view = iprot.readBool();
@@ -1013,6 +1090,43 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 10: // COL_TYPES
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list144 = iprot.readListBegin();
+                struct.col_types = new java.util.ArrayList<com.mapd.thrift.server.TTypeInfo>(_list144.size);
+                com.mapd.thrift.server.TTypeInfo _elem145;
+                for (int _i146 = 0; _i146 < _list144.size; ++_i146)
+                {
+                  _elem145 = new com.mapd.thrift.server.TTypeInfo();
+                  _elem145.read(iprot);
+                  struct.col_types.add(_elem145);
+                }
+                iprot.readListEnd();
+              }
+              struct.setCol_typesIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 11: // COL_NAMES
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list147 = iprot.readListBegin();
+                struct.col_names = new java.util.ArrayList<java.lang.String>(_list147.size);
+                java.lang.String _elem148;
+                for (int _i149 = 0; _i149 < _list147.size; ++_i149)
+                {
+                  _elem148 = iprot.readString();
+                  struct.col_names.add(_elem148);
+                }
+                iprot.readListEnd();
+              }
+              struct.setCol_namesIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -1036,18 +1150,6 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
       oprot.writeFieldBegin(NUM_COLS_FIELD_DESC);
       oprot.writeI64(struct.num_cols);
       oprot.writeFieldEnd();
-      if (struct.col_datum_types != null) {
-        oprot.writeFieldBegin(COL_DATUM_TYPES_FIELD_DESC);
-        {
-          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, struct.col_datum_types.size()));
-          for (com.mapd.thrift.server.TDatumType _iter147 : struct.col_datum_types)
-          {
-            oprot.writeI32(_iter147.getValue());
-          }
-          oprot.writeListEnd();
-        }
-        oprot.writeFieldEnd();
-      }
       oprot.writeFieldBegin(IS_VIEW_FIELD_DESC);
       oprot.writeBool(struct.is_view);
       oprot.writeFieldEnd();
@@ -1066,6 +1168,30 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
       oprot.writeFieldBegin(MAX_TABLE_ID_FIELD_DESC);
       oprot.writeI64(struct.max_table_id);
       oprot.writeFieldEnd();
+      if (struct.col_types != null) {
+        oprot.writeFieldBegin(COL_TYPES_FIELD_DESC);
+        {
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.col_types.size()));
+          for (com.mapd.thrift.server.TTypeInfo _iter150 : struct.col_types)
+          {
+            _iter150.write(oprot);
+          }
+          oprot.writeListEnd();
+        }
+        oprot.writeFieldEnd();
+      }
+      if (struct.col_names != null) {
+        oprot.writeFieldBegin(COL_NAMES_FIELD_DESC);
+        {
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.col_names.size()));
+          for (java.lang.String _iter151 : struct.col_names)
+          {
+            oprot.writeString(_iter151);
+          }
+          oprot.writeListEnd();
+        }
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -1090,42 +1216,36 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
       if (struct.isSetNum_cols()) {
         optionals.set(1);
       }
-      if (struct.isSetCol_datum_types()) {
+      if (struct.isSetIs_view()) {
         optionals.set(2);
       }
-      if (struct.isSetIs_view()) {
+      if (struct.isSetIs_replicated()) {
         optionals.set(3);
       }
-      if (struct.isSetIs_replicated()) {
+      if (struct.isSetShard_count()) {
         optionals.set(4);
       }
-      if (struct.isSetShard_count()) {
+      if (struct.isSetMax_rows()) {
         optionals.set(5);
       }
-      if (struct.isSetMax_rows()) {
+      if (struct.isSetTable_id()) {
         optionals.set(6);
       }
-      if (struct.isSetTable_id()) {
+      if (struct.isSetMax_table_id()) {
         optionals.set(7);
       }
-      if (struct.isSetMax_table_id()) {
+      if (struct.isSetCol_types()) {
         optionals.set(8);
       }
-      oprot.writeBitSet(optionals, 9);
+      if (struct.isSetCol_names()) {
+        optionals.set(9);
+      }
+      oprot.writeBitSet(optionals, 10);
       if (struct.isSetTable_name()) {
         oprot.writeString(struct.table_name);
       }
       if (struct.isSetNum_cols()) {
         oprot.writeI64(struct.num_cols);
-      }
-      if (struct.isSetCol_datum_types()) {
-        {
-          oprot.writeI32(struct.col_datum_types.size());
-          for (com.mapd.thrift.server.TDatumType _iter148 : struct.col_datum_types)
-          {
-            oprot.writeI32(_iter148.getValue());
-          }
-        }
       }
       if (struct.isSetIs_view()) {
         oprot.writeBool(struct.is_view);
@@ -1145,12 +1265,30 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
       if (struct.isSetMax_table_id()) {
         oprot.writeI64(struct.max_table_id);
       }
+      if (struct.isSetCol_types()) {
+        {
+          oprot.writeI32(struct.col_types.size());
+          for (com.mapd.thrift.server.TTypeInfo _iter152 : struct.col_types)
+          {
+            _iter152.write(oprot);
+          }
+        }
+      }
+      if (struct.isSetCol_names()) {
+        {
+          oprot.writeI32(struct.col_names.size());
+          for (java.lang.String _iter153 : struct.col_names)
+          {
+            oprot.writeString(_iter153);
+          }
+        }
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TTableMeta struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(9);
+      java.util.BitSet incoming = iprot.readBitSet(10);
       if (incoming.get(0)) {
         struct.table_name = iprot.readString();
         struct.setTable_nameIsSet(true);
@@ -1160,44 +1298,55 @@ public class TTableMeta implements org.apache.thrift.TBase<TTableMeta, TTableMet
         struct.setNum_colsIsSet(true);
       }
       if (incoming.get(2)) {
-        {
-          org.apache.thrift.protocol.TList _list149 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
-          struct.col_datum_types = new java.util.ArrayList<com.mapd.thrift.server.TDatumType>(_list149.size);
-          com.mapd.thrift.server.TDatumType _elem150;
-          for (int _i151 = 0; _i151 < _list149.size; ++_i151)
-          {
-            _elem150 = com.mapd.thrift.server.TDatumType.findByValue(iprot.readI32());
-            if (_elem150 != null)
-            {
-              struct.col_datum_types.add(_elem150);
-            }
-          }
-        }
-        struct.setCol_datum_typesIsSet(true);
-      }
-      if (incoming.get(3)) {
         struct.is_view = iprot.readBool();
         struct.setIs_viewIsSet(true);
       }
-      if (incoming.get(4)) {
+      if (incoming.get(3)) {
         struct.is_replicated = iprot.readBool();
         struct.setIs_replicatedIsSet(true);
       }
-      if (incoming.get(5)) {
+      if (incoming.get(4)) {
         struct.shard_count = iprot.readI64();
         struct.setShard_countIsSet(true);
       }
-      if (incoming.get(6)) {
+      if (incoming.get(5)) {
         struct.max_rows = iprot.readI64();
         struct.setMax_rowsIsSet(true);
       }
-      if (incoming.get(7)) {
+      if (incoming.get(6)) {
         struct.table_id = iprot.readI64();
         struct.setTable_idIsSet(true);
       }
-      if (incoming.get(8)) {
+      if (incoming.get(7)) {
         struct.max_table_id = iprot.readI64();
         struct.setMax_table_idIsSet(true);
+      }
+      if (incoming.get(8)) {
+        {
+          org.apache.thrift.protocol.TList _list154 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.col_types = new java.util.ArrayList<com.mapd.thrift.server.TTypeInfo>(_list154.size);
+          com.mapd.thrift.server.TTypeInfo _elem155;
+          for (int _i156 = 0; _i156 < _list154.size; ++_i156)
+          {
+            _elem155 = new com.mapd.thrift.server.TTypeInfo();
+            _elem155.read(iprot);
+            struct.col_types.add(_elem155);
+          }
+        }
+        struct.setCol_typesIsSet(true);
+      }
+      if (incoming.get(9)) {
+        {
+          org.apache.thrift.protocol.TList _list157 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+          struct.col_names = new java.util.ArrayList<java.lang.String>(_list157.size);
+          java.lang.String _elem158;
+          for (int _i159 = 0; _i159 < _list157.size; ++_i159)
+          {
+            _elem158 = iprot.readString();
+            struct.col_names.add(_elem158);
+          }
+        }
+        struct.setCol_namesIsSet(true);
       }
     }
   }

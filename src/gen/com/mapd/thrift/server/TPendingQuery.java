@@ -610,14 +610,14 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
           case 2: // COLUMN_RANGES
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list160 = iprot.readListBegin();
-                struct.column_ranges = new java.util.ArrayList<TColumnRange>(_list160.size);
-                TColumnRange _elem161;
-                for (int _i162 = 0; _i162 < _list160.size; ++_i162)
+                org.apache.thrift.protocol.TList _list168 = iprot.readListBegin();
+                struct.column_ranges = new java.util.ArrayList<TColumnRange>(_list168.size);
+                TColumnRange _elem169;
+                for (int _i170 = 0; _i170 < _list168.size; ++_i170)
                 {
-                  _elem161 = new TColumnRange();
-                  _elem161.read(iprot);
-                  struct.column_ranges.add(_elem161);
+                  _elem169 = new TColumnRange();
+                  _elem169.read(iprot);
+                  struct.column_ranges.add(_elem169);
                 }
                 iprot.readListEnd();
               }
@@ -629,14 +629,14 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
           case 3: // DICTIONARY_GENERATIONS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list163 = iprot.readListBegin();
-                struct.dictionary_generations = new java.util.ArrayList<TDictionaryGeneration>(_list163.size);
-                TDictionaryGeneration _elem164;
-                for (int _i165 = 0; _i165 < _list163.size; ++_i165)
+                org.apache.thrift.protocol.TList _list171 = iprot.readListBegin();
+                struct.dictionary_generations = new java.util.ArrayList<TDictionaryGeneration>(_list171.size);
+                TDictionaryGeneration _elem172;
+                for (int _i173 = 0; _i173 < _list171.size; ++_i173)
                 {
-                  _elem164 = new TDictionaryGeneration();
-                  _elem164.read(iprot);
-                  struct.dictionary_generations.add(_elem164);
+                  _elem172 = new TDictionaryGeneration();
+                  _elem172.read(iprot);
+                  struct.dictionary_generations.add(_elem172);
                 }
                 iprot.readListEnd();
               }
@@ -648,14 +648,14 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
           case 4: // TABLE_GENERATIONS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list166 = iprot.readListBegin();
-                struct.table_generations = new java.util.ArrayList<TTableGeneration>(_list166.size);
-                TTableGeneration _elem167;
-                for (int _i168 = 0; _i168 < _list166.size; ++_i168)
+                org.apache.thrift.protocol.TList _list174 = iprot.readListBegin();
+                struct.table_generations = new java.util.ArrayList<TTableGeneration>(_list174.size);
+                TTableGeneration _elem175;
+                for (int _i176 = 0; _i176 < _list174.size; ++_i176)
                 {
-                  _elem167 = new TTableGeneration();
-                  _elem167.read(iprot);
-                  struct.table_generations.add(_elem167);
+                  _elem175 = new TTableGeneration();
+                  _elem175.read(iprot);
+                  struct.table_generations.add(_elem175);
                 }
                 iprot.readListEnd();
               }
@@ -686,9 +686,9 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
         oprot.writeFieldBegin(COLUMN_RANGES_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.column_ranges.size()));
-          for (TColumnRange _iter169 : struct.column_ranges)
+          for (TColumnRange _iter177 : struct.column_ranges)
           {
-            _iter169.write(oprot);
+            _iter177.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -698,9 +698,9 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
         oprot.writeFieldBegin(DICTIONARY_GENERATIONS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.dictionary_generations.size()));
-          for (TDictionaryGeneration _iter170 : struct.dictionary_generations)
+          for (TDictionaryGeneration _iter178 : struct.dictionary_generations)
           {
-            _iter170.write(oprot);
+            _iter178.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -710,9 +710,9 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
         oprot.writeFieldBegin(TABLE_GENERATIONS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.table_generations.size()));
-          for (TTableGeneration _iter171 : struct.table_generations)
+          for (TTableGeneration _iter179 : struct.table_generations)
           {
-            _iter171.write(oprot);
+            _iter179.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -755,27 +755,27 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
       if (struct.isSetColumn_ranges()) {
         {
           oprot.writeI32(struct.column_ranges.size());
-          for (TColumnRange _iter172 : struct.column_ranges)
+          for (TColumnRange _iter180 : struct.column_ranges)
           {
-            _iter172.write(oprot);
+            _iter180.write(oprot);
           }
         }
       }
       if (struct.isSetDictionary_generations()) {
         {
           oprot.writeI32(struct.dictionary_generations.size());
-          for (TDictionaryGeneration _iter173 : struct.dictionary_generations)
+          for (TDictionaryGeneration _iter181 : struct.dictionary_generations)
           {
-            _iter173.write(oprot);
+            _iter181.write(oprot);
           }
         }
       }
       if (struct.isSetTable_generations()) {
         {
           oprot.writeI32(struct.table_generations.size());
-          for (TTableGeneration _iter174 : struct.table_generations)
+          for (TTableGeneration _iter182 : struct.table_generations)
           {
-            _iter174.write(oprot);
+            _iter182.write(oprot);
           }
         }
       }
@@ -791,42 +791,42 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
       }
       if (incoming.get(1)) {
         {
-          org.apache.thrift.protocol.TList _list175 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.column_ranges = new java.util.ArrayList<TColumnRange>(_list175.size);
-          TColumnRange _elem176;
-          for (int _i177 = 0; _i177 < _list175.size; ++_i177)
+          org.apache.thrift.protocol.TList _list183 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.column_ranges = new java.util.ArrayList<TColumnRange>(_list183.size);
+          TColumnRange _elem184;
+          for (int _i185 = 0; _i185 < _list183.size; ++_i185)
           {
-            _elem176 = new TColumnRange();
-            _elem176.read(iprot);
-            struct.column_ranges.add(_elem176);
+            _elem184 = new TColumnRange();
+            _elem184.read(iprot);
+            struct.column_ranges.add(_elem184);
           }
         }
         struct.setColumn_rangesIsSet(true);
       }
       if (incoming.get(2)) {
         {
-          org.apache.thrift.protocol.TList _list178 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.dictionary_generations = new java.util.ArrayList<TDictionaryGeneration>(_list178.size);
-          TDictionaryGeneration _elem179;
-          for (int _i180 = 0; _i180 < _list178.size; ++_i180)
+          org.apache.thrift.protocol.TList _list186 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.dictionary_generations = new java.util.ArrayList<TDictionaryGeneration>(_list186.size);
+          TDictionaryGeneration _elem187;
+          for (int _i188 = 0; _i188 < _list186.size; ++_i188)
           {
-            _elem179 = new TDictionaryGeneration();
-            _elem179.read(iprot);
-            struct.dictionary_generations.add(_elem179);
+            _elem187 = new TDictionaryGeneration();
+            _elem187.read(iprot);
+            struct.dictionary_generations.add(_elem187);
           }
         }
         struct.setDictionary_generationsIsSet(true);
       }
       if (incoming.get(3)) {
         {
-          org.apache.thrift.protocol.TList _list181 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.table_generations = new java.util.ArrayList<TTableGeneration>(_list181.size);
-          TTableGeneration _elem182;
-          for (int _i183 = 0; _i183 < _list181.size; ++_i183)
+          org.apache.thrift.protocol.TList _list189 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.table_generations = new java.util.ArrayList<TTableGeneration>(_list189.size);
+          TTableGeneration _elem190;
+          for (int _i191 = 0; _i191 < _list189.size; ++_i191)
           {
-            _elem182 = new TTableGeneration();
-            _elem182.read(iprot);
-            struct.table_generations.add(_elem182);
+            _elem190 = new TTableGeneration();
+            _elem190.read(iprot);
+            struct.table_generations.add(_elem190);
           }
         }
         struct.setTable_generationsIsSet(true);
