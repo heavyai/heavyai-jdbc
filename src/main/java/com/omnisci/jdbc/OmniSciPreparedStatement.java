@@ -382,10 +382,10 @@ class OmniSciPreparedStatement implements PreparedStatement {
           }
           
           for (int i = 0; i < fieldsOrder.length; i++) {
-            fieldsOrder[i] = listOfFieldsLowerCase.indexOf(listOfColumns.get(i).toLowerCase());
+            fieldsOrder[i] = listOfFieldsLowerCase.indexOf(listOfColumns.get(i));
             if (fieldsOrder[i] == -1) {
               throw new SQLException(
-                      "Column " + listOfColumns.get(i).toLowerCase() + " does not exist");
+                      "Column " + listOfColumns.get(i) + " does not exist");
             }
           }
         }
