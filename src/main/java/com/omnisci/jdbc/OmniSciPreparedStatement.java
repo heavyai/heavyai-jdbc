@@ -364,6 +364,11 @@ class OmniSciPreparedStatement implements PreparedStatement {
                   != listOfFields.length) {
             throw new SQLException("Duplicated column name");
           }
+          List<String> listOfFieldsLowerCase = new ArrayList<>();
+          for (String field : listOfFields) {
+            listOfFieldsLowerCase.add(field.toLowerCase());
+          }
+          
           fieldsOrder = new int[listOfFields.length];
           List<String> listOfColumns = new ArrayList<String>();
           try {
@@ -375,11 +380,12 @@ class OmniSciPreparedStatement implements PreparedStatement {
           } catch (TException ex) {
             throw new SQLException(ex.toString());
           }
+          
           for (int i = 0; i < fieldsOrder.length; i++) {
-            fieldsOrder[i] = listOfColumns.indexOf(listOfFields[i].toLowerCase());
+            fieldsOrder[i] = listOfFieldsLowerCase.indexOf(listOfColumns.get(i));
             if (fieldsOrder[i] == -1) {
               throw new SQLException(
-                      "Column " + listOfFields[i].toLowerCase() + " does not exist");
+                      "Column " + listOfColumns.get(i) + " does not exist");
             }
           }
         }
