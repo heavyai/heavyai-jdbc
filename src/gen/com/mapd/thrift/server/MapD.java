@@ -169,6 +169,10 @@ public class MapD {
 
     public TLicenseInfo get_license_claims(java.lang.String session, java.lang.String nonce) throws TMapDException, org.apache.thrift.TException;
 
+    public java.util.Map<java.lang.String,java.lang.String> get_device_parameters() throws TMapDException, org.apache.thrift.TException;
+
+    public void register_runtime_udf(java.lang.String session, java.lang.String signatures, java.util.Map<java.lang.String,java.lang.String> device_ir_map) throws TMapDException, org.apache.thrift.TException;
+
   }
 
   public interface AsyncIface {
@@ -330,6 +334,10 @@ public class MapD {
     public void set_license_key(java.lang.String session, java.lang.String key, java.lang.String nonce, org.apache.thrift.async.AsyncMethodCallback<TLicenseInfo> resultHandler) throws org.apache.thrift.TException;
 
     public void get_license_claims(java.lang.String session, java.lang.String nonce, org.apache.thrift.async.AsyncMethodCallback<TLicenseInfo> resultHandler) throws org.apache.thrift.TException;
+
+    public void get_device_parameters(org.apache.thrift.async.AsyncMethodCallback<java.util.Map<java.lang.String,java.lang.String>> resultHandler) throws org.apache.thrift.TException;
+
+    public void register_runtime_udf(java.lang.String session, java.lang.String signatures, java.util.Map<java.lang.String,java.lang.String> device_ir_map, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -2445,6 +2453,56 @@ public class MapD {
         throw result.e;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "get_license_claims failed: unknown result");
+    }
+
+    public java.util.Map<java.lang.String,java.lang.String> get_device_parameters() throws TMapDException, org.apache.thrift.TException
+    {
+      send_get_device_parameters();
+      return recv_get_device_parameters();
+    }
+
+    public void send_get_device_parameters() throws org.apache.thrift.TException
+    {
+      get_device_parameters_args args = new get_device_parameters_args();
+      sendBase("get_device_parameters", args);
+    }
+
+    public java.util.Map<java.lang.String,java.lang.String> recv_get_device_parameters() throws TMapDException, org.apache.thrift.TException
+    {
+      get_device_parameters_result result = new get_device_parameters_result();
+      receiveBase(result, "get_device_parameters");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.e != null) {
+        throw result.e;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "get_device_parameters failed: unknown result");
+    }
+
+    public void register_runtime_udf(java.lang.String session, java.lang.String signatures, java.util.Map<java.lang.String,java.lang.String> device_ir_map) throws TMapDException, org.apache.thrift.TException
+    {
+      send_register_runtime_udf(session, signatures, device_ir_map);
+      recv_register_runtime_udf();
+    }
+
+    public void send_register_runtime_udf(java.lang.String session, java.lang.String signatures, java.util.Map<java.lang.String,java.lang.String> device_ir_map) throws org.apache.thrift.TException
+    {
+      register_runtime_udf_args args = new register_runtime_udf_args();
+      args.setSession(session);
+      args.setSignatures(signatures);
+      args.setDevice_ir_map(device_ir_map);
+      sendBase("register_runtime_udf", args);
+    }
+
+    public void recv_register_runtime_udf() throws TMapDException, org.apache.thrift.TException
+    {
+      register_runtime_udf_result result = new register_runtime_udf_result();
+      receiveBase(result, "register_runtime_udf");
+      if (result.e != null) {
+        throw result.e;
+      }
+      return;
     }
 
   }
@@ -5374,6 +5432,73 @@ public class MapD {
       }
     }
 
+    public void get_device_parameters(org.apache.thrift.async.AsyncMethodCallback<java.util.Map<java.lang.String,java.lang.String>> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      get_device_parameters_call method_call = new get_device_parameters_call(resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class get_device_parameters_call extends org.apache.thrift.async.TAsyncMethodCall<java.util.Map<java.lang.String,java.lang.String>> {
+      public get_device_parameters_call(org.apache.thrift.async.AsyncMethodCallback<java.util.Map<java.lang.String,java.lang.String>> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("get_device_parameters", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        get_device_parameters_args args = new get_device_parameters_args();
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public java.util.Map<java.lang.String,java.lang.String> getResult() throws TMapDException, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new java.lang.IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_get_device_parameters();
+      }
+    }
+
+    public void register_runtime_udf(java.lang.String session, java.lang.String signatures, java.util.Map<java.lang.String,java.lang.String> device_ir_map, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      register_runtime_udf_call method_call = new register_runtime_udf_call(session, signatures, device_ir_map, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class register_runtime_udf_call extends org.apache.thrift.async.TAsyncMethodCall<Void> {
+      private java.lang.String session;
+      private java.lang.String signatures;
+      private java.util.Map<java.lang.String,java.lang.String> device_ir_map;
+      public register_runtime_udf_call(java.lang.String session, java.lang.String signatures, java.util.Map<java.lang.String,java.lang.String> device_ir_map, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.session = session;
+        this.signatures = signatures;
+        this.device_ir_map = device_ir_map;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("register_runtime_udf", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        register_runtime_udf_args args = new register_runtime_udf_args();
+        args.setSession(session);
+        args.setSignatures(signatures);
+        args.setDevice_ir_map(device_ir_map);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public Void getResult() throws TMapDException, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new java.lang.IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return null;
+      }
+    }
+
   }
 
   public static class Processor<I extends Iface> extends org.apache.thrift.TBaseProcessor<I> implements org.apache.thrift.TProcessor {
@@ -5466,6 +5591,8 @@ public class MapD {
       processMap.put("has_object_privilege", new has_object_privilege());
       processMap.put("set_license_key", new set_license_key());
       processMap.put("get_license_claims", new get_license_claims());
+      processMap.put("get_device_parameters", new get_device_parameters());
+      processMap.put("register_runtime_udf", new register_runtime_udf());
       return processMap;
     }
 
@@ -7756,6 +7883,64 @@ public class MapD {
       }
     }
 
+    public static class get_device_parameters<I extends Iface> extends org.apache.thrift.ProcessFunction<I, get_device_parameters_args> {
+      public get_device_parameters() {
+        super("get_device_parameters");
+      }
+
+      public get_device_parameters_args getEmptyArgsInstance() {
+        return new get_device_parameters_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      @Override
+      protected boolean handleRuntimeExceptions() {
+        return false;
+      }
+
+      public get_device_parameters_result getResult(I iface, get_device_parameters_args args) throws org.apache.thrift.TException {
+        get_device_parameters_result result = new get_device_parameters_result();
+        try {
+          result.success = iface.get_device_parameters();
+        } catch (TMapDException e) {
+          result.e = e;
+        }
+        return result;
+      }
+    }
+
+    public static class register_runtime_udf<I extends Iface> extends org.apache.thrift.ProcessFunction<I, register_runtime_udf_args> {
+      public register_runtime_udf() {
+        super("register_runtime_udf");
+      }
+
+      public register_runtime_udf_args getEmptyArgsInstance() {
+        return new register_runtime_udf_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      @Override
+      protected boolean handleRuntimeExceptions() {
+        return false;
+      }
+
+      public register_runtime_udf_result getResult(I iface, register_runtime_udf_args args) throws org.apache.thrift.TException {
+        register_runtime_udf_result result = new register_runtime_udf_result();
+        try {
+          iface.register_runtime_udf(args.session, args.signatures, args.device_ir_map);
+        } catch (TMapDException e) {
+          result.e = e;
+        }
+        return result;
+      }
+    }
+
   }
 
   public static class AsyncProcessor<I extends AsyncIface> extends org.apache.thrift.TBaseAsyncProcessor<I> {
@@ -7848,6 +8033,8 @@ public class MapD {
       processMap.put("has_object_privilege", new has_object_privilege());
       processMap.put("set_license_key", new set_license_key());
       processMap.put("get_license_claims", new get_license_claims());
+      processMap.put("get_device_parameters", new get_device_parameters());
+      processMap.put("register_runtime_udf", new register_runtime_udf());
       return processMap;
     }
 
@@ -12952,6 +13139,135 @@ public class MapD {
 
       public void start(I iface, get_license_claims_args args, org.apache.thrift.async.AsyncMethodCallback<TLicenseInfo> resultHandler) throws org.apache.thrift.TException {
         iface.get_license_claims(args.session, args.nonce,resultHandler);
+      }
+    }
+
+    public static class get_device_parameters<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, get_device_parameters_args, java.util.Map<java.lang.String,java.lang.String>> {
+      public get_device_parameters() {
+        super("get_device_parameters");
+      }
+
+      public get_device_parameters_args getEmptyArgsInstance() {
+        return new get_device_parameters_args();
+      }
+
+      public org.apache.thrift.async.AsyncMethodCallback<java.util.Map<java.lang.String,java.lang.String>> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new org.apache.thrift.async.AsyncMethodCallback<java.util.Map<java.lang.String,java.lang.String>>() { 
+          public void onComplete(java.util.Map<java.lang.String,java.lang.String> o) {
+            get_device_parameters_result result = new get_device_parameters_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb, result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+            } catch (org.apache.thrift.transport.TTransportException e) {
+              _LOGGER.error("TTransportException writing to internal frame buffer", e);
+              fb.close();
+            } catch (java.lang.Exception e) {
+              _LOGGER.error("Exception writing to internal frame buffer", e);
+              onError(e);
+            }
+          }
+          public void onError(java.lang.Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TSerializable msg;
+            get_device_parameters_result result = new get_device_parameters_result();
+            if (e instanceof TMapDException) {
+              result.e = (TMapDException) e;
+              result.setEIsSet(true);
+              msg = result;
+            } else if (e instanceof org.apache.thrift.transport.TTransportException) {
+              _LOGGER.error("TTransportException inside handler", e);
+              fb.close();
+              return;
+            } else if (e instanceof org.apache.thrift.TApplicationException) {
+              _LOGGER.error("TApplicationException inside handler", e);
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TApplicationException)e;
+            } else {
+              _LOGGER.error("Exception inside handler", e);
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+            } catch (java.lang.Exception ex) {
+              _LOGGER.error("Exception writing to internal frame buffer", ex);
+              fb.close();
+            }
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, get_device_parameters_args args, org.apache.thrift.async.AsyncMethodCallback<java.util.Map<java.lang.String,java.lang.String>> resultHandler) throws org.apache.thrift.TException {
+        iface.get_device_parameters(resultHandler);
+      }
+    }
+
+    public static class register_runtime_udf<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, register_runtime_udf_args, Void> {
+      public register_runtime_udf() {
+        super("register_runtime_udf");
+      }
+
+      public register_runtime_udf_args getEmptyArgsInstance() {
+        return new register_runtime_udf_args();
+      }
+
+      public org.apache.thrift.async.AsyncMethodCallback<Void> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new org.apache.thrift.async.AsyncMethodCallback<Void>() { 
+          public void onComplete(Void o) {
+            register_runtime_udf_result result = new register_runtime_udf_result();
+            try {
+              fcall.sendResponse(fb, result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+            } catch (org.apache.thrift.transport.TTransportException e) {
+              _LOGGER.error("TTransportException writing to internal frame buffer", e);
+              fb.close();
+            } catch (java.lang.Exception e) {
+              _LOGGER.error("Exception writing to internal frame buffer", e);
+              onError(e);
+            }
+          }
+          public void onError(java.lang.Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TSerializable msg;
+            register_runtime_udf_result result = new register_runtime_udf_result();
+            if (e instanceof TMapDException) {
+              result.e = (TMapDException) e;
+              result.setEIsSet(true);
+              msg = result;
+            } else if (e instanceof org.apache.thrift.transport.TTransportException) {
+              _LOGGER.error("TTransportException inside handler", e);
+              fb.close();
+              return;
+            } else if (e instanceof org.apache.thrift.TApplicationException) {
+              _LOGGER.error("TApplicationException inside handler", e);
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TApplicationException)e;
+            } else {
+              _LOGGER.error("Exception inside handler", e);
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+            } catch (java.lang.Exception ex) {
+              _LOGGER.error("Exception writing to internal frame buffer", ex);
+              fb.close();
+            }
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, register_runtime_udf_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+        iface.register_runtime_udf(args.session, args.signatures, args.device_ir_map,resultHandler);
       }
     }
 
@@ -90800,6 +91116,1762 @@ public class MapD {
           struct.setSuccessIsSet(true);
         }
         if (incoming.get(1)) {
+          struct.e = new TMapDException();
+          struct.e.read(iprot);
+          struct.setEIsSet(true);
+        }
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  public static class get_device_parameters_args implements org.apache.thrift.TBase<get_device_parameters_args, get_device_parameters_args._Fields>, java.io.Serializable, Cloneable, Comparable<get_device_parameters_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("get_device_parameters_args");
+
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new get_device_parameters_argsStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new get_device_parameters_argsTupleSchemeFactory();
+
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+;
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(get_device_parameters_args.class, metaDataMap);
+    }
+
+    public get_device_parameters_args() {
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public get_device_parameters_args(get_device_parameters_args other) {
+    }
+
+    public get_device_parameters_args deepCopy() {
+      return new get_device_parameters_args(this);
+    }
+
+    @Override
+    public void clear() {
+    }
+
+    public void setFieldValue(_Fields field, java.lang.Object value) {
+      switch (field) {
+      }
+    }
+
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof get_device_parameters_args)
+        return this.equals((get_device_parameters_args)that);
+      return false;
+    }
+
+    public boolean equals(get_device_parameters_args that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(get_device_parameters_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+    }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("get_device_parameters_args(");
+      boolean first = true;
+
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class get_device_parameters_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public get_device_parameters_argsStandardScheme getScheme() {
+        return new get_device_parameters_argsStandardScheme();
+      }
+    }
+
+    private static class get_device_parameters_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<get_device_parameters_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, get_device_parameters_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, get_device_parameters_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class get_device_parameters_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public get_device_parameters_argsTupleScheme getScheme() {
+        return new get_device_parameters_argsTupleScheme();
+      }
+    }
+
+    private static class get_device_parameters_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<get_device_parameters_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, get_device_parameters_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, get_device_parameters_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  public static class get_device_parameters_result implements org.apache.thrift.TBase<get_device_parameters_result, get_device_parameters_result._Fields>, java.io.Serializable, Cloneable, Comparable<get_device_parameters_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("get_device_parameters_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.MAP, (short)0);
+    private static final org.apache.thrift.protocol.TField E_FIELD_DESC = new org.apache.thrift.protocol.TField("e", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new get_device_parameters_resultStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new get_device_parameters_resultTupleSchemeFactory();
+
+    public java.util.Map<java.lang.String,java.lang.String> success; // required
+    public TMapDException e; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      E((short)1, "e");
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // E
+            return E;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.MapMetaData(org.apache.thrift.protocol.TType.MAP, 
+              new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING), 
+              new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
+      tmpMap.put(_Fields.E, new org.apache.thrift.meta_data.FieldMetaData("e", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TMapDException.class)));
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(get_device_parameters_result.class, metaDataMap);
+    }
+
+    public get_device_parameters_result() {
+    }
+
+    public get_device_parameters_result(
+      java.util.Map<java.lang.String,java.lang.String> success,
+      TMapDException e)
+    {
+      this();
+      this.success = success;
+      this.e = e;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public get_device_parameters_result(get_device_parameters_result other) {
+      if (other.isSetSuccess()) {
+        java.util.Map<java.lang.String,java.lang.String> __this__success = new java.util.HashMap<java.lang.String,java.lang.String>(other.success);
+        this.success = __this__success;
+      }
+      if (other.isSetE()) {
+        this.e = new TMapDException(other.e);
+      }
+    }
+
+    public get_device_parameters_result deepCopy() {
+      return new get_device_parameters_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+      this.e = null;
+    }
+
+    public int getSuccessSize() {
+      return (this.success == null) ? 0 : this.success.size();
+    }
+
+    public void putToSuccess(java.lang.String key, java.lang.String val) {
+      if (this.success == null) {
+        this.success = new java.util.HashMap<java.lang.String,java.lang.String>();
+      }
+      this.success.put(key, val);
+    }
+
+    public java.util.Map<java.lang.String,java.lang.String> getSuccess() {
+      return this.success;
+    }
+
+    public get_device_parameters_result setSuccess(java.util.Map<java.lang.String,java.lang.String> success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public TMapDException getE() {
+      return this.e;
+    }
+
+    public get_device_parameters_result setE(TMapDException e) {
+      this.e = e;
+      return this;
+    }
+
+    public void unsetE() {
+      this.e = null;
+    }
+
+    /** Returns true if field e is set (has been assigned a value) and false otherwise */
+    public boolean isSetE() {
+      return this.e != null;
+    }
+
+    public void setEIsSet(boolean value) {
+      if (!value) {
+        this.e = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, java.lang.Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((java.util.Map<java.lang.String,java.lang.String>)value);
+        }
+        break;
+
+      case E:
+        if (value == null) {
+          unsetE();
+        } else {
+          setE((TMapDException)value);
+        }
+        break;
+
+      }
+    }
+
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case E:
+        return getE();
+
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case E:
+        return isSetE();
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof get_device_parameters_result)
+        return this.equals((get_device_parameters_result)that);
+      return false;
+    }
+
+    public boolean equals(get_device_parameters_result that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_e = true && this.isSetE();
+      boolean that_present_e = true && that.isSetE();
+      if (this_present_e || that_present_e) {
+        if (!(this_present_e && that_present_e))
+          return false;
+        if (!this.e.equals(that.e))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetSuccess()) ? 131071 : 524287);
+      if (isSetSuccess())
+        hashCode = hashCode * 8191 + success.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetE()) ? 131071 : 524287);
+      if (isSetE())
+        hashCode = hashCode * 8191 + e.hashCode();
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(get_device_parameters_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = java.lang.Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetE()).compareTo(other.isSetE());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetE()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.e, other.e);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+      }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("get_device_parameters_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("e:");
+      if (this.e == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.e);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class get_device_parameters_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public get_device_parameters_resultStandardScheme getScheme() {
+        return new get_device_parameters_resultStandardScheme();
+      }
+    }
+
+    private static class get_device_parameters_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<get_device_parameters_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, get_device_parameters_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
+                {
+                  org.apache.thrift.protocol.TMap _map608 = iprot.readMapBegin();
+                  struct.success = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map608.size);
+                  java.lang.String _key609;
+                  java.lang.String _val610;
+                  for (int _i611 = 0; _i611 < _map608.size; ++_i611)
+                  {
+                    _key609 = iprot.readString();
+                    _val610 = iprot.readString();
+                    struct.success.put(_key609, _val610);
+                  }
+                  iprot.readMapEnd();
+                }
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // E
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.e = new TMapDException();
+                struct.e.read(iprot);
+                struct.setEIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, get_device_parameters_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          {
+            oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, struct.success.size()));
+            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter612 : struct.success.entrySet())
+            {
+              oprot.writeString(_iter612.getKey());
+              oprot.writeString(_iter612.getValue());
+            }
+            oprot.writeMapEnd();
+          }
+          oprot.writeFieldEnd();
+        }
+        if (struct.e != null) {
+          oprot.writeFieldBegin(E_FIELD_DESC);
+          struct.e.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class get_device_parameters_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public get_device_parameters_resultTupleScheme getScheme() {
+        return new get_device_parameters_resultTupleScheme();
+      }
+    }
+
+    private static class get_device_parameters_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<get_device_parameters_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, get_device_parameters_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetE()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          {
+            oprot.writeI32(struct.success.size());
+            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter613 : struct.success.entrySet())
+            {
+              oprot.writeString(_iter613.getKey());
+              oprot.writeString(_iter613.getValue());
+            }
+          }
+        }
+        if (struct.isSetE()) {
+          struct.e.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, get_device_parameters_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          {
+            org.apache.thrift.protocol.TMap _map614 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map614.size);
+            java.lang.String _key615;
+            java.lang.String _val616;
+            for (int _i617 = 0; _i617 < _map614.size; ++_i617)
+            {
+              _key615 = iprot.readString();
+              _val616 = iprot.readString();
+              struct.success.put(_key615, _val616);
+            }
+          }
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.e = new TMapDException();
+          struct.e.read(iprot);
+          struct.setEIsSet(true);
+        }
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  public static class register_runtime_udf_args implements org.apache.thrift.TBase<register_runtime_udf_args, register_runtime_udf_args._Fields>, java.io.Serializable, Cloneable, Comparable<register_runtime_udf_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("register_runtime_udf_args");
+
+    private static final org.apache.thrift.protocol.TField SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("session", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField SIGNATURES_FIELD_DESC = new org.apache.thrift.protocol.TField("signatures", org.apache.thrift.protocol.TType.STRING, (short)2);
+    private static final org.apache.thrift.protocol.TField DEVICE_IR_MAP_FIELD_DESC = new org.apache.thrift.protocol.TField("device_ir_map", org.apache.thrift.protocol.TType.MAP, (short)3);
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new register_runtime_udf_argsStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new register_runtime_udf_argsTupleSchemeFactory();
+
+    public java.lang.String session; // required
+    public java.lang.String signatures; // required
+    public java.util.Map<java.lang.String,java.lang.String> device_ir_map; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SESSION((short)1, "session"),
+      SIGNATURES((short)2, "signatures"),
+      DEVICE_IR_MAP((short)3, "device_ir_map");
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // SESSION
+            return SESSION;
+          case 2: // SIGNATURES
+            return SIGNATURES;
+          case 3: // DEVICE_IR_MAP
+            return DEVICE_IR_MAP;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SESSION, new org.apache.thrift.meta_data.FieldMetaData("session", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING          , "TSessionId")));
+      tmpMap.put(_Fields.SIGNATURES, new org.apache.thrift.meta_data.FieldMetaData("signatures", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.DEVICE_IR_MAP, new org.apache.thrift.meta_data.FieldMetaData("device_ir_map", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.MapMetaData(org.apache.thrift.protocol.TType.MAP, 
+              new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING), 
+              new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(register_runtime_udf_args.class, metaDataMap);
+    }
+
+    public register_runtime_udf_args() {
+    }
+
+    public register_runtime_udf_args(
+      java.lang.String session,
+      java.lang.String signatures,
+      java.util.Map<java.lang.String,java.lang.String> device_ir_map)
+    {
+      this();
+      this.session = session;
+      this.signatures = signatures;
+      this.device_ir_map = device_ir_map;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public register_runtime_udf_args(register_runtime_udf_args other) {
+      if (other.isSetSession()) {
+        this.session = other.session;
+      }
+      if (other.isSetSignatures()) {
+        this.signatures = other.signatures;
+      }
+      if (other.isSetDevice_ir_map()) {
+        java.util.Map<java.lang.String,java.lang.String> __this__device_ir_map = new java.util.HashMap<java.lang.String,java.lang.String>(other.device_ir_map);
+        this.device_ir_map = __this__device_ir_map;
+      }
+    }
+
+    public register_runtime_udf_args deepCopy() {
+      return new register_runtime_udf_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.session = null;
+      this.signatures = null;
+      this.device_ir_map = null;
+    }
+
+    public java.lang.String getSession() {
+      return this.session;
+    }
+
+    public register_runtime_udf_args setSession(java.lang.String session) {
+      this.session = session;
+      return this;
+    }
+
+    public void unsetSession() {
+      this.session = null;
+    }
+
+    /** Returns true if field session is set (has been assigned a value) and false otherwise */
+    public boolean isSetSession() {
+      return this.session != null;
+    }
+
+    public void setSessionIsSet(boolean value) {
+      if (!value) {
+        this.session = null;
+      }
+    }
+
+    public java.lang.String getSignatures() {
+      return this.signatures;
+    }
+
+    public register_runtime_udf_args setSignatures(java.lang.String signatures) {
+      this.signatures = signatures;
+      return this;
+    }
+
+    public void unsetSignatures() {
+      this.signatures = null;
+    }
+
+    /** Returns true if field signatures is set (has been assigned a value) and false otherwise */
+    public boolean isSetSignatures() {
+      return this.signatures != null;
+    }
+
+    public void setSignaturesIsSet(boolean value) {
+      if (!value) {
+        this.signatures = null;
+      }
+    }
+
+    public int getDevice_ir_mapSize() {
+      return (this.device_ir_map == null) ? 0 : this.device_ir_map.size();
+    }
+
+    public void putToDevice_ir_map(java.lang.String key, java.lang.String val) {
+      if (this.device_ir_map == null) {
+        this.device_ir_map = new java.util.HashMap<java.lang.String,java.lang.String>();
+      }
+      this.device_ir_map.put(key, val);
+    }
+
+    public java.util.Map<java.lang.String,java.lang.String> getDevice_ir_map() {
+      return this.device_ir_map;
+    }
+
+    public register_runtime_udf_args setDevice_ir_map(java.util.Map<java.lang.String,java.lang.String> device_ir_map) {
+      this.device_ir_map = device_ir_map;
+      return this;
+    }
+
+    public void unsetDevice_ir_map() {
+      this.device_ir_map = null;
+    }
+
+    /** Returns true if field device_ir_map is set (has been assigned a value) and false otherwise */
+    public boolean isSetDevice_ir_map() {
+      return this.device_ir_map != null;
+    }
+
+    public void setDevice_ir_mapIsSet(boolean value) {
+      if (!value) {
+        this.device_ir_map = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, java.lang.Object value) {
+      switch (field) {
+      case SESSION:
+        if (value == null) {
+          unsetSession();
+        } else {
+          setSession((java.lang.String)value);
+        }
+        break;
+
+      case SIGNATURES:
+        if (value == null) {
+          unsetSignatures();
+        } else {
+          setSignatures((java.lang.String)value);
+        }
+        break;
+
+      case DEVICE_IR_MAP:
+        if (value == null) {
+          unsetDevice_ir_map();
+        } else {
+          setDevice_ir_map((java.util.Map<java.lang.String,java.lang.String>)value);
+        }
+        break;
+
+      }
+    }
+
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SESSION:
+        return getSession();
+
+      case SIGNATURES:
+        return getSignatures();
+
+      case DEVICE_IR_MAP:
+        return getDevice_ir_map();
+
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SESSION:
+        return isSetSession();
+      case SIGNATURES:
+        return isSetSignatures();
+      case DEVICE_IR_MAP:
+        return isSetDevice_ir_map();
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof register_runtime_udf_args)
+        return this.equals((register_runtime_udf_args)that);
+      return false;
+    }
+
+    public boolean equals(register_runtime_udf_args that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      boolean this_present_session = true && this.isSetSession();
+      boolean that_present_session = true && that.isSetSession();
+      if (this_present_session || that_present_session) {
+        if (!(this_present_session && that_present_session))
+          return false;
+        if (!this.session.equals(that.session))
+          return false;
+      }
+
+      boolean this_present_signatures = true && this.isSetSignatures();
+      boolean that_present_signatures = true && that.isSetSignatures();
+      if (this_present_signatures || that_present_signatures) {
+        if (!(this_present_signatures && that_present_signatures))
+          return false;
+        if (!this.signatures.equals(that.signatures))
+          return false;
+      }
+
+      boolean this_present_device_ir_map = true && this.isSetDevice_ir_map();
+      boolean that_present_device_ir_map = true && that.isSetDevice_ir_map();
+      if (this_present_device_ir_map || that_present_device_ir_map) {
+        if (!(this_present_device_ir_map && that_present_device_ir_map))
+          return false;
+        if (!this.device_ir_map.equals(that.device_ir_map))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetSession()) ? 131071 : 524287);
+      if (isSetSession())
+        hashCode = hashCode * 8191 + session.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetSignatures()) ? 131071 : 524287);
+      if (isSetSignatures())
+        hashCode = hashCode * 8191 + signatures.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetDevice_ir_map()) ? 131071 : 524287);
+      if (isSetDevice_ir_map())
+        hashCode = hashCode * 8191 + device_ir_map.hashCode();
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(register_runtime_udf_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = java.lang.Boolean.valueOf(isSetSession()).compareTo(other.isSetSession());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSession()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.session, other.session);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetSignatures()).compareTo(other.isSetSignatures());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSignatures()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.signatures, other.signatures);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetDevice_ir_map()).compareTo(other.isSetDevice_ir_map());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetDevice_ir_map()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.device_ir_map, other.device_ir_map);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+    }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("register_runtime_udf_args(");
+      boolean first = true;
+
+      sb.append("session:");
+      if (this.session == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.session);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("signatures:");
+      if (this.signatures == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.signatures);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("device_ir_map:");
+      if (this.device_ir_map == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.device_ir_map);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class register_runtime_udf_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public register_runtime_udf_argsStandardScheme getScheme() {
+        return new register_runtime_udf_argsStandardScheme();
+      }
+    }
+
+    private static class register_runtime_udf_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<register_runtime_udf_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, register_runtime_udf_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // SESSION
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.session = iprot.readString();
+                struct.setSessionIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // SIGNATURES
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.signatures = iprot.readString();
+                struct.setSignaturesIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 3: // DEVICE_IR_MAP
+              if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
+                {
+                  org.apache.thrift.protocol.TMap _map618 = iprot.readMapBegin();
+                  struct.device_ir_map = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map618.size);
+                  java.lang.String _key619;
+                  java.lang.String _val620;
+                  for (int _i621 = 0; _i621 < _map618.size; ++_i621)
+                  {
+                    _key619 = iprot.readString();
+                    _val620 = iprot.readString();
+                    struct.device_ir_map.put(_key619, _val620);
+                  }
+                  iprot.readMapEnd();
+                }
+                struct.setDevice_ir_mapIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, register_runtime_udf_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.session != null) {
+          oprot.writeFieldBegin(SESSION_FIELD_DESC);
+          oprot.writeString(struct.session);
+          oprot.writeFieldEnd();
+        }
+        if (struct.signatures != null) {
+          oprot.writeFieldBegin(SIGNATURES_FIELD_DESC);
+          oprot.writeString(struct.signatures);
+          oprot.writeFieldEnd();
+        }
+        if (struct.device_ir_map != null) {
+          oprot.writeFieldBegin(DEVICE_IR_MAP_FIELD_DESC);
+          {
+            oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, struct.device_ir_map.size()));
+            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter622 : struct.device_ir_map.entrySet())
+            {
+              oprot.writeString(_iter622.getKey());
+              oprot.writeString(_iter622.getValue());
+            }
+            oprot.writeMapEnd();
+          }
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class register_runtime_udf_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public register_runtime_udf_argsTupleScheme getScheme() {
+        return new register_runtime_udf_argsTupleScheme();
+      }
+    }
+
+    private static class register_runtime_udf_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<register_runtime_udf_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, register_runtime_udf_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetSession()) {
+          optionals.set(0);
+        }
+        if (struct.isSetSignatures()) {
+          optionals.set(1);
+        }
+        if (struct.isSetDevice_ir_map()) {
+          optionals.set(2);
+        }
+        oprot.writeBitSet(optionals, 3);
+        if (struct.isSetSession()) {
+          oprot.writeString(struct.session);
+        }
+        if (struct.isSetSignatures()) {
+          oprot.writeString(struct.signatures);
+        }
+        if (struct.isSetDevice_ir_map()) {
+          {
+            oprot.writeI32(struct.device_ir_map.size());
+            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter623 : struct.device_ir_map.entrySet())
+            {
+              oprot.writeString(_iter623.getKey());
+              oprot.writeString(_iter623.getValue());
+            }
+          }
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, register_runtime_udf_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(3);
+        if (incoming.get(0)) {
+          struct.session = iprot.readString();
+          struct.setSessionIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.signatures = iprot.readString();
+          struct.setSignaturesIsSet(true);
+        }
+        if (incoming.get(2)) {
+          {
+            org.apache.thrift.protocol.TMap _map624 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.device_ir_map = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map624.size);
+            java.lang.String _key625;
+            java.lang.String _val626;
+            for (int _i627 = 0; _i627 < _map624.size; ++_i627)
+            {
+              _key625 = iprot.readString();
+              _val626 = iprot.readString();
+              struct.device_ir_map.put(_key625, _val626);
+            }
+          }
+          struct.setDevice_ir_mapIsSet(true);
+        }
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  public static class register_runtime_udf_result implements org.apache.thrift.TBase<register_runtime_udf_result, register_runtime_udf_result._Fields>, java.io.Serializable, Cloneable, Comparable<register_runtime_udf_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("register_runtime_udf_result");
+
+    private static final org.apache.thrift.protocol.TField E_FIELD_DESC = new org.apache.thrift.protocol.TField("e", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new register_runtime_udf_resultStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new register_runtime_udf_resultTupleSchemeFactory();
+
+    public TMapDException e; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      E((short)1, "e");
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // E
+            return E;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.E, new org.apache.thrift.meta_data.FieldMetaData("e", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TMapDException.class)));
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(register_runtime_udf_result.class, metaDataMap);
+    }
+
+    public register_runtime_udf_result() {
+    }
+
+    public register_runtime_udf_result(
+      TMapDException e)
+    {
+      this();
+      this.e = e;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public register_runtime_udf_result(register_runtime_udf_result other) {
+      if (other.isSetE()) {
+        this.e = new TMapDException(other.e);
+      }
+    }
+
+    public register_runtime_udf_result deepCopy() {
+      return new register_runtime_udf_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.e = null;
+    }
+
+    public TMapDException getE() {
+      return this.e;
+    }
+
+    public register_runtime_udf_result setE(TMapDException e) {
+      this.e = e;
+      return this;
+    }
+
+    public void unsetE() {
+      this.e = null;
+    }
+
+    /** Returns true if field e is set (has been assigned a value) and false otherwise */
+    public boolean isSetE() {
+      return this.e != null;
+    }
+
+    public void setEIsSet(boolean value) {
+      if (!value) {
+        this.e = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, java.lang.Object value) {
+      switch (field) {
+      case E:
+        if (value == null) {
+          unsetE();
+        } else {
+          setE((TMapDException)value);
+        }
+        break;
+
+      }
+    }
+
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      case E:
+        return getE();
+
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      case E:
+        return isSetE();
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof register_runtime_udf_result)
+        return this.equals((register_runtime_udf_result)that);
+      return false;
+    }
+
+    public boolean equals(register_runtime_udf_result that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      boolean this_present_e = true && this.isSetE();
+      boolean that_present_e = true && that.isSetE();
+      if (this_present_e || that_present_e) {
+        if (!(this_present_e && that_present_e))
+          return false;
+        if (!this.e.equals(that.e))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetE()) ? 131071 : 524287);
+      if (isSetE())
+        hashCode = hashCode * 8191 + e.hashCode();
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(register_runtime_udf_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = java.lang.Boolean.valueOf(isSetE()).compareTo(other.isSetE());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetE()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.e, other.e);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+      }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("register_runtime_udf_result(");
+      boolean first = true;
+
+      sb.append("e:");
+      if (this.e == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.e);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class register_runtime_udf_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public register_runtime_udf_resultStandardScheme getScheme() {
+        return new register_runtime_udf_resultStandardScheme();
+      }
+    }
+
+    private static class register_runtime_udf_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<register_runtime_udf_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, register_runtime_udf_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // E
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.e = new TMapDException();
+                struct.e.read(iprot);
+                struct.setEIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, register_runtime_udf_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.e != null) {
+          oprot.writeFieldBegin(E_FIELD_DESC);
+          struct.e.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class register_runtime_udf_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public register_runtime_udf_resultTupleScheme getScheme() {
+        return new register_runtime_udf_resultTupleScheme();
+      }
+    }
+
+    private static class register_runtime_udf_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<register_runtime_udf_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, register_runtime_udf_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetE()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetE()) {
+          struct.e.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, register_runtime_udf_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
           struct.e = new TMapDException();
           struct.e.read(iprot);
           struct.setEIsSet(true);

@@ -13,6 +13,7 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
   private static final org.apache.thrift.protocol.TField USER_FIELD_DESC = new org.apache.thrift.protocol.TField("user", org.apache.thrift.protocol.TType.STRING, (short)1);
   private static final org.apache.thrift.protocol.TField DATABASE_FIELD_DESC = new org.apache.thrift.protocol.TField("database", org.apache.thrift.protocol.TType.STRING, (short)2);
   private static final org.apache.thrift.protocol.TField START_TIME_FIELD_DESC = new org.apache.thrift.protocol.TField("start_time", org.apache.thrift.protocol.TType.I64, (short)3);
+  private static final org.apache.thrift.protocol.TField IS_SUPER_FIELD_DESC = new org.apache.thrift.protocol.TField("is_super", org.apache.thrift.protocol.TType.BOOL, (short)4);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TSessionInfoStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TSessionInfoTupleSchemeFactory();
@@ -20,12 +21,14 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
   public java.lang.String user; // required
   public java.lang.String database; // required
   public long start_time; // required
+  public boolean is_super; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     USER((short)1, "user"),
     DATABASE((short)2, "database"),
-    START_TIME((short)3, "start_time");
+    START_TIME((short)3, "start_time"),
+    IS_SUPER((short)4, "is_super");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -46,6 +49,8 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
           return DATABASE;
         case 3: // START_TIME
           return START_TIME;
+        case 4: // IS_SUPER
+          return IS_SUPER;
         default:
           return null;
       }
@@ -87,6 +92,7 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
 
   // isset id assignments
   private static final int __START_TIME_ISSET_ID = 0;
+  private static final int __IS_SUPER_ISSET_ID = 1;
   private byte __isset_bitfield = 0;
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -97,6 +103,8 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.START_TIME, new org.apache.thrift.meta_data.FieldMetaData("start_time", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
+    tmpMap.put(_Fields.IS_SUPER, new org.apache.thrift.meta_data.FieldMetaData("is_super", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TSessionInfo.class, metaDataMap);
   }
@@ -107,13 +115,16 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
   public TSessionInfo(
     java.lang.String user,
     java.lang.String database,
-    long start_time)
+    long start_time,
+    boolean is_super)
   {
     this();
     this.user = user;
     this.database = database;
     this.start_time = start_time;
     setStart_timeIsSet(true);
+    this.is_super = is_super;
+    setIs_superIsSet(true);
   }
 
   /**
@@ -128,6 +139,7 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
       this.database = other.database;
     }
     this.start_time = other.start_time;
+    this.is_super = other.is_super;
   }
 
   public TSessionInfo deepCopy() {
@@ -140,6 +152,8 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
     this.database = null;
     setStart_timeIsSet(false);
     this.start_time = 0;
+    setIs_superIsSet(false);
+    this.is_super = false;
   }
 
   public java.lang.String getUser() {
@@ -213,6 +227,29 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
     __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __START_TIME_ISSET_ID, value);
   }
 
+  public boolean isIs_super() {
+    return this.is_super;
+  }
+
+  public TSessionInfo setIs_super(boolean is_super) {
+    this.is_super = is_super;
+    setIs_superIsSet(true);
+    return this;
+  }
+
+  public void unsetIs_super() {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __IS_SUPER_ISSET_ID);
+  }
+
+  /** Returns true if field is_super is set (has been assigned a value) and false otherwise */
+  public boolean isSetIs_super() {
+    return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __IS_SUPER_ISSET_ID);
+  }
+
+  public void setIs_superIsSet(boolean value) {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __IS_SUPER_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, java.lang.Object value) {
     switch (field) {
     case USER:
@@ -239,6 +276,14 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
       }
       break;
 
+    case IS_SUPER:
+      if (value == null) {
+        unsetIs_super();
+      } else {
+        setIs_super((java.lang.Boolean)value);
+      }
+      break;
+
     }
   }
 
@@ -252,6 +297,9 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
 
     case START_TIME:
       return getStart_time();
+
+    case IS_SUPER:
+      return isIs_super();
 
     }
     throw new java.lang.IllegalStateException();
@@ -270,6 +318,8 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
       return isSetDatabase();
     case START_TIME:
       return isSetStart_time();
+    case IS_SUPER:
+      return isSetIs_super();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -316,6 +366,15 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
         return false;
     }
 
+    boolean this_present_is_super = true;
+    boolean that_present_is_super = true;
+    if (this_present_is_super || that_present_is_super) {
+      if (!(this_present_is_super && that_present_is_super))
+        return false;
+      if (this.is_super != that.is_super)
+        return false;
+    }
+
     return true;
   }
 
@@ -332,6 +391,8 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
       hashCode = hashCode * 8191 + database.hashCode();
 
     hashCode = hashCode * 8191 + org.apache.thrift.TBaseHelper.hashCode(start_time);
+
+    hashCode = hashCode * 8191 + ((is_super) ? 131071 : 524287);
 
     return hashCode;
   }
@@ -374,6 +435,16 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.valueOf(isSetIs_super()).compareTo(other.isSetIs_super());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetIs_super()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.is_super, other.is_super);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -412,6 +483,10 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
     if (!first) sb.append(", ");
     sb.append("start_time:");
     sb.append(this.start_time);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("is_super:");
+    sb.append(this.is_super);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -482,6 +557,14 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 4: // IS_SUPER
+            if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+              struct.is_super = iprot.readBool();
+              struct.setIs_superIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -510,6 +593,9 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
       oprot.writeFieldBegin(START_TIME_FIELD_DESC);
       oprot.writeI64(struct.start_time);
       oprot.writeFieldEnd();
+      oprot.writeFieldBegin(IS_SUPER_FIELD_DESC);
+      oprot.writeBool(struct.is_super);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -537,7 +623,10 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
       if (struct.isSetStart_time()) {
         optionals.set(2);
       }
-      oprot.writeBitSet(optionals, 3);
+      if (struct.isSetIs_super()) {
+        optionals.set(3);
+      }
+      oprot.writeBitSet(optionals, 4);
       if (struct.isSetUser()) {
         oprot.writeString(struct.user);
       }
@@ -547,12 +636,15 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
       if (struct.isSetStart_time()) {
         oprot.writeI64(struct.start_time);
       }
+      if (struct.isSetIs_super()) {
+        oprot.writeBool(struct.is_super);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TSessionInfo struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(3);
+      java.util.BitSet incoming = iprot.readBitSet(4);
       if (incoming.get(0)) {
         struct.user = iprot.readString();
         struct.setUserIsSet(true);
@@ -564,6 +656,10 @@ public class TSessionInfo implements org.apache.thrift.TBase<TSessionInfo, TSess
       if (incoming.get(2)) {
         struct.start_time = iprot.readI64();
         struct.setStart_timeIsSet(true);
+      }
+      if (incoming.get(3)) {
+        struct.is_super = iprot.readBool();
+        struct.setIs_superIsSet(true);
       }
     }
   }
