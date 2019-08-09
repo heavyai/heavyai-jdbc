@@ -1,6 +1,16 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.omnisci/jdbc/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.omnisci/jdbc)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.omnisci/omnisci-jdbc/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.omnisci/omnisci-jdbc)
 
 ## Specifying Maven Dependency
+
+```xml
+<dependency>
+  <groupId>com.omnisci</groupId>
+  <artifactId>omnisci-jdbc</artifactId>
+  <version>4.8.0</version>
+</dependency>
+```
+
+### Before 4.8.0
 
 ```xml
 <dependency>
