@@ -14,6 +14,7 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
   private static final org.apache.thrift.protocol.TField OBJECT_TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("objectType", org.apache.thrift.protocol.TType.I32, (short)2);
   private static final org.apache.thrift.protocol.TField PRIVS_FIELD_DESC = new org.apache.thrift.protocol.TField("privs", org.apache.thrift.protocol.TType.LIST, (short)3);
   private static final org.apache.thrift.protocol.TField GRANTEE_FIELD_DESC = new org.apache.thrift.protocol.TField("grantee", org.apache.thrift.protocol.TType.STRING, (short)4);
+  private static final org.apache.thrift.protocol.TField PRIVILEGE_OBJECT_TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("privilegeObjectType", org.apache.thrift.protocol.TType.I32, (short)5);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TDBObjectStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TDBObjectTupleSchemeFactory();
@@ -26,6 +27,11 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
   public TDBObjectType objectType; // required
   public java.util.List<java.lang.Boolean> privs; // required
   public java.lang.String grantee; // required
+  /**
+   * 
+   * @see TDBObjectType
+   */
+  public TDBObjectType privilegeObjectType; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -36,7 +42,12 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
      */
     OBJECT_TYPE((short)2, "objectType"),
     PRIVS((short)3, "privs"),
-    GRANTEE((short)4, "grantee");
+    GRANTEE((short)4, "grantee"),
+    /**
+     * 
+     * @see TDBObjectType
+     */
+    PRIVILEGE_OBJECT_TYPE((short)5, "privilegeObjectType");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -59,6 +70,8 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
           return PRIVS;
         case 4: // GRANTEE
           return GRANTEE;
+        case 5: // PRIVILEGE_OBJECT_TYPE
+          return PRIVILEGE_OBJECT_TYPE;
         default:
           return null;
       }
@@ -111,6 +124,8 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
             new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL))));
     tmpMap.put(_Fields.GRANTEE, new org.apache.thrift.meta_data.FieldMetaData("grantee", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.PRIVILEGE_OBJECT_TYPE, new org.apache.thrift.meta_data.FieldMetaData("privilegeObjectType", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, TDBObjectType.class)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TDBObject.class, metaDataMap);
   }
@@ -122,13 +137,15 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
     java.lang.String objectName,
     TDBObjectType objectType,
     java.util.List<java.lang.Boolean> privs,
-    java.lang.String grantee)
+    java.lang.String grantee,
+    TDBObjectType privilegeObjectType)
   {
     this();
     this.objectName = objectName;
     this.objectType = objectType;
     this.privs = privs;
     this.grantee = grantee;
+    this.privilegeObjectType = privilegeObjectType;
   }
 
   /**
@@ -148,6 +165,9 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
     if (other.isSetGrantee()) {
       this.grantee = other.grantee;
     }
+    if (other.isSetPrivilegeObjectType()) {
+      this.privilegeObjectType = other.privilegeObjectType;
+    }
   }
 
   public TDBObject deepCopy() {
@@ -160,6 +180,7 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
     this.objectType = null;
     this.privs = null;
     this.grantee = null;
+    this.privilegeObjectType = null;
   }
 
   public java.lang.String getObjectName() {
@@ -281,6 +302,38 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
     }
   }
 
+  /**
+   * 
+   * @see TDBObjectType
+   */
+  public TDBObjectType getPrivilegeObjectType() {
+    return this.privilegeObjectType;
+  }
+
+  /**
+   * 
+   * @see TDBObjectType
+   */
+  public TDBObject setPrivilegeObjectType(TDBObjectType privilegeObjectType) {
+    this.privilegeObjectType = privilegeObjectType;
+    return this;
+  }
+
+  public void unsetPrivilegeObjectType() {
+    this.privilegeObjectType = null;
+  }
+
+  /** Returns true if field privilegeObjectType is set (has been assigned a value) and false otherwise */
+  public boolean isSetPrivilegeObjectType() {
+    return this.privilegeObjectType != null;
+  }
+
+  public void setPrivilegeObjectTypeIsSet(boolean value) {
+    if (!value) {
+      this.privilegeObjectType = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, java.lang.Object value) {
     switch (field) {
     case OBJECT_NAME:
@@ -315,6 +368,14 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
       }
       break;
 
+    case PRIVILEGE_OBJECT_TYPE:
+      if (value == null) {
+        unsetPrivilegeObjectType();
+      } else {
+        setPrivilegeObjectType((TDBObjectType)value);
+      }
+      break;
+
     }
   }
 
@@ -331,6 +392,9 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
 
     case GRANTEE:
       return getGrantee();
+
+    case PRIVILEGE_OBJECT_TYPE:
+      return getPrivilegeObjectType();
 
     }
     throw new java.lang.IllegalStateException();
@@ -351,6 +415,8 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
       return isSetPrivs();
     case GRANTEE:
       return isSetGrantee();
+    case PRIVILEGE_OBJECT_TYPE:
+      return isSetPrivilegeObjectType();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -406,6 +472,15 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
         return false;
     }
 
+    boolean this_present_privilegeObjectType = true && this.isSetPrivilegeObjectType();
+    boolean that_present_privilegeObjectType = true && that.isSetPrivilegeObjectType();
+    if (this_present_privilegeObjectType || that_present_privilegeObjectType) {
+      if (!(this_present_privilegeObjectType && that_present_privilegeObjectType))
+        return false;
+      if (!this.privilegeObjectType.equals(that.privilegeObjectType))
+        return false;
+    }
+
     return true;
   }
 
@@ -428,6 +503,10 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
     hashCode = hashCode * 8191 + ((isSetGrantee()) ? 131071 : 524287);
     if (isSetGrantee())
       hashCode = hashCode * 8191 + grantee.hashCode();
+
+    hashCode = hashCode * 8191 + ((isSetPrivilegeObjectType()) ? 131071 : 524287);
+    if (isSetPrivilegeObjectType())
+      hashCode = hashCode * 8191 + privilegeObjectType.getValue();
 
     return hashCode;
   }
@@ -476,6 +555,16 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
     }
     if (isSetGrantee()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.grantee, other.grantee);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = java.lang.Boolean.valueOf(isSetPrivilegeObjectType()).compareTo(other.isSetPrivilegeObjectType());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetPrivilegeObjectType()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.privilegeObjectType, other.privilegeObjectType);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -529,6 +618,14 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
       sb.append("null");
     } else {
       sb.append(this.grantee);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("privilegeObjectType:");
+    if (this.privilegeObjectType == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.privilegeObjectType);
     }
     first = false;
     sb.append(")");
@@ -616,6 +713,14 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 5: // PRIVILEGE_OBJECT_TYPE
+            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+              struct.privilegeObjectType = com.mapd.thrift.server.TDBObjectType.findByValue(iprot.readI32());
+              struct.setPrivilegeObjectTypeIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -658,6 +763,11 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
         oprot.writeString(struct.grantee);
         oprot.writeFieldEnd();
       }
+      if (struct.privilegeObjectType != null) {
+        oprot.writeFieldBegin(PRIVILEGE_OBJECT_TYPE_FIELD_DESC);
+        oprot.writeI32(struct.privilegeObjectType.getValue());
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -688,7 +798,10 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
       if (struct.isSetGrantee()) {
         optionals.set(3);
       }
-      oprot.writeBitSet(optionals, 4);
+      if (struct.isSetPrivilegeObjectType()) {
+        optionals.set(4);
+      }
+      oprot.writeBitSet(optionals, 5);
       if (struct.isSetObjectName()) {
         oprot.writeString(struct.objectName);
       }
@@ -707,12 +820,15 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
       if (struct.isSetGrantee()) {
         oprot.writeString(struct.grantee);
       }
+      if (struct.isSetPrivilegeObjectType()) {
+        oprot.writeI32(struct.privilegeObjectType.getValue());
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TDBObject struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(4);
+      java.util.BitSet incoming = iprot.readBitSet(5);
       if (incoming.get(0)) {
         struct.objectName = iprot.readString();
         struct.setObjectNameIsSet(true);
@@ -737,6 +853,10 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
       if (incoming.get(3)) {
         struct.grantee = iprot.readString();
         struct.setGranteeIsSet(true);
+      }
+      if (incoming.get(4)) {
+        struct.privilegeObjectType = com.mapd.thrift.server.TDBObjectType.findByValue(iprot.readI32());
+        struct.setPrivilegeObjectTypeIsSet(true);
       }
     }
   }
