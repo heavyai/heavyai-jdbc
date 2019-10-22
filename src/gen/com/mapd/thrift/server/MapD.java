@@ -161,9 +161,9 @@ public class MapD {
 
     public TLicenseInfo get_license_claims(java.lang.String session, java.lang.String nonce) throws TMapDException, org.apache.thrift.TException;
 
-    public java.util.Map<java.lang.String,java.lang.String> get_device_parameters() throws TMapDException, org.apache.thrift.TException;
+    public java.util.Map<java.lang.String,java.lang.String> get_device_parameters(java.lang.String session) throws TMapDException, org.apache.thrift.TException;
 
-    public void register_runtime_udf(java.lang.String session, java.lang.String signatures, java.util.Map<java.lang.String,java.lang.String> device_ir_map) throws TMapDException, org.apache.thrift.TException;
+    public void register_runtime_extension_functions(java.lang.String session, java.util.List<com.mapd.thrift.calciteserver.TUserDefinedFunction> udfs, java.util.List<com.mapd.thrift.calciteserver.TUserDefinedTableFunction> udtfs, java.util.Map<java.lang.String,java.lang.String> device_ir_map) throws TMapDException, org.apache.thrift.TException;
 
   }
 
@@ -319,9 +319,9 @@ public class MapD {
 
     public void get_license_claims(java.lang.String session, java.lang.String nonce, org.apache.thrift.async.AsyncMethodCallback<TLicenseInfo> resultHandler) throws org.apache.thrift.TException;
 
-    public void get_device_parameters(org.apache.thrift.async.AsyncMethodCallback<java.util.Map<java.lang.String,java.lang.String>> resultHandler) throws org.apache.thrift.TException;
+    public void get_device_parameters(java.lang.String session, org.apache.thrift.async.AsyncMethodCallback<java.util.Map<java.lang.String,java.lang.String>> resultHandler) throws org.apache.thrift.TException;
 
-    public void register_runtime_udf(java.lang.String session, java.lang.String signatures, java.util.Map<java.lang.String,java.lang.String> device_ir_map, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
+    public void register_runtime_extension_functions(java.lang.String session, java.util.List<com.mapd.thrift.calciteserver.TUserDefinedFunction> udfs, java.util.List<com.mapd.thrift.calciteserver.TUserDefinedTableFunction> udtfs, java.util.Map<java.lang.String,java.lang.String> device_ir_map, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -2336,15 +2336,16 @@ public class MapD {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "get_license_claims failed: unknown result");
     }
 
-    public java.util.Map<java.lang.String,java.lang.String> get_device_parameters() throws TMapDException, org.apache.thrift.TException
+    public java.util.Map<java.lang.String,java.lang.String> get_device_parameters(java.lang.String session) throws TMapDException, org.apache.thrift.TException
     {
-      send_get_device_parameters();
+      send_get_device_parameters(session);
       return recv_get_device_parameters();
     }
 
-    public void send_get_device_parameters() throws org.apache.thrift.TException
+    public void send_get_device_parameters(java.lang.String session) throws org.apache.thrift.TException
     {
       get_device_parameters_args args = new get_device_parameters_args();
+      args.setSession(session);
       sendBase("get_device_parameters", args);
     }
 
@@ -2361,25 +2362,26 @@ public class MapD {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "get_device_parameters failed: unknown result");
     }
 
-    public void register_runtime_udf(java.lang.String session, java.lang.String signatures, java.util.Map<java.lang.String,java.lang.String> device_ir_map) throws TMapDException, org.apache.thrift.TException
+    public void register_runtime_extension_functions(java.lang.String session, java.util.List<com.mapd.thrift.calciteserver.TUserDefinedFunction> udfs, java.util.List<com.mapd.thrift.calciteserver.TUserDefinedTableFunction> udtfs, java.util.Map<java.lang.String,java.lang.String> device_ir_map) throws TMapDException, org.apache.thrift.TException
     {
-      send_register_runtime_udf(session, signatures, device_ir_map);
-      recv_register_runtime_udf();
+      send_register_runtime_extension_functions(session, udfs, udtfs, device_ir_map);
+      recv_register_runtime_extension_functions();
     }
 
-    public void send_register_runtime_udf(java.lang.String session, java.lang.String signatures, java.util.Map<java.lang.String,java.lang.String> device_ir_map) throws org.apache.thrift.TException
+    public void send_register_runtime_extension_functions(java.lang.String session, java.util.List<com.mapd.thrift.calciteserver.TUserDefinedFunction> udfs, java.util.List<com.mapd.thrift.calciteserver.TUserDefinedTableFunction> udtfs, java.util.Map<java.lang.String,java.lang.String> device_ir_map) throws org.apache.thrift.TException
     {
-      register_runtime_udf_args args = new register_runtime_udf_args();
+      register_runtime_extension_functions_args args = new register_runtime_extension_functions_args();
       args.setSession(session);
-      args.setSignatures(signatures);
+      args.setUdfs(udfs);
+      args.setUdtfs(udtfs);
       args.setDevice_ir_map(device_ir_map);
-      sendBase("register_runtime_udf", args);
+      sendBase("register_runtime_extension_functions", args);
     }
 
-    public void recv_register_runtime_udf() throws TMapDException, org.apache.thrift.TException
+    public void recv_register_runtime_extension_functions() throws TMapDException, org.apache.thrift.TException
     {
-      register_runtime_udf_result result = new register_runtime_udf_result();
-      receiveBase(result, "register_runtime_udf");
+      register_runtime_extension_functions_result result = new register_runtime_extension_functions_result();
+      receiveBase(result, "register_runtime_extension_functions");
       if (result.e != null) {
         throw result.e;
       }
@@ -5170,21 +5172,24 @@ public class MapD {
       }
     }
 
-    public void get_device_parameters(org.apache.thrift.async.AsyncMethodCallback<java.util.Map<java.lang.String,java.lang.String>> resultHandler) throws org.apache.thrift.TException {
+    public void get_device_parameters(java.lang.String session, org.apache.thrift.async.AsyncMethodCallback<java.util.Map<java.lang.String,java.lang.String>> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      get_device_parameters_call method_call = new get_device_parameters_call(resultHandler, this, ___protocolFactory, ___transport);
+      get_device_parameters_call method_call = new get_device_parameters_call(session, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class get_device_parameters_call extends org.apache.thrift.async.TAsyncMethodCall<java.util.Map<java.lang.String,java.lang.String>> {
-      public get_device_parameters_call(org.apache.thrift.async.AsyncMethodCallback<java.util.Map<java.lang.String,java.lang.String>> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private java.lang.String session;
+      public get_device_parameters_call(java.lang.String session, org.apache.thrift.async.AsyncMethodCallback<java.util.Map<java.lang.String,java.lang.String>> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
+        this.session = session;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("get_device_parameters", org.apache.thrift.protocol.TMessageType.CALL, 0));
         get_device_parameters_args args = new get_device_parameters_args();
+        args.setSession(session);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -5199,29 +5204,32 @@ public class MapD {
       }
     }
 
-    public void register_runtime_udf(java.lang.String session, java.lang.String signatures, java.util.Map<java.lang.String,java.lang.String> device_ir_map, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+    public void register_runtime_extension_functions(java.lang.String session, java.util.List<com.mapd.thrift.calciteserver.TUserDefinedFunction> udfs, java.util.List<com.mapd.thrift.calciteserver.TUserDefinedTableFunction> udtfs, java.util.Map<java.lang.String,java.lang.String> device_ir_map, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      register_runtime_udf_call method_call = new register_runtime_udf_call(session, signatures, device_ir_map, resultHandler, this, ___protocolFactory, ___transport);
+      register_runtime_extension_functions_call method_call = new register_runtime_extension_functions_call(session, udfs, udtfs, device_ir_map, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class register_runtime_udf_call extends org.apache.thrift.async.TAsyncMethodCall<Void> {
+    public static class register_runtime_extension_functions_call extends org.apache.thrift.async.TAsyncMethodCall<Void> {
       private java.lang.String session;
-      private java.lang.String signatures;
+      private java.util.List<com.mapd.thrift.calciteserver.TUserDefinedFunction> udfs;
+      private java.util.List<com.mapd.thrift.calciteserver.TUserDefinedTableFunction> udtfs;
       private java.util.Map<java.lang.String,java.lang.String> device_ir_map;
-      public register_runtime_udf_call(java.lang.String session, java.lang.String signatures, java.util.Map<java.lang.String,java.lang.String> device_ir_map, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public register_runtime_extension_functions_call(java.lang.String session, java.util.List<com.mapd.thrift.calciteserver.TUserDefinedFunction> udfs, java.util.List<com.mapd.thrift.calciteserver.TUserDefinedTableFunction> udtfs, java.util.Map<java.lang.String,java.lang.String> device_ir_map, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.session = session;
-        this.signatures = signatures;
+        this.udfs = udfs;
+        this.udtfs = udtfs;
         this.device_ir_map = device_ir_map;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
-        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("register_runtime_udf", org.apache.thrift.protocol.TMessageType.CALL, 0));
-        register_runtime_udf_args args = new register_runtime_udf_args();
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("register_runtime_extension_functions", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        register_runtime_extension_functions_args args = new register_runtime_extension_functions_args();
         args.setSession(session);
-        args.setSignatures(signatures);
+        args.setUdfs(udfs);
+        args.setUdtfs(udtfs);
         args.setDevice_ir_map(device_ir_map);
         args.write(prot);
         prot.writeMessageEnd();
@@ -5326,7 +5334,7 @@ public class MapD {
       processMap.put("set_license_key", new set_license_key());
       processMap.put("get_license_claims", new get_license_claims());
       processMap.put("get_device_parameters", new get_device_parameters());
-      processMap.put("register_runtime_udf", new register_runtime_udf());
+      processMap.put("register_runtime_extension_functions", new register_runtime_extension_functions());
       return processMap;
     }
 
@@ -7523,7 +7531,7 @@ public class MapD {
       public get_device_parameters_result getResult(I iface, get_device_parameters_args args) throws org.apache.thrift.TException {
         get_device_parameters_result result = new get_device_parameters_result();
         try {
-          result.success = iface.get_device_parameters();
+          result.success = iface.get_device_parameters(args.session);
         } catch (TMapDException e) {
           result.e = e;
         }
@@ -7531,13 +7539,13 @@ public class MapD {
       }
     }
 
-    public static class register_runtime_udf<I extends Iface> extends org.apache.thrift.ProcessFunction<I, register_runtime_udf_args> {
-      public register_runtime_udf() {
-        super("register_runtime_udf");
+    public static class register_runtime_extension_functions<I extends Iface> extends org.apache.thrift.ProcessFunction<I, register_runtime_extension_functions_args> {
+      public register_runtime_extension_functions() {
+        super("register_runtime_extension_functions");
       }
 
-      public register_runtime_udf_args getEmptyArgsInstance() {
-        return new register_runtime_udf_args();
+      public register_runtime_extension_functions_args getEmptyArgsInstance() {
+        return new register_runtime_extension_functions_args();
       }
 
       protected boolean isOneway() {
@@ -7549,10 +7557,10 @@ public class MapD {
         return false;
       }
 
-      public register_runtime_udf_result getResult(I iface, register_runtime_udf_args args) throws org.apache.thrift.TException {
-        register_runtime_udf_result result = new register_runtime_udf_result();
+      public register_runtime_extension_functions_result getResult(I iface, register_runtime_extension_functions_args args) throws org.apache.thrift.TException {
+        register_runtime_extension_functions_result result = new register_runtime_extension_functions_result();
         try {
-          iface.register_runtime_udf(args.session, args.signatures, args.device_ir_map);
+          iface.register_runtime_extension_functions(args.session, args.udfs, args.udtfs, args.device_ir_map);
         } catch (TMapDException e) {
           result.e = e;
         }
@@ -7649,7 +7657,7 @@ public class MapD {
       processMap.put("set_license_key", new set_license_key());
       processMap.put("get_license_claims", new get_license_claims());
       processMap.put("get_device_parameters", new get_device_parameters());
-      processMap.put("register_runtime_udf", new register_runtime_udf());
+      processMap.put("register_runtime_extension_functions", new register_runtime_extension_functions());
       return processMap;
     }
 
@@ -12561,24 +12569,24 @@ public class MapD {
       }
 
       public void start(I iface, get_device_parameters_args args, org.apache.thrift.async.AsyncMethodCallback<java.util.Map<java.lang.String,java.lang.String>> resultHandler) throws org.apache.thrift.TException {
-        iface.get_device_parameters(resultHandler);
+        iface.get_device_parameters(args.session,resultHandler);
       }
     }
 
-    public static class register_runtime_udf<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, register_runtime_udf_args, Void> {
-      public register_runtime_udf() {
-        super("register_runtime_udf");
+    public static class register_runtime_extension_functions<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, register_runtime_extension_functions_args, Void> {
+      public register_runtime_extension_functions() {
+        super("register_runtime_extension_functions");
       }
 
-      public register_runtime_udf_args getEmptyArgsInstance() {
-        return new register_runtime_udf_args();
+      public register_runtime_extension_functions_args getEmptyArgsInstance() {
+        return new register_runtime_extension_functions_args();
       }
 
       public org.apache.thrift.async.AsyncMethodCallback<Void> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
         return new org.apache.thrift.async.AsyncMethodCallback<Void>() { 
           public void onComplete(Void o) {
-            register_runtime_udf_result result = new register_runtime_udf_result();
+            register_runtime_extension_functions_result result = new register_runtime_extension_functions_result();
             try {
               fcall.sendResponse(fb, result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
             } catch (org.apache.thrift.transport.TTransportException e) {
@@ -12592,7 +12600,7 @@ public class MapD {
           public void onError(java.lang.Exception e) {
             byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
             org.apache.thrift.TSerializable msg;
-            register_runtime_udf_result result = new register_runtime_udf_result();
+            register_runtime_extension_functions_result result = new register_runtime_extension_functions_result();
             if (e instanceof TMapDException) {
               result.e = (TMapDException) e;
               result.setEIsSet(true);
@@ -12624,8 +12632,8 @@ public class MapD {
         return false;
       }
 
-      public void start(I iface, register_runtime_udf_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
-        iface.register_runtime_udf(args.session, args.signatures, args.device_ir_map,resultHandler);
+      public void start(I iface, register_runtime_extension_functions_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+        iface.register_runtime_extension_functions(args.session, args.udfs, args.udtfs, args.device_ir_map,resultHandler);
       }
     }
 
@@ -86685,14 +86693,16 @@ public class MapD {
   public static class get_device_parameters_args implements org.apache.thrift.TBase<get_device_parameters_args, get_device_parameters_args._Fields>, java.io.Serializable, Cloneable, Comparable<get_device_parameters_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("get_device_parameters_args");
 
+    private static final org.apache.thrift.protocol.TField SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("session", org.apache.thrift.protocol.TType.STRING, (short)1);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new get_device_parameters_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new get_device_parameters_argsTupleSchemeFactory();
 
+    public java.lang.String session; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-;
+      SESSION((short)1, "session");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -86707,6 +86717,8 @@ public class MapD {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
+          case 1: // SESSION
+            return SESSION;
           default:
             return null;
         }
@@ -86745,9 +86757,13 @@ public class MapD {
         return _fieldName;
       }
     }
+
+    // isset id assignments
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SESSION, new org.apache.thrift.meta_data.FieldMetaData("session", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING          , "TSessionId")));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(get_device_parameters_args.class, metaDataMap);
     }
@@ -86755,10 +86771,20 @@ public class MapD {
     public get_device_parameters_args() {
     }
 
+    public get_device_parameters_args(
+      java.lang.String session)
+    {
+      this();
+      this.session = session;
+    }
+
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public get_device_parameters_args(get_device_parameters_args other) {
+      if (other.isSetSession()) {
+        this.session = other.session;
+      }
     }
 
     public get_device_parameters_args deepCopy() {
@@ -86767,15 +86793,51 @@ public class MapD {
 
     @Override
     public void clear() {
+      this.session = null;
+    }
+
+    public java.lang.String getSession() {
+      return this.session;
+    }
+
+    public get_device_parameters_args setSession(java.lang.String session) {
+      this.session = session;
+      return this;
+    }
+
+    public void unsetSession() {
+      this.session = null;
+    }
+
+    /** Returns true if field session is set (has been assigned a value) and false otherwise */
+    public boolean isSetSession() {
+      return this.session != null;
+    }
+
+    public void setSessionIsSet(boolean value) {
+      if (!value) {
+        this.session = null;
+      }
     }
 
     public void setFieldValue(_Fields field, java.lang.Object value) {
       switch (field) {
+      case SESSION:
+        if (value == null) {
+          unsetSession();
+        } else {
+          setSession((java.lang.String)value);
+        }
+        break;
+
       }
     }
 
     public java.lang.Object getFieldValue(_Fields field) {
       switch (field) {
+      case SESSION:
+        return getSession();
+
       }
       throw new java.lang.IllegalStateException();
     }
@@ -86787,6 +86849,8 @@ public class MapD {
       }
 
       switch (field) {
+      case SESSION:
+        return isSetSession();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -86806,12 +86870,25 @@ public class MapD {
       if (this == that)
         return true;
 
+      boolean this_present_session = true && this.isSetSession();
+      boolean that_present_session = true && that.isSetSession();
+      if (this_present_session || that_present_session) {
+        if (!(this_present_session && that_present_session))
+          return false;
+        if (!this.session.equals(that.session))
+          return false;
+      }
+
       return true;
     }
 
     @Override
     public int hashCode() {
       int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetSession()) ? 131071 : 524287);
+      if (isSetSession())
+        hashCode = hashCode * 8191 + session.hashCode();
 
       return hashCode;
     }
@@ -86824,6 +86901,16 @@ public class MapD {
 
       int lastComparison = 0;
 
+      lastComparison = java.lang.Boolean.valueOf(isSetSession()).compareTo(other.isSetSession());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSession()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.session, other.session);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       return 0;
     }
 
@@ -86844,6 +86931,13 @@ public class MapD {
       java.lang.StringBuilder sb = new java.lang.StringBuilder("get_device_parameters_args(");
       boolean first = true;
 
+      sb.append("session:");
+      if (this.session == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.session);
+      }
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -86887,6 +86981,14 @@ public class MapD {
             break;
           }
           switch (schemeField.id) {
+            case 1: // SESSION
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.session = iprot.readString();
+                struct.setSessionIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -86902,6 +87004,11 @@ public class MapD {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.session != null) {
+          oprot.writeFieldBegin(SESSION_FIELD_DESC);
+          oprot.writeString(struct.session);
+          oprot.writeFieldEnd();
+        }
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -86919,11 +87026,24 @@ public class MapD {
       @Override
       public void write(org.apache.thrift.protocol.TProtocol prot, get_device_parameters_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetSession()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSession()) {
+          oprot.writeString(struct.session);
+        }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, get_device_parameters_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.session = iprot.readString();
+          struct.setSessionIsSet(true);
+        }
       }
     }
 
@@ -87452,25 +87572,28 @@ public class MapD {
     }
   }
 
-  public static class register_runtime_udf_args implements org.apache.thrift.TBase<register_runtime_udf_args, register_runtime_udf_args._Fields>, java.io.Serializable, Cloneable, Comparable<register_runtime_udf_args>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("register_runtime_udf_args");
+  public static class register_runtime_extension_functions_args implements org.apache.thrift.TBase<register_runtime_extension_functions_args, register_runtime_extension_functions_args._Fields>, java.io.Serializable, Cloneable, Comparable<register_runtime_extension_functions_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("register_runtime_extension_functions_args");
 
     private static final org.apache.thrift.protocol.TField SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("session", org.apache.thrift.protocol.TType.STRING, (short)1);
-    private static final org.apache.thrift.protocol.TField SIGNATURES_FIELD_DESC = new org.apache.thrift.protocol.TField("signatures", org.apache.thrift.protocol.TType.STRING, (short)2);
-    private static final org.apache.thrift.protocol.TField DEVICE_IR_MAP_FIELD_DESC = new org.apache.thrift.protocol.TField("device_ir_map", org.apache.thrift.protocol.TType.MAP, (short)3);
+    private static final org.apache.thrift.protocol.TField UDFS_FIELD_DESC = new org.apache.thrift.protocol.TField("udfs", org.apache.thrift.protocol.TType.LIST, (short)2);
+    private static final org.apache.thrift.protocol.TField UDTFS_FIELD_DESC = new org.apache.thrift.protocol.TField("udtfs", org.apache.thrift.protocol.TType.LIST, (short)3);
+    private static final org.apache.thrift.protocol.TField DEVICE_IR_MAP_FIELD_DESC = new org.apache.thrift.protocol.TField("device_ir_map", org.apache.thrift.protocol.TType.MAP, (short)4);
 
-    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new register_runtime_udf_argsStandardSchemeFactory();
-    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new register_runtime_udf_argsTupleSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new register_runtime_extension_functions_argsStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new register_runtime_extension_functions_argsTupleSchemeFactory();
 
     public java.lang.String session; // required
-    public java.lang.String signatures; // required
+    public java.util.List<com.mapd.thrift.calciteserver.TUserDefinedFunction> udfs; // required
+    public java.util.List<com.mapd.thrift.calciteserver.TUserDefinedTableFunction> udtfs; // required
     public java.util.Map<java.lang.String,java.lang.String> device_ir_map; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       SESSION((short)1, "session"),
-      SIGNATURES((short)2, "signatures"),
-      DEVICE_IR_MAP((short)3, "device_ir_map");
+      UDFS((short)2, "udfs"),
+      UDTFS((short)3, "udtfs"),
+      DEVICE_IR_MAP((short)4, "device_ir_map");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -87487,9 +87610,11 @@ public class MapD {
         switch(fieldId) {
           case 1: // SESSION
             return SESSION;
-          case 2: // SIGNATURES
-            return SIGNATURES;
-          case 3: // DEVICE_IR_MAP
+          case 2: // UDFS
+            return UDFS;
+          case 3: // UDTFS
+            return UDTFS;
+          case 4: // DEVICE_IR_MAP
             return DEVICE_IR_MAP;
           default:
             return null;
@@ -87536,39 +87661,56 @@ public class MapD {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SESSION, new org.apache.thrift.meta_data.FieldMetaData("session", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING          , "TSessionId")));
-      tmpMap.put(_Fields.SIGNATURES, new org.apache.thrift.meta_data.FieldMetaData("signatures", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.UDFS, new org.apache.thrift.meta_data.FieldMetaData("udfs", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+              new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.mapd.thrift.calciteserver.TUserDefinedFunction.class))));
+      tmpMap.put(_Fields.UDTFS, new org.apache.thrift.meta_data.FieldMetaData("udtfs", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+              new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.mapd.thrift.calciteserver.TUserDefinedTableFunction.class))));
       tmpMap.put(_Fields.DEVICE_IR_MAP, new org.apache.thrift.meta_data.FieldMetaData("device_ir_map", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.MapMetaData(org.apache.thrift.protocol.TType.MAP, 
               new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING), 
               new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(register_runtime_udf_args.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(register_runtime_extension_functions_args.class, metaDataMap);
     }
 
-    public register_runtime_udf_args() {
+    public register_runtime_extension_functions_args() {
     }
 
-    public register_runtime_udf_args(
+    public register_runtime_extension_functions_args(
       java.lang.String session,
-      java.lang.String signatures,
+      java.util.List<com.mapd.thrift.calciteserver.TUserDefinedFunction> udfs,
+      java.util.List<com.mapd.thrift.calciteserver.TUserDefinedTableFunction> udtfs,
       java.util.Map<java.lang.String,java.lang.String> device_ir_map)
     {
       this();
       this.session = session;
-      this.signatures = signatures;
+      this.udfs = udfs;
+      this.udtfs = udtfs;
       this.device_ir_map = device_ir_map;
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public register_runtime_udf_args(register_runtime_udf_args other) {
+    public register_runtime_extension_functions_args(register_runtime_extension_functions_args other) {
       if (other.isSetSession()) {
         this.session = other.session;
       }
-      if (other.isSetSignatures()) {
-        this.signatures = other.signatures;
+      if (other.isSetUdfs()) {
+        java.util.List<com.mapd.thrift.calciteserver.TUserDefinedFunction> __this__udfs = new java.util.ArrayList<com.mapd.thrift.calciteserver.TUserDefinedFunction>(other.udfs.size());
+        for (com.mapd.thrift.calciteserver.TUserDefinedFunction other_element : other.udfs) {
+          __this__udfs.add(new com.mapd.thrift.calciteserver.TUserDefinedFunction(other_element));
+        }
+        this.udfs = __this__udfs;
+      }
+      if (other.isSetUdtfs()) {
+        java.util.List<com.mapd.thrift.calciteserver.TUserDefinedTableFunction> __this__udtfs = new java.util.ArrayList<com.mapd.thrift.calciteserver.TUserDefinedTableFunction>(other.udtfs.size());
+        for (com.mapd.thrift.calciteserver.TUserDefinedTableFunction other_element : other.udtfs) {
+          __this__udtfs.add(new com.mapd.thrift.calciteserver.TUserDefinedTableFunction(other_element));
+        }
+        this.udtfs = __this__udtfs;
       }
       if (other.isSetDevice_ir_map()) {
         java.util.Map<java.lang.String,java.lang.String> __this__device_ir_map = new java.util.HashMap<java.lang.String,java.lang.String>(other.device_ir_map);
@@ -87576,14 +87718,15 @@ public class MapD {
       }
     }
 
-    public register_runtime_udf_args deepCopy() {
-      return new register_runtime_udf_args(this);
+    public register_runtime_extension_functions_args deepCopy() {
+      return new register_runtime_extension_functions_args(this);
     }
 
     @Override
     public void clear() {
       this.session = null;
-      this.signatures = null;
+      this.udfs = null;
+      this.udtfs = null;
       this.device_ir_map = null;
     }
 
@@ -87591,7 +87734,7 @@ public class MapD {
       return this.session;
     }
 
-    public register_runtime_udf_args setSession(java.lang.String session) {
+    public register_runtime_extension_functions_args setSession(java.lang.String session) {
       this.session = session;
       return this;
     }
@@ -87611,27 +87754,81 @@ public class MapD {
       }
     }
 
-    public java.lang.String getSignatures() {
-      return this.signatures;
+    public int getUdfsSize() {
+      return (this.udfs == null) ? 0 : this.udfs.size();
     }
 
-    public register_runtime_udf_args setSignatures(java.lang.String signatures) {
-      this.signatures = signatures;
+    public java.util.Iterator<com.mapd.thrift.calciteserver.TUserDefinedFunction> getUdfsIterator() {
+      return (this.udfs == null) ? null : this.udfs.iterator();
+    }
+
+    public void addToUdfs(com.mapd.thrift.calciteserver.TUserDefinedFunction elem) {
+      if (this.udfs == null) {
+        this.udfs = new java.util.ArrayList<com.mapd.thrift.calciteserver.TUserDefinedFunction>();
+      }
+      this.udfs.add(elem);
+    }
+
+    public java.util.List<com.mapd.thrift.calciteserver.TUserDefinedFunction> getUdfs() {
+      return this.udfs;
+    }
+
+    public register_runtime_extension_functions_args setUdfs(java.util.List<com.mapd.thrift.calciteserver.TUserDefinedFunction> udfs) {
+      this.udfs = udfs;
       return this;
     }
 
-    public void unsetSignatures() {
-      this.signatures = null;
+    public void unsetUdfs() {
+      this.udfs = null;
     }
 
-    /** Returns true if field signatures is set (has been assigned a value) and false otherwise */
-    public boolean isSetSignatures() {
-      return this.signatures != null;
+    /** Returns true if field udfs is set (has been assigned a value) and false otherwise */
+    public boolean isSetUdfs() {
+      return this.udfs != null;
     }
 
-    public void setSignaturesIsSet(boolean value) {
+    public void setUdfsIsSet(boolean value) {
       if (!value) {
-        this.signatures = null;
+        this.udfs = null;
+      }
+    }
+
+    public int getUdtfsSize() {
+      return (this.udtfs == null) ? 0 : this.udtfs.size();
+    }
+
+    public java.util.Iterator<com.mapd.thrift.calciteserver.TUserDefinedTableFunction> getUdtfsIterator() {
+      return (this.udtfs == null) ? null : this.udtfs.iterator();
+    }
+
+    public void addToUdtfs(com.mapd.thrift.calciteserver.TUserDefinedTableFunction elem) {
+      if (this.udtfs == null) {
+        this.udtfs = new java.util.ArrayList<com.mapd.thrift.calciteserver.TUserDefinedTableFunction>();
+      }
+      this.udtfs.add(elem);
+    }
+
+    public java.util.List<com.mapd.thrift.calciteserver.TUserDefinedTableFunction> getUdtfs() {
+      return this.udtfs;
+    }
+
+    public register_runtime_extension_functions_args setUdtfs(java.util.List<com.mapd.thrift.calciteserver.TUserDefinedTableFunction> udtfs) {
+      this.udtfs = udtfs;
+      return this;
+    }
+
+    public void unsetUdtfs() {
+      this.udtfs = null;
+    }
+
+    /** Returns true if field udtfs is set (has been assigned a value) and false otherwise */
+    public boolean isSetUdtfs() {
+      return this.udtfs != null;
+    }
+
+    public void setUdtfsIsSet(boolean value) {
+      if (!value) {
+        this.udtfs = null;
       }
     }
 
@@ -87650,7 +87847,7 @@ public class MapD {
       return this.device_ir_map;
     }
 
-    public register_runtime_udf_args setDevice_ir_map(java.util.Map<java.lang.String,java.lang.String> device_ir_map) {
+    public register_runtime_extension_functions_args setDevice_ir_map(java.util.Map<java.lang.String,java.lang.String> device_ir_map) {
       this.device_ir_map = device_ir_map;
       return this;
     }
@@ -87680,11 +87877,19 @@ public class MapD {
         }
         break;
 
-      case SIGNATURES:
+      case UDFS:
         if (value == null) {
-          unsetSignatures();
+          unsetUdfs();
         } else {
-          setSignatures((java.lang.String)value);
+          setUdfs((java.util.List<com.mapd.thrift.calciteserver.TUserDefinedFunction>)value);
+        }
+        break;
+
+      case UDTFS:
+        if (value == null) {
+          unsetUdtfs();
+        } else {
+          setUdtfs((java.util.List<com.mapd.thrift.calciteserver.TUserDefinedTableFunction>)value);
         }
         break;
 
@@ -87704,8 +87909,11 @@ public class MapD {
       case SESSION:
         return getSession();
 
-      case SIGNATURES:
-        return getSignatures();
+      case UDFS:
+        return getUdfs();
+
+      case UDTFS:
+        return getUdtfs();
 
       case DEVICE_IR_MAP:
         return getDevice_ir_map();
@@ -87723,8 +87931,10 @@ public class MapD {
       switch (field) {
       case SESSION:
         return isSetSession();
-      case SIGNATURES:
-        return isSetSignatures();
+      case UDFS:
+        return isSetUdfs();
+      case UDTFS:
+        return isSetUdtfs();
       case DEVICE_IR_MAP:
         return isSetDevice_ir_map();
       }
@@ -87735,12 +87945,12 @@ public class MapD {
     public boolean equals(java.lang.Object that) {
       if (that == null)
         return false;
-      if (that instanceof register_runtime_udf_args)
-        return this.equals((register_runtime_udf_args)that);
+      if (that instanceof register_runtime_extension_functions_args)
+        return this.equals((register_runtime_extension_functions_args)that);
       return false;
     }
 
-    public boolean equals(register_runtime_udf_args that) {
+    public boolean equals(register_runtime_extension_functions_args that) {
       if (that == null)
         return false;
       if (this == that)
@@ -87755,12 +87965,21 @@ public class MapD {
           return false;
       }
 
-      boolean this_present_signatures = true && this.isSetSignatures();
-      boolean that_present_signatures = true && that.isSetSignatures();
-      if (this_present_signatures || that_present_signatures) {
-        if (!(this_present_signatures && that_present_signatures))
+      boolean this_present_udfs = true && this.isSetUdfs();
+      boolean that_present_udfs = true && that.isSetUdfs();
+      if (this_present_udfs || that_present_udfs) {
+        if (!(this_present_udfs && that_present_udfs))
           return false;
-        if (!this.signatures.equals(that.signatures))
+        if (!this.udfs.equals(that.udfs))
+          return false;
+      }
+
+      boolean this_present_udtfs = true && this.isSetUdtfs();
+      boolean that_present_udtfs = true && that.isSetUdtfs();
+      if (this_present_udtfs || that_present_udtfs) {
+        if (!(this_present_udtfs && that_present_udtfs))
+          return false;
+        if (!this.udtfs.equals(that.udtfs))
           return false;
       }
 
@@ -87784,9 +88003,13 @@ public class MapD {
       if (isSetSession())
         hashCode = hashCode * 8191 + session.hashCode();
 
-      hashCode = hashCode * 8191 + ((isSetSignatures()) ? 131071 : 524287);
-      if (isSetSignatures())
-        hashCode = hashCode * 8191 + signatures.hashCode();
+      hashCode = hashCode * 8191 + ((isSetUdfs()) ? 131071 : 524287);
+      if (isSetUdfs())
+        hashCode = hashCode * 8191 + udfs.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetUdtfs()) ? 131071 : 524287);
+      if (isSetUdtfs())
+        hashCode = hashCode * 8191 + udtfs.hashCode();
 
       hashCode = hashCode * 8191 + ((isSetDevice_ir_map()) ? 131071 : 524287);
       if (isSetDevice_ir_map())
@@ -87796,7 +88019,7 @@ public class MapD {
     }
 
     @Override
-    public int compareTo(register_runtime_udf_args other) {
+    public int compareTo(register_runtime_extension_functions_args other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -87813,12 +88036,22 @@ public class MapD {
           return lastComparison;
         }
       }
-      lastComparison = java.lang.Boolean.valueOf(isSetSignatures()).compareTo(other.isSetSignatures());
+      lastComparison = java.lang.Boolean.valueOf(isSetUdfs()).compareTo(other.isSetUdfs());
       if (lastComparison != 0) {
         return lastComparison;
       }
-      if (isSetSignatures()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.signatures, other.signatures);
+      if (isSetUdfs()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.udfs, other.udfs);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetUdtfs()).compareTo(other.isSetUdtfs());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetUdtfs()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.udtfs, other.udtfs);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -87850,7 +88083,7 @@ public class MapD {
 
     @Override
     public java.lang.String toString() {
-      java.lang.StringBuilder sb = new java.lang.StringBuilder("register_runtime_udf_args(");
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("register_runtime_extension_functions_args(");
       boolean first = true;
 
       sb.append("session:");
@@ -87861,11 +88094,19 @@ public class MapD {
       }
       first = false;
       if (!first) sb.append(", ");
-      sb.append("signatures:");
-      if (this.signatures == null) {
+      sb.append("udfs:");
+      if (this.udfs == null) {
         sb.append("null");
       } else {
-        sb.append(this.signatures);
+        sb.append(this.udfs);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("udtfs:");
+      if (this.udtfs == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.udtfs);
       }
       first = false;
       if (!first) sb.append(", ");
@@ -87901,15 +88142,15 @@ public class MapD {
       }
     }
 
-    private static class register_runtime_udf_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
-      public register_runtime_udf_argsStandardScheme getScheme() {
-        return new register_runtime_udf_argsStandardScheme();
+    private static class register_runtime_extension_functions_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public register_runtime_extension_functions_argsStandardScheme getScheme() {
+        return new register_runtime_extension_functions_argsStandardScheme();
       }
     }
 
-    private static class register_runtime_udf_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<register_runtime_udf_args> {
+    private static class register_runtime_extension_functions_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<register_runtime_extension_functions_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, register_runtime_udf_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, register_runtime_extension_functions_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -87927,26 +88168,56 @@ public class MapD {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
-            case 2: // SIGNATURES
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-                struct.signatures = iprot.readString();
-                struct.setSignaturesIsSet(true);
+            case 2: // UDFS
+              if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+                {
+                  org.apache.thrift.protocol.TList _list592 = iprot.readListBegin();
+                  struct.udfs = new java.util.ArrayList<com.mapd.thrift.calciteserver.TUserDefinedFunction>(_list592.size);
+                  com.mapd.thrift.calciteserver.TUserDefinedFunction _elem593;
+                  for (int _i594 = 0; _i594 < _list592.size; ++_i594)
+                  {
+                    _elem593 = new com.mapd.thrift.calciteserver.TUserDefinedFunction();
+                    _elem593.read(iprot);
+                    struct.udfs.add(_elem593);
+                  }
+                  iprot.readListEnd();
+                }
+                struct.setUdfsIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
-            case 3: // DEVICE_IR_MAP
+            case 3: // UDTFS
+              if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+                {
+                  org.apache.thrift.protocol.TList _list595 = iprot.readListBegin();
+                  struct.udtfs = new java.util.ArrayList<com.mapd.thrift.calciteserver.TUserDefinedTableFunction>(_list595.size);
+                  com.mapd.thrift.calciteserver.TUserDefinedTableFunction _elem596;
+                  for (int _i597 = 0; _i597 < _list595.size; ++_i597)
+                  {
+                    _elem596 = new com.mapd.thrift.calciteserver.TUserDefinedTableFunction();
+                    _elem596.read(iprot);
+                    struct.udtfs.add(_elem596);
+                  }
+                  iprot.readListEnd();
+                }
+                struct.setUdtfsIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 4: // DEVICE_IR_MAP
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map592 = iprot.readMapBegin();
-                  struct.device_ir_map = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map592.size);
-                  java.lang.String _key593;
-                  java.lang.String _val594;
-                  for (int _i595 = 0; _i595 < _map592.size; ++_i595)
+                  org.apache.thrift.protocol.TMap _map598 = iprot.readMapBegin();
+                  struct.device_ir_map = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map598.size);
+                  java.lang.String _key599;
+                  java.lang.String _val600;
+                  for (int _i601 = 0; _i601 < _map598.size; ++_i601)
                   {
-                    _key593 = iprot.readString();
-                    _val594 = iprot.readString();
-                    struct.device_ir_map.put(_key593, _val594);
+                    _key599 = iprot.readString();
+                    _val600 = iprot.readString();
+                    struct.device_ir_map.put(_key599, _val600);
                   }
                   iprot.readMapEnd();
                 }
@@ -87966,7 +88237,7 @@ public class MapD {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, register_runtime_udf_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, register_runtime_extension_functions_args struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -87975,19 +88246,38 @@ public class MapD {
           oprot.writeString(struct.session);
           oprot.writeFieldEnd();
         }
-        if (struct.signatures != null) {
-          oprot.writeFieldBegin(SIGNATURES_FIELD_DESC);
-          oprot.writeString(struct.signatures);
+        if (struct.udfs != null) {
+          oprot.writeFieldBegin(UDFS_FIELD_DESC);
+          {
+            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.udfs.size()));
+            for (com.mapd.thrift.calciteserver.TUserDefinedFunction _iter602 : struct.udfs)
+            {
+              _iter602.write(oprot);
+            }
+            oprot.writeListEnd();
+          }
+          oprot.writeFieldEnd();
+        }
+        if (struct.udtfs != null) {
+          oprot.writeFieldBegin(UDTFS_FIELD_DESC);
+          {
+            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.udtfs.size()));
+            for (com.mapd.thrift.calciteserver.TUserDefinedTableFunction _iter603 : struct.udtfs)
+            {
+              _iter603.write(oprot);
+            }
+            oprot.writeListEnd();
+          }
           oprot.writeFieldEnd();
         }
         if (struct.device_ir_map != null) {
           oprot.writeFieldBegin(DEVICE_IR_MAP_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, struct.device_ir_map.size()));
-            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter596 : struct.device_ir_map.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter604 : struct.device_ir_map.entrySet())
             {
-              oprot.writeString(_iter596.getKey());
-              oprot.writeString(_iter596.getValue());
+              oprot.writeString(_iter604.getKey());
+              oprot.writeString(_iter604.getValue());
             }
             oprot.writeMapEnd();
           }
@@ -87999,69 +88289,111 @@ public class MapD {
 
     }
 
-    private static class register_runtime_udf_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
-      public register_runtime_udf_argsTupleScheme getScheme() {
-        return new register_runtime_udf_argsTupleScheme();
+    private static class register_runtime_extension_functions_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public register_runtime_extension_functions_argsTupleScheme getScheme() {
+        return new register_runtime_extension_functions_argsTupleScheme();
       }
     }
 
-    private static class register_runtime_udf_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<register_runtime_udf_args> {
+    private static class register_runtime_extension_functions_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<register_runtime_extension_functions_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, register_runtime_udf_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, register_runtime_extension_functions_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet optionals = new java.util.BitSet();
         if (struct.isSetSession()) {
           optionals.set(0);
         }
-        if (struct.isSetSignatures()) {
+        if (struct.isSetUdfs()) {
           optionals.set(1);
         }
-        if (struct.isSetDevice_ir_map()) {
+        if (struct.isSetUdtfs()) {
           optionals.set(2);
         }
-        oprot.writeBitSet(optionals, 3);
+        if (struct.isSetDevice_ir_map()) {
+          optionals.set(3);
+        }
+        oprot.writeBitSet(optionals, 4);
         if (struct.isSetSession()) {
           oprot.writeString(struct.session);
         }
-        if (struct.isSetSignatures()) {
-          oprot.writeString(struct.signatures);
+        if (struct.isSetUdfs()) {
+          {
+            oprot.writeI32(struct.udfs.size());
+            for (com.mapd.thrift.calciteserver.TUserDefinedFunction _iter605 : struct.udfs)
+            {
+              _iter605.write(oprot);
+            }
+          }
+        }
+        if (struct.isSetUdtfs()) {
+          {
+            oprot.writeI32(struct.udtfs.size());
+            for (com.mapd.thrift.calciteserver.TUserDefinedTableFunction _iter606 : struct.udtfs)
+            {
+              _iter606.write(oprot);
+            }
+          }
         }
         if (struct.isSetDevice_ir_map()) {
           {
             oprot.writeI32(struct.device_ir_map.size());
-            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter597 : struct.device_ir_map.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter607 : struct.device_ir_map.entrySet())
             {
-              oprot.writeString(_iter597.getKey());
-              oprot.writeString(_iter597.getValue());
+              oprot.writeString(_iter607.getKey());
+              oprot.writeString(_iter607.getValue());
             }
           }
         }
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, register_runtime_udf_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, register_runtime_extension_functions_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-        java.util.BitSet incoming = iprot.readBitSet(3);
+        java.util.BitSet incoming = iprot.readBitSet(4);
         if (incoming.get(0)) {
           struct.session = iprot.readString();
           struct.setSessionIsSet(true);
         }
         if (incoming.get(1)) {
-          struct.signatures = iprot.readString();
-          struct.setSignaturesIsSet(true);
+          {
+            org.apache.thrift.protocol.TList _list608 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.udfs = new java.util.ArrayList<com.mapd.thrift.calciteserver.TUserDefinedFunction>(_list608.size);
+            com.mapd.thrift.calciteserver.TUserDefinedFunction _elem609;
+            for (int _i610 = 0; _i610 < _list608.size; ++_i610)
+            {
+              _elem609 = new com.mapd.thrift.calciteserver.TUserDefinedFunction();
+              _elem609.read(iprot);
+              struct.udfs.add(_elem609);
+            }
+          }
+          struct.setUdfsIsSet(true);
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TMap _map598 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.device_ir_map = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map598.size);
-            java.lang.String _key599;
-            java.lang.String _val600;
-            for (int _i601 = 0; _i601 < _map598.size; ++_i601)
+            org.apache.thrift.protocol.TList _list611 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.udtfs = new java.util.ArrayList<com.mapd.thrift.calciteserver.TUserDefinedTableFunction>(_list611.size);
+            com.mapd.thrift.calciteserver.TUserDefinedTableFunction _elem612;
+            for (int _i613 = 0; _i613 < _list611.size; ++_i613)
             {
-              _key599 = iprot.readString();
-              _val600 = iprot.readString();
-              struct.device_ir_map.put(_key599, _val600);
+              _elem612 = new com.mapd.thrift.calciteserver.TUserDefinedTableFunction();
+              _elem612.read(iprot);
+              struct.udtfs.add(_elem612);
+            }
+          }
+          struct.setUdtfsIsSet(true);
+        }
+        if (incoming.get(3)) {
+          {
+            org.apache.thrift.protocol.TMap _map614 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.device_ir_map = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map614.size);
+            java.lang.String _key615;
+            java.lang.String _val616;
+            for (int _i617 = 0; _i617 < _map614.size; ++_i617)
+            {
+              _key615 = iprot.readString();
+              _val616 = iprot.readString();
+              struct.device_ir_map.put(_key615, _val616);
             }
           }
           struct.setDevice_ir_mapIsSet(true);
@@ -88074,13 +88406,13 @@ public class MapD {
     }
   }
 
-  public static class register_runtime_udf_result implements org.apache.thrift.TBase<register_runtime_udf_result, register_runtime_udf_result._Fields>, java.io.Serializable, Cloneable, Comparable<register_runtime_udf_result>   {
-    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("register_runtime_udf_result");
+  public static class register_runtime_extension_functions_result implements org.apache.thrift.TBase<register_runtime_extension_functions_result, register_runtime_extension_functions_result._Fields>, java.io.Serializable, Cloneable, Comparable<register_runtime_extension_functions_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("register_runtime_extension_functions_result");
 
     private static final org.apache.thrift.protocol.TField E_FIELD_DESC = new org.apache.thrift.protocol.TField("e", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
-    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new register_runtime_udf_resultStandardSchemeFactory();
-    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new register_runtime_udf_resultTupleSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new register_runtime_extension_functions_resultStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new register_runtime_extension_functions_resultTupleSchemeFactory();
 
     public TMapDException e; // required
 
@@ -88149,13 +88481,13 @@ public class MapD {
       tmpMap.put(_Fields.E, new org.apache.thrift.meta_data.FieldMetaData("e", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TMapDException.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
-      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(register_runtime_udf_result.class, metaDataMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(register_runtime_extension_functions_result.class, metaDataMap);
     }
 
-    public register_runtime_udf_result() {
+    public register_runtime_extension_functions_result() {
     }
 
-    public register_runtime_udf_result(
+    public register_runtime_extension_functions_result(
       TMapDException e)
     {
       this();
@@ -88165,14 +88497,14 @@ public class MapD {
     /**
      * Performs a deep copy on <i>other</i>.
      */
-    public register_runtime_udf_result(register_runtime_udf_result other) {
+    public register_runtime_extension_functions_result(register_runtime_extension_functions_result other) {
       if (other.isSetE()) {
         this.e = new TMapDException(other.e);
       }
     }
 
-    public register_runtime_udf_result deepCopy() {
-      return new register_runtime_udf_result(this);
+    public register_runtime_extension_functions_result deepCopy() {
+      return new register_runtime_extension_functions_result(this);
     }
 
     @Override
@@ -88184,7 +88516,7 @@ public class MapD {
       return this.e;
     }
 
-    public register_runtime_udf_result setE(TMapDException e) {
+    public register_runtime_extension_functions_result setE(TMapDException e) {
       this.e = e;
       return this;
     }
@@ -88243,12 +88575,12 @@ public class MapD {
     public boolean equals(java.lang.Object that) {
       if (that == null)
         return false;
-      if (that instanceof register_runtime_udf_result)
-        return this.equals((register_runtime_udf_result)that);
+      if (that instanceof register_runtime_extension_functions_result)
+        return this.equals((register_runtime_extension_functions_result)that);
       return false;
     }
 
-    public boolean equals(register_runtime_udf_result that) {
+    public boolean equals(register_runtime_extension_functions_result that) {
       if (that == null)
         return false;
       if (this == that)
@@ -88278,7 +88610,7 @@ public class MapD {
     }
 
     @Override
-    public int compareTo(register_runtime_udf_result other) {
+    public int compareTo(register_runtime_extension_functions_result other) {
       if (!getClass().equals(other.getClass())) {
         return getClass().getName().compareTo(other.getClass().getName());
       }
@@ -88312,7 +88644,7 @@ public class MapD {
 
     @Override
     public java.lang.String toString() {
-      java.lang.StringBuilder sb = new java.lang.StringBuilder("register_runtime_udf_result(");
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("register_runtime_extension_functions_result(");
       boolean first = true;
 
       sb.append("e:");
@@ -88347,15 +88679,15 @@ public class MapD {
       }
     }
 
-    private static class register_runtime_udf_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
-      public register_runtime_udf_resultStandardScheme getScheme() {
-        return new register_runtime_udf_resultStandardScheme();
+    private static class register_runtime_extension_functions_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public register_runtime_extension_functions_resultStandardScheme getScheme() {
+        return new register_runtime_extension_functions_resultStandardScheme();
       }
     }
 
-    private static class register_runtime_udf_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<register_runtime_udf_result> {
+    private static class register_runtime_extension_functions_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<register_runtime_extension_functions_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, register_runtime_udf_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, register_runtime_extension_functions_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -88385,7 +88717,7 @@ public class MapD {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, register_runtime_udf_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, register_runtime_extension_functions_result struct) throws org.apache.thrift.TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -88400,16 +88732,16 @@ public class MapD {
 
     }
 
-    private static class register_runtime_udf_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
-      public register_runtime_udf_resultTupleScheme getScheme() {
-        return new register_runtime_udf_resultTupleScheme();
+    private static class register_runtime_extension_functions_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public register_runtime_extension_functions_resultTupleScheme getScheme() {
+        return new register_runtime_extension_functions_resultTupleScheme();
       }
     }
 
-    private static class register_runtime_udf_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<register_runtime_udf_result> {
+    private static class register_runtime_extension_functions_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<register_runtime_extension_functions_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, register_runtime_udf_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, register_runtime_extension_functions_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet optionals = new java.util.BitSet();
         if (struct.isSetE()) {
@@ -88422,7 +88754,7 @@ public class MapD {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, register_runtime_udf_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, register_runtime_extension_functions_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {

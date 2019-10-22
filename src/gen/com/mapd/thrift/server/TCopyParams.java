@@ -32,6 +32,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
   private static final org.apache.thrift.protocol.TField SANITIZE_COLUMN_NAMES_FIELD_DESC = new org.apache.thrift.protocol.TField("sanitize_column_names", org.apache.thrift.protocol.TType.BOOL, (short)20);
   private static final org.apache.thrift.protocol.TField GEO_LAYER_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("geo_layer_name", org.apache.thrift.protocol.TType.STRING, (short)21);
   private static final org.apache.thrift.protocol.TField S3_ENDPOINT_FIELD_DESC = new org.apache.thrift.protocol.TField("s3_endpoint", org.apache.thrift.protocol.TType.STRING, (short)22);
+  private static final org.apache.thrift.protocol.TField GEO_ASSIGN_RENDER_GROUPS_FIELD_DESC = new org.apache.thrift.protocol.TField("geo_assign_render_groups", org.apache.thrift.protocol.TType.BOOL, (short)23);
+  private static final org.apache.thrift.protocol.TField GEO_EXPLODE_COLLECTIONS_FIELD_DESC = new org.apache.thrift.protocol.TField("geo_explode_collections", org.apache.thrift.protocol.TType.BOOL, (short)24);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TCopyParamsStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TCopyParamsTupleSchemeFactory();
@@ -74,6 +76,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
   public boolean sanitize_column_names; // required
   public java.lang.String geo_layer_name; // required
   public java.lang.String s3_endpoint; // required
+  public boolean geo_assign_render_groups; // required
+  public boolean geo_explode_collections; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -114,7 +118,9 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     GEO_COORDS_SRID((short)19, "geo_coords_srid"),
     SANITIZE_COLUMN_NAMES((short)20, "sanitize_column_names"),
     GEO_LAYER_NAME((short)21, "geo_layer_name"),
-    S3_ENDPOINT((short)22, "s3_endpoint");
+    S3_ENDPOINT((short)22, "s3_endpoint"),
+    GEO_ASSIGN_RENDER_GROUPS((short)23, "geo_assign_render_groups"),
+    GEO_EXPLODE_COLLECTIONS((short)24, "geo_explode_collections");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -173,6 +179,10 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
           return GEO_LAYER_NAME;
         case 22: // S3_ENDPOINT
           return S3_ENDPOINT;
+        case 23: // GEO_ASSIGN_RENDER_GROUPS
+          return GEO_ASSIGN_RENDER_GROUPS;
+        case 24: // GEO_EXPLODE_COLLECTIONS
+          return GEO_EXPLODE_COLLECTIONS;
         default:
           return null;
       }
@@ -218,6 +228,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
   private static final int __GEO_COORDS_COMP_PARAM_ISSET_ID = 2;
   private static final int __GEO_COORDS_SRID_ISSET_ID = 3;
   private static final int __SANITIZE_COLUMN_NAMES_ISSET_ID = 4;
+  private static final int __GEO_ASSIGN_RENDER_GROUPS_ISSET_ID = 5;
+  private static final int __GEO_EXPLODE_COLLECTIONS_ISSET_ID = 6;
   private byte __isset_bitfield = 0;
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -266,6 +278,10 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.S3_ENDPOINT, new org.apache.thrift.meta_data.FieldMetaData("s3_endpoint", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.GEO_ASSIGN_RENDER_GROUPS, new org.apache.thrift.meta_data.FieldMetaData("geo_assign_render_groups", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+    tmpMap.put(_Fields.GEO_EXPLODE_COLLECTIONS, new org.apache.thrift.meta_data.FieldMetaData("geo_explode_collections", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TCopyParams.class, metaDataMap);
   }
@@ -284,6 +300,10 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     this.geo_coords_srid = 4326;
 
     this.sanitize_column_names = true;
+
+    this.geo_assign_render_groups = true;
+
+    this.geo_explode_collections = false;
 
   }
 
@@ -309,7 +329,9 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     int geo_coords_srid,
     boolean sanitize_column_names,
     java.lang.String geo_layer_name,
-    java.lang.String s3_endpoint)
+    java.lang.String s3_endpoint,
+    boolean geo_assign_render_groups,
+    boolean geo_explode_collections)
   {
     this();
     this.delimiter = delimiter;
@@ -339,6 +361,10 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     setSanitize_column_namesIsSet(true);
     this.geo_layer_name = geo_layer_name;
     this.s3_endpoint = s3_endpoint;
+    this.geo_assign_render_groups = geo_assign_render_groups;
+    setGeo_assign_render_groupsIsSet(true);
+    this.geo_explode_collections = geo_explode_collections;
+    setGeo_explode_collectionsIsSet(true);
   }
 
   /**
@@ -402,6 +428,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     if (other.isSetS3_endpoint()) {
       this.s3_endpoint = other.s3_endpoint;
     }
+    this.geo_assign_render_groups = other.geo_assign_render_groups;
+    this.geo_explode_collections = other.geo_explode_collections;
   }
 
   public TCopyParams deepCopy() {
@@ -441,6 +469,10 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
 
     this.geo_layer_name = null;
     this.s3_endpoint = null;
+    this.geo_assign_render_groups = true;
+
+    this.geo_explode_collections = false;
+
   }
 
   public java.lang.String getDelimiter() {
@@ -998,6 +1030,52 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     }
   }
 
+  public boolean isGeo_assign_render_groups() {
+    return this.geo_assign_render_groups;
+  }
+
+  public TCopyParams setGeo_assign_render_groups(boolean geo_assign_render_groups) {
+    this.geo_assign_render_groups = geo_assign_render_groups;
+    setGeo_assign_render_groupsIsSet(true);
+    return this;
+  }
+
+  public void unsetGeo_assign_render_groups() {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __GEO_ASSIGN_RENDER_GROUPS_ISSET_ID);
+  }
+
+  /** Returns true if field geo_assign_render_groups is set (has been assigned a value) and false otherwise */
+  public boolean isSetGeo_assign_render_groups() {
+    return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __GEO_ASSIGN_RENDER_GROUPS_ISSET_ID);
+  }
+
+  public void setGeo_assign_render_groupsIsSet(boolean value) {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __GEO_ASSIGN_RENDER_GROUPS_ISSET_ID, value);
+  }
+
+  public boolean isGeo_explode_collections() {
+    return this.geo_explode_collections;
+  }
+
+  public TCopyParams setGeo_explode_collections(boolean geo_explode_collections) {
+    this.geo_explode_collections = geo_explode_collections;
+    setGeo_explode_collectionsIsSet(true);
+    return this;
+  }
+
+  public void unsetGeo_explode_collections() {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __GEO_EXPLODE_COLLECTIONS_ISSET_ID);
+  }
+
+  /** Returns true if field geo_explode_collections is set (has been assigned a value) and false otherwise */
+  public boolean isSetGeo_explode_collections() {
+    return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __GEO_EXPLODE_COLLECTIONS_ISSET_ID);
+  }
+
+  public void setGeo_explode_collectionsIsSet(boolean value) {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __GEO_EXPLODE_COLLECTIONS_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, java.lang.Object value) {
     switch (field) {
     case DELIMITER:
@@ -1176,6 +1254,22 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       }
       break;
 
+    case GEO_ASSIGN_RENDER_GROUPS:
+      if (value == null) {
+        unsetGeo_assign_render_groups();
+      } else {
+        setGeo_assign_render_groups((java.lang.Boolean)value);
+      }
+      break;
+
+    case GEO_EXPLODE_COLLECTIONS:
+      if (value == null) {
+        unsetGeo_explode_collections();
+      } else {
+        setGeo_explode_collections((java.lang.Boolean)value);
+      }
+      break;
+
     }
   }
 
@@ -1247,6 +1341,12 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     case S3_ENDPOINT:
       return getS3_endpoint();
 
+    case GEO_ASSIGN_RENDER_GROUPS:
+      return isGeo_assign_render_groups();
+
+    case GEO_EXPLODE_COLLECTIONS:
+      return isGeo_explode_collections();
+
     }
     throw new java.lang.IllegalStateException();
   }
@@ -1302,6 +1402,10 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       return isSetGeo_layer_name();
     case S3_ENDPOINT:
       return isSetS3_endpoint();
+    case GEO_ASSIGN_RENDER_GROUPS:
+      return isSetGeo_assign_render_groups();
+    case GEO_EXPLODE_COLLECTIONS:
+      return isSetGeo_explode_collections();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -1519,6 +1623,24 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         return false;
     }
 
+    boolean this_present_geo_assign_render_groups = true;
+    boolean that_present_geo_assign_render_groups = true;
+    if (this_present_geo_assign_render_groups || that_present_geo_assign_render_groups) {
+      if (!(this_present_geo_assign_render_groups && that_present_geo_assign_render_groups))
+        return false;
+      if (this.geo_assign_render_groups != that.geo_assign_render_groups)
+        return false;
+    }
+
+    boolean this_present_geo_explode_collections = true;
+    boolean that_present_geo_explode_collections = true;
+    if (this_present_geo_explode_collections || that_present_geo_explode_collections) {
+      if (!(this_present_geo_explode_collections && that_present_geo_explode_collections))
+        return false;
+      if (this.geo_explode_collections != that.geo_explode_collections)
+        return false;
+    }
+
     return true;
   }
 
@@ -1603,6 +1725,10 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     hashCode = hashCode * 8191 + ((isSetS3_endpoint()) ? 131071 : 524287);
     if (isSetS3_endpoint())
       hashCode = hashCode * 8191 + s3_endpoint.hashCode();
+
+    hashCode = hashCode * 8191 + ((geo_assign_render_groups) ? 131071 : 524287);
+
+    hashCode = hashCode * 8191 + ((geo_explode_collections) ? 131071 : 524287);
 
     return hashCode;
   }
@@ -1835,6 +1961,26 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.valueOf(isSetGeo_assign_render_groups()).compareTo(other.isSetGeo_assign_render_groups());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetGeo_assign_render_groups()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.geo_assign_render_groups, other.geo_assign_render_groups);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = java.lang.Boolean.valueOf(isSetGeo_explode_collections()).compareTo(other.isSetGeo_explode_collections());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetGeo_explode_collections()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.geo_explode_collections, other.geo_explode_collections);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -2009,6 +2155,14 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     } else {
       sb.append(this.s3_endpoint);
     }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("geo_assign_render_groups:");
+    sb.append(this.geo_assign_render_groups);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("geo_explode_collections:");
+    sb.append(this.geo_explode_collections);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -2231,6 +2385,22 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 23: // GEO_ASSIGN_RENDER_GROUPS
+            if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+              struct.geo_assign_render_groups = iprot.readBool();
+              struct.setGeo_assign_render_groupsIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 24: // GEO_EXPLODE_COLLECTIONS
+            if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+              struct.geo_explode_collections = iprot.readBool();
+              struct.setGeo_explode_collectionsIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -2346,6 +2516,12 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         oprot.writeString(struct.s3_endpoint);
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(GEO_ASSIGN_RENDER_GROUPS_FIELD_DESC);
+      oprot.writeBool(struct.geo_assign_render_groups);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(GEO_EXPLODE_COLLECTIONS_FIELD_DESC);
+      oprot.writeBool(struct.geo_explode_collections);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -2430,7 +2606,13 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       if (struct.isSetS3_endpoint()) {
         optionals.set(21);
       }
-      oprot.writeBitSet(optionals, 22);
+      if (struct.isSetGeo_assign_render_groups()) {
+        optionals.set(22);
+      }
+      if (struct.isSetGeo_explode_collections()) {
+        optionals.set(23);
+      }
+      oprot.writeBitSet(optionals, 24);
       if (struct.isSetDelimiter()) {
         oprot.writeString(struct.delimiter);
       }
@@ -2497,12 +2679,18 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       if (struct.isSetS3_endpoint()) {
         oprot.writeString(struct.s3_endpoint);
       }
+      if (struct.isSetGeo_assign_render_groups()) {
+        oprot.writeBool(struct.geo_assign_render_groups);
+      }
+      if (struct.isSetGeo_explode_collections()) {
+        oprot.writeBool(struct.geo_explode_collections);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TCopyParams struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(22);
+      java.util.BitSet incoming = iprot.readBitSet(24);
       if (incoming.get(0)) {
         struct.delimiter = iprot.readString();
         struct.setDelimiterIsSet(true);
@@ -2590,6 +2778,14 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       if (incoming.get(21)) {
         struct.s3_endpoint = iprot.readString();
         struct.setS3_endpointIsSet(true);
+      }
+      if (incoming.get(22)) {
+        struct.geo_assign_render_groups = iprot.readBool();
+        struct.setGeo_assign_render_groupsIsSet(true);
+      }
+      if (incoming.get(23)) {
+        struct.geo_explode_collections = iprot.readBool();
+        struct.setGeo_explode_collectionsIsSet(true);
       }
     }
   }
