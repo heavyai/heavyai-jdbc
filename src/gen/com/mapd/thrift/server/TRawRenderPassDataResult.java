@@ -17,6 +17,7 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
   private static final org.apache.thrift.protocol.TField ROW_IDS__B_FIELD_DESC = new org.apache.thrift.protocol.TField("row_ids_B", org.apache.thrift.protocol.TType.STRING, (short)5);
   private static final org.apache.thrift.protocol.TField TABLE_IDS_FIELD_DESC = new org.apache.thrift.protocol.TField("table_ids", org.apache.thrift.protocol.TType.STRING, (short)6);
   private static final org.apache.thrift.protocol.TField ACCUM_DATA_FIELD_DESC = new org.apache.thrift.protocol.TField("accum_data", org.apache.thrift.protocol.TType.STRING, (short)7);
+  private static final org.apache.thrift.protocol.TField ACCUM_DEPTH_FIELD_DESC = new org.apache.thrift.protocol.TField("accum_depth", org.apache.thrift.protocol.TType.I32, (short)8);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TRawRenderPassDataResultStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TRawRenderPassDataResultTupleSchemeFactory();
@@ -28,6 +29,7 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
   public java.nio.ByteBuffer row_ids_B; // required
   public java.nio.ByteBuffer table_ids; // required
   public java.nio.ByteBuffer accum_data; // required
+  public int accum_depth; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -37,7 +39,8 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
     ROW_IDS__A((short)4, "row_ids_A"),
     ROW_IDS__B((short)5, "row_ids_B"),
     TABLE_IDS((short)6, "table_ids"),
-    ACCUM_DATA((short)7, "accum_data");
+    ACCUM_DATA((short)7, "accum_data"),
+    ACCUM_DEPTH((short)8, "accum_depth");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -66,6 +69,8 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
           return TABLE_IDS;
         case 7: // ACCUM_DATA
           return ACCUM_DATA;
+        case 8: // ACCUM_DEPTH
+          return ACCUM_DEPTH;
         default:
           return null;
       }
@@ -108,6 +113,7 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
   // isset id assignments
   private static final int __NUM_PIXEL_CHANNELS_ISSET_ID = 0;
   private static final int __NUM_PIXEL_SAMPLES_ISSET_ID = 1;
+  private static final int __ACCUM_DEPTH_ISSET_ID = 2;
   private byte __isset_bitfield = 0;
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -126,6 +132,8 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING        , true)));
     tmpMap.put(_Fields.ACCUM_DATA, new org.apache.thrift.meta_data.FieldMetaData("accum_data", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING        , true)));
+    tmpMap.put(_Fields.ACCUM_DEPTH, new org.apache.thrift.meta_data.FieldMetaData("accum_depth", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TRawRenderPassDataResult.class, metaDataMap);
   }
@@ -140,7 +148,8 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
     java.nio.ByteBuffer row_ids_A,
     java.nio.ByteBuffer row_ids_B,
     java.nio.ByteBuffer table_ids,
-    java.nio.ByteBuffer accum_data)
+    java.nio.ByteBuffer accum_data,
+    int accum_depth)
   {
     this();
     this.num_pixel_channels = num_pixel_channels;
@@ -152,6 +161,8 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
     this.row_ids_B = org.apache.thrift.TBaseHelper.copyBinary(row_ids_B);
     this.table_ids = org.apache.thrift.TBaseHelper.copyBinary(table_ids);
     this.accum_data = org.apache.thrift.TBaseHelper.copyBinary(accum_data);
+    this.accum_depth = accum_depth;
+    setAccum_depthIsSet(true);
   }
 
   /**
@@ -176,6 +187,7 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
     if (other.isSetAccum_data()) {
       this.accum_data = org.apache.thrift.TBaseHelper.copyBinary(other.accum_data);
     }
+    this.accum_depth = other.accum_depth;
   }
 
   public TRawRenderPassDataResult deepCopy() {
@@ -193,6 +205,8 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
     this.row_ids_B = null;
     this.table_ids = null;
     this.accum_data = null;
+    setAccum_depthIsSet(false);
+    this.accum_depth = 0;
   }
 
   public int getNum_pixel_channels() {
@@ -411,6 +425,29 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
     }
   }
 
+  public int getAccum_depth() {
+    return this.accum_depth;
+  }
+
+  public TRawRenderPassDataResult setAccum_depth(int accum_depth) {
+    this.accum_depth = accum_depth;
+    setAccum_depthIsSet(true);
+    return this;
+  }
+
+  public void unsetAccum_depth() {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __ACCUM_DEPTH_ISSET_ID);
+  }
+
+  /** Returns true if field accum_depth is set (has been assigned a value) and false otherwise */
+  public boolean isSetAccum_depth() {
+    return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __ACCUM_DEPTH_ISSET_ID);
+  }
+
+  public void setAccum_depthIsSet(boolean value) {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __ACCUM_DEPTH_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, java.lang.Object value) {
     switch (field) {
     case NUM_PIXEL_CHANNELS:
@@ -489,6 +526,14 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
       }
       break;
 
+    case ACCUM_DEPTH:
+      if (value == null) {
+        unsetAccum_depth();
+      } else {
+        setAccum_depth((java.lang.Integer)value);
+      }
+      break;
+
     }
   }
 
@@ -515,6 +560,9 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
     case ACCUM_DATA:
       return getAccum_data();
 
+    case ACCUM_DEPTH:
+      return getAccum_depth();
+
     }
     throw new java.lang.IllegalStateException();
   }
@@ -540,6 +588,8 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
       return isSetTable_ids();
     case ACCUM_DATA:
       return isSetAccum_data();
+    case ACCUM_DEPTH:
+      return isSetAccum_depth();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -622,6 +672,15 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
         return false;
     }
 
+    boolean this_present_accum_depth = true;
+    boolean that_present_accum_depth = true;
+    if (this_present_accum_depth || that_present_accum_depth) {
+      if (!(this_present_accum_depth && that_present_accum_depth))
+        return false;
+      if (this.accum_depth != that.accum_depth)
+        return false;
+    }
+
     return true;
   }
 
@@ -652,6 +711,8 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
     hashCode = hashCode * 8191 + ((isSetAccum_data()) ? 131071 : 524287);
     if (isSetAccum_data())
       hashCode = hashCode * 8191 + accum_data.hashCode();
+
+    hashCode = hashCode * 8191 + accum_depth;
 
     return hashCode;
   }
@@ -734,6 +795,16 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.valueOf(isSetAccum_depth()).compareTo(other.isSetAccum_depth());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetAccum_depth()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.accum_depth, other.accum_depth);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -800,6 +871,10 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
     } else {
       org.apache.thrift.TBaseHelper.toString(this.accum_data, sb);
     }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("accum_depth:");
+    sb.append(this.accum_depth);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -902,6 +977,14 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 8: // ACCUM_DEPTH
+            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+              struct.accum_depth = iprot.readI32();
+              struct.setAccum_depthIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -948,6 +1031,9 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
         oprot.writeBinary(struct.accum_data);
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(ACCUM_DEPTH_FIELD_DESC);
+      oprot.writeI32(struct.accum_depth);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -987,7 +1073,10 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
       if (struct.isSetAccum_data()) {
         optionals.set(6);
       }
-      oprot.writeBitSet(optionals, 7);
+      if (struct.isSetAccum_depth()) {
+        optionals.set(7);
+      }
+      oprot.writeBitSet(optionals, 8);
       if (struct.isSetNum_pixel_channels()) {
         oprot.writeI32(struct.num_pixel_channels);
       }
@@ -1009,12 +1098,15 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
       if (struct.isSetAccum_data()) {
         oprot.writeBinary(struct.accum_data);
       }
+      if (struct.isSetAccum_depth()) {
+        oprot.writeI32(struct.accum_depth);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TRawRenderPassDataResult struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(7);
+      java.util.BitSet incoming = iprot.readBitSet(8);
       if (incoming.get(0)) {
         struct.num_pixel_channels = iprot.readI32();
         struct.setNum_pixel_channelsIsSet(true);
@@ -1042,6 +1134,10 @@ public class TRawRenderPassDataResult implements org.apache.thrift.TBase<TRawRen
       if (incoming.get(6)) {
         struct.accum_data = iprot.readBinary();
         struct.setAccum_dataIsSet(true);
+      }
+      if (incoming.get(7)) {
+        struct.accum_depth = iprot.readI32();
+        struct.setAccum_depthIsSet(true);
       }
     }
   }

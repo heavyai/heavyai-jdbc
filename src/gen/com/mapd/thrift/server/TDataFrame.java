@@ -14,6 +14,8 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
   private static final org.apache.thrift.protocol.TField SM_SIZE_FIELD_DESC = new org.apache.thrift.protocol.TField("sm_size", org.apache.thrift.protocol.TType.I64, (short)2);
   private static final org.apache.thrift.protocol.TField DF_HANDLE_FIELD_DESC = new org.apache.thrift.protocol.TField("df_handle", org.apache.thrift.protocol.TType.STRING, (short)3);
   private static final org.apache.thrift.protocol.TField DF_SIZE_FIELD_DESC = new org.apache.thrift.protocol.TField("df_size", org.apache.thrift.protocol.TType.I64, (short)4);
+  private static final org.apache.thrift.protocol.TField EXECUTION_TIME_MS_FIELD_DESC = new org.apache.thrift.protocol.TField("execution_time_ms", org.apache.thrift.protocol.TType.I64, (short)5);
+  private static final org.apache.thrift.protocol.TField ARROW_CONVERSION_TIME_MS_FIELD_DESC = new org.apache.thrift.protocol.TField("arrow_conversion_time_ms", org.apache.thrift.protocol.TType.I64, (short)6);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TDataFrameStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TDataFrameTupleSchemeFactory();
@@ -22,13 +24,17 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
   public long sm_size; // required
   public java.nio.ByteBuffer df_handle; // required
   public long df_size; // required
+  public long execution_time_ms; // required
+  public long arrow_conversion_time_ms; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     SM_HANDLE((short)1, "sm_handle"),
     SM_SIZE((short)2, "sm_size"),
     DF_HANDLE((short)3, "df_handle"),
-    DF_SIZE((short)4, "df_size");
+    DF_SIZE((short)4, "df_size"),
+    EXECUTION_TIME_MS((short)5, "execution_time_ms"),
+    ARROW_CONVERSION_TIME_MS((short)6, "arrow_conversion_time_ms");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -51,6 +57,10 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
           return DF_HANDLE;
         case 4: // DF_SIZE
           return DF_SIZE;
+        case 5: // EXECUTION_TIME_MS
+          return EXECUTION_TIME_MS;
+        case 6: // ARROW_CONVERSION_TIME_MS
+          return ARROW_CONVERSION_TIME_MS;
         default:
           return null;
       }
@@ -93,6 +103,8 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
   // isset id assignments
   private static final int __SM_SIZE_ISSET_ID = 0;
   private static final int __DF_SIZE_ISSET_ID = 1;
+  private static final int __EXECUTION_TIME_MS_ISSET_ID = 2;
+  private static final int __ARROW_CONVERSION_TIME_MS_ISSET_ID = 3;
   private byte __isset_bitfield = 0;
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -105,6 +117,10 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING        , true)));
     tmpMap.put(_Fields.DF_SIZE, new org.apache.thrift.meta_data.FieldMetaData("df_size", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
+    tmpMap.put(_Fields.EXECUTION_TIME_MS, new org.apache.thrift.meta_data.FieldMetaData("execution_time_ms", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
+    tmpMap.put(_Fields.ARROW_CONVERSION_TIME_MS, new org.apache.thrift.meta_data.FieldMetaData("arrow_conversion_time_ms", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TDataFrame.class, metaDataMap);
   }
@@ -116,7 +132,9 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
     java.nio.ByteBuffer sm_handle,
     long sm_size,
     java.nio.ByteBuffer df_handle,
-    long df_size)
+    long df_size,
+    long execution_time_ms,
+    long arrow_conversion_time_ms)
   {
     this();
     this.sm_handle = org.apache.thrift.TBaseHelper.copyBinary(sm_handle);
@@ -125,6 +143,10 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
     this.df_handle = org.apache.thrift.TBaseHelper.copyBinary(df_handle);
     this.df_size = df_size;
     setDf_sizeIsSet(true);
+    this.execution_time_ms = execution_time_ms;
+    setExecution_time_msIsSet(true);
+    this.arrow_conversion_time_ms = arrow_conversion_time_ms;
+    setArrow_conversion_time_msIsSet(true);
   }
 
   /**
@@ -140,6 +162,8 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
       this.df_handle = org.apache.thrift.TBaseHelper.copyBinary(other.df_handle);
     }
     this.df_size = other.df_size;
+    this.execution_time_ms = other.execution_time_ms;
+    this.arrow_conversion_time_ms = other.arrow_conversion_time_ms;
   }
 
   public TDataFrame deepCopy() {
@@ -154,6 +178,10 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
     this.df_handle = null;
     setDf_sizeIsSet(false);
     this.df_size = 0;
+    setExecution_time_msIsSet(false);
+    this.execution_time_ms = 0;
+    setArrow_conversion_time_msIsSet(false);
+    this.arrow_conversion_time_ms = 0;
   }
 
   public byte[] getSm_handle() {
@@ -270,6 +298,52 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
     __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __DF_SIZE_ISSET_ID, value);
   }
 
+  public long getExecution_time_ms() {
+    return this.execution_time_ms;
+  }
+
+  public TDataFrame setExecution_time_ms(long execution_time_ms) {
+    this.execution_time_ms = execution_time_ms;
+    setExecution_time_msIsSet(true);
+    return this;
+  }
+
+  public void unsetExecution_time_ms() {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __EXECUTION_TIME_MS_ISSET_ID);
+  }
+
+  /** Returns true if field execution_time_ms is set (has been assigned a value) and false otherwise */
+  public boolean isSetExecution_time_ms() {
+    return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __EXECUTION_TIME_MS_ISSET_ID);
+  }
+
+  public void setExecution_time_msIsSet(boolean value) {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __EXECUTION_TIME_MS_ISSET_ID, value);
+  }
+
+  public long getArrow_conversion_time_ms() {
+    return this.arrow_conversion_time_ms;
+  }
+
+  public TDataFrame setArrow_conversion_time_ms(long arrow_conversion_time_ms) {
+    this.arrow_conversion_time_ms = arrow_conversion_time_ms;
+    setArrow_conversion_time_msIsSet(true);
+    return this;
+  }
+
+  public void unsetArrow_conversion_time_ms() {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __ARROW_CONVERSION_TIME_MS_ISSET_ID);
+  }
+
+  /** Returns true if field arrow_conversion_time_ms is set (has been assigned a value) and false otherwise */
+  public boolean isSetArrow_conversion_time_ms() {
+    return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __ARROW_CONVERSION_TIME_MS_ISSET_ID);
+  }
+
+  public void setArrow_conversion_time_msIsSet(boolean value) {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __ARROW_CONVERSION_TIME_MS_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, java.lang.Object value) {
     switch (field) {
     case SM_HANDLE:
@@ -312,6 +386,22 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
       }
       break;
 
+    case EXECUTION_TIME_MS:
+      if (value == null) {
+        unsetExecution_time_ms();
+      } else {
+        setExecution_time_ms((java.lang.Long)value);
+      }
+      break;
+
+    case ARROW_CONVERSION_TIME_MS:
+      if (value == null) {
+        unsetArrow_conversion_time_ms();
+      } else {
+        setArrow_conversion_time_ms((java.lang.Long)value);
+      }
+      break;
+
     }
   }
 
@@ -328,6 +418,12 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
 
     case DF_SIZE:
       return getDf_size();
+
+    case EXECUTION_TIME_MS:
+      return getExecution_time_ms();
+
+    case ARROW_CONVERSION_TIME_MS:
+      return getArrow_conversion_time_ms();
 
     }
     throw new java.lang.IllegalStateException();
@@ -348,6 +444,10 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
       return isSetDf_handle();
     case DF_SIZE:
       return isSetDf_size();
+    case EXECUTION_TIME_MS:
+      return isSetExecution_time_ms();
+    case ARROW_CONVERSION_TIME_MS:
+      return isSetArrow_conversion_time_ms();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -403,6 +503,24 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
         return false;
     }
 
+    boolean this_present_execution_time_ms = true;
+    boolean that_present_execution_time_ms = true;
+    if (this_present_execution_time_ms || that_present_execution_time_ms) {
+      if (!(this_present_execution_time_ms && that_present_execution_time_ms))
+        return false;
+      if (this.execution_time_ms != that.execution_time_ms)
+        return false;
+    }
+
+    boolean this_present_arrow_conversion_time_ms = true;
+    boolean that_present_arrow_conversion_time_ms = true;
+    if (this_present_arrow_conversion_time_ms || that_present_arrow_conversion_time_ms) {
+      if (!(this_present_arrow_conversion_time_ms && that_present_arrow_conversion_time_ms))
+        return false;
+      if (this.arrow_conversion_time_ms != that.arrow_conversion_time_ms)
+        return false;
+    }
+
     return true;
   }
 
@@ -421,6 +539,10 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
       hashCode = hashCode * 8191 + df_handle.hashCode();
 
     hashCode = hashCode * 8191 + org.apache.thrift.TBaseHelper.hashCode(df_size);
+
+    hashCode = hashCode * 8191 + org.apache.thrift.TBaseHelper.hashCode(execution_time_ms);
+
+    hashCode = hashCode * 8191 + org.apache.thrift.TBaseHelper.hashCode(arrow_conversion_time_ms);
 
     return hashCode;
   }
@@ -473,6 +595,26 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.valueOf(isSetExecution_time_ms()).compareTo(other.isSetExecution_time_ms());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetExecution_time_ms()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.execution_time_ms, other.execution_time_ms);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = java.lang.Boolean.valueOf(isSetArrow_conversion_time_ms()).compareTo(other.isSetArrow_conversion_time_ms());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetArrow_conversion_time_ms()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.arrow_conversion_time_ms, other.arrow_conversion_time_ms);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -515,6 +657,14 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
     if (!first) sb.append(", ");
     sb.append("df_size:");
     sb.append(this.df_size);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("execution_time_ms:");
+    sb.append(this.execution_time_ms);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("arrow_conversion_time_ms:");
+    sb.append(this.arrow_conversion_time_ms);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -593,6 +743,22 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 5: // EXECUTION_TIME_MS
+            if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+              struct.execution_time_ms = iprot.readI64();
+              struct.setExecution_time_msIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 6: // ARROW_CONVERSION_TIME_MS
+            if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+              struct.arrow_conversion_time_ms = iprot.readI64();
+              struct.setArrow_conversion_time_msIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -624,6 +790,12 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
       oprot.writeFieldBegin(DF_SIZE_FIELD_DESC);
       oprot.writeI64(struct.df_size);
       oprot.writeFieldEnd();
+      oprot.writeFieldBegin(EXECUTION_TIME_MS_FIELD_DESC);
+      oprot.writeI64(struct.execution_time_ms);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(ARROW_CONVERSION_TIME_MS_FIELD_DESC);
+      oprot.writeI64(struct.arrow_conversion_time_ms);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -654,7 +826,13 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
       if (struct.isSetDf_size()) {
         optionals.set(3);
       }
-      oprot.writeBitSet(optionals, 4);
+      if (struct.isSetExecution_time_ms()) {
+        optionals.set(4);
+      }
+      if (struct.isSetArrow_conversion_time_ms()) {
+        optionals.set(5);
+      }
+      oprot.writeBitSet(optionals, 6);
       if (struct.isSetSm_handle()) {
         oprot.writeBinary(struct.sm_handle);
       }
@@ -667,12 +845,18 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
       if (struct.isSetDf_size()) {
         oprot.writeI64(struct.df_size);
       }
+      if (struct.isSetExecution_time_ms()) {
+        oprot.writeI64(struct.execution_time_ms);
+      }
+      if (struct.isSetArrow_conversion_time_ms()) {
+        oprot.writeI64(struct.arrow_conversion_time_ms);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TDataFrame struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(4);
+      java.util.BitSet incoming = iprot.readBitSet(6);
       if (incoming.get(0)) {
         struct.sm_handle = iprot.readBinary();
         struct.setSm_handleIsSet(true);
@@ -688,6 +872,14 @@ public class TDataFrame implements org.apache.thrift.TBase<TDataFrame, TDataFram
       if (incoming.get(3)) {
         struct.df_size = iprot.readI64();
         struct.setDf_sizeIsSet(true);
+      }
+      if (incoming.get(4)) {
+        struct.execution_time_ms = iprot.readI64();
+        struct.setExecution_time_msIsSet(true);
+      }
+      if (incoming.get(5)) {
+        struct.arrow_conversion_time_ms = iprot.readI64();
+        struct.setArrow_conversion_time_msIsSet(true);
       }
     }
   }
