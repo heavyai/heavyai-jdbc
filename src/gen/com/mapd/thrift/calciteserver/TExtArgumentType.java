@@ -21,15 +21,20 @@ public enum TExtArgumentType implements org.apache.thrift.TEnum {
   PInt64(10),
   PFloat(11),
   PDouble(12),
-  Bool(13),
-  ArrayInt8(14),
-  ArrayInt16(15),
-  ArrayInt32(16),
-  ArrayInt64(17),
-  ArrayFloat(18),
-  ArrayDouble(19),
-  GeoPoint(20),
-  Cursor(21);
+  PBool(13),
+  Bool(14),
+  ArrayInt8(15),
+  ArrayInt16(16),
+  ArrayInt32(17),
+  ArrayInt64(18),
+  ArrayFloat(19),
+  ArrayDouble(20),
+  ArrayBool(21),
+  GeoPoint(22),
+  GeoLineString(23),
+  Cursor(24),
+  GeoPolygon(25),
+  GeoMultiPolygon(26);
 
   private final int value;
 
@@ -77,23 +82,33 @@ public enum TExtArgumentType implements org.apache.thrift.TEnum {
       case 12:
         return PDouble;
       case 13:
-        return Bool;
+        return PBool;
       case 14:
-        return ArrayInt8;
+        return Bool;
       case 15:
-        return ArrayInt16;
+        return ArrayInt8;
       case 16:
-        return ArrayInt32;
+        return ArrayInt16;
       case 17:
-        return ArrayInt64;
+        return ArrayInt32;
       case 18:
-        return ArrayFloat;
+        return ArrayInt64;
       case 19:
-        return ArrayDouble;
+        return ArrayFloat;
       case 20:
-        return GeoPoint;
+        return ArrayDouble;
       case 21:
+        return ArrayBool;
+      case 22:
+        return GeoPoint;
+      case 23:
+        return GeoLineString;
+      case 24:
         return Cursor;
+      case 25:
+        return GeoPolygon;
+      case 26:
+        return GeoMultiPolygon;
       default:
         return null;
     }

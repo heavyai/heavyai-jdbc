@@ -19,6 +19,8 @@ public class MapD {
 
     public void switch_database(java.lang.String session, java.lang.String dbname) throws TMapDException, org.apache.thrift.TException;
 
+    public java.lang.String clone_session(java.lang.String session) throws TMapDException, org.apache.thrift.TException;
+
     public TServerStatus get_server_status(java.lang.String session) throws TMapDException, org.apache.thrift.TException;
 
     public java.util.List<TServerStatus> get_status(java.lang.String session) throws TMapDException, org.apache.thrift.TException;
@@ -73,7 +75,7 @@ public class MapD {
 
     public void deallocate_df(java.lang.String session, TDataFrame df, com.mapd.thrift.server.TDeviceType device_type, int device_id) throws TMapDException, org.apache.thrift.TException;
 
-    public void interrupt(java.lang.String session) throws TMapDException, org.apache.thrift.TException;
+    public void interrupt(java.lang.String query_session, java.lang.String interrupt_session) throws TMapDException, org.apache.thrift.TException;
 
     public java.util.Map<java.lang.String,TColumnType> sql_validate(java.lang.String session, java.lang.String query) throws TMapDException, org.apache.thrift.TException;
 
@@ -131,7 +133,7 @@ public class MapD {
 
     public TTableMeta check_table_consistency(java.lang.String session, int table_id) throws TMapDException, org.apache.thrift.TException;
 
-    public TPendingQuery start_query(java.lang.String session, java.lang.String query_ra, boolean just_explain) throws TMapDException, org.apache.thrift.TException;
+    public TPendingQuery start_query(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, boolean just_explain) throws TMapDException, org.apache.thrift.TException;
 
     public TStepResult execute_query_step(TPendingQuery pending_query) throws TMapDException, org.apache.thrift.TException;
 
@@ -176,6 +178,8 @@ public class MapD {
     public void disconnect(java.lang.String session, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
     public void switch_database(java.lang.String session, java.lang.String dbname, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
+
+    public void clone_session(java.lang.String session, org.apache.thrift.async.AsyncMethodCallback<java.lang.String> resultHandler) throws org.apache.thrift.TException;
 
     public void get_server_status(java.lang.String session, org.apache.thrift.async.AsyncMethodCallback<TServerStatus> resultHandler) throws org.apache.thrift.TException;
 
@@ -231,7 +235,7 @@ public class MapD {
 
     public void deallocate_df(java.lang.String session, TDataFrame df, com.mapd.thrift.server.TDeviceType device_type, int device_id, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
-    public void interrupt(java.lang.String session, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
+    public void interrupt(java.lang.String query_session, java.lang.String interrupt_session, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
     public void sql_validate(java.lang.String session, java.lang.String query, org.apache.thrift.async.AsyncMethodCallback<java.util.Map<java.lang.String,TColumnType>> resultHandler) throws org.apache.thrift.TException;
 
@@ -289,7 +293,7 @@ public class MapD {
 
     public void check_table_consistency(java.lang.String session, int table_id, org.apache.thrift.async.AsyncMethodCallback<TTableMeta> resultHandler) throws org.apache.thrift.TException;
 
-    public void start_query(java.lang.String session, java.lang.String query_ra, boolean just_explain, org.apache.thrift.async.AsyncMethodCallback<TPendingQuery> resultHandler) throws org.apache.thrift.TException;
+    public void start_query(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, boolean just_explain, org.apache.thrift.async.AsyncMethodCallback<TPendingQuery> resultHandler) throws org.apache.thrift.TException;
 
     public void execute_query_step(TPendingQuery pending_query, org.apache.thrift.async.AsyncMethodCallback<TStepResult> resultHandler) throws org.apache.thrift.TException;
 
@@ -445,6 +449,32 @@ public class MapD {
         throw result.e;
       }
       return;
+    }
+
+    public java.lang.String clone_session(java.lang.String session) throws TMapDException, org.apache.thrift.TException
+    {
+      send_clone_session(session);
+      return recv_clone_session();
+    }
+
+    public void send_clone_session(java.lang.String session) throws org.apache.thrift.TException
+    {
+      clone_session_args args = new clone_session_args();
+      args.setSession(session);
+      sendBase("clone_session", args);
+    }
+
+    public java.lang.String recv_clone_session() throws TMapDException, org.apache.thrift.TException
+    {
+      clone_session_result result = new clone_session_result();
+      receiveBase(result, "clone_session");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      if (result.e != null) {
+        throw result.e;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "clone_session failed: unknown result");
     }
 
     public TServerStatus get_server_status(java.lang.String session) throws TMapDException, org.apache.thrift.TException
@@ -1147,16 +1177,17 @@ public class MapD {
       return;
     }
 
-    public void interrupt(java.lang.String session) throws TMapDException, org.apache.thrift.TException
+    public void interrupt(java.lang.String query_session, java.lang.String interrupt_session) throws TMapDException, org.apache.thrift.TException
     {
-      send_interrupt(session);
+      send_interrupt(query_session, interrupt_session);
       recv_interrupt();
     }
 
-    public void send_interrupt(java.lang.String session) throws org.apache.thrift.TException
+    public void send_interrupt(java.lang.String query_session, java.lang.String interrupt_session) throws org.apache.thrift.TException
     {
       interrupt_args args = new interrupt_args();
-      args.setSession(session);
+      args.setQuery_session(query_session);
+      args.setInterrupt_session(interrupt_session);
       sendBase("interrupt", args);
     }
 
@@ -1931,16 +1962,17 @@ public class MapD {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "check_table_consistency failed: unknown result");
     }
 
-    public TPendingQuery start_query(java.lang.String session, java.lang.String query_ra, boolean just_explain) throws TMapDException, org.apache.thrift.TException
+    public TPendingQuery start_query(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, boolean just_explain) throws TMapDException, org.apache.thrift.TException
     {
-      send_start_query(session, query_ra, just_explain);
+      send_start_query(leaf_session, parent_session, query_ra, just_explain);
       return recv_start_query();
     }
 
-    public void send_start_query(java.lang.String session, java.lang.String query_ra, boolean just_explain) throws org.apache.thrift.TException
+    public void send_start_query(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, boolean just_explain) throws org.apache.thrift.TException
     {
       start_query_args args = new start_query_args();
-      args.setSession(session);
+      args.setLeaf_session(leaf_session);
+      args.setParent_session(parent_session);
       args.setQuery_ra(query_ra);
       args.setJust_explain(just_explain);
       sendBase("start_query", args);
@@ -2543,6 +2575,38 @@ public class MapD {
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
         return null;
+      }
+    }
+
+    public void clone_session(java.lang.String session, org.apache.thrift.async.AsyncMethodCallback<java.lang.String> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      clone_session_call method_call = new clone_session_call(session, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class clone_session_call extends org.apache.thrift.async.TAsyncMethodCall<java.lang.String> {
+      private java.lang.String session;
+      public clone_session_call(java.lang.String session, org.apache.thrift.async.AsyncMethodCallback<java.lang.String> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.session = session;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("clone_session", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        clone_session_args args = new clone_session_args();
+        args.setSession(session);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public java.lang.String getResult() throws TMapDException, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new java.lang.IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_clone_session();
       }
     }
 
@@ -3485,24 +3549,27 @@ public class MapD {
       }
     }
 
-    public void interrupt(java.lang.String session, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+    public void interrupt(java.lang.String query_session, java.lang.String interrupt_session, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      interrupt_call method_call = new interrupt_call(session, resultHandler, this, ___protocolFactory, ___transport);
+      interrupt_call method_call = new interrupt_call(query_session, interrupt_session, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class interrupt_call extends org.apache.thrift.async.TAsyncMethodCall<Void> {
-      private java.lang.String session;
-      public interrupt_call(java.lang.String session, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private java.lang.String query_session;
+      private java.lang.String interrupt_session;
+      public interrupt_call(java.lang.String query_session, java.lang.String interrupt_session, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
-        this.session = session;
+        this.query_session = query_session;
+        this.interrupt_session = interrupt_session;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("interrupt", org.apache.thrift.protocol.TMessageType.CALL, 0));
         interrupt_args args = new interrupt_args();
-        args.setSession(session);
+        args.setQuery_session(query_session);
+        args.setInterrupt_session(interrupt_session);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -4620,20 +4687,22 @@ public class MapD {
       }
     }
 
-    public void start_query(java.lang.String session, java.lang.String query_ra, boolean just_explain, org.apache.thrift.async.AsyncMethodCallback<TPendingQuery> resultHandler) throws org.apache.thrift.TException {
+    public void start_query(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, boolean just_explain, org.apache.thrift.async.AsyncMethodCallback<TPendingQuery> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      start_query_call method_call = new start_query_call(session, query_ra, just_explain, resultHandler, this, ___protocolFactory, ___transport);
+      start_query_call method_call = new start_query_call(leaf_session, parent_session, query_ra, just_explain, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class start_query_call extends org.apache.thrift.async.TAsyncMethodCall<TPendingQuery> {
-      private java.lang.String session;
+      private java.lang.String leaf_session;
+      private java.lang.String parent_session;
       private java.lang.String query_ra;
       private boolean just_explain;
-      public start_query_call(java.lang.String session, java.lang.String query_ra, boolean just_explain, org.apache.thrift.async.AsyncMethodCallback<TPendingQuery> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public start_query_call(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, boolean just_explain, org.apache.thrift.async.AsyncMethodCallback<TPendingQuery> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
-        this.session = session;
+        this.leaf_session = leaf_session;
+        this.parent_session = parent_session;
         this.query_ra = query_ra;
         this.just_explain = just_explain;
       }
@@ -4641,7 +4710,8 @@ public class MapD {
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("start_query", org.apache.thrift.protocol.TMessageType.CALL, 0));
         start_query_args args = new start_query_args();
-        args.setSession(session);
+        args.setLeaf_session(leaf_session);
+        args.setParent_session(parent_session);
         args.setQuery_ra(query_ra);
         args.setJust_explain(just_explain);
         args.write(prot);
@@ -5262,6 +5332,7 @@ public class MapD {
       processMap.put("krb5_connect", new krb5_connect());
       processMap.put("disconnect", new disconnect());
       processMap.put("switch_database", new switch_database());
+      processMap.put("clone_session", new clone_session());
       processMap.put("get_server_status", new get_server_status());
       processMap.put("get_status", new get_status());
       processMap.put("get_hardware_info", new get_hardware_info());
@@ -5447,6 +5518,35 @@ public class MapD {
         switch_database_result result = new switch_database_result();
         try {
           iface.switch_database(args.session, args.dbname);
+        } catch (TMapDException e) {
+          result.e = e;
+        }
+        return result;
+      }
+    }
+
+    public static class clone_session<I extends Iface> extends org.apache.thrift.ProcessFunction<I, clone_session_args> {
+      public clone_session() {
+        super("clone_session");
+      }
+
+      public clone_session_args getEmptyArgsInstance() {
+        return new clone_session_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      @Override
+      protected boolean handleRuntimeExceptions() {
+        return false;
+      }
+
+      public clone_session_result getResult(I iface, clone_session_args args) throws org.apache.thrift.TException {
+        clone_session_result result = new clone_session_result();
+        try {
+          result.success = iface.clone_session(args.session);
         } catch (TMapDException e) {
           result.e = e;
         }
@@ -6252,7 +6352,7 @@ public class MapD {
       public interrupt_result getResult(I iface, interrupt_args args) throws org.apache.thrift.TException {
         interrupt_result result = new interrupt_result();
         try {
-          iface.interrupt(args.session);
+          iface.interrupt(args.query_session, args.interrupt_session);
         } catch (TMapDException e) {
           result.e = e;
         }
@@ -7094,7 +7194,7 @@ public class MapD {
       public start_query_result getResult(I iface, start_query_args args) throws org.apache.thrift.TException {
         start_query_result result = new start_query_result();
         try {
-          result.success = iface.start_query(args.session, args.query_ra, args.just_explain);
+          result.success = iface.start_query(args.leaf_session, args.parent_session, args.query_ra, args.just_explain);
         } catch (TMapDException e) {
           result.e = e;
         }
@@ -7585,6 +7685,7 @@ public class MapD {
       processMap.put("krb5_connect", new krb5_connect());
       processMap.put("disconnect", new disconnect());
       processMap.put("switch_database", new switch_database());
+      processMap.put("clone_session", new clone_session());
       processMap.put("get_server_status", new get_server_status());
       processMap.put("get_status", new get_status());
       processMap.put("get_hardware_info", new get_hardware_info());
@@ -7916,6 +8017,71 @@ public class MapD {
 
       public void start(I iface, switch_database_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
         iface.switch_database(args.session, args.dbname,resultHandler);
+      }
+    }
+
+    public static class clone_session<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, clone_session_args, java.lang.String> {
+      public clone_session() {
+        super("clone_session");
+      }
+
+      public clone_session_args getEmptyArgsInstance() {
+        return new clone_session_args();
+      }
+
+      public org.apache.thrift.async.AsyncMethodCallback<java.lang.String> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new org.apache.thrift.async.AsyncMethodCallback<java.lang.String>() { 
+          public void onComplete(java.lang.String o) {
+            clone_session_result result = new clone_session_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb, result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+            } catch (org.apache.thrift.transport.TTransportException e) {
+              _LOGGER.error("TTransportException writing to internal frame buffer", e);
+              fb.close();
+            } catch (java.lang.Exception e) {
+              _LOGGER.error("Exception writing to internal frame buffer", e);
+              onError(e);
+            }
+          }
+          public void onError(java.lang.Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TSerializable msg;
+            clone_session_result result = new clone_session_result();
+            if (e instanceof TMapDException) {
+              result.e = (TMapDException) e;
+              result.setEIsSet(true);
+              msg = result;
+            } else if (e instanceof org.apache.thrift.transport.TTransportException) {
+              _LOGGER.error("TTransportException inside handler", e);
+              fb.close();
+              return;
+            } else if (e instanceof org.apache.thrift.TApplicationException) {
+              _LOGGER.error("TApplicationException inside handler", e);
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TApplicationException)e;
+            } else {
+              _LOGGER.error("Exception inside handler", e);
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+            } catch (java.lang.Exception ex) {
+              _LOGGER.error("Exception writing to internal frame buffer", ex);
+              fb.close();
+            }
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, clone_session_args args, org.apache.thrift.async.AsyncMethodCallback<java.lang.String> resultHandler) throws org.apache.thrift.TException {
+        iface.clone_session(args.session,resultHandler);
       }
     }
 
@@ -9721,7 +9887,7 @@ public class MapD {
       }
 
       public void start(I iface, interrupt_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
-        iface.interrupt(args.session,resultHandler);
+        iface.interrupt(args.query_session, args.interrupt_session,resultHandler);
       }
     }
 
@@ -11595,7 +11761,7 @@ public class MapD {
       }
 
       public void start(I iface, start_query_args args, org.apache.thrift.async.AsyncMethodCallback<TPendingQuery> resultHandler) throws org.apache.thrift.TException {
-        iface.start_query(args.session, args.query_ra, args.just_explain,resultHandler);
+        iface.start_query(args.leaf_session, args.parent_session, args.query_ra, args.just_explain,resultHandler);
       }
     }
 
@@ -16160,6 +16326,836 @@ public class MapD {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
+          struct.e = new TMapDException();
+          struct.e.read(iprot);
+          struct.setEIsSet(true);
+        }
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  public static class clone_session_args implements org.apache.thrift.TBase<clone_session_args, clone_session_args._Fields>, java.io.Serializable, Cloneable, Comparable<clone_session_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("clone_session_args");
+
+    private static final org.apache.thrift.protocol.TField SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("session", org.apache.thrift.protocol.TType.STRING, (short)1);
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new clone_session_argsStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new clone_session_argsTupleSchemeFactory();
+
+    public java.lang.String session; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SESSION((short)1, "session");
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // SESSION
+            return SESSION;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SESSION, new org.apache.thrift.meta_data.FieldMetaData("session", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING          , "TSessionId")));
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(clone_session_args.class, metaDataMap);
+    }
+
+    public clone_session_args() {
+    }
+
+    public clone_session_args(
+      java.lang.String session)
+    {
+      this();
+      this.session = session;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public clone_session_args(clone_session_args other) {
+      if (other.isSetSession()) {
+        this.session = other.session;
+      }
+    }
+
+    public clone_session_args deepCopy() {
+      return new clone_session_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.session = null;
+    }
+
+    public java.lang.String getSession() {
+      return this.session;
+    }
+
+    public clone_session_args setSession(java.lang.String session) {
+      this.session = session;
+      return this;
+    }
+
+    public void unsetSession() {
+      this.session = null;
+    }
+
+    /** Returns true if field session is set (has been assigned a value) and false otherwise */
+    public boolean isSetSession() {
+      return this.session != null;
+    }
+
+    public void setSessionIsSet(boolean value) {
+      if (!value) {
+        this.session = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, java.lang.Object value) {
+      switch (field) {
+      case SESSION:
+        if (value == null) {
+          unsetSession();
+        } else {
+          setSession((java.lang.String)value);
+        }
+        break;
+
+      }
+    }
+
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SESSION:
+        return getSession();
+
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SESSION:
+        return isSetSession();
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof clone_session_args)
+        return this.equals((clone_session_args)that);
+      return false;
+    }
+
+    public boolean equals(clone_session_args that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      boolean this_present_session = true && this.isSetSession();
+      boolean that_present_session = true && that.isSetSession();
+      if (this_present_session || that_present_session) {
+        if (!(this_present_session && that_present_session))
+          return false;
+        if (!this.session.equals(that.session))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetSession()) ? 131071 : 524287);
+      if (isSetSession())
+        hashCode = hashCode * 8191 + session.hashCode();
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(clone_session_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = java.lang.Boolean.valueOf(isSetSession()).compareTo(other.isSetSession());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSession()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.session, other.session);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+    }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("clone_session_args(");
+      boolean first = true;
+
+      sb.append("session:");
+      if (this.session == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.session);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class clone_session_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public clone_session_argsStandardScheme getScheme() {
+        return new clone_session_argsStandardScheme();
+      }
+    }
+
+    private static class clone_session_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<clone_session_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, clone_session_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // SESSION
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.session = iprot.readString();
+                struct.setSessionIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, clone_session_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.session != null) {
+          oprot.writeFieldBegin(SESSION_FIELD_DESC);
+          oprot.writeString(struct.session);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class clone_session_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public clone_session_argsTupleScheme getScheme() {
+        return new clone_session_argsTupleScheme();
+      }
+    }
+
+    private static class clone_session_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<clone_session_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, clone_session_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetSession()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSession()) {
+          oprot.writeString(struct.session);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, clone_session_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.session = iprot.readString();
+          struct.setSessionIsSet(true);
+        }
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  public static class clone_session_result implements org.apache.thrift.TBase<clone_session_result, clone_session_result._Fields>, java.io.Serializable, Cloneable, Comparable<clone_session_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("clone_session_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRING, (short)0);
+    private static final org.apache.thrift.protocol.TField E_FIELD_DESC = new org.apache.thrift.protocol.TField("e", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new clone_session_resultStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new clone_session_resultTupleSchemeFactory();
+
+    public java.lang.String success; // required
+    public TMapDException e; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success"),
+      E((short)1, "e");
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          case 1: // E
+            return E;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING          , "TSessionId")));
+      tmpMap.put(_Fields.E, new org.apache.thrift.meta_data.FieldMetaData("e", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TMapDException.class)));
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(clone_session_result.class, metaDataMap);
+    }
+
+    public clone_session_result() {
+    }
+
+    public clone_session_result(
+      java.lang.String success,
+      TMapDException e)
+    {
+      this();
+      this.success = success;
+      this.e = e;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public clone_session_result(clone_session_result other) {
+      if (other.isSetSuccess()) {
+        this.success = other.success;
+      }
+      if (other.isSetE()) {
+        this.e = new TMapDException(other.e);
+      }
+    }
+
+    public clone_session_result deepCopy() {
+      return new clone_session_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+      this.e = null;
+    }
+
+    public java.lang.String getSuccess() {
+      return this.success;
+    }
+
+    public clone_session_result setSuccess(java.lang.String success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public TMapDException getE() {
+      return this.e;
+    }
+
+    public clone_session_result setE(TMapDException e) {
+      this.e = e;
+      return this;
+    }
+
+    public void unsetE() {
+      this.e = null;
+    }
+
+    /** Returns true if field e is set (has been assigned a value) and false otherwise */
+    public boolean isSetE() {
+      return this.e != null;
+    }
+
+    public void setEIsSet(boolean value) {
+      if (!value) {
+        this.e = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, java.lang.Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((java.lang.String)value);
+        }
+        break;
+
+      case E:
+        if (value == null) {
+          unsetE();
+        } else {
+          setE((TMapDException)value);
+        }
+        break;
+
+      }
+    }
+
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      case E:
+        return getE();
+
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      case E:
+        return isSetE();
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof clone_session_result)
+        return this.equals((clone_session_result)that);
+      return false;
+    }
+
+    public boolean equals(clone_session_result that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      boolean this_present_e = true && this.isSetE();
+      boolean that_present_e = true && that.isSetE();
+      if (this_present_e || that_present_e) {
+        if (!(this_present_e && that_present_e))
+          return false;
+        if (!this.e.equals(that.e))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetSuccess()) ? 131071 : 524287);
+      if (isSetSuccess())
+        hashCode = hashCode * 8191 + success.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetE()) ? 131071 : 524287);
+      if (isSetE())
+        hashCode = hashCode * 8191 + e.hashCode();
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(clone_session_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = java.lang.Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetE()).compareTo(other.isSetE());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetE()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.e, other.e);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+      }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("clone_session_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("e:");
+      if (this.e == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.e);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class clone_session_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public clone_session_resultStandardScheme getScheme() {
+        return new clone_session_resultStandardScheme();
+      }
+    }
+
+    private static class clone_session_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<clone_session_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, clone_session_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.success = iprot.readString();
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 1: // E
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.e = new TMapDException();
+                struct.e.read(iprot);
+                struct.setEIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, clone_session_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          oprot.writeString(struct.success);
+          oprot.writeFieldEnd();
+        }
+        if (struct.e != null) {
+          oprot.writeFieldBegin(E_FIELD_DESC);
+          struct.e.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class clone_session_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public clone_session_resultTupleScheme getScheme() {
+        return new clone_session_resultTupleScheme();
+      }
+    }
+
+    private static class clone_session_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<clone_session_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, clone_session_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        if (struct.isSetE()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetSuccess()) {
+          oprot.writeString(struct.success);
+        }
+        if (struct.isSetE()) {
+          struct.e.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, clone_session_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.success = iprot.readString();
+          struct.setSuccessIsSet(true);
+        }
+        if (incoming.get(1)) {
           struct.e = new TMapDException();
           struct.e.read(iprot);
           struct.setEIsSet(true);
@@ -40652,16 +41648,19 @@ public class MapD {
   public static class interrupt_args implements org.apache.thrift.TBase<interrupt_args, interrupt_args._Fields>, java.io.Serializable, Cloneable, Comparable<interrupt_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("interrupt_args");
 
-    private static final org.apache.thrift.protocol.TField SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("session", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField QUERY_SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("query_session", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField INTERRUPT_SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("interrupt_session", org.apache.thrift.protocol.TType.STRING, (short)2);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new interrupt_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new interrupt_argsTupleSchemeFactory();
 
-    public java.lang.String session; // required
+    public java.lang.String query_session; // required
+    public java.lang.String interrupt_session; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      SESSION((short)1, "session");
+      QUERY_SESSION((short)1, "query_session"),
+      INTERRUPT_SESSION((short)2, "interrupt_session");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -40676,8 +41675,10 @@ public class MapD {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // SESSION
-            return SESSION;
+          case 1: // QUERY_SESSION
+            return QUERY_SESSION;
+          case 2: // INTERRUPT_SESSION
+            return INTERRUPT_SESSION;
           default:
             return null;
         }
@@ -40721,7 +41722,9 @@ public class MapD {
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.SESSION, new org.apache.thrift.meta_data.FieldMetaData("session", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+      tmpMap.put(_Fields.QUERY_SESSION, new org.apache.thrift.meta_data.FieldMetaData("query_session", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING          , "TSessionId")));
+      tmpMap.put(_Fields.INTERRUPT_SESSION, new org.apache.thrift.meta_data.FieldMetaData("interrupt_session", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING          , "TSessionId")));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(interrupt_args.class, metaDataMap);
@@ -40731,18 +41734,23 @@ public class MapD {
     }
 
     public interrupt_args(
-      java.lang.String session)
+      java.lang.String query_session,
+      java.lang.String interrupt_session)
     {
       this();
-      this.session = session;
+      this.query_session = query_session;
+      this.interrupt_session = interrupt_session;
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public interrupt_args(interrupt_args other) {
-      if (other.isSetSession()) {
-        this.session = other.session;
+      if (other.isSetQuery_session()) {
+        this.query_session = other.query_session;
+      }
+      if (other.isSetInterrupt_session()) {
+        this.interrupt_session = other.interrupt_session;
       }
     }
 
@@ -40752,40 +41760,73 @@ public class MapD {
 
     @Override
     public void clear() {
-      this.session = null;
+      this.query_session = null;
+      this.interrupt_session = null;
     }
 
-    public java.lang.String getSession() {
-      return this.session;
+    public java.lang.String getQuery_session() {
+      return this.query_session;
     }
 
-    public interrupt_args setSession(java.lang.String session) {
-      this.session = session;
+    public interrupt_args setQuery_session(java.lang.String query_session) {
+      this.query_session = query_session;
       return this;
     }
 
-    public void unsetSession() {
-      this.session = null;
+    public void unsetQuery_session() {
+      this.query_session = null;
     }
 
-    /** Returns true if field session is set (has been assigned a value) and false otherwise */
-    public boolean isSetSession() {
-      return this.session != null;
+    /** Returns true if field query_session is set (has been assigned a value) and false otherwise */
+    public boolean isSetQuery_session() {
+      return this.query_session != null;
     }
 
-    public void setSessionIsSet(boolean value) {
+    public void setQuery_sessionIsSet(boolean value) {
       if (!value) {
-        this.session = null;
+        this.query_session = null;
+      }
+    }
+
+    public java.lang.String getInterrupt_session() {
+      return this.interrupt_session;
+    }
+
+    public interrupt_args setInterrupt_session(java.lang.String interrupt_session) {
+      this.interrupt_session = interrupt_session;
+      return this;
+    }
+
+    public void unsetInterrupt_session() {
+      this.interrupt_session = null;
+    }
+
+    /** Returns true if field interrupt_session is set (has been assigned a value) and false otherwise */
+    public boolean isSetInterrupt_session() {
+      return this.interrupt_session != null;
+    }
+
+    public void setInterrupt_sessionIsSet(boolean value) {
+      if (!value) {
+        this.interrupt_session = null;
       }
     }
 
     public void setFieldValue(_Fields field, java.lang.Object value) {
       switch (field) {
-      case SESSION:
+      case QUERY_SESSION:
         if (value == null) {
-          unsetSession();
+          unsetQuery_session();
         } else {
-          setSession((java.lang.String)value);
+          setQuery_session((java.lang.String)value);
+        }
+        break;
+
+      case INTERRUPT_SESSION:
+        if (value == null) {
+          unsetInterrupt_session();
+        } else {
+          setInterrupt_session((java.lang.String)value);
         }
         break;
 
@@ -40794,8 +41835,11 @@ public class MapD {
 
     public java.lang.Object getFieldValue(_Fields field) {
       switch (field) {
-      case SESSION:
-        return getSession();
+      case QUERY_SESSION:
+        return getQuery_session();
+
+      case INTERRUPT_SESSION:
+        return getInterrupt_session();
 
       }
       throw new java.lang.IllegalStateException();
@@ -40808,8 +41852,10 @@ public class MapD {
       }
 
       switch (field) {
-      case SESSION:
-        return isSetSession();
+      case QUERY_SESSION:
+        return isSetQuery_session();
+      case INTERRUPT_SESSION:
+        return isSetInterrupt_session();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -40829,12 +41875,21 @@ public class MapD {
       if (this == that)
         return true;
 
-      boolean this_present_session = true && this.isSetSession();
-      boolean that_present_session = true && that.isSetSession();
-      if (this_present_session || that_present_session) {
-        if (!(this_present_session && that_present_session))
+      boolean this_present_query_session = true && this.isSetQuery_session();
+      boolean that_present_query_session = true && that.isSetQuery_session();
+      if (this_present_query_session || that_present_query_session) {
+        if (!(this_present_query_session && that_present_query_session))
           return false;
-        if (!this.session.equals(that.session))
+        if (!this.query_session.equals(that.query_session))
+          return false;
+      }
+
+      boolean this_present_interrupt_session = true && this.isSetInterrupt_session();
+      boolean that_present_interrupt_session = true && that.isSetInterrupt_session();
+      if (this_present_interrupt_session || that_present_interrupt_session) {
+        if (!(this_present_interrupt_session && that_present_interrupt_session))
+          return false;
+        if (!this.interrupt_session.equals(that.interrupt_session))
           return false;
       }
 
@@ -40845,9 +41900,13 @@ public class MapD {
     public int hashCode() {
       int hashCode = 1;
 
-      hashCode = hashCode * 8191 + ((isSetSession()) ? 131071 : 524287);
-      if (isSetSession())
-        hashCode = hashCode * 8191 + session.hashCode();
+      hashCode = hashCode * 8191 + ((isSetQuery_session()) ? 131071 : 524287);
+      if (isSetQuery_session())
+        hashCode = hashCode * 8191 + query_session.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetInterrupt_session()) ? 131071 : 524287);
+      if (isSetInterrupt_session())
+        hashCode = hashCode * 8191 + interrupt_session.hashCode();
 
       return hashCode;
     }
@@ -40860,12 +41919,22 @@ public class MapD {
 
       int lastComparison = 0;
 
-      lastComparison = java.lang.Boolean.valueOf(isSetSession()).compareTo(other.isSetSession());
+      lastComparison = java.lang.Boolean.valueOf(isSetQuery_session()).compareTo(other.isSetQuery_session());
       if (lastComparison != 0) {
         return lastComparison;
       }
-      if (isSetSession()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.session, other.session);
+      if (isSetQuery_session()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.query_session, other.query_session);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetInterrupt_session()).compareTo(other.isSetInterrupt_session());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetInterrupt_session()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.interrupt_session, other.interrupt_session);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -40890,11 +41959,19 @@ public class MapD {
       java.lang.StringBuilder sb = new java.lang.StringBuilder("interrupt_args(");
       boolean first = true;
 
-      sb.append("session:");
-      if (this.session == null) {
+      sb.append("query_session:");
+      if (this.query_session == null) {
         sb.append("null");
       } else {
-        sb.append(this.session);
+        sb.append(this.query_session);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("interrupt_session:");
+      if (this.interrupt_session == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.interrupt_session);
       }
       first = false;
       sb.append(")");
@@ -40940,10 +42017,18 @@ public class MapD {
             break;
           }
           switch (schemeField.id) {
-            case 1: // SESSION
+            case 1: // QUERY_SESSION
               if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-                struct.session = iprot.readString();
-                struct.setSessionIsSet(true);
+                struct.query_session = iprot.readString();
+                struct.setQuery_sessionIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // INTERRUPT_SESSION
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.interrupt_session = iprot.readString();
+                struct.setInterrupt_sessionIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
@@ -40963,9 +42048,14 @@ public class MapD {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.session != null) {
-          oprot.writeFieldBegin(SESSION_FIELD_DESC);
-          oprot.writeString(struct.session);
+        if (struct.query_session != null) {
+          oprot.writeFieldBegin(QUERY_SESSION_FIELD_DESC);
+          oprot.writeString(struct.query_session);
+          oprot.writeFieldEnd();
+        }
+        if (struct.interrupt_session != null) {
+          oprot.writeFieldBegin(INTERRUPT_SESSION_FIELD_DESC);
+          oprot.writeString(struct.interrupt_session);
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -40986,22 +42076,32 @@ public class MapD {
       public void write(org.apache.thrift.protocol.TProtocol prot, interrupt_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet optionals = new java.util.BitSet();
-        if (struct.isSetSession()) {
+        if (struct.isSetQuery_session()) {
           optionals.set(0);
         }
-        oprot.writeBitSet(optionals, 1);
-        if (struct.isSetSession()) {
-          oprot.writeString(struct.session);
+        if (struct.isSetInterrupt_session()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetQuery_session()) {
+          oprot.writeString(struct.query_session);
+        }
+        if (struct.isSetInterrupt_session()) {
+          oprot.writeString(struct.interrupt_session);
         }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, interrupt_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-        java.util.BitSet incoming = iprot.readBitSet(1);
+        java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
-          struct.session = iprot.readString();
-          struct.setSessionIsSet(true);
+          struct.query_session = iprot.readString();
+          struct.setQuery_sessionIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.interrupt_session = iprot.readString();
+          struct.setInterrupt_sessionIsSet(true);
         }
       }
     }
@@ -71501,22 +72601,25 @@ public class MapD {
   public static class start_query_args implements org.apache.thrift.TBase<start_query_args, start_query_args._Fields>, java.io.Serializable, Cloneable, Comparable<start_query_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("start_query_args");
 
-    private static final org.apache.thrift.protocol.TField SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("session", org.apache.thrift.protocol.TType.STRING, (short)1);
-    private static final org.apache.thrift.protocol.TField QUERY_RA_FIELD_DESC = new org.apache.thrift.protocol.TField("query_ra", org.apache.thrift.protocol.TType.STRING, (short)2);
-    private static final org.apache.thrift.protocol.TField JUST_EXPLAIN_FIELD_DESC = new org.apache.thrift.protocol.TField("just_explain", org.apache.thrift.protocol.TType.BOOL, (short)3);
+    private static final org.apache.thrift.protocol.TField LEAF_SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("leaf_session", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField PARENT_SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("parent_session", org.apache.thrift.protocol.TType.STRING, (short)2);
+    private static final org.apache.thrift.protocol.TField QUERY_RA_FIELD_DESC = new org.apache.thrift.protocol.TField("query_ra", org.apache.thrift.protocol.TType.STRING, (short)3);
+    private static final org.apache.thrift.protocol.TField JUST_EXPLAIN_FIELD_DESC = new org.apache.thrift.protocol.TField("just_explain", org.apache.thrift.protocol.TType.BOOL, (short)4);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new start_query_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new start_query_argsTupleSchemeFactory();
 
-    public java.lang.String session; // required
+    public java.lang.String leaf_session; // required
+    public java.lang.String parent_session; // required
     public java.lang.String query_ra; // required
     public boolean just_explain; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      SESSION((short)1, "session"),
-      QUERY_RA((short)2, "query_ra"),
-      JUST_EXPLAIN((short)3, "just_explain");
+      LEAF_SESSION((short)1, "leaf_session"),
+      PARENT_SESSION((short)2, "parent_session"),
+      QUERY_RA((short)3, "query_ra"),
+      JUST_EXPLAIN((short)4, "just_explain");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -71531,11 +72634,13 @@ public class MapD {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // SESSION
-            return SESSION;
-          case 2: // QUERY_RA
+          case 1: // LEAF_SESSION
+            return LEAF_SESSION;
+          case 2: // PARENT_SESSION
+            return PARENT_SESSION;
+          case 3: // QUERY_RA
             return QUERY_RA;
-          case 3: // JUST_EXPLAIN
+          case 4: // JUST_EXPLAIN
             return JUST_EXPLAIN;
           default:
             return null;
@@ -71582,7 +72687,9 @@ public class MapD {
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.SESSION, new org.apache.thrift.meta_data.FieldMetaData("session", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+      tmpMap.put(_Fields.LEAF_SESSION, new org.apache.thrift.meta_data.FieldMetaData("leaf_session", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING          , "TSessionId")));
+      tmpMap.put(_Fields.PARENT_SESSION, new org.apache.thrift.meta_data.FieldMetaData("parent_session", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING          , "TSessionId")));
       tmpMap.put(_Fields.QUERY_RA, new org.apache.thrift.meta_data.FieldMetaData("query_ra", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
@@ -71596,12 +72703,14 @@ public class MapD {
     }
 
     public start_query_args(
-      java.lang.String session,
+      java.lang.String leaf_session,
+      java.lang.String parent_session,
       java.lang.String query_ra,
       boolean just_explain)
     {
       this();
-      this.session = session;
+      this.leaf_session = leaf_session;
+      this.parent_session = parent_session;
       this.query_ra = query_ra;
       this.just_explain = just_explain;
       setJust_explainIsSet(true);
@@ -71612,8 +72721,11 @@ public class MapD {
      */
     public start_query_args(start_query_args other) {
       __isset_bitfield = other.__isset_bitfield;
-      if (other.isSetSession()) {
-        this.session = other.session;
+      if (other.isSetLeaf_session()) {
+        this.leaf_session = other.leaf_session;
+      }
+      if (other.isSetParent_session()) {
+        this.parent_session = other.parent_session;
       }
       if (other.isSetQuery_ra()) {
         this.query_ra = other.query_ra;
@@ -71627,33 +72739,58 @@ public class MapD {
 
     @Override
     public void clear() {
-      this.session = null;
+      this.leaf_session = null;
+      this.parent_session = null;
       this.query_ra = null;
       setJust_explainIsSet(false);
       this.just_explain = false;
     }
 
-    public java.lang.String getSession() {
-      return this.session;
+    public java.lang.String getLeaf_session() {
+      return this.leaf_session;
     }
 
-    public start_query_args setSession(java.lang.String session) {
-      this.session = session;
+    public start_query_args setLeaf_session(java.lang.String leaf_session) {
+      this.leaf_session = leaf_session;
       return this;
     }
 
-    public void unsetSession() {
-      this.session = null;
+    public void unsetLeaf_session() {
+      this.leaf_session = null;
     }
 
-    /** Returns true if field session is set (has been assigned a value) and false otherwise */
-    public boolean isSetSession() {
-      return this.session != null;
+    /** Returns true if field leaf_session is set (has been assigned a value) and false otherwise */
+    public boolean isSetLeaf_session() {
+      return this.leaf_session != null;
     }
 
-    public void setSessionIsSet(boolean value) {
+    public void setLeaf_sessionIsSet(boolean value) {
       if (!value) {
-        this.session = null;
+        this.leaf_session = null;
+      }
+    }
+
+    public java.lang.String getParent_session() {
+      return this.parent_session;
+    }
+
+    public start_query_args setParent_session(java.lang.String parent_session) {
+      this.parent_session = parent_session;
+      return this;
+    }
+
+    public void unsetParent_session() {
+      this.parent_session = null;
+    }
+
+    /** Returns true if field parent_session is set (has been assigned a value) and false otherwise */
+    public boolean isSetParent_session() {
+      return this.parent_session != null;
+    }
+
+    public void setParent_sessionIsSet(boolean value) {
+      if (!value) {
+        this.parent_session = null;
       }
     }
 
@@ -71706,11 +72843,19 @@ public class MapD {
 
     public void setFieldValue(_Fields field, java.lang.Object value) {
       switch (field) {
-      case SESSION:
+      case LEAF_SESSION:
         if (value == null) {
-          unsetSession();
+          unsetLeaf_session();
         } else {
-          setSession((java.lang.String)value);
+          setLeaf_session((java.lang.String)value);
+        }
+        break;
+
+      case PARENT_SESSION:
+        if (value == null) {
+          unsetParent_session();
+        } else {
+          setParent_session((java.lang.String)value);
         }
         break;
 
@@ -71735,8 +72880,11 @@ public class MapD {
 
     public java.lang.Object getFieldValue(_Fields field) {
       switch (field) {
-      case SESSION:
-        return getSession();
+      case LEAF_SESSION:
+        return getLeaf_session();
+
+      case PARENT_SESSION:
+        return getParent_session();
 
       case QUERY_RA:
         return getQuery_ra();
@@ -71755,8 +72903,10 @@ public class MapD {
       }
 
       switch (field) {
-      case SESSION:
-        return isSetSession();
+      case LEAF_SESSION:
+        return isSetLeaf_session();
+      case PARENT_SESSION:
+        return isSetParent_session();
       case QUERY_RA:
         return isSetQuery_ra();
       case JUST_EXPLAIN:
@@ -71780,12 +72930,21 @@ public class MapD {
       if (this == that)
         return true;
 
-      boolean this_present_session = true && this.isSetSession();
-      boolean that_present_session = true && that.isSetSession();
-      if (this_present_session || that_present_session) {
-        if (!(this_present_session && that_present_session))
+      boolean this_present_leaf_session = true && this.isSetLeaf_session();
+      boolean that_present_leaf_session = true && that.isSetLeaf_session();
+      if (this_present_leaf_session || that_present_leaf_session) {
+        if (!(this_present_leaf_session && that_present_leaf_session))
           return false;
-        if (!this.session.equals(that.session))
+        if (!this.leaf_session.equals(that.leaf_session))
+          return false;
+      }
+
+      boolean this_present_parent_session = true && this.isSetParent_session();
+      boolean that_present_parent_session = true && that.isSetParent_session();
+      if (this_present_parent_session || that_present_parent_session) {
+        if (!(this_present_parent_session && that_present_parent_session))
+          return false;
+        if (!this.parent_session.equals(that.parent_session))
           return false;
       }
 
@@ -71814,9 +72973,13 @@ public class MapD {
     public int hashCode() {
       int hashCode = 1;
 
-      hashCode = hashCode * 8191 + ((isSetSession()) ? 131071 : 524287);
-      if (isSetSession())
-        hashCode = hashCode * 8191 + session.hashCode();
+      hashCode = hashCode * 8191 + ((isSetLeaf_session()) ? 131071 : 524287);
+      if (isSetLeaf_session())
+        hashCode = hashCode * 8191 + leaf_session.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetParent_session()) ? 131071 : 524287);
+      if (isSetParent_session())
+        hashCode = hashCode * 8191 + parent_session.hashCode();
 
       hashCode = hashCode * 8191 + ((isSetQuery_ra()) ? 131071 : 524287);
       if (isSetQuery_ra())
@@ -71835,12 +72998,22 @@ public class MapD {
 
       int lastComparison = 0;
 
-      lastComparison = java.lang.Boolean.valueOf(isSetSession()).compareTo(other.isSetSession());
+      lastComparison = java.lang.Boolean.valueOf(isSetLeaf_session()).compareTo(other.isSetLeaf_session());
       if (lastComparison != 0) {
         return lastComparison;
       }
-      if (isSetSession()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.session, other.session);
+      if (isSetLeaf_session()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.leaf_session, other.leaf_session);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetParent_session()).compareTo(other.isSetParent_session());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetParent_session()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.parent_session, other.parent_session);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -71885,11 +73058,19 @@ public class MapD {
       java.lang.StringBuilder sb = new java.lang.StringBuilder("start_query_args(");
       boolean first = true;
 
-      sb.append("session:");
-      if (this.session == null) {
+      sb.append("leaf_session:");
+      if (this.leaf_session == null) {
         sb.append("null");
       } else {
-        sb.append(this.session);
+        sb.append(this.leaf_session);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("parent_session:");
+      if (this.parent_session == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.parent_session);
       }
       first = false;
       if (!first) sb.append(", ");
@@ -71949,15 +73130,23 @@ public class MapD {
             break;
           }
           switch (schemeField.id) {
-            case 1: // SESSION
+            case 1: // LEAF_SESSION
               if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-                struct.session = iprot.readString();
-                struct.setSessionIsSet(true);
+                struct.leaf_session = iprot.readString();
+                struct.setLeaf_sessionIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
-            case 2: // QUERY_RA
+            case 2: // PARENT_SESSION
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.parent_session = iprot.readString();
+                struct.setParent_sessionIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 3: // QUERY_RA
               if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
                 struct.query_ra = iprot.readString();
                 struct.setQuery_raIsSet(true);
@@ -71965,7 +73154,7 @@ public class MapD {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
-            case 3: // JUST_EXPLAIN
+            case 4: // JUST_EXPLAIN
               if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
                 struct.just_explain = iprot.readBool();
                 struct.setJust_explainIsSet(true);
@@ -71988,9 +73177,14 @@ public class MapD {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.session != null) {
-          oprot.writeFieldBegin(SESSION_FIELD_DESC);
-          oprot.writeString(struct.session);
+        if (struct.leaf_session != null) {
+          oprot.writeFieldBegin(LEAF_SESSION_FIELD_DESC);
+          oprot.writeString(struct.leaf_session);
+          oprot.writeFieldEnd();
+        }
+        if (struct.parent_session != null) {
+          oprot.writeFieldBegin(PARENT_SESSION_FIELD_DESC);
+          oprot.writeString(struct.parent_session);
           oprot.writeFieldEnd();
         }
         if (struct.query_ra != null) {
@@ -72019,18 +73213,24 @@ public class MapD {
       public void write(org.apache.thrift.protocol.TProtocol prot, start_query_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet optionals = new java.util.BitSet();
-        if (struct.isSetSession()) {
+        if (struct.isSetLeaf_session()) {
           optionals.set(0);
         }
-        if (struct.isSetQuery_ra()) {
+        if (struct.isSetParent_session()) {
           optionals.set(1);
         }
-        if (struct.isSetJust_explain()) {
+        if (struct.isSetQuery_ra()) {
           optionals.set(2);
         }
-        oprot.writeBitSet(optionals, 3);
-        if (struct.isSetSession()) {
-          oprot.writeString(struct.session);
+        if (struct.isSetJust_explain()) {
+          optionals.set(3);
+        }
+        oprot.writeBitSet(optionals, 4);
+        if (struct.isSetLeaf_session()) {
+          oprot.writeString(struct.leaf_session);
+        }
+        if (struct.isSetParent_session()) {
+          oprot.writeString(struct.parent_session);
         }
         if (struct.isSetQuery_ra()) {
           oprot.writeString(struct.query_ra);
@@ -72043,16 +73243,20 @@ public class MapD {
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, start_query_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-        java.util.BitSet incoming = iprot.readBitSet(3);
+        java.util.BitSet incoming = iprot.readBitSet(4);
         if (incoming.get(0)) {
-          struct.session = iprot.readString();
-          struct.setSessionIsSet(true);
+          struct.leaf_session = iprot.readString();
+          struct.setLeaf_sessionIsSet(true);
         }
         if (incoming.get(1)) {
+          struct.parent_session = iprot.readString();
+          struct.setParent_sessionIsSet(true);
+        }
+        if (incoming.get(2)) {
           struct.query_ra = iprot.readString();
           struct.setQuery_raIsSet(true);
         }
-        if (incoming.get(2)) {
+        if (incoming.get(3)) {
           struct.just_explain = iprot.readBool();
           struct.setJust_explainIsSet(true);
         }

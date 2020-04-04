@@ -15,6 +15,7 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
   private static final org.apache.thrift.protocol.TField TOTAL_TIME_MS_FIELD_DESC = new org.apache.thrift.protocol.TField("total_time_ms", org.apache.thrift.protocol.TType.I64, (short)3);
   private static final org.apache.thrift.protocol.TField NONCE_FIELD_DESC = new org.apache.thrift.protocol.TField("nonce", org.apache.thrift.protocol.TType.STRING, (short)4);
   private static final org.apache.thrift.protocol.TField DEBUG_FIELD_DESC = new org.apache.thrift.protocol.TField("debug", org.apache.thrift.protocol.TType.STRING, (short)5);
+  private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BOOL, (short)6);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TQueryResultStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TQueryResultTupleSchemeFactory();
@@ -24,6 +25,7 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
   public long total_time_ms; // required
   public java.lang.String nonce; // required
   public java.lang.String debug; // optional
+  public boolean success; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -31,7 +33,8 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
     EXECUTION_TIME_MS((short)2, "execution_time_ms"),
     TOTAL_TIME_MS((short)3, "total_time_ms"),
     NONCE((short)4, "nonce"),
-    DEBUG((short)5, "debug");
+    DEBUG((short)5, "debug"),
+    SUCCESS((short)6, "success");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -56,6 +59,8 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
           return NONCE;
         case 5: // DEBUG
           return DEBUG;
+        case 6: // SUCCESS
+          return SUCCESS;
         default:
           return null;
       }
@@ -98,8 +103,9 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
   // isset id assignments
   private static final int __EXECUTION_TIME_MS_ISSET_ID = 0;
   private static final int __TOTAL_TIME_MS_ISSET_ID = 1;
+  private static final int __SUCCESS_ISSET_ID = 2;
   private byte __isset_bitfield = 0;
-  private static final _Fields optionals[] = {_Fields.DEBUG};
+  private static final _Fields optionals[] = {_Fields.DEBUG,_Fields.SUCCESS};
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -113,11 +119,15 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.DEBUG, new org.apache.thrift.meta_data.FieldMetaData("debug", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TQueryResult.class, metaDataMap);
   }
 
   public TQueryResult() {
+    this.success = true;
+
   }
 
   public TQueryResult(
@@ -151,6 +161,7 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
     if (other.isSetDebug()) {
       this.debug = other.debug;
     }
+    this.success = other.success;
   }
 
   public TQueryResult deepCopy() {
@@ -166,6 +177,8 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
     this.total_time_ms = 0;
     this.nonce = null;
     this.debug = null;
+    this.success = true;
+
   }
 
   public TRowSet getRow_set() {
@@ -286,6 +299,29 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
     }
   }
 
+  public boolean isSuccess() {
+    return this.success;
+  }
+
+  public TQueryResult setSuccess(boolean success) {
+    this.success = success;
+    setSuccessIsSet(true);
+    return this;
+  }
+
+  public void unsetSuccess() {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+  }
+
+  /** Returns true if field success is set (has been assigned a value) and false otherwise */
+  public boolean isSetSuccess() {
+    return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+  }
+
+  public void setSuccessIsSet(boolean value) {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __SUCCESS_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, java.lang.Object value) {
     switch (field) {
     case ROW_SET:
@@ -328,6 +364,14 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
       }
       break;
 
+    case SUCCESS:
+      if (value == null) {
+        unsetSuccess();
+      } else {
+        setSuccess((java.lang.Boolean)value);
+      }
+      break;
+
     }
   }
 
@@ -347,6 +391,9 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
 
     case DEBUG:
       return getDebug();
+
+    case SUCCESS:
+      return isSuccess();
 
     }
     throw new java.lang.IllegalStateException();
@@ -369,6 +416,8 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
       return isSetNonce();
     case DEBUG:
       return isSetDebug();
+    case SUCCESS:
+      return isSetSuccess();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -433,6 +482,15 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
         return false;
     }
 
+    boolean this_present_success = true && this.isSetSuccess();
+    boolean that_present_success = true && that.isSetSuccess();
+    if (this_present_success || that_present_success) {
+      if (!(this_present_success && that_present_success))
+        return false;
+      if (this.success != that.success)
+        return false;
+    }
+
     return true;
   }
 
@@ -455,6 +513,10 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
     hashCode = hashCode * 8191 + ((isSetDebug()) ? 131071 : 524287);
     if (isSetDebug())
       hashCode = hashCode * 8191 + debug.hashCode();
+
+    hashCode = hashCode * 8191 + ((isSetSuccess()) ? 131071 : 524287);
+    if (isSetSuccess())
+      hashCode = hashCode * 8191 + ((success) ? 131071 : 524287);
 
     return hashCode;
   }
@@ -517,6 +579,16 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetSuccess()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -568,6 +640,12 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
       } else {
         sb.append(this.debug);
       }
+      first = false;
+    }
+    if (isSetSuccess()) {
+      if (!first) sb.append(", ");
+      sb.append("success:");
+      sb.append(this.success);
       first = false;
     }
     sb.append(")");
@@ -659,6 +737,14 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 6: // SUCCESS
+            if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+              struct.success = iprot.readBool();
+              struct.setSuccessIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -697,6 +783,11 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
           oprot.writeFieldEnd();
         }
       }
+      if (struct.isSetSuccess()) {
+        oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+        oprot.writeBool(struct.success);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -730,7 +821,10 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
       if (struct.isSetDebug()) {
         optionals.set(4);
       }
-      oprot.writeBitSet(optionals, 5);
+      if (struct.isSetSuccess()) {
+        optionals.set(5);
+      }
+      oprot.writeBitSet(optionals, 6);
       if (struct.isSetRow_set()) {
         struct.row_set.write(oprot);
       }
@@ -746,12 +840,15 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
       if (struct.isSetDebug()) {
         oprot.writeString(struct.debug);
       }
+      if (struct.isSetSuccess()) {
+        oprot.writeBool(struct.success);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TQueryResult struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(5);
+      java.util.BitSet incoming = iprot.readBitSet(6);
       if (incoming.get(0)) {
         struct.row_set = new TRowSet();
         struct.row_set.read(iprot);
@@ -772,6 +869,10 @@ public class TQueryResult implements org.apache.thrift.TBase<TQueryResult, TQuer
       if (incoming.get(4)) {
         struct.debug = iprot.readString();
         struct.setDebugIsSet(true);
+      }
+      if (incoming.get(5)) {
+        struct.success = iprot.readBool();
+        struct.setSuccessIsSet(true);
       }
     }
   }

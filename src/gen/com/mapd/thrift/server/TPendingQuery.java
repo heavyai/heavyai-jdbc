@@ -14,6 +14,7 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
   private static final org.apache.thrift.protocol.TField COLUMN_RANGES_FIELD_DESC = new org.apache.thrift.protocol.TField("column_ranges", org.apache.thrift.protocol.TType.LIST, (short)2);
   private static final org.apache.thrift.protocol.TField DICTIONARY_GENERATIONS_FIELD_DESC = new org.apache.thrift.protocol.TField("dictionary_generations", org.apache.thrift.protocol.TType.LIST, (short)3);
   private static final org.apache.thrift.protocol.TField TABLE_GENERATIONS_FIELD_DESC = new org.apache.thrift.protocol.TField("table_generations", org.apache.thrift.protocol.TType.LIST, (short)4);
+  private static final org.apache.thrift.protocol.TField PARENT_SESSION_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("parent_session_id", org.apache.thrift.protocol.TType.STRING, (short)5);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TPendingQueryStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TPendingQueryTupleSchemeFactory();
@@ -22,13 +23,15 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
   public java.util.List<TColumnRange> column_ranges; // required
   public java.util.List<TDictionaryGeneration> dictionary_generations; // required
   public java.util.List<TTableGeneration> table_generations; // required
+  public java.lang.String parent_session_id; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     ID((short)1, "id"),
     COLUMN_RANGES((short)2, "column_ranges"),
     DICTIONARY_GENERATIONS((short)3, "dictionary_generations"),
-    TABLE_GENERATIONS((short)4, "table_generations");
+    TABLE_GENERATIONS((short)4, "table_generations"),
+    PARENT_SESSION_ID((short)5, "parent_session_id");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -51,6 +54,8 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
           return DICTIONARY_GENERATIONS;
         case 4: // TABLE_GENERATIONS
           return TABLE_GENERATIONS;
+        case 5: // PARENT_SESSION_ID
+          return PARENT_SESSION_ID;
         default:
           return null;
       }
@@ -107,6 +112,8 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
     tmpMap.put(_Fields.TABLE_GENERATIONS, new org.apache.thrift.meta_data.FieldMetaData("table_generations", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TTableGeneration.class))));
+    tmpMap.put(_Fields.PARENT_SESSION_ID, new org.apache.thrift.meta_data.FieldMetaData("parent_session_id", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING        , "TSessionId")));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TPendingQuery.class, metaDataMap);
   }
@@ -118,7 +125,8 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
     long id,
     java.util.List<TColumnRange> column_ranges,
     java.util.List<TDictionaryGeneration> dictionary_generations,
-    java.util.List<TTableGeneration> table_generations)
+    java.util.List<TTableGeneration> table_generations,
+    java.lang.String parent_session_id)
   {
     this();
     this.id = id;
@@ -126,6 +134,7 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
     this.column_ranges = column_ranges;
     this.dictionary_generations = dictionary_generations;
     this.table_generations = table_generations;
+    this.parent_session_id = parent_session_id;
   }
 
   /**
@@ -155,6 +164,9 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
       }
       this.table_generations = __this__table_generations;
     }
+    if (other.isSetParent_session_id()) {
+      this.parent_session_id = other.parent_session_id;
+    }
   }
 
   public TPendingQuery deepCopy() {
@@ -168,6 +180,7 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
     this.column_ranges = null;
     this.dictionary_generations = null;
     this.table_generations = null;
+    this.parent_session_id = null;
   }
 
   public long getId() {
@@ -310,6 +323,30 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
     }
   }
 
+  public java.lang.String getParent_session_id() {
+    return this.parent_session_id;
+  }
+
+  public TPendingQuery setParent_session_id(java.lang.String parent_session_id) {
+    this.parent_session_id = parent_session_id;
+    return this;
+  }
+
+  public void unsetParent_session_id() {
+    this.parent_session_id = null;
+  }
+
+  /** Returns true if field parent_session_id is set (has been assigned a value) and false otherwise */
+  public boolean isSetParent_session_id() {
+    return this.parent_session_id != null;
+  }
+
+  public void setParent_session_idIsSet(boolean value) {
+    if (!value) {
+      this.parent_session_id = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, java.lang.Object value) {
     switch (field) {
     case ID:
@@ -344,6 +381,14 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
       }
       break;
 
+    case PARENT_SESSION_ID:
+      if (value == null) {
+        unsetParent_session_id();
+      } else {
+        setParent_session_id((java.lang.String)value);
+      }
+      break;
+
     }
   }
 
@@ -360,6 +405,9 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
 
     case TABLE_GENERATIONS:
       return getTable_generations();
+
+    case PARENT_SESSION_ID:
+      return getParent_session_id();
 
     }
     throw new java.lang.IllegalStateException();
@@ -380,6 +428,8 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
       return isSetDictionary_generations();
     case TABLE_GENERATIONS:
       return isSetTable_generations();
+    case PARENT_SESSION_ID:
+      return isSetParent_session_id();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -435,6 +485,15 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
         return false;
     }
 
+    boolean this_present_parent_session_id = true && this.isSetParent_session_id();
+    boolean that_present_parent_session_id = true && that.isSetParent_session_id();
+    if (this_present_parent_session_id || that_present_parent_session_id) {
+      if (!(this_present_parent_session_id && that_present_parent_session_id))
+        return false;
+      if (!this.parent_session_id.equals(that.parent_session_id))
+        return false;
+    }
+
     return true;
   }
 
@@ -455,6 +514,10 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
     hashCode = hashCode * 8191 + ((isSetTable_generations()) ? 131071 : 524287);
     if (isSetTable_generations())
       hashCode = hashCode * 8191 + table_generations.hashCode();
+
+    hashCode = hashCode * 8191 + ((isSetParent_session_id()) ? 131071 : 524287);
+    if (isSetParent_session_id())
+      hashCode = hashCode * 8191 + parent_session_id.hashCode();
 
     return hashCode;
   }
@@ -507,6 +570,16 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.valueOf(isSetParent_session_id()).compareTo(other.isSetParent_session_id());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetParent_session_id()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.parent_session_id, other.parent_session_id);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -552,6 +625,14 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
       sb.append("null");
     } else {
       sb.append(this.table_generations);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("parent_session_id:");
+    if (this.parent_session_id == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.parent_session_id);
     }
     first = false;
     sb.append(")");
@@ -664,6 +745,14 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 5: // PARENT_SESSION_ID
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.parent_session_id = iprot.readString();
+              struct.setParent_session_idIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -718,6 +807,11 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
         }
         oprot.writeFieldEnd();
       }
+      if (struct.parent_session_id != null) {
+        oprot.writeFieldBegin(PARENT_SESSION_ID_FIELD_DESC);
+        oprot.writeString(struct.parent_session_id);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -748,7 +842,10 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
       if (struct.isSetTable_generations()) {
         optionals.set(3);
       }
-      oprot.writeBitSet(optionals, 4);
+      if (struct.isSetParent_session_id()) {
+        optionals.set(4);
+      }
+      oprot.writeBitSet(optionals, 5);
       if (struct.isSetId()) {
         oprot.writeI64(struct.id);
       }
@@ -779,12 +876,15 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
           }
         }
       }
+      if (struct.isSetParent_session_id()) {
+        oprot.writeString(struct.parent_session_id);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TPendingQuery struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(4);
+      java.util.BitSet incoming = iprot.readBitSet(5);
       if (incoming.get(0)) {
         struct.id = iprot.readI64();
         struct.setIdIsSet(true);
@@ -830,6 +930,10 @@ public class TPendingQuery implements org.apache.thrift.TBase<TPendingQuery, TPe
           }
         }
         struct.setTable_generationsIsSet(true);
+      }
+      if (incoming.get(4)) {
+        struct.parent_session_id = iprot.readString();
+        struct.setParent_session_idIsSet(true);
       }
     }
   }
