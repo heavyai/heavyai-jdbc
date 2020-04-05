@@ -16,9 +16,9 @@
 package com.omnisci.jdbc;
 
 import com.mapd.common.SockTransportProperties;
-import com.mapd.thrift.server.MapD;
-import com.mapd.thrift.server.TMapDException;
-import com.mapd.thrift.server.TServerStatus;
+import com.omnisci.thrift.server.OmniSci;
+import com.omnisci.thrift.server.TOmniSciException;
+import com.omnisci.thrift.server.TServerStatus;
 
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
@@ -272,7 +272,7 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
      */
 
   protected String session = null;
-  protected MapD.Client client = null;
+  protected OmniSci.Client client = null;
   protected String catalog;
   protected TTransport transport;
   protected SQLWarning warnings;
@@ -295,7 +295,7 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
     // Now over write the old connection.
     try {
       TProtocol protocol = omniSciConnection.manageConnection();
-      omniSciConnection.client = new MapD.Client(protocol);
+      omniSciConnection.client = new OmniSci.Client(protocol);
     } catch (java.lang.Exception jE) {
       throw new SQLException("Error creating new connection "
                       + OmniSciExceptionText.getExceptionDetail(jE),
@@ -393,14 +393,14 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
 
     try {
       TProtocol protocol = manageConnection();
-      client = new MapD.Client(protocol);
+      client = new OmniSci.Client(protocol);
       setSession(this.cP.get(Connection_enums.pkiauth));
       catalog = (String) this.cP.get(Connection_enums.db_name);
     } catch (TTransportException ex) {
       throw new SQLException("Thrift transport connection failed - "
                       + OmniSciExceptionText.getExceptionDetail(ex),
               ex);
-    } catch (TMapDException ex) {
+    } catch (TOmniSciException ex) {
       throw new SQLException("Omnisci connection failed - "
                       + OmniSciExceptionText.getExceptionDetail(ex),
               ex);
@@ -473,7 +473,7 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
         client.disconnect(session);
       }
       closeConnection();
-    } catch (TMapDException ex) {
+    } catch (TOmniSciException ex) {
       throw new SQLException("disconnect failed." + ex.toString());
     } catch (TException ex) {
       throw new SQLException("disconnect failed." + ex.toString());
@@ -515,7 +515,7 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
         TServerStatus server_status = client.get_server_status(session);
         return server_status.read_only;
       }
-    } catch (TMapDException ex) {
+    } catch (TOmniSciException ex) {
       throw new SQLException(
               "get_server_status failed during isReadOnly check." + ex.toString());
     } catch (TException ex) {
@@ -749,7 +749,7 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
       client.get_server_status(session);
     } catch (TTransportException ex) {
       throw new SQLException("Connection failed - " + ex.toString());
-    } catch (TMapDException ex) {
+    } catch (TOmniSciException ex) {
       throw new SQLException("Connection failed - " + ex.toString());
     } catch (TException ex) {
       throw new SQLException("Connection failed - " + ex.toString());
