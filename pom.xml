@@ -87,6 +87,9 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.22.0</version>
         <configuration>
+          <systemPropertyVariables>
+            <propertiesFileName>${propertiesFileName}</propertiesFileName>
+          </systemPropertyVariables>
           <skipTests>${skipTests}</skipTests>
         </configuration>
       </plugin>
