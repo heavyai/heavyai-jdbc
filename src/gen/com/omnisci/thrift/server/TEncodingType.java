@@ -15,8 +15,7 @@ public enum TEncodingType implements org.apache.thrift.TEnum {
   DICT(4),
   SPARSE(5),
   GEOINT(6),
-  DATE_IN_DAYS(7),
-  PACKED_PIXEL_COORD(8);
+  DATE_IN_DAYS(7);
 
   private final int value;
 
@@ -54,8 +53,6 @@ public enum TEncodingType implements org.apache.thrift.TEnum {
         return GEOINT;
       case 7:
         return DATE_IN_DAYS;
-      case 8:
-        return PACKED_PIXEL_COORD;
       default:
         return null;
     }
