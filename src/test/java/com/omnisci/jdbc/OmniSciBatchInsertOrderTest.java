@@ -65,7 +65,6 @@ public class OmniSciBatchInsertOrderTest {
       drop.close();
       
       String query = ddlForTable("student", columns);
-      log.info("Creating table by running {}", query);
       PreparedStatement create = conn.prepareStatement(query);
       create.executeQuery();
       create.close();
@@ -130,7 +129,6 @@ public class OmniSciBatchInsertOrderTest {
   private void insertBatch(Connection conn, List<Column> cols, List<Map<String, String>> rows) throws SQLException {
     String insertSql = buildInsertStatement("student", cols);
     
-    log.info("inserting {} rows in batch using query {}", rows.size(), insertSql);
     PreparedStatement insert = conn.prepareStatement(insertSql);
     for (Map<String, String> row : rows) {
       int index = 1;
