@@ -34,6 +34,7 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
   private static final org.apache.thrift.protocol.TField S3_ENDPOINT_FIELD_DESC = new org.apache.thrift.protocol.TField("s3_endpoint", org.apache.thrift.protocol.TType.STRING, (short)22);
   private static final org.apache.thrift.protocol.TField GEO_ASSIGN_RENDER_GROUPS_FIELD_DESC = new org.apache.thrift.protocol.TField("geo_assign_render_groups", org.apache.thrift.protocol.TType.BOOL, (short)23);
   private static final org.apache.thrift.protocol.TField GEO_EXPLODE_COLLECTIONS_FIELD_DESC = new org.apache.thrift.protocol.TField("geo_explode_collections", org.apache.thrift.protocol.TType.BOOL, (short)24);
+  private static final org.apache.thrift.protocol.TField SOURCE_SRID_FIELD_DESC = new org.apache.thrift.protocol.TField("source_srid", org.apache.thrift.protocol.TType.I32, (short)25);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TCopyParamsStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TCopyParamsTupleSchemeFactory();
@@ -78,6 +79,7 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
   public @org.apache.thrift.annotation.Nullable java.lang.String s3_endpoint; // required
   public boolean geo_assign_render_groups; // required
   public boolean geo_explode_collections; // required
+  public int source_srid; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -120,7 +122,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     GEO_LAYER_NAME((short)21, "geo_layer_name"),
     S3_ENDPOINT((short)22, "s3_endpoint"),
     GEO_ASSIGN_RENDER_GROUPS((short)23, "geo_assign_render_groups"),
-    GEO_EXPLODE_COLLECTIONS((short)24, "geo_explode_collections");
+    GEO_EXPLODE_COLLECTIONS((short)24, "geo_explode_collections"),
+    SOURCE_SRID((short)25, "source_srid");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -184,6 +187,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
           return GEO_ASSIGN_RENDER_GROUPS;
         case 24: // GEO_EXPLODE_COLLECTIONS
           return GEO_EXPLODE_COLLECTIONS;
+        case 25: // SOURCE_SRID
+          return SOURCE_SRID;
         default:
           return null;
       }
@@ -232,6 +237,7 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
   private static final int __SANITIZE_COLUMN_NAMES_ISSET_ID = 4;
   private static final int __GEO_ASSIGN_RENDER_GROUPS_ISSET_ID = 5;
   private static final int __GEO_EXPLODE_COLLECTIONS_ISSET_ID = 6;
+  private static final int __SOURCE_SRID_ISSET_ID = 7;
   private byte __isset_bitfield = 0;
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -284,6 +290,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     tmpMap.put(_Fields.GEO_EXPLODE_COLLECTIONS, new org.apache.thrift.meta_data.FieldMetaData("geo_explode_collections", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+    tmpMap.put(_Fields.SOURCE_SRID, new org.apache.thrift.meta_data.FieldMetaData("source_srid", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TCopyParams.class, metaDataMap);
   }
@@ -306,6 +314,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     this.geo_assign_render_groups = true;
 
     this.geo_explode_collections = false;
+
+    this.source_srid = 0;
 
   }
 
@@ -333,7 +343,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     java.lang.String geo_layer_name,
     java.lang.String s3_endpoint,
     boolean geo_assign_render_groups,
-    boolean geo_explode_collections)
+    boolean geo_explode_collections,
+    int source_srid)
   {
     this();
     this.delimiter = delimiter;
@@ -367,6 +378,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     setGeo_assign_render_groupsIsSet(true);
     this.geo_explode_collections = geo_explode_collections;
     setGeo_explode_collectionsIsSet(true);
+    this.source_srid = source_srid;
+    setSource_sridIsSet(true);
   }
 
   /**
@@ -432,6 +445,7 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     }
     this.geo_assign_render_groups = other.geo_assign_render_groups;
     this.geo_explode_collections = other.geo_explode_collections;
+    this.source_srid = other.source_srid;
   }
 
   public TCopyParams deepCopy() {
@@ -474,6 +488,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     this.geo_assign_render_groups = true;
 
     this.geo_explode_collections = false;
+
+    this.source_srid = 0;
 
   }
 
@@ -1095,6 +1111,29 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __GEO_EXPLODE_COLLECTIONS_ISSET_ID, value);
   }
 
+  public int getSource_srid() {
+    return this.source_srid;
+  }
+
+  public TCopyParams setSource_srid(int source_srid) {
+    this.source_srid = source_srid;
+    setSource_sridIsSet(true);
+    return this;
+  }
+
+  public void unsetSource_srid() {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __SOURCE_SRID_ISSET_ID);
+  }
+
+  /** Returns true if field source_srid is set (has been assigned a value) and false otherwise */
+  public boolean isSetSource_srid() {
+    return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __SOURCE_SRID_ISSET_ID);
+  }
+
+  public void setSource_sridIsSet(boolean value) {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __SOURCE_SRID_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
     switch (field) {
     case DELIMITER:
@@ -1289,6 +1328,14 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       }
       break;
 
+    case SOURCE_SRID:
+      if (value == null) {
+        unsetSource_srid();
+      } else {
+        setSource_srid((java.lang.Integer)value);
+      }
+      break;
+
     }
   }
 
@@ -1367,6 +1414,9 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     case GEO_EXPLODE_COLLECTIONS:
       return isGeo_explode_collections();
 
+    case SOURCE_SRID:
+      return getSource_srid();
+
     }
     throw new java.lang.IllegalStateException();
   }
@@ -1426,6 +1476,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       return isSetGeo_assign_render_groups();
     case GEO_EXPLODE_COLLECTIONS:
       return isSetGeo_explode_collections();
+    case SOURCE_SRID:
+      return isSetSource_srid();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -1661,6 +1713,15 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         return false;
     }
 
+    boolean this_present_source_srid = true;
+    boolean that_present_source_srid = true;
+    if (this_present_source_srid || that_present_source_srid) {
+      if (!(this_present_source_srid && that_present_source_srid))
+        return false;
+      if (this.source_srid != that.source_srid)
+        return false;
+    }
+
     return true;
   }
 
@@ -1749,6 +1810,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     hashCode = hashCode * 8191 + ((geo_assign_render_groups) ? 131071 : 524287);
 
     hashCode = hashCode * 8191 + ((geo_explode_collections) ? 131071 : 524287);
+
+    hashCode = hashCode * 8191 + source_srid;
 
     return hashCode;
   }
@@ -2001,6 +2064,16 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.valueOf(isSetSource_srid()).compareTo(other.isSetSource_srid());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetSource_srid()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.source_srid, other.source_srid);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -2184,6 +2257,10 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     if (!first) sb.append(", ");
     sb.append("geo_explode_collections:");
     sb.append(this.geo_explode_collections);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("source_srid:");
+    sb.append(this.source_srid);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -2422,6 +2499,14 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 25: // SOURCE_SRID
+            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+              struct.source_srid = iprot.readI32();
+              struct.setSource_sridIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -2543,6 +2628,9 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       oprot.writeFieldBegin(GEO_EXPLODE_COLLECTIONS_FIELD_DESC);
       oprot.writeBool(struct.geo_explode_collections);
       oprot.writeFieldEnd();
+      oprot.writeFieldBegin(SOURCE_SRID_FIELD_DESC);
+      oprot.writeI32(struct.source_srid);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -2633,7 +2721,10 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       if (struct.isSetGeo_explode_collections()) {
         optionals.set(23);
       }
-      oprot.writeBitSet(optionals, 24);
+      if (struct.isSetSource_srid()) {
+        optionals.set(24);
+      }
+      oprot.writeBitSet(optionals, 25);
       if (struct.isSetDelimiter()) {
         oprot.writeString(struct.delimiter);
       }
@@ -2706,12 +2797,15 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       if (struct.isSetGeo_explode_collections()) {
         oprot.writeBool(struct.geo_explode_collections);
       }
+      if (struct.isSetSource_srid()) {
+        oprot.writeI32(struct.source_srid);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TCopyParams struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(24);
+      java.util.BitSet incoming = iprot.readBitSet(25);
       if (incoming.get(0)) {
         struct.delimiter = iprot.readString();
         struct.setDelimiterIsSet(true);
@@ -2807,6 +2901,10 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       if (incoming.get(23)) {
         struct.geo_explode_collections = iprot.readBool();
         struct.setGeo_explode_collectionsIsSet(true);
+      }
+      if (incoming.get(24)) {
+        struct.source_srid = iprot.readI32();
+        struct.setSource_sridIsSet(true);
       }
     }
   }

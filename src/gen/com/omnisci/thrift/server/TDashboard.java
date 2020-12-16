@@ -18,6 +18,7 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
   private static final org.apache.thrift.protocol.TField DASHBOARD_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("dashboard_id", org.apache.thrift.protocol.TType.I32, (short)6);
   private static final org.apache.thrift.protocol.TField DASHBOARD_OWNER_FIELD_DESC = new org.apache.thrift.protocol.TField("dashboard_owner", org.apache.thrift.protocol.TType.STRING, (short)7);
   private static final org.apache.thrift.protocol.TField IS_DASH_SHARED_FIELD_DESC = new org.apache.thrift.protocol.TField("is_dash_shared", org.apache.thrift.protocol.TType.BOOL, (short)8);
+  private static final org.apache.thrift.protocol.TField DASHBOARD_PERMISSIONS_FIELD_DESC = new org.apache.thrift.protocol.TField("dashboard_permissions", org.apache.thrift.protocol.TType.STRUCT, (short)9);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TDashboardStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TDashboardTupleSchemeFactory();
@@ -30,6 +31,7 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
   public int dashboard_id; // required
   public @org.apache.thrift.annotation.Nullable java.lang.String dashboard_owner; // required
   public boolean is_dash_shared; // required
+  public @org.apache.thrift.annotation.Nullable TDashboardPermissions dashboard_permissions; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -40,7 +42,8 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
     DASHBOARD_METADATA((short)5, "dashboard_metadata"),
     DASHBOARD_ID((short)6, "dashboard_id"),
     DASHBOARD_OWNER((short)7, "dashboard_owner"),
-    IS_DASH_SHARED((short)8, "is_dash_shared");
+    IS_DASH_SHARED((short)8, "is_dash_shared"),
+    DASHBOARD_PERMISSIONS((short)9, "dashboard_permissions");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -72,6 +75,8 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
           return DASHBOARD_OWNER;
         case 8: // IS_DASH_SHARED
           return IS_DASH_SHARED;
+        case 9: // DASHBOARD_PERMISSIONS
+          return DASHBOARD_PERMISSIONS;
         default:
           return null;
       }
@@ -135,6 +140,8 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.IS_DASH_SHARED, new org.apache.thrift.meta_data.FieldMetaData("is_dash_shared", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+    tmpMap.put(_Fields.DASHBOARD_PERMISSIONS, new org.apache.thrift.meta_data.FieldMetaData("dashboard_permissions", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TDashboardPermissions.class)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TDashboard.class, metaDataMap);
   }
@@ -150,7 +157,8 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
     java.lang.String dashboard_metadata,
     int dashboard_id,
     java.lang.String dashboard_owner,
-    boolean is_dash_shared)
+    boolean is_dash_shared,
+    TDashboardPermissions dashboard_permissions)
   {
     this();
     this.dashboard_name = dashboard_name;
@@ -163,6 +171,7 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
     this.dashboard_owner = dashboard_owner;
     this.is_dash_shared = is_dash_shared;
     setIs_dash_sharedIsSet(true);
+    this.dashboard_permissions = dashboard_permissions;
   }
 
   /**
@@ -190,6 +199,9 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
       this.dashboard_owner = other.dashboard_owner;
     }
     this.is_dash_shared = other.is_dash_shared;
+    if (other.isSetDashboard_permissions()) {
+      this.dashboard_permissions = new TDashboardPermissions(other.dashboard_permissions);
+    }
   }
 
   public TDashboard deepCopy() {
@@ -208,6 +220,7 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
     this.dashboard_owner = null;
     setIs_dash_sharedIsSet(false);
     this.is_dash_shared = false;
+    this.dashboard_permissions = null;
   }
 
   @org.apache.thrift.annotation.Nullable
@@ -406,6 +419,31 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
     __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __IS_DASH_SHARED_ISSET_ID, value);
   }
 
+  @org.apache.thrift.annotation.Nullable
+  public TDashboardPermissions getDashboard_permissions() {
+    return this.dashboard_permissions;
+  }
+
+  public TDashboard setDashboard_permissions(@org.apache.thrift.annotation.Nullable TDashboardPermissions dashboard_permissions) {
+    this.dashboard_permissions = dashboard_permissions;
+    return this;
+  }
+
+  public void unsetDashboard_permissions() {
+    this.dashboard_permissions = null;
+  }
+
+  /** Returns true if field dashboard_permissions is set (has been assigned a value) and false otherwise */
+  public boolean isSetDashboard_permissions() {
+    return this.dashboard_permissions != null;
+  }
+
+  public void setDashboard_permissionsIsSet(boolean value) {
+    if (!value) {
+      this.dashboard_permissions = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
     switch (field) {
     case DASHBOARD_NAME:
@@ -472,6 +510,14 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
       }
       break;
 
+    case DASHBOARD_PERMISSIONS:
+      if (value == null) {
+        unsetDashboard_permissions();
+      } else {
+        setDashboard_permissions((TDashboardPermissions)value);
+      }
+      break;
+
     }
   }
 
@@ -502,6 +548,9 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
     case IS_DASH_SHARED:
       return isIs_dash_shared();
 
+    case DASHBOARD_PERMISSIONS:
+      return getDashboard_permissions();
+
     }
     throw new java.lang.IllegalStateException();
   }
@@ -529,6 +578,8 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
       return isSetDashboard_owner();
     case IS_DASH_SHARED:
       return isSetIs_dash_shared();
+    case DASHBOARD_PERMISSIONS:
+      return isSetDashboard_permissions();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -620,6 +671,15 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
         return false;
     }
 
+    boolean this_present_dashboard_permissions = true && this.isSetDashboard_permissions();
+    boolean that_present_dashboard_permissions = true && that.isSetDashboard_permissions();
+    if (this_present_dashboard_permissions || that_present_dashboard_permissions) {
+      if (!(this_present_dashboard_permissions && that_present_dashboard_permissions))
+        return false;
+      if (!this.dashboard_permissions.equals(that.dashboard_permissions))
+        return false;
+    }
+
     return true;
   }
 
@@ -654,6 +714,10 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
       hashCode = hashCode * 8191 + dashboard_owner.hashCode();
 
     hashCode = hashCode * 8191 + ((is_dash_shared) ? 131071 : 524287);
+
+    hashCode = hashCode * 8191 + ((isSetDashboard_permissions()) ? 131071 : 524287);
+    if (isSetDashboard_permissions())
+      hashCode = hashCode * 8191 + dashboard_permissions.hashCode();
 
     return hashCode;
   }
@@ -746,6 +810,16 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.valueOf(isSetDashboard_permissions()).compareTo(other.isSetDashboard_permissions());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetDashboard_permissions()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.dashboard_permissions, other.dashboard_permissions);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -822,6 +896,14 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
     sb.append("is_dash_shared:");
     sb.append(this.is_dash_shared);
     first = false;
+    if (!first) sb.append(", ");
+    sb.append("dashboard_permissions:");
+    if (this.dashboard_permissions == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.dashboard_permissions);
+    }
+    first = false;
     sb.append(")");
     return sb.toString();
   }
@@ -829,6 +911,9 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // check for sub-struct validity
+    if (dashboard_permissions != null) {
+      dashboard_permissions.validate();
+    }
   }
 
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -931,6 +1016,15 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 9: // DASHBOARD_PERMISSIONS
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+              struct.dashboard_permissions = new TDashboardPermissions();
+              struct.dashboard_permissions.read(iprot);
+              struct.setDashboard_permissionsIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -982,6 +1076,11 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
       oprot.writeFieldBegin(IS_DASH_SHARED_FIELD_DESC);
       oprot.writeBool(struct.is_dash_shared);
       oprot.writeFieldEnd();
+      if (struct.dashboard_permissions != null) {
+        oprot.writeFieldBegin(DASHBOARD_PERMISSIONS_FIELD_DESC);
+        struct.dashboard_permissions.write(oprot);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -1024,7 +1123,10 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
       if (struct.isSetIs_dash_shared()) {
         optionals.set(7);
       }
-      oprot.writeBitSet(optionals, 8);
+      if (struct.isSetDashboard_permissions()) {
+        optionals.set(8);
+      }
+      oprot.writeBitSet(optionals, 9);
       if (struct.isSetDashboard_name()) {
         oprot.writeString(struct.dashboard_name);
       }
@@ -1049,12 +1151,15 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
       if (struct.isSetIs_dash_shared()) {
         oprot.writeBool(struct.is_dash_shared);
       }
+      if (struct.isSetDashboard_permissions()) {
+        struct.dashboard_permissions.write(oprot);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TDashboard struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(8);
+      java.util.BitSet incoming = iprot.readBitSet(9);
       if (incoming.get(0)) {
         struct.dashboard_name = iprot.readString();
         struct.setDashboard_nameIsSet(true);
@@ -1086,6 +1191,11 @@ public class TDashboard implements org.apache.thrift.TBase<TDashboard, TDashboar
       if (incoming.get(7)) {
         struct.is_dash_shared = iprot.readBool();
         struct.setIs_dash_sharedIsSet(true);
+      }
+      if (incoming.get(8)) {
+        struct.dashboard_permissions = new TDashboardPermissions();
+        struct.dashboard_permissions.read(iprot);
+        struct.setDashboard_permissionsIsSet(true);
       }
     }
   }

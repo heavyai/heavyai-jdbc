@@ -13,13 +13,15 @@ public class TDBObjectPermissions extends org.apache.thrift.TUnion<TDBObjectPerm
   private static final org.apache.thrift.protocol.TField TABLE_PERMISSIONS__FIELD_DESC = new org.apache.thrift.protocol.TField("table_permissions_", org.apache.thrift.protocol.TType.STRUCT, (short)2);
   private static final org.apache.thrift.protocol.TField DASHBOARD_PERMISSIONS__FIELD_DESC = new org.apache.thrift.protocol.TField("dashboard_permissions_", org.apache.thrift.protocol.TType.STRUCT, (short)3);
   private static final org.apache.thrift.protocol.TField VIEW_PERMISSIONS__FIELD_DESC = new org.apache.thrift.protocol.TField("view_permissions_", org.apache.thrift.protocol.TType.STRUCT, (short)4);
+  private static final org.apache.thrift.protocol.TField SERVER_PERMISSIONS__FIELD_DESC = new org.apache.thrift.protocol.TField("server_permissions_", org.apache.thrift.protocol.TType.STRUCT, (short)5);
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     DATABASE_PERMISSIONS_((short)1, "database_permissions_"),
     TABLE_PERMISSIONS_((short)2, "table_permissions_"),
     DASHBOARD_PERMISSIONS_((short)3, "dashboard_permissions_"),
-    VIEW_PERMISSIONS_((short)4, "view_permissions_");
+    VIEW_PERMISSIONS_((short)4, "view_permissions_"),
+    SERVER_PERMISSIONS_((short)5, "server_permissions_");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -43,6 +45,8 @@ public class TDBObjectPermissions extends org.apache.thrift.TUnion<TDBObjectPerm
           return DASHBOARD_PERMISSIONS_;
         case 4: // VIEW_PERMISSIONS_
           return VIEW_PERMISSIONS_;
+        case 5: // SERVER_PERMISSIONS_
+          return SERVER_PERMISSIONS_;
         default:
           return null;
       }
@@ -94,6 +98,8 @@ public class TDBObjectPermissions extends org.apache.thrift.TUnion<TDBObjectPerm
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TDashboardPermissions.class)));
     tmpMap.put(_Fields.VIEW_PERMISSIONS_, new org.apache.thrift.meta_data.FieldMetaData("view_permissions_", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TViewPermissions.class)));
+    tmpMap.put(_Fields.SERVER_PERMISSIONS_, new org.apache.thrift.meta_data.FieldMetaData("server_permissions_", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TServerPermissions.class)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TDBObjectPermissions.class, metaDataMap);
   }
@@ -137,6 +143,12 @@ public class TDBObjectPermissions extends org.apache.thrift.TUnion<TDBObjectPerm
     return x;
   }
 
+  public static TDBObjectPermissions server_permissions_(TServerPermissions value) {
+    TDBObjectPermissions x = new TDBObjectPermissions();
+    x.setServer_permissions_(value);
+    return x;
+  }
+
 
   @Override
   protected void checkType(_Fields setField, java.lang.Object value) throws java.lang.ClassCastException {
@@ -161,6 +173,11 @@ public class TDBObjectPermissions extends org.apache.thrift.TUnion<TDBObjectPerm
           break;
         }
         throw new java.lang.ClassCastException("Was expecting value of type TViewPermissions for field 'view_permissions_', but got " + value.getClass().getSimpleName());
+      case SERVER_PERMISSIONS_:
+        if (value instanceof TServerPermissions) {
+          break;
+        }
+        throw new java.lang.ClassCastException("Was expecting value of type TServerPermissions for field 'server_permissions_', but got " + value.getClass().getSimpleName());
       default:
         throw new java.lang.IllegalArgumentException("Unknown field id " + setField);
     }
@@ -211,6 +228,16 @@ public class TDBObjectPermissions extends org.apache.thrift.TUnion<TDBObjectPerm
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
             return null;
           }
+        case SERVER_PERMISSIONS_:
+          if (field.type == SERVER_PERMISSIONS__FIELD_DESC.type) {
+            TServerPermissions server_permissions_;
+            server_permissions_ = new TServerPermissions();
+            server_permissions_.read(iprot);
+            return server_permissions_;
+          } else {
+            org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+            return null;
+          }
         default:
           throw new java.lang.IllegalStateException("setField wasn't null, but didn't match any of the case statements!");
       }
@@ -238,6 +265,10 @@ public class TDBObjectPermissions extends org.apache.thrift.TUnion<TDBObjectPerm
       case VIEW_PERMISSIONS_:
         TViewPermissions view_permissions_ = (TViewPermissions)value_;
         view_permissions_.write(oprot);
+        return;
+      case SERVER_PERMISSIONS_:
+        TServerPermissions server_permissions_ = (TServerPermissions)value_;
+        server_permissions_.write(oprot);
         return;
       default:
         throw new java.lang.IllegalStateException("Cannot write union with unknown field " + setField_);
@@ -269,6 +300,11 @@ public class TDBObjectPermissions extends org.apache.thrift.TUnion<TDBObjectPerm
           view_permissions_ = new TViewPermissions();
           view_permissions_.read(iprot);
           return view_permissions_;
+        case SERVER_PERMISSIONS_:
+          TServerPermissions server_permissions_;
+          server_permissions_ = new TServerPermissions();
+          server_permissions_.read(iprot);
+          return server_permissions_;
         default:
           throw new java.lang.IllegalStateException("setField wasn't null, but didn't match any of the case statements!");
       }
@@ -296,6 +332,10 @@ public class TDBObjectPermissions extends org.apache.thrift.TUnion<TDBObjectPerm
         TViewPermissions view_permissions_ = (TViewPermissions)value_;
         view_permissions_.write(oprot);
         return;
+      case SERVER_PERMISSIONS_:
+        TServerPermissions server_permissions_ = (TServerPermissions)value_;
+        server_permissions_.write(oprot);
+        return;
       default:
         throw new java.lang.IllegalStateException("Cannot write union with unknown field " + setField_);
     }
@@ -312,6 +352,8 @@ public class TDBObjectPermissions extends org.apache.thrift.TUnion<TDBObjectPerm
         return DASHBOARD_PERMISSIONS__FIELD_DESC;
       case VIEW_PERMISSIONS_:
         return VIEW_PERMISSIONS__FIELD_DESC;
+      case SERVER_PERMISSIONS_:
+        return SERVER_PERMISSIONS__FIELD_DESC;
       default:
         throw new java.lang.IllegalArgumentException("Unknown field id " + setField);
     }
@@ -389,6 +431,20 @@ public class TDBObjectPermissions extends org.apache.thrift.TUnion<TDBObjectPerm
     value_ = value;
   }
 
+  public TServerPermissions getServer_permissions_() {
+    if (getSetField() == _Fields.SERVER_PERMISSIONS_) {
+      return (TServerPermissions)getFieldValue();
+    } else {
+      throw new java.lang.RuntimeException("Cannot get field 'server_permissions_' because union is currently set to " + getFieldDesc(getSetField()).name);
+    }
+  }
+
+  public void setServer_permissions_(TServerPermissions value) {
+    if (value == null) throw new java.lang.NullPointerException();
+    setField_ = _Fields.SERVER_PERMISSIONS_;
+    value_ = value;
+  }
+
   public boolean isSetDatabase_permissions_() {
     return setField_ == _Fields.DATABASE_PERMISSIONS_;
   }
@@ -406,6 +462,11 @@ public class TDBObjectPermissions extends org.apache.thrift.TUnion<TDBObjectPerm
 
   public boolean isSetView_permissions_() {
     return setField_ == _Fields.VIEW_PERMISSIONS_;
+  }
+
+
+  public boolean isSetServer_permissions_() {
+    return setField_ == _Fields.SERVER_PERMISSIONS_;
   }
 
 

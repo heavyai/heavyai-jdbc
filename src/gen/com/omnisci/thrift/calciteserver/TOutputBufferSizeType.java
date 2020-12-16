@@ -8,9 +8,9 @@ package com.omnisci.thrift.calciteserver;
 
 
 public enum TOutputBufferSizeType implements org.apache.thrift.TEnum {
-  kUserSpecifiedConstantParameter(0),
-  kUserSpecifiedRowMultiplier(1),
-  kConstant(2);
+  kConstant(0),
+  kUserSpecifiedConstantParameter(1),
+  kUserSpecifiedRowMultiplier(2);
 
   private final int value;
 
@@ -33,11 +33,11 @@ public enum TOutputBufferSizeType implements org.apache.thrift.TEnum {
   public static TOutputBufferSizeType findByValue(int value) { 
     switch (value) {
       case 0:
-        return kUserSpecifiedConstantParameter;
-      case 1:
-        return kUserSpecifiedRowMultiplier;
-      case 2:
         return kConstant;
+      case 1:
+        return kUserSpecifiedConstantParameter;
+      case 2:
+        return kUserSpecifiedRowMultiplier;
       default:
         return null;
     }

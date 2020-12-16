@@ -7,17 +7,13 @@
 package com.omnisci.thrift.server;
 
 
-public enum TDBObjectType implements org.apache.thrift.TEnum {
-  AbstractDBObjectType(0),
-  DatabaseDBObjectType(1),
-  TableDBObjectType(2),
-  DashboardDBObjectType(3),
-  ViewDBObjectType(4),
-  ServerDBObjectType(5);
+public enum TArrowTransport implements org.apache.thrift.TEnum {
+  SHARED_MEMORY(0),
+  WIRE(1);
 
   private final int value;
 
-  private TDBObjectType(int value) {
+  private TArrowTransport(int value) {
     this.value = value;
   }
 
@@ -33,20 +29,12 @@ public enum TDBObjectType implements org.apache.thrift.TEnum {
    * @return null if the value is not found.
    */
   @org.apache.thrift.annotation.Nullable
-  public static TDBObjectType findByValue(int value) { 
+  public static TArrowTransport findByValue(int value) { 
     switch (value) {
       case 0:
-        return AbstractDBObjectType;
+        return SHARED_MEMORY;
       case 1:
-        return DatabaseDBObjectType;
-      case 2:
-        return TableDBObjectType;
-      case 3:
-        return DashboardDBObjectType;
-      case 4:
-        return ViewDBObjectType;
-      case 5:
-        return ServerDBObjectType;
+        return WIRE;
       default:
         return null;
     }

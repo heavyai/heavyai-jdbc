@@ -14,7 +14,8 @@ public enum TAggKind implements org.apache.thrift.TEnum {
   SUM(3),
   COUNT(4),
   APPROX_COUNT_DISTINCT(5),
-  SAMPLE(6);
+  SAMPLE(6),
+  SINGLE_VALUE(7);
 
   private final int value;
 
@@ -50,6 +51,8 @@ public enum TAggKind implements org.apache.thrift.TEnum {
         return APPROX_COUNT_DISTINCT;
       case 6:
         return SAMPLE;
+      case 7:
+        return SINGLE_VALUE;
       default:
         return null;
     }
