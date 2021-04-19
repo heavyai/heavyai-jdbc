@@ -57,6 +57,10 @@ public class OmniSci {
 
     public void clear_gpu_memory(java.lang.String session) throws TOmniSciException, org.apache.thrift.TException;
 
+    public void set_cur_session(java.lang.String parent_session, java.lang.String leaf_session, java.lang.String start_time_str, java.lang.String label) throws TOmniSciException, org.apache.thrift.TException;
+
+    public void invalidate_cur_session(java.lang.String parent_session, java.lang.String leaf_session, java.lang.String start_time_str, java.lang.String label) throws TOmniSciException, org.apache.thrift.TException;
+
     public void set_table_epoch(java.lang.String session, int db_id, int table_id, int new_epoch) throws TOmniSciException, org.apache.thrift.TException;
 
     public void set_table_epoch_by_name(java.lang.String session, java.lang.String table_name, int new_epoch) throws TOmniSciException, org.apache.thrift.TException;
@@ -121,6 +125,8 @@ public class OmniSci {
 
     public void load_table_binary_columnar(java.lang.String session, java.lang.String table_name, java.util.List<TColumn> cols, java.util.List<java.lang.String> column_names) throws TOmniSciException, org.apache.thrift.TException;
 
+    public void load_table_binary_columnar_polys(java.lang.String session, java.lang.String table_name, java.util.List<TColumn> cols, java.util.List<java.lang.String> column_names, boolean assign_render_groups) throws TOmniSciException, org.apache.thrift.TException;
+
     public void load_table_binary_arrow(java.lang.String session, java.lang.String table_name, java.nio.ByteBuffer arrow_stream, boolean use_column_names) throws TOmniSciException, org.apache.thrift.TException;
 
     public void load_table(java.lang.String session, java.lang.String table_name, java.util.List<TStringRow> rows, java.util.List<java.lang.String> column_names) throws TOmniSciException, org.apache.thrift.TException;
@@ -145,9 +151,9 @@ public class OmniSci {
 
     public TTableMeta check_table_consistency(java.lang.String session, int table_id) throws TOmniSciException, org.apache.thrift.TException;
 
-    public TPendingQuery start_query(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, boolean just_explain, java.util.List<java.lang.Long> outer_fragment_indices) throws TOmniSciException, org.apache.thrift.TException;
+    public TPendingQuery start_query(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, java.lang.String start_time_str, boolean just_explain, java.util.List<java.lang.Long> outer_fragment_indices) throws TOmniSciException, org.apache.thrift.TException;
 
-    public TStepResult execute_query_step(TPendingQuery pending_query, long subquery_id) throws TOmniSciException, org.apache.thrift.TException;
+    public TStepResult execute_query_step(TPendingQuery pending_query, long subquery_id, java.lang.String start_time_str) throws TOmniSciException, org.apache.thrift.TException;
 
     public void broadcast_serialized_rows(com.omnisci.thrift.server.TSerializedRows serialized_rows, java.util.List<TColumnType> row_desc, long query_id, long subquery_id, boolean is_final_subquery_result) throws TOmniSciException, org.apache.thrift.TException;
 
@@ -229,6 +235,10 @@ public class OmniSci {
 
     public void clear_gpu_memory(java.lang.String session, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
+    public void set_cur_session(java.lang.String parent_session, java.lang.String leaf_session, java.lang.String start_time_str, java.lang.String label, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
+
+    public void invalidate_cur_session(java.lang.String parent_session, java.lang.String leaf_session, java.lang.String start_time_str, java.lang.String label, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
+
     public void set_table_epoch(java.lang.String session, int db_id, int table_id, int new_epoch, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
     public void set_table_epoch_by_name(java.lang.String session, java.lang.String table_name, int new_epoch, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
@@ -293,6 +303,8 @@ public class OmniSci {
 
     public void load_table_binary_columnar(java.lang.String session, java.lang.String table_name, java.util.List<TColumn> cols, java.util.List<java.lang.String> column_names, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
+    public void load_table_binary_columnar_polys(java.lang.String session, java.lang.String table_name, java.util.List<TColumn> cols, java.util.List<java.lang.String> column_names, boolean assign_render_groups, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
+
     public void load_table_binary_arrow(java.lang.String session, java.lang.String table_name, java.nio.ByteBuffer arrow_stream, boolean use_column_names, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
     public void load_table(java.lang.String session, java.lang.String table_name, java.util.List<TStringRow> rows, java.util.List<java.lang.String> column_names, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
@@ -317,9 +329,9 @@ public class OmniSci {
 
     public void check_table_consistency(java.lang.String session, int table_id, org.apache.thrift.async.AsyncMethodCallback<TTableMeta> resultHandler) throws org.apache.thrift.TException;
 
-    public void start_query(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, boolean just_explain, java.util.List<java.lang.Long> outer_fragment_indices, org.apache.thrift.async.AsyncMethodCallback<TPendingQuery> resultHandler) throws org.apache.thrift.TException;
+    public void start_query(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, java.lang.String start_time_str, boolean just_explain, java.util.List<java.lang.Long> outer_fragment_indices, org.apache.thrift.async.AsyncMethodCallback<TPendingQuery> resultHandler) throws org.apache.thrift.TException;
 
-    public void execute_query_step(TPendingQuery pending_query, long subquery_id, org.apache.thrift.async.AsyncMethodCallback<TStepResult> resultHandler) throws org.apache.thrift.TException;
+    public void execute_query_step(TPendingQuery pending_query, long subquery_id, java.lang.String start_time_str, org.apache.thrift.async.AsyncMethodCallback<TStepResult> resultHandler) throws org.apache.thrift.TException;
 
     public void broadcast_serialized_rows(com.omnisci.thrift.server.TSerializedRows serialized_rows, java.util.List<TColumnType> row_desc, long query_id, long subquery_id, boolean is_final_subquery_result, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
 
@@ -953,6 +965,58 @@ public class OmniSci {
     {
       clear_gpu_memory_result result = new clear_gpu_memory_result();
       receiveBase(result, "clear_gpu_memory");
+      if (result.e != null) {
+        throw result.e;
+      }
+      return;
+    }
+
+    public void set_cur_session(java.lang.String parent_session, java.lang.String leaf_session, java.lang.String start_time_str, java.lang.String label) throws TOmniSciException, org.apache.thrift.TException
+    {
+      send_set_cur_session(parent_session, leaf_session, start_time_str, label);
+      recv_set_cur_session();
+    }
+
+    public void send_set_cur_session(java.lang.String parent_session, java.lang.String leaf_session, java.lang.String start_time_str, java.lang.String label) throws org.apache.thrift.TException
+    {
+      set_cur_session_args args = new set_cur_session_args();
+      args.setParent_session(parent_session);
+      args.setLeaf_session(leaf_session);
+      args.setStart_time_str(start_time_str);
+      args.setLabel(label);
+      sendBase("set_cur_session", args);
+    }
+
+    public void recv_set_cur_session() throws TOmniSciException, org.apache.thrift.TException
+    {
+      set_cur_session_result result = new set_cur_session_result();
+      receiveBase(result, "set_cur_session");
+      if (result.e != null) {
+        throw result.e;
+      }
+      return;
+    }
+
+    public void invalidate_cur_session(java.lang.String parent_session, java.lang.String leaf_session, java.lang.String start_time_str, java.lang.String label) throws TOmniSciException, org.apache.thrift.TException
+    {
+      send_invalidate_cur_session(parent_session, leaf_session, start_time_str, label);
+      recv_invalidate_cur_session();
+    }
+
+    public void send_invalidate_cur_session(java.lang.String parent_session, java.lang.String leaf_session, java.lang.String start_time_str, java.lang.String label) throws org.apache.thrift.TException
+    {
+      invalidate_cur_session_args args = new invalidate_cur_session_args();
+      args.setParent_session(parent_session);
+      args.setLeaf_session(leaf_session);
+      args.setStart_time_str(start_time_str);
+      args.setLabel(label);
+      sendBase("invalidate_cur_session", args);
+    }
+
+    public void recv_invalidate_cur_session() throws TOmniSciException, org.apache.thrift.TException
+    {
+      invalidate_cur_session_result result = new invalidate_cur_session_result();
+      receiveBase(result, "invalidate_cur_session");
       if (result.e != null) {
         throw result.e;
       }
@@ -1815,6 +1879,33 @@ public class OmniSci {
       return;
     }
 
+    public void load_table_binary_columnar_polys(java.lang.String session, java.lang.String table_name, java.util.List<TColumn> cols, java.util.List<java.lang.String> column_names, boolean assign_render_groups) throws TOmniSciException, org.apache.thrift.TException
+    {
+      send_load_table_binary_columnar_polys(session, table_name, cols, column_names, assign_render_groups);
+      recv_load_table_binary_columnar_polys();
+    }
+
+    public void send_load_table_binary_columnar_polys(java.lang.String session, java.lang.String table_name, java.util.List<TColumn> cols, java.util.List<java.lang.String> column_names, boolean assign_render_groups) throws org.apache.thrift.TException
+    {
+      load_table_binary_columnar_polys_args args = new load_table_binary_columnar_polys_args();
+      args.setSession(session);
+      args.setTable_name(table_name);
+      args.setCols(cols);
+      args.setColumn_names(column_names);
+      args.setAssign_render_groups(assign_render_groups);
+      sendBase("load_table_binary_columnar_polys", args);
+    }
+
+    public void recv_load_table_binary_columnar_polys() throws TOmniSciException, org.apache.thrift.TException
+    {
+      load_table_binary_columnar_polys_result result = new load_table_binary_columnar_polys_result();
+      receiveBase(result, "load_table_binary_columnar_polys");
+      if (result.e != null) {
+        throw result.e;
+      }
+      return;
+    }
+
     public void load_table_binary_arrow(java.lang.String session, java.lang.String table_name, java.nio.ByteBuffer arrow_stream, boolean use_column_names) throws TOmniSciException, org.apache.thrift.TException
     {
       send_load_table_binary_arrow(session, table_name, arrow_stream, use_column_names);
@@ -2141,18 +2232,19 @@ public class OmniSci {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "check_table_consistency failed: unknown result");
     }
 
-    public TPendingQuery start_query(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, boolean just_explain, java.util.List<java.lang.Long> outer_fragment_indices) throws TOmniSciException, org.apache.thrift.TException
+    public TPendingQuery start_query(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, java.lang.String start_time_str, boolean just_explain, java.util.List<java.lang.Long> outer_fragment_indices) throws TOmniSciException, org.apache.thrift.TException
     {
-      send_start_query(leaf_session, parent_session, query_ra, just_explain, outer_fragment_indices);
+      send_start_query(leaf_session, parent_session, query_ra, start_time_str, just_explain, outer_fragment_indices);
       return recv_start_query();
     }
 
-    public void send_start_query(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, boolean just_explain, java.util.List<java.lang.Long> outer_fragment_indices) throws org.apache.thrift.TException
+    public void send_start_query(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, java.lang.String start_time_str, boolean just_explain, java.util.List<java.lang.Long> outer_fragment_indices) throws org.apache.thrift.TException
     {
       start_query_args args = new start_query_args();
       args.setLeaf_session(leaf_session);
       args.setParent_session(parent_session);
       args.setQuery_ra(query_ra);
+      args.setStart_time_str(start_time_str);
       args.setJust_explain(just_explain);
       args.setOuter_fragment_indices(outer_fragment_indices);
       sendBase("start_query", args);
@@ -2171,17 +2263,18 @@ public class OmniSci {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "start_query failed: unknown result");
     }
 
-    public TStepResult execute_query_step(TPendingQuery pending_query, long subquery_id) throws TOmniSciException, org.apache.thrift.TException
+    public TStepResult execute_query_step(TPendingQuery pending_query, long subquery_id, java.lang.String start_time_str) throws TOmniSciException, org.apache.thrift.TException
     {
-      send_execute_query_step(pending_query, subquery_id);
+      send_execute_query_step(pending_query, subquery_id, start_time_str);
       return recv_execute_query_step();
     }
 
-    public void send_execute_query_step(TPendingQuery pending_query, long subquery_id) throws org.apache.thrift.TException
+    public void send_execute_query_step(TPendingQuery pending_query, long subquery_id, java.lang.String start_time_str) throws org.apache.thrift.TException
     {
       execute_query_step_args args = new execute_query_step_args();
       args.setPending_query(pending_query);
       args.setSubquery_id(subquery_id);
+      args.setStart_time_str(start_time_str);
       sendBase("execute_query_step", args);
     }
 
@@ -3360,6 +3453,88 @@ public class OmniSci {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("clear_gpu_memory", org.apache.thrift.protocol.TMessageType.CALL, 0));
         clear_gpu_memory_args args = new clear_gpu_memory_args();
         args.setSession(session);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public Void getResult() throws TOmniSciException, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new java.lang.IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return null;
+      }
+    }
+
+    public void set_cur_session(java.lang.String parent_session, java.lang.String leaf_session, java.lang.String start_time_str, java.lang.String label, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      set_cur_session_call method_call = new set_cur_session_call(parent_session, leaf_session, start_time_str, label, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class set_cur_session_call extends org.apache.thrift.async.TAsyncMethodCall<Void> {
+      private java.lang.String parent_session;
+      private java.lang.String leaf_session;
+      private java.lang.String start_time_str;
+      private java.lang.String label;
+      public set_cur_session_call(java.lang.String parent_session, java.lang.String leaf_session, java.lang.String start_time_str, java.lang.String label, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.parent_session = parent_session;
+        this.leaf_session = leaf_session;
+        this.start_time_str = start_time_str;
+        this.label = label;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("set_cur_session", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        set_cur_session_args args = new set_cur_session_args();
+        args.setParent_session(parent_session);
+        args.setLeaf_session(leaf_session);
+        args.setStart_time_str(start_time_str);
+        args.setLabel(label);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public Void getResult() throws TOmniSciException, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new java.lang.IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return null;
+      }
+    }
+
+    public void invalidate_cur_session(java.lang.String parent_session, java.lang.String leaf_session, java.lang.String start_time_str, java.lang.String label, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      invalidate_cur_session_call method_call = new invalidate_cur_session_call(parent_session, leaf_session, start_time_str, label, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class invalidate_cur_session_call extends org.apache.thrift.async.TAsyncMethodCall<Void> {
+      private java.lang.String parent_session;
+      private java.lang.String leaf_session;
+      private java.lang.String start_time_str;
+      private java.lang.String label;
+      public invalidate_cur_session_call(java.lang.String parent_session, java.lang.String leaf_session, java.lang.String start_time_str, java.lang.String label, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.parent_session = parent_session;
+        this.leaf_session = leaf_session;
+        this.start_time_str = start_time_str;
+        this.label = label;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("invalidate_cur_session", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        invalidate_cur_session_args args = new invalidate_cur_session_args();
+        args.setParent_session(parent_session);
+        args.setLeaf_session(leaf_session);
+        args.setStart_time_str(start_time_str);
+        args.setLabel(label);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -4641,6 +4816,50 @@ public class OmniSci {
       }
     }
 
+    public void load_table_binary_columnar_polys(java.lang.String session, java.lang.String table_name, java.util.List<TColumn> cols, java.util.List<java.lang.String> column_names, boolean assign_render_groups, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      load_table_binary_columnar_polys_call method_call = new load_table_binary_columnar_polys_call(session, table_name, cols, column_names, assign_render_groups, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class load_table_binary_columnar_polys_call extends org.apache.thrift.async.TAsyncMethodCall<Void> {
+      private java.lang.String session;
+      private java.lang.String table_name;
+      private java.util.List<TColumn> cols;
+      private java.util.List<java.lang.String> column_names;
+      private boolean assign_render_groups;
+      public load_table_binary_columnar_polys_call(java.lang.String session, java.lang.String table_name, java.util.List<TColumn> cols, java.util.List<java.lang.String> column_names, boolean assign_render_groups, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.session = session;
+        this.table_name = table_name;
+        this.cols = cols;
+        this.column_names = column_names;
+        this.assign_render_groups = assign_render_groups;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("load_table_binary_columnar_polys", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        load_table_binary_columnar_polys_args args = new load_table_binary_columnar_polys_args();
+        args.setSession(session);
+        args.setTable_name(table_name);
+        args.setCols(cols);
+        args.setColumn_names(column_names);
+        args.setAssign_render_groups(assign_render_groups);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public Void getResult() throws TOmniSciException, org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new java.lang.IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return null;
+      }
+    }
+
     public void load_table_binary_arrow(java.lang.String session, java.lang.String table_name, java.nio.ByteBuffer arrow_stream, boolean use_column_names, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       load_table_binary_arrow_call method_call = new load_table_binary_arrow_call(session, table_name, arrow_stream, use_column_names, resultHandler, this, ___protocolFactory, ___transport);
@@ -5112,9 +5331,9 @@ public class OmniSci {
       }
     }
 
-    public void start_query(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, boolean just_explain, java.util.List<java.lang.Long> outer_fragment_indices, org.apache.thrift.async.AsyncMethodCallback<TPendingQuery> resultHandler) throws org.apache.thrift.TException {
+    public void start_query(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, java.lang.String start_time_str, boolean just_explain, java.util.List<java.lang.Long> outer_fragment_indices, org.apache.thrift.async.AsyncMethodCallback<TPendingQuery> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      start_query_call method_call = new start_query_call(leaf_session, parent_session, query_ra, just_explain, outer_fragment_indices, resultHandler, this, ___protocolFactory, ___transport);
+      start_query_call method_call = new start_query_call(leaf_session, parent_session, query_ra, start_time_str, just_explain, outer_fragment_indices, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
@@ -5123,13 +5342,15 @@ public class OmniSci {
       private java.lang.String leaf_session;
       private java.lang.String parent_session;
       private java.lang.String query_ra;
+      private java.lang.String start_time_str;
       private boolean just_explain;
       private java.util.List<java.lang.Long> outer_fragment_indices;
-      public start_query_call(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, boolean just_explain, java.util.List<java.lang.Long> outer_fragment_indices, org.apache.thrift.async.AsyncMethodCallback<TPendingQuery> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public start_query_call(java.lang.String leaf_session, java.lang.String parent_session, java.lang.String query_ra, java.lang.String start_time_str, boolean just_explain, java.util.List<java.lang.Long> outer_fragment_indices, org.apache.thrift.async.AsyncMethodCallback<TPendingQuery> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.leaf_session = leaf_session;
         this.parent_session = parent_session;
         this.query_ra = query_ra;
+        this.start_time_str = start_time_str;
         this.just_explain = just_explain;
         this.outer_fragment_indices = outer_fragment_indices;
       }
@@ -5140,6 +5361,7 @@ public class OmniSci {
         args.setLeaf_session(leaf_session);
         args.setParent_session(parent_session);
         args.setQuery_ra(query_ra);
+        args.setStart_time_str(start_time_str);
         args.setJust_explain(just_explain);
         args.setOuter_fragment_indices(outer_fragment_indices);
         args.write(prot);
@@ -5156,9 +5378,9 @@ public class OmniSci {
       }
     }
 
-    public void execute_query_step(TPendingQuery pending_query, long subquery_id, org.apache.thrift.async.AsyncMethodCallback<TStepResult> resultHandler) throws org.apache.thrift.TException {
+    public void execute_query_step(TPendingQuery pending_query, long subquery_id, java.lang.String start_time_str, org.apache.thrift.async.AsyncMethodCallback<TStepResult> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      execute_query_step_call method_call = new execute_query_step_call(pending_query, subquery_id, resultHandler, this, ___protocolFactory, ___transport);
+      execute_query_step_call method_call = new execute_query_step_call(pending_query, subquery_id, start_time_str, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
@@ -5166,10 +5388,12 @@ public class OmniSci {
     public static class execute_query_step_call extends org.apache.thrift.async.TAsyncMethodCall<TStepResult> {
       private TPendingQuery pending_query;
       private long subquery_id;
-      public execute_query_step_call(TPendingQuery pending_query, long subquery_id, org.apache.thrift.async.AsyncMethodCallback<TStepResult> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private java.lang.String start_time_str;
+      public execute_query_step_call(TPendingQuery pending_query, long subquery_id, java.lang.String start_time_str, org.apache.thrift.async.AsyncMethodCallback<TStepResult> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.pending_query = pending_query;
         this.subquery_id = subquery_id;
+        this.start_time_str = start_time_str;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
@@ -5177,6 +5401,7 @@ public class OmniSci {
         execute_query_step_args args = new execute_query_step_args();
         args.setPending_query(pending_query);
         args.setSubquery_id(subquery_id);
+        args.setStart_time_str(start_time_str);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -5785,6 +6010,8 @@ public class OmniSci {
       processMap.put("get_memory", new get_memory());
       processMap.put("clear_cpu_memory", new clear_cpu_memory());
       processMap.put("clear_gpu_memory", new clear_gpu_memory());
+      processMap.put("set_cur_session", new set_cur_session());
+      processMap.put("invalidate_cur_session", new invalidate_cur_session());
       processMap.put("set_table_epoch", new set_table_epoch());
       processMap.put("set_table_epoch_by_name", new set_table_epoch_by_name());
       processMap.put("get_table_epoch", new get_table_epoch());
@@ -5817,6 +6044,7 @@ public class OmniSci {
       processMap.put("create_link", new create_link());
       processMap.put("load_table_binary", new load_table_binary());
       processMap.put("load_table_binary_columnar", new load_table_binary_columnar());
+      processMap.put("load_table_binary_columnar_polys", new load_table_binary_columnar_polys());
       processMap.put("load_table_binary_arrow", new load_table_binary_arrow());
       processMap.put("load_table", new load_table());
       processMap.put("detect_column_types", new detect_column_types());
@@ -6509,6 +6737,64 @@ public class OmniSci {
         clear_gpu_memory_result result = new clear_gpu_memory_result();
         try {
           iface.clear_gpu_memory(args.session);
+        } catch (TOmniSciException e) {
+          result.e = e;
+        }
+        return result;
+      }
+    }
+
+    public static class set_cur_session<I extends Iface> extends org.apache.thrift.ProcessFunction<I, set_cur_session_args> {
+      public set_cur_session() {
+        super("set_cur_session");
+      }
+
+      public set_cur_session_args getEmptyArgsInstance() {
+        return new set_cur_session_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      @Override
+      protected boolean rethrowUnhandledExceptions() {
+        return false;
+      }
+
+      public set_cur_session_result getResult(I iface, set_cur_session_args args) throws org.apache.thrift.TException {
+        set_cur_session_result result = new set_cur_session_result();
+        try {
+          iface.set_cur_session(args.parent_session, args.leaf_session, args.start_time_str, args.label);
+        } catch (TOmniSciException e) {
+          result.e = e;
+        }
+        return result;
+      }
+    }
+
+    public static class invalidate_cur_session<I extends Iface> extends org.apache.thrift.ProcessFunction<I, invalidate_cur_session_args> {
+      public invalidate_cur_session() {
+        super("invalidate_cur_session");
+      }
+
+      public invalidate_cur_session_args getEmptyArgsInstance() {
+        return new invalidate_cur_session_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      @Override
+      protected boolean rethrowUnhandledExceptions() {
+        return false;
+      }
+
+      public invalidate_cur_session_result getResult(I iface, invalidate_cur_session_args args) throws org.apache.thrift.TException {
+        invalidate_cur_session_result result = new invalidate_cur_session_result();
+        try {
+          iface.invalidate_cur_session(args.parent_session, args.leaf_session, args.start_time_str, args.label);
         } catch (TOmniSciException e) {
           result.e = e;
         }
@@ -7431,6 +7717,35 @@ public class OmniSci {
       }
     }
 
+    public static class load_table_binary_columnar_polys<I extends Iface> extends org.apache.thrift.ProcessFunction<I, load_table_binary_columnar_polys_args> {
+      public load_table_binary_columnar_polys() {
+        super("load_table_binary_columnar_polys");
+      }
+
+      public load_table_binary_columnar_polys_args getEmptyArgsInstance() {
+        return new load_table_binary_columnar_polys_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      @Override
+      protected boolean rethrowUnhandledExceptions() {
+        return false;
+      }
+
+      public load_table_binary_columnar_polys_result getResult(I iface, load_table_binary_columnar_polys_args args) throws org.apache.thrift.TException {
+        load_table_binary_columnar_polys_result result = new load_table_binary_columnar_polys_result();
+        try {
+          iface.load_table_binary_columnar_polys(args.session, args.table_name, args.cols, args.column_names, args.assign_render_groups);
+        } catch (TOmniSciException e) {
+          result.e = e;
+        }
+        return result;
+      }
+    }
+
     public static class load_table_binary_arrow<I extends Iface> extends org.apache.thrift.ProcessFunction<I, load_table_binary_arrow_args> {
       public load_table_binary_arrow() {
         super("load_table_binary_arrow");
@@ -7801,7 +8116,7 @@ public class OmniSci {
       public start_query_result getResult(I iface, start_query_args args) throws org.apache.thrift.TException {
         start_query_result result = new start_query_result();
         try {
-          result.success = iface.start_query(args.leaf_session, args.parent_session, args.query_ra, args.just_explain, args.outer_fragment_indices);
+          result.success = iface.start_query(args.leaf_session, args.parent_session, args.query_ra, args.start_time_str, args.just_explain, args.outer_fragment_indices);
         } catch (TOmniSciException e) {
           result.e = e;
         }
@@ -7830,7 +8145,7 @@ public class OmniSci {
       public execute_query_step_result getResult(I iface, execute_query_step_args args) throws org.apache.thrift.TException {
         execute_query_step_result result = new execute_query_step_result();
         try {
-          result.success = iface.execute_query_step(args.pending_query, args.subquery_id);
+          result.success = iface.execute_query_step(args.pending_query, args.subquery_id, args.start_time_str);
         } catch (TOmniSciException e) {
           result.e = e;
         }
@@ -8311,6 +8626,8 @@ public class OmniSci {
       processMap.put("get_memory", new get_memory());
       processMap.put("clear_cpu_memory", new clear_cpu_memory());
       processMap.put("clear_gpu_memory", new clear_gpu_memory());
+      processMap.put("set_cur_session", new set_cur_session());
+      processMap.put("invalidate_cur_session", new invalidate_cur_session());
       processMap.put("set_table_epoch", new set_table_epoch());
       processMap.put("set_table_epoch_by_name", new set_table_epoch_by_name());
       processMap.put("get_table_epoch", new get_table_epoch());
@@ -8343,6 +8660,7 @@ public class OmniSci {
       processMap.put("create_link", new create_link());
       processMap.put("load_table_binary", new load_table_binary());
       processMap.put("load_table_binary_columnar", new load_table_binary_columnar());
+      processMap.put("load_table_binary_columnar_polys", new load_table_binary_columnar_polys());
       processMap.put("load_table_binary_arrow", new load_table_binary_arrow());
       processMap.put("load_table", new load_table());
       processMap.put("detect_column_types", new detect_column_types());
@@ -9861,6 +10179,134 @@ public class OmniSci {
 
       public void start(I iface, clear_gpu_memory_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
         iface.clear_gpu_memory(args.session,resultHandler);
+      }
+    }
+
+    public static class set_cur_session<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, set_cur_session_args, Void> {
+      public set_cur_session() {
+        super("set_cur_session");
+      }
+
+      public set_cur_session_args getEmptyArgsInstance() {
+        return new set_cur_session_args();
+      }
+
+      public org.apache.thrift.async.AsyncMethodCallback<Void> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new org.apache.thrift.async.AsyncMethodCallback<Void>() { 
+          public void onComplete(Void o) {
+            set_cur_session_result result = new set_cur_session_result();
+            try {
+              fcall.sendResponse(fb, result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+            } catch (org.apache.thrift.transport.TTransportException e) {
+              _LOGGER.error("TTransportException writing to internal frame buffer", e);
+              fb.close();
+            } catch (java.lang.Exception e) {
+              _LOGGER.error("Exception writing to internal frame buffer", e);
+              onError(e);
+            }
+          }
+          public void onError(java.lang.Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TSerializable msg;
+            set_cur_session_result result = new set_cur_session_result();
+            if (e instanceof TOmniSciException) {
+              result.e = (TOmniSciException) e;
+              result.setEIsSet(true);
+              msg = result;
+            } else if (e instanceof org.apache.thrift.transport.TTransportException) {
+              _LOGGER.error("TTransportException inside handler", e);
+              fb.close();
+              return;
+            } else if (e instanceof org.apache.thrift.TApplicationException) {
+              _LOGGER.error("TApplicationException inside handler", e);
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TApplicationException)e;
+            } else {
+              _LOGGER.error("Exception inside handler", e);
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+            } catch (java.lang.Exception ex) {
+              _LOGGER.error("Exception writing to internal frame buffer", ex);
+              fb.close();
+            }
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, set_cur_session_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+        iface.set_cur_session(args.parent_session, args.leaf_session, args.start_time_str, args.label,resultHandler);
+      }
+    }
+
+    public static class invalidate_cur_session<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, invalidate_cur_session_args, Void> {
+      public invalidate_cur_session() {
+        super("invalidate_cur_session");
+      }
+
+      public invalidate_cur_session_args getEmptyArgsInstance() {
+        return new invalidate_cur_session_args();
+      }
+
+      public org.apache.thrift.async.AsyncMethodCallback<Void> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new org.apache.thrift.async.AsyncMethodCallback<Void>() { 
+          public void onComplete(Void o) {
+            invalidate_cur_session_result result = new invalidate_cur_session_result();
+            try {
+              fcall.sendResponse(fb, result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+            } catch (org.apache.thrift.transport.TTransportException e) {
+              _LOGGER.error("TTransportException writing to internal frame buffer", e);
+              fb.close();
+            } catch (java.lang.Exception e) {
+              _LOGGER.error("Exception writing to internal frame buffer", e);
+              onError(e);
+            }
+          }
+          public void onError(java.lang.Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TSerializable msg;
+            invalidate_cur_session_result result = new invalidate_cur_session_result();
+            if (e instanceof TOmniSciException) {
+              result.e = (TOmniSciException) e;
+              result.setEIsSet(true);
+              msg = result;
+            } else if (e instanceof org.apache.thrift.transport.TTransportException) {
+              _LOGGER.error("TTransportException inside handler", e);
+              fb.close();
+              return;
+            } else if (e instanceof org.apache.thrift.TApplicationException) {
+              _LOGGER.error("TApplicationException inside handler", e);
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TApplicationException)e;
+            } else {
+              _LOGGER.error("Exception inside handler", e);
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+            } catch (java.lang.Exception ex) {
+              _LOGGER.error("Exception writing to internal frame buffer", ex);
+              fb.close();
+            }
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, invalidate_cur_session_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+        iface.invalidate_cur_session(args.parent_session, args.leaf_session, args.start_time_str, args.label,resultHandler);
       }
     }
 
@@ -11916,6 +12362,70 @@ public class OmniSci {
       }
     }
 
+    public static class load_table_binary_columnar_polys<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, load_table_binary_columnar_polys_args, Void> {
+      public load_table_binary_columnar_polys() {
+        super("load_table_binary_columnar_polys");
+      }
+
+      public load_table_binary_columnar_polys_args getEmptyArgsInstance() {
+        return new load_table_binary_columnar_polys_args();
+      }
+
+      public org.apache.thrift.async.AsyncMethodCallback<Void> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new org.apache.thrift.async.AsyncMethodCallback<Void>() { 
+          public void onComplete(Void o) {
+            load_table_binary_columnar_polys_result result = new load_table_binary_columnar_polys_result();
+            try {
+              fcall.sendResponse(fb, result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+            } catch (org.apache.thrift.transport.TTransportException e) {
+              _LOGGER.error("TTransportException writing to internal frame buffer", e);
+              fb.close();
+            } catch (java.lang.Exception e) {
+              _LOGGER.error("Exception writing to internal frame buffer", e);
+              onError(e);
+            }
+          }
+          public void onError(java.lang.Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TSerializable msg;
+            load_table_binary_columnar_polys_result result = new load_table_binary_columnar_polys_result();
+            if (e instanceof TOmniSciException) {
+              result.e = (TOmniSciException) e;
+              result.setEIsSet(true);
+              msg = result;
+            } else if (e instanceof org.apache.thrift.transport.TTransportException) {
+              _LOGGER.error("TTransportException inside handler", e);
+              fb.close();
+              return;
+            } else if (e instanceof org.apache.thrift.TApplicationException) {
+              _LOGGER.error("TApplicationException inside handler", e);
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TApplicationException)e;
+            } else {
+              _LOGGER.error("Exception inside handler", e);
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+            } catch (java.lang.Exception ex) {
+              _LOGGER.error("Exception writing to internal frame buffer", ex);
+              fb.close();
+            }
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, load_table_binary_columnar_polys_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+        iface.load_table_binary_columnar_polys(args.session, args.table_name, args.cols, args.column_names, args.assign_render_groups,resultHandler);
+      }
+    }
+
     public static class load_table_binary_arrow<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, load_table_binary_arrow_args, Void> {
       public load_table_binary_arrow() {
         super("load_table_binary_arrow");
@@ -12753,7 +13263,7 @@ public class OmniSci {
       }
 
       public void start(I iface, start_query_args args, org.apache.thrift.async.AsyncMethodCallback<TPendingQuery> resultHandler) throws org.apache.thrift.TException {
-        iface.start_query(args.leaf_session, args.parent_session, args.query_ra, args.just_explain, args.outer_fragment_indices,resultHandler);
+        iface.start_query(args.leaf_session, args.parent_session, args.query_ra, args.start_time_str, args.just_explain, args.outer_fragment_indices,resultHandler);
       }
     }
 
@@ -12818,7 +13328,7 @@ public class OmniSci {
       }
 
       public void start(I iface, execute_query_step_args args, org.apache.thrift.async.AsyncMethodCallback<TStepResult> resultHandler) throws org.apache.thrift.TException {
-        iface.execute_query_step(args.pending_query, args.subquery_id,resultHandler);
+        iface.execute_query_step(args.pending_query, args.subquery_id, args.start_time_str,resultHandler);
       }
     }
 
@@ -19832,14 +20342,14 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list290 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TServerStatus>(_list290.size);
-                  @org.apache.thrift.annotation.Nullable TServerStatus _elem291;
-                  for (int _i292 = 0; _i292 < _list290.size; ++_i292)
+                  org.apache.thrift.protocol.TList _list298 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TServerStatus>(_list298.size);
+                  @org.apache.thrift.annotation.Nullable TServerStatus _elem299;
+                  for (int _i300 = 0; _i300 < _list298.size; ++_i300)
                   {
-                    _elem291 = new TServerStatus();
-                    _elem291.read(iprot);
-                    struct.success.add(_elem291);
+                    _elem299 = new TServerStatus();
+                    _elem299.read(iprot);
+                    struct.success.add(_elem299);
                   }
                   iprot.readListEnd();
                 }
@@ -19876,9 +20386,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TServerStatus _iter293 : struct.success)
+            for (TServerStatus _iter301 : struct.success)
             {
-              _iter293.write(oprot);
+              _iter301.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -19917,9 +20427,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TServerStatus _iter294 : struct.success)
+            for (TServerStatus _iter302 : struct.success)
             {
-              _iter294.write(oprot);
+              _iter302.write(oprot);
             }
           }
         }
@@ -19934,14 +20444,14 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list295 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TServerStatus>(_list295.size);
-            @org.apache.thrift.annotation.Nullable TServerStatus _elem296;
-            for (int _i297 = 0; _i297 < _list295.size; ++_i297)
+            org.apache.thrift.protocol.TList _list303 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TServerStatus>(_list303.size);
+            @org.apache.thrift.annotation.Nullable TServerStatus _elem304;
+            for (int _i305 = 0; _i305 < _list303.size; ++_i305)
             {
-              _elem296 = new TServerStatus();
-              _elem296.read(iprot);
-              struct.success.add(_elem296);
+              _elem304 = new TServerStatus();
+              _elem304.read(iprot);
+              struct.success.add(_elem304);
             }
           }
           struct.setSuccessIsSet(true);
@@ -21571,13 +22081,13 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list298 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<java.lang.String>(_list298.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem299;
-                  for (int _i300 = 0; _i300 < _list298.size; ++_i300)
+                  org.apache.thrift.protocol.TList _list306 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<java.lang.String>(_list306.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem307;
+                  for (int _i308 = 0; _i308 < _list306.size; ++_i308)
                   {
-                    _elem299 = iprot.readString();
-                    struct.success.add(_elem299);
+                    _elem307 = iprot.readString();
+                    struct.success.add(_elem307);
                   }
                   iprot.readListEnd();
                 }
@@ -21614,9 +22124,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.lang.String _iter301 : struct.success)
+            for (java.lang.String _iter309 : struct.success)
             {
-              oprot.writeString(_iter301);
+              oprot.writeString(_iter309);
             }
             oprot.writeListEnd();
           }
@@ -21655,9 +22165,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.lang.String _iter302 : struct.success)
+            for (java.lang.String _iter310 : struct.success)
             {
-              oprot.writeString(_iter302);
+              oprot.writeString(_iter310);
             }
           }
         }
@@ -21672,13 +22182,13 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list303 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.success = new java.util.ArrayList<java.lang.String>(_list303.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem304;
-            for (int _i305 = 0; _i305 < _list303.size; ++_i305)
+            org.apache.thrift.protocol.TList _list311 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new java.util.ArrayList<java.lang.String>(_list311.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem312;
+            for (int _i313 = 0; _i313 < _list311.size; ++_i313)
             {
-              _elem304 = iprot.readString();
-              struct.success.add(_elem304);
+              _elem312 = iprot.readString();
+              struct.success.add(_elem312);
             }
           }
           struct.setSuccessIsSet(true);
@@ -22462,13 +22972,13 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list306 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<java.lang.String>(_list306.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem307;
-                  for (int _i308 = 0; _i308 < _list306.size; ++_i308)
+                  org.apache.thrift.protocol.TList _list314 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<java.lang.String>(_list314.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem315;
+                  for (int _i316 = 0; _i316 < _list314.size; ++_i316)
                   {
-                    _elem307 = iprot.readString();
-                    struct.success.add(_elem307);
+                    _elem315 = iprot.readString();
+                    struct.success.add(_elem315);
                   }
                   iprot.readListEnd();
                 }
@@ -22505,9 +23015,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.lang.String _iter309 : struct.success)
+            for (java.lang.String _iter317 : struct.success)
             {
-              oprot.writeString(_iter309);
+              oprot.writeString(_iter317);
             }
             oprot.writeListEnd();
           }
@@ -22546,9 +23056,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.lang.String _iter310 : struct.success)
+            for (java.lang.String _iter318 : struct.success)
             {
-              oprot.writeString(_iter310);
+              oprot.writeString(_iter318);
             }
           }
         }
@@ -22563,13 +23073,13 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list311 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.success = new java.util.ArrayList<java.lang.String>(_list311.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem312;
-            for (int _i313 = 0; _i313 < _list311.size; ++_i313)
+            org.apache.thrift.protocol.TList _list319 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new java.util.ArrayList<java.lang.String>(_list319.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem320;
+            for (int _i321 = 0; _i321 < _list319.size; ++_i321)
             {
-              _elem312 = iprot.readString();
-              struct.success.add(_elem312);
+              _elem320 = iprot.readString();
+              struct.success.add(_elem320);
             }
           }
           struct.setSuccessIsSet(true);
@@ -23353,13 +23863,13 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list314 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<java.lang.String>(_list314.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem315;
-                  for (int _i316 = 0; _i316 < _list314.size; ++_i316)
+                  org.apache.thrift.protocol.TList _list322 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<java.lang.String>(_list322.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem323;
+                  for (int _i324 = 0; _i324 < _list322.size; ++_i324)
                   {
-                    _elem315 = iprot.readString();
-                    struct.success.add(_elem315);
+                    _elem323 = iprot.readString();
+                    struct.success.add(_elem323);
                   }
                   iprot.readListEnd();
                 }
@@ -23396,9 +23906,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.lang.String _iter317 : struct.success)
+            for (java.lang.String _iter325 : struct.success)
             {
-              oprot.writeString(_iter317);
+              oprot.writeString(_iter325);
             }
             oprot.writeListEnd();
           }
@@ -23437,9 +23947,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.lang.String _iter318 : struct.success)
+            for (java.lang.String _iter326 : struct.success)
             {
-              oprot.writeString(_iter318);
+              oprot.writeString(_iter326);
             }
           }
         }
@@ -23454,13 +23964,13 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list319 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.success = new java.util.ArrayList<java.lang.String>(_list319.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem320;
-            for (int _i321 = 0; _i321 < _list319.size; ++_i321)
+            org.apache.thrift.protocol.TList _list327 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new java.util.ArrayList<java.lang.String>(_list327.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem328;
+            for (int _i329 = 0; _i329 < _list327.size; ++_i329)
             {
-              _elem320 = iprot.readString();
-              struct.success.add(_elem320);
+              _elem328 = iprot.readString();
+              struct.success.add(_elem328);
             }
           }
           struct.setSuccessIsSet(true);
@@ -24247,14 +24757,14 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list322 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TTableMeta>(_list322.size);
-                  @org.apache.thrift.annotation.Nullable TTableMeta _elem323;
-                  for (int _i324 = 0; _i324 < _list322.size; ++_i324)
+                  org.apache.thrift.protocol.TList _list330 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TTableMeta>(_list330.size);
+                  @org.apache.thrift.annotation.Nullable TTableMeta _elem331;
+                  for (int _i332 = 0; _i332 < _list330.size; ++_i332)
                   {
-                    _elem323 = new TTableMeta();
-                    _elem323.read(iprot);
-                    struct.success.add(_elem323);
+                    _elem331 = new TTableMeta();
+                    _elem331.read(iprot);
+                    struct.success.add(_elem331);
                   }
                   iprot.readListEnd();
                 }
@@ -24291,9 +24801,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TTableMeta _iter325 : struct.success)
+            for (TTableMeta _iter333 : struct.success)
             {
-              _iter325.write(oprot);
+              _iter333.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -24332,9 +24842,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TTableMeta _iter326 : struct.success)
+            for (TTableMeta _iter334 : struct.success)
             {
-              _iter326.write(oprot);
+              _iter334.write(oprot);
             }
           }
         }
@@ -24349,14 +24859,14 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list327 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TTableMeta>(_list327.size);
-            @org.apache.thrift.annotation.Nullable TTableMeta _elem328;
-            for (int _i329 = 0; _i329 < _list327.size; ++_i329)
+            org.apache.thrift.protocol.TList _list335 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TTableMeta>(_list335.size);
+            @org.apache.thrift.annotation.Nullable TTableMeta _elem336;
+            for (int _i337 = 0; _i337 < _list335.size; ++_i337)
             {
-              _elem328 = new TTableMeta();
-              _elem328.read(iprot);
-              struct.success.add(_elem328);
+              _elem336 = new TTableMeta();
+              _elem336.read(iprot);
+              struct.success.add(_elem336);
             }
           }
           struct.setSuccessIsSet(true);
@@ -27042,13 +27552,13 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list330 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<java.lang.String>(_list330.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem331;
-                  for (int _i332 = 0; _i332 < _list330.size; ++_i332)
+                  org.apache.thrift.protocol.TList _list338 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<java.lang.String>(_list338.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem339;
+                  for (int _i340 = 0; _i340 < _list338.size; ++_i340)
                   {
-                    _elem331 = iprot.readString();
-                    struct.success.add(_elem331);
+                    _elem339 = iprot.readString();
+                    struct.success.add(_elem339);
                   }
                   iprot.readListEnd();
                 }
@@ -27085,9 +27595,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.lang.String _iter333 : struct.success)
+            for (java.lang.String _iter341 : struct.success)
             {
-              oprot.writeString(_iter333);
+              oprot.writeString(_iter341);
             }
             oprot.writeListEnd();
           }
@@ -27126,9 +27636,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.lang.String _iter334 : struct.success)
+            for (java.lang.String _iter342 : struct.success)
             {
-              oprot.writeString(_iter334);
+              oprot.writeString(_iter342);
             }
           }
         }
@@ -27143,13 +27653,13 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list335 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.success = new java.util.ArrayList<java.lang.String>(_list335.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem336;
-            for (int _i337 = 0; _i337 < _list335.size; ++_i337)
+            org.apache.thrift.protocol.TList _list343 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new java.util.ArrayList<java.lang.String>(_list343.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem344;
+            for (int _i345 = 0; _i345 < _list343.size; ++_i345)
             {
-              _elem336 = iprot.readString();
-              struct.success.add(_elem336);
+              _elem344 = iprot.readString();
+              struct.success.add(_elem344);
             }
           }
           struct.setSuccessIsSet(true);
@@ -27936,14 +28446,14 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list338 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TDBInfo>(_list338.size);
-                  @org.apache.thrift.annotation.Nullable TDBInfo _elem339;
-                  for (int _i340 = 0; _i340 < _list338.size; ++_i340)
+                  org.apache.thrift.protocol.TList _list346 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TDBInfo>(_list346.size);
+                  @org.apache.thrift.annotation.Nullable TDBInfo _elem347;
+                  for (int _i348 = 0; _i348 < _list346.size; ++_i348)
                   {
-                    _elem339 = new TDBInfo();
-                    _elem339.read(iprot);
-                    struct.success.add(_elem339);
+                    _elem347 = new TDBInfo();
+                    _elem347.read(iprot);
+                    struct.success.add(_elem347);
                   }
                   iprot.readListEnd();
                 }
@@ -27980,9 +28490,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TDBInfo _iter341 : struct.success)
+            for (TDBInfo _iter349 : struct.success)
             {
-              _iter341.write(oprot);
+              _iter349.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -28021,9 +28531,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TDBInfo _iter342 : struct.success)
+            for (TDBInfo _iter350 : struct.success)
             {
-              _iter342.write(oprot);
+              _iter350.write(oprot);
             }
           }
         }
@@ -28038,14 +28548,14 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list343 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TDBInfo>(_list343.size);
-            @org.apache.thrift.annotation.Nullable TDBInfo _elem344;
-            for (int _i345 = 0; _i345 < _list343.size; ++_i345)
+            org.apache.thrift.protocol.TList _list351 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TDBInfo>(_list351.size);
+            @org.apache.thrift.annotation.Nullable TDBInfo _elem352;
+            for (int _i353 = 0; _i353 < _list351.size; ++_i353)
             {
-              _elem344 = new TDBInfo();
-              _elem344.read(iprot);
-              struct.success.add(_elem344);
+              _elem352 = new TDBInfo();
+              _elem352.read(iprot);
+              struct.success.add(_elem352);
             }
           }
           struct.setSuccessIsSet(true);
@@ -31978,14 +32488,14 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list346 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TNodeMemoryInfo>(_list346.size);
-                  @org.apache.thrift.annotation.Nullable TNodeMemoryInfo _elem347;
-                  for (int _i348 = 0; _i348 < _list346.size; ++_i348)
+                  org.apache.thrift.protocol.TList _list354 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TNodeMemoryInfo>(_list354.size);
+                  @org.apache.thrift.annotation.Nullable TNodeMemoryInfo _elem355;
+                  for (int _i356 = 0; _i356 < _list354.size; ++_i356)
                   {
-                    _elem347 = new TNodeMemoryInfo();
-                    _elem347.read(iprot);
-                    struct.success.add(_elem347);
+                    _elem355 = new TNodeMemoryInfo();
+                    _elem355.read(iprot);
+                    struct.success.add(_elem355);
                   }
                   iprot.readListEnd();
                 }
@@ -32022,9 +32532,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TNodeMemoryInfo _iter349 : struct.success)
+            for (TNodeMemoryInfo _iter357 : struct.success)
             {
-              _iter349.write(oprot);
+              _iter357.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -32063,9 +32573,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TNodeMemoryInfo _iter350 : struct.success)
+            for (TNodeMemoryInfo _iter358 : struct.success)
             {
-              _iter350.write(oprot);
+              _iter358.write(oprot);
             }
           }
         }
@@ -32080,14 +32590,14 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list351 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TNodeMemoryInfo>(_list351.size);
-            @org.apache.thrift.annotation.Nullable TNodeMemoryInfo _elem352;
-            for (int _i353 = 0; _i353 < _list351.size; ++_i353)
+            org.apache.thrift.protocol.TList _list359 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TNodeMemoryInfo>(_list359.size);
+            @org.apache.thrift.annotation.Nullable TNodeMemoryInfo _elem360;
+            for (int _i361 = 0; _i361 < _list359.size; ++_i361)
             {
-              _elem352 = new TNodeMemoryInfo();
-              _elem352.read(iprot);
-              struct.success.add(_elem352);
+              _elem360 = new TNodeMemoryInfo();
+              _elem360.read(iprot);
+              struct.success.add(_elem360);
             }
           }
           struct.setSuccessIsSet(true);
@@ -33562,6 +34072,2108 @@ public class OmniSci {
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, clear_gpu_memory_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.e = new TOmniSciException();
+          struct.e.read(iprot);
+          struct.setEIsSet(true);
+        }
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  public static class set_cur_session_args implements org.apache.thrift.TBase<set_cur_session_args, set_cur_session_args._Fields>, java.io.Serializable, Cloneable, Comparable<set_cur_session_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("set_cur_session_args");
+
+    private static final org.apache.thrift.protocol.TField PARENT_SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("parent_session", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField LEAF_SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("leaf_session", org.apache.thrift.protocol.TType.STRING, (short)2);
+    private static final org.apache.thrift.protocol.TField START_TIME_STR_FIELD_DESC = new org.apache.thrift.protocol.TField("start_time_str", org.apache.thrift.protocol.TType.STRING, (short)3);
+    private static final org.apache.thrift.protocol.TField LABEL_FIELD_DESC = new org.apache.thrift.protocol.TField("label", org.apache.thrift.protocol.TType.STRING, (short)4);
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new set_cur_session_argsStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new set_cur_session_argsTupleSchemeFactory();
+
+    public @org.apache.thrift.annotation.Nullable java.lang.String parent_session; // required
+    public @org.apache.thrift.annotation.Nullable java.lang.String leaf_session; // required
+    public @org.apache.thrift.annotation.Nullable java.lang.String start_time_str; // required
+    public @org.apache.thrift.annotation.Nullable java.lang.String label; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      PARENT_SESSION((short)1, "parent_session"),
+      LEAF_SESSION((short)2, "leaf_session"),
+      START_TIME_STR((short)3, "start_time_str"),
+      LABEL((short)4, "label");
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // PARENT_SESSION
+            return PARENT_SESSION;
+          case 2: // LEAF_SESSION
+            return LEAF_SESSION;
+          case 3: // START_TIME_STR
+            return START_TIME_STR;
+          case 4: // LABEL
+            return LABEL;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.PARENT_SESSION, new org.apache.thrift.meta_data.FieldMetaData("parent_session", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING          , "TSessionId")));
+      tmpMap.put(_Fields.LEAF_SESSION, new org.apache.thrift.meta_data.FieldMetaData("leaf_session", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING          , "TSessionId")));
+      tmpMap.put(_Fields.START_TIME_STR, new org.apache.thrift.meta_data.FieldMetaData("start_time_str", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.LABEL, new org.apache.thrift.meta_data.FieldMetaData("label", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(set_cur_session_args.class, metaDataMap);
+    }
+
+    public set_cur_session_args() {
+    }
+
+    public set_cur_session_args(
+      java.lang.String parent_session,
+      java.lang.String leaf_session,
+      java.lang.String start_time_str,
+      java.lang.String label)
+    {
+      this();
+      this.parent_session = parent_session;
+      this.leaf_session = leaf_session;
+      this.start_time_str = start_time_str;
+      this.label = label;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public set_cur_session_args(set_cur_session_args other) {
+      if (other.isSetParent_session()) {
+        this.parent_session = other.parent_session;
+      }
+      if (other.isSetLeaf_session()) {
+        this.leaf_session = other.leaf_session;
+      }
+      if (other.isSetStart_time_str()) {
+        this.start_time_str = other.start_time_str;
+      }
+      if (other.isSetLabel()) {
+        this.label = other.label;
+      }
+    }
+
+    public set_cur_session_args deepCopy() {
+      return new set_cur_session_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.parent_session = null;
+      this.leaf_session = null;
+      this.start_time_str = null;
+      this.label = null;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.String getParent_session() {
+      return this.parent_session;
+    }
+
+    public set_cur_session_args setParent_session(@org.apache.thrift.annotation.Nullable java.lang.String parent_session) {
+      this.parent_session = parent_session;
+      return this;
+    }
+
+    public void unsetParent_session() {
+      this.parent_session = null;
+    }
+
+    /** Returns true if field parent_session is set (has been assigned a value) and false otherwise */
+    public boolean isSetParent_session() {
+      return this.parent_session != null;
+    }
+
+    public void setParent_sessionIsSet(boolean value) {
+      if (!value) {
+        this.parent_session = null;
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.String getLeaf_session() {
+      return this.leaf_session;
+    }
+
+    public set_cur_session_args setLeaf_session(@org.apache.thrift.annotation.Nullable java.lang.String leaf_session) {
+      this.leaf_session = leaf_session;
+      return this;
+    }
+
+    public void unsetLeaf_session() {
+      this.leaf_session = null;
+    }
+
+    /** Returns true if field leaf_session is set (has been assigned a value) and false otherwise */
+    public boolean isSetLeaf_session() {
+      return this.leaf_session != null;
+    }
+
+    public void setLeaf_sessionIsSet(boolean value) {
+      if (!value) {
+        this.leaf_session = null;
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.String getStart_time_str() {
+      return this.start_time_str;
+    }
+
+    public set_cur_session_args setStart_time_str(@org.apache.thrift.annotation.Nullable java.lang.String start_time_str) {
+      this.start_time_str = start_time_str;
+      return this;
+    }
+
+    public void unsetStart_time_str() {
+      this.start_time_str = null;
+    }
+
+    /** Returns true if field start_time_str is set (has been assigned a value) and false otherwise */
+    public boolean isSetStart_time_str() {
+      return this.start_time_str != null;
+    }
+
+    public void setStart_time_strIsSet(boolean value) {
+      if (!value) {
+        this.start_time_str = null;
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.String getLabel() {
+      return this.label;
+    }
+
+    public set_cur_session_args setLabel(@org.apache.thrift.annotation.Nullable java.lang.String label) {
+      this.label = label;
+      return this;
+    }
+
+    public void unsetLabel() {
+      this.label = null;
+    }
+
+    /** Returns true if field label is set (has been assigned a value) and false otherwise */
+    public boolean isSetLabel() {
+      return this.label != null;
+    }
+
+    public void setLabelIsSet(boolean value) {
+      if (!value) {
+        this.label = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
+      switch (field) {
+      case PARENT_SESSION:
+        if (value == null) {
+          unsetParent_session();
+        } else {
+          setParent_session((java.lang.String)value);
+        }
+        break;
+
+      case LEAF_SESSION:
+        if (value == null) {
+          unsetLeaf_session();
+        } else {
+          setLeaf_session((java.lang.String)value);
+        }
+        break;
+
+      case START_TIME_STR:
+        if (value == null) {
+          unsetStart_time_str();
+        } else {
+          setStart_time_str((java.lang.String)value);
+        }
+        break;
+
+      case LABEL:
+        if (value == null) {
+          unsetLabel();
+        } else {
+          setLabel((java.lang.String)value);
+        }
+        break;
+
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      case PARENT_SESSION:
+        return getParent_session();
+
+      case LEAF_SESSION:
+        return getLeaf_session();
+
+      case START_TIME_STR:
+        return getStart_time_str();
+
+      case LABEL:
+        return getLabel();
+
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      case PARENT_SESSION:
+        return isSetParent_session();
+      case LEAF_SESSION:
+        return isSetLeaf_session();
+      case START_TIME_STR:
+        return isSetStart_time_str();
+      case LABEL:
+        return isSetLabel();
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof set_cur_session_args)
+        return this.equals((set_cur_session_args)that);
+      return false;
+    }
+
+    public boolean equals(set_cur_session_args that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      boolean this_present_parent_session = true && this.isSetParent_session();
+      boolean that_present_parent_session = true && that.isSetParent_session();
+      if (this_present_parent_session || that_present_parent_session) {
+        if (!(this_present_parent_session && that_present_parent_session))
+          return false;
+        if (!this.parent_session.equals(that.parent_session))
+          return false;
+      }
+
+      boolean this_present_leaf_session = true && this.isSetLeaf_session();
+      boolean that_present_leaf_session = true && that.isSetLeaf_session();
+      if (this_present_leaf_session || that_present_leaf_session) {
+        if (!(this_present_leaf_session && that_present_leaf_session))
+          return false;
+        if (!this.leaf_session.equals(that.leaf_session))
+          return false;
+      }
+
+      boolean this_present_start_time_str = true && this.isSetStart_time_str();
+      boolean that_present_start_time_str = true && that.isSetStart_time_str();
+      if (this_present_start_time_str || that_present_start_time_str) {
+        if (!(this_present_start_time_str && that_present_start_time_str))
+          return false;
+        if (!this.start_time_str.equals(that.start_time_str))
+          return false;
+      }
+
+      boolean this_present_label = true && this.isSetLabel();
+      boolean that_present_label = true && that.isSetLabel();
+      if (this_present_label || that_present_label) {
+        if (!(this_present_label && that_present_label))
+          return false;
+        if (!this.label.equals(that.label))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetParent_session()) ? 131071 : 524287);
+      if (isSetParent_session())
+        hashCode = hashCode * 8191 + parent_session.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetLeaf_session()) ? 131071 : 524287);
+      if (isSetLeaf_session())
+        hashCode = hashCode * 8191 + leaf_session.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetStart_time_str()) ? 131071 : 524287);
+      if (isSetStart_time_str())
+        hashCode = hashCode * 8191 + start_time_str.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetLabel()) ? 131071 : 524287);
+      if (isSetLabel())
+        hashCode = hashCode * 8191 + label.hashCode();
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(set_cur_session_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = java.lang.Boolean.valueOf(isSetParent_session()).compareTo(other.isSetParent_session());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetParent_session()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.parent_session, other.parent_session);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetLeaf_session()).compareTo(other.isSetLeaf_session());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetLeaf_session()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.leaf_session, other.leaf_session);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetStart_time_str()).compareTo(other.isSetStart_time_str());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetStart_time_str()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.start_time_str, other.start_time_str);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetLabel()).compareTo(other.isSetLabel());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetLabel()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.label, other.label);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+    }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("set_cur_session_args(");
+      boolean first = true;
+
+      sb.append("parent_session:");
+      if (this.parent_session == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.parent_session);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("leaf_session:");
+      if (this.leaf_session == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.leaf_session);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("start_time_str:");
+      if (this.start_time_str == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.start_time_str);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("label:");
+      if (this.label == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.label);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class set_cur_session_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public set_cur_session_argsStandardScheme getScheme() {
+        return new set_cur_session_argsStandardScheme();
+      }
+    }
+
+    private static class set_cur_session_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<set_cur_session_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, set_cur_session_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // PARENT_SESSION
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.parent_session = iprot.readString();
+                struct.setParent_sessionIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // LEAF_SESSION
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.leaf_session = iprot.readString();
+                struct.setLeaf_sessionIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 3: // START_TIME_STR
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.start_time_str = iprot.readString();
+                struct.setStart_time_strIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 4: // LABEL
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.label = iprot.readString();
+                struct.setLabelIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, set_cur_session_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.parent_session != null) {
+          oprot.writeFieldBegin(PARENT_SESSION_FIELD_DESC);
+          oprot.writeString(struct.parent_session);
+          oprot.writeFieldEnd();
+        }
+        if (struct.leaf_session != null) {
+          oprot.writeFieldBegin(LEAF_SESSION_FIELD_DESC);
+          oprot.writeString(struct.leaf_session);
+          oprot.writeFieldEnd();
+        }
+        if (struct.start_time_str != null) {
+          oprot.writeFieldBegin(START_TIME_STR_FIELD_DESC);
+          oprot.writeString(struct.start_time_str);
+          oprot.writeFieldEnd();
+        }
+        if (struct.label != null) {
+          oprot.writeFieldBegin(LABEL_FIELD_DESC);
+          oprot.writeString(struct.label);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class set_cur_session_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public set_cur_session_argsTupleScheme getScheme() {
+        return new set_cur_session_argsTupleScheme();
+      }
+    }
+
+    private static class set_cur_session_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<set_cur_session_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, set_cur_session_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetParent_session()) {
+          optionals.set(0);
+        }
+        if (struct.isSetLeaf_session()) {
+          optionals.set(1);
+        }
+        if (struct.isSetStart_time_str()) {
+          optionals.set(2);
+        }
+        if (struct.isSetLabel()) {
+          optionals.set(3);
+        }
+        oprot.writeBitSet(optionals, 4);
+        if (struct.isSetParent_session()) {
+          oprot.writeString(struct.parent_session);
+        }
+        if (struct.isSetLeaf_session()) {
+          oprot.writeString(struct.leaf_session);
+        }
+        if (struct.isSetStart_time_str()) {
+          oprot.writeString(struct.start_time_str);
+        }
+        if (struct.isSetLabel()) {
+          oprot.writeString(struct.label);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, set_cur_session_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(4);
+        if (incoming.get(0)) {
+          struct.parent_session = iprot.readString();
+          struct.setParent_sessionIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.leaf_session = iprot.readString();
+          struct.setLeaf_sessionIsSet(true);
+        }
+        if (incoming.get(2)) {
+          struct.start_time_str = iprot.readString();
+          struct.setStart_time_strIsSet(true);
+        }
+        if (incoming.get(3)) {
+          struct.label = iprot.readString();
+          struct.setLabelIsSet(true);
+        }
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  public static class set_cur_session_result implements org.apache.thrift.TBase<set_cur_session_result, set_cur_session_result._Fields>, java.io.Serializable, Cloneable, Comparable<set_cur_session_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("set_cur_session_result");
+
+    private static final org.apache.thrift.protocol.TField E_FIELD_DESC = new org.apache.thrift.protocol.TField("e", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new set_cur_session_resultStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new set_cur_session_resultTupleSchemeFactory();
+
+    public @org.apache.thrift.annotation.Nullable TOmniSciException e; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      E((short)1, "e");
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // E
+            return E;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.E, new org.apache.thrift.meta_data.FieldMetaData("e", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TOmniSciException.class)));
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(set_cur_session_result.class, metaDataMap);
+    }
+
+    public set_cur_session_result() {
+    }
+
+    public set_cur_session_result(
+      TOmniSciException e)
+    {
+      this();
+      this.e = e;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public set_cur_session_result(set_cur_session_result other) {
+      if (other.isSetE()) {
+        this.e = new TOmniSciException(other.e);
+      }
+    }
+
+    public set_cur_session_result deepCopy() {
+      return new set_cur_session_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.e = null;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public TOmniSciException getE() {
+      return this.e;
+    }
+
+    public set_cur_session_result setE(@org.apache.thrift.annotation.Nullable TOmniSciException e) {
+      this.e = e;
+      return this;
+    }
+
+    public void unsetE() {
+      this.e = null;
+    }
+
+    /** Returns true if field e is set (has been assigned a value) and false otherwise */
+    public boolean isSetE() {
+      return this.e != null;
+    }
+
+    public void setEIsSet(boolean value) {
+      if (!value) {
+        this.e = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
+      switch (field) {
+      case E:
+        if (value == null) {
+          unsetE();
+        } else {
+          setE((TOmniSciException)value);
+        }
+        break;
+
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      case E:
+        return getE();
+
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      case E:
+        return isSetE();
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof set_cur_session_result)
+        return this.equals((set_cur_session_result)that);
+      return false;
+    }
+
+    public boolean equals(set_cur_session_result that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      boolean this_present_e = true && this.isSetE();
+      boolean that_present_e = true && that.isSetE();
+      if (this_present_e || that_present_e) {
+        if (!(this_present_e && that_present_e))
+          return false;
+        if (!this.e.equals(that.e))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetE()) ? 131071 : 524287);
+      if (isSetE())
+        hashCode = hashCode * 8191 + e.hashCode();
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(set_cur_session_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = java.lang.Boolean.valueOf(isSetE()).compareTo(other.isSetE());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetE()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.e, other.e);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+      }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("set_cur_session_result(");
+      boolean first = true;
+
+      sb.append("e:");
+      if (this.e == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.e);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class set_cur_session_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public set_cur_session_resultStandardScheme getScheme() {
+        return new set_cur_session_resultStandardScheme();
+      }
+    }
+
+    private static class set_cur_session_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<set_cur_session_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, set_cur_session_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // E
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.e = new TOmniSciException();
+                struct.e.read(iprot);
+                struct.setEIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, set_cur_session_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.e != null) {
+          oprot.writeFieldBegin(E_FIELD_DESC);
+          struct.e.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class set_cur_session_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public set_cur_session_resultTupleScheme getScheme() {
+        return new set_cur_session_resultTupleScheme();
+      }
+    }
+
+    private static class set_cur_session_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<set_cur_session_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, set_cur_session_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetE()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetE()) {
+          struct.e.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, set_cur_session_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.e = new TOmniSciException();
+          struct.e.read(iprot);
+          struct.setEIsSet(true);
+        }
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  public static class invalidate_cur_session_args implements org.apache.thrift.TBase<invalidate_cur_session_args, invalidate_cur_session_args._Fields>, java.io.Serializable, Cloneable, Comparable<invalidate_cur_session_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("invalidate_cur_session_args");
+
+    private static final org.apache.thrift.protocol.TField PARENT_SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("parent_session", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField LEAF_SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("leaf_session", org.apache.thrift.protocol.TType.STRING, (short)2);
+    private static final org.apache.thrift.protocol.TField START_TIME_STR_FIELD_DESC = new org.apache.thrift.protocol.TField("start_time_str", org.apache.thrift.protocol.TType.STRING, (short)3);
+    private static final org.apache.thrift.protocol.TField LABEL_FIELD_DESC = new org.apache.thrift.protocol.TField("label", org.apache.thrift.protocol.TType.STRING, (short)4);
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new invalidate_cur_session_argsStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new invalidate_cur_session_argsTupleSchemeFactory();
+
+    public @org.apache.thrift.annotation.Nullable java.lang.String parent_session; // required
+    public @org.apache.thrift.annotation.Nullable java.lang.String leaf_session; // required
+    public @org.apache.thrift.annotation.Nullable java.lang.String start_time_str; // required
+    public @org.apache.thrift.annotation.Nullable java.lang.String label; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      PARENT_SESSION((short)1, "parent_session"),
+      LEAF_SESSION((short)2, "leaf_session"),
+      START_TIME_STR((short)3, "start_time_str"),
+      LABEL((short)4, "label");
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // PARENT_SESSION
+            return PARENT_SESSION;
+          case 2: // LEAF_SESSION
+            return LEAF_SESSION;
+          case 3: // START_TIME_STR
+            return START_TIME_STR;
+          case 4: // LABEL
+            return LABEL;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.PARENT_SESSION, new org.apache.thrift.meta_data.FieldMetaData("parent_session", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING          , "TSessionId")));
+      tmpMap.put(_Fields.LEAF_SESSION, new org.apache.thrift.meta_data.FieldMetaData("leaf_session", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING          , "TSessionId")));
+      tmpMap.put(_Fields.START_TIME_STR, new org.apache.thrift.meta_data.FieldMetaData("start_time_str", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.LABEL, new org.apache.thrift.meta_data.FieldMetaData("label", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(invalidate_cur_session_args.class, metaDataMap);
+    }
+
+    public invalidate_cur_session_args() {
+    }
+
+    public invalidate_cur_session_args(
+      java.lang.String parent_session,
+      java.lang.String leaf_session,
+      java.lang.String start_time_str,
+      java.lang.String label)
+    {
+      this();
+      this.parent_session = parent_session;
+      this.leaf_session = leaf_session;
+      this.start_time_str = start_time_str;
+      this.label = label;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public invalidate_cur_session_args(invalidate_cur_session_args other) {
+      if (other.isSetParent_session()) {
+        this.parent_session = other.parent_session;
+      }
+      if (other.isSetLeaf_session()) {
+        this.leaf_session = other.leaf_session;
+      }
+      if (other.isSetStart_time_str()) {
+        this.start_time_str = other.start_time_str;
+      }
+      if (other.isSetLabel()) {
+        this.label = other.label;
+      }
+    }
+
+    public invalidate_cur_session_args deepCopy() {
+      return new invalidate_cur_session_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.parent_session = null;
+      this.leaf_session = null;
+      this.start_time_str = null;
+      this.label = null;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.String getParent_session() {
+      return this.parent_session;
+    }
+
+    public invalidate_cur_session_args setParent_session(@org.apache.thrift.annotation.Nullable java.lang.String parent_session) {
+      this.parent_session = parent_session;
+      return this;
+    }
+
+    public void unsetParent_session() {
+      this.parent_session = null;
+    }
+
+    /** Returns true if field parent_session is set (has been assigned a value) and false otherwise */
+    public boolean isSetParent_session() {
+      return this.parent_session != null;
+    }
+
+    public void setParent_sessionIsSet(boolean value) {
+      if (!value) {
+        this.parent_session = null;
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.String getLeaf_session() {
+      return this.leaf_session;
+    }
+
+    public invalidate_cur_session_args setLeaf_session(@org.apache.thrift.annotation.Nullable java.lang.String leaf_session) {
+      this.leaf_session = leaf_session;
+      return this;
+    }
+
+    public void unsetLeaf_session() {
+      this.leaf_session = null;
+    }
+
+    /** Returns true if field leaf_session is set (has been assigned a value) and false otherwise */
+    public boolean isSetLeaf_session() {
+      return this.leaf_session != null;
+    }
+
+    public void setLeaf_sessionIsSet(boolean value) {
+      if (!value) {
+        this.leaf_session = null;
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.String getStart_time_str() {
+      return this.start_time_str;
+    }
+
+    public invalidate_cur_session_args setStart_time_str(@org.apache.thrift.annotation.Nullable java.lang.String start_time_str) {
+      this.start_time_str = start_time_str;
+      return this;
+    }
+
+    public void unsetStart_time_str() {
+      this.start_time_str = null;
+    }
+
+    /** Returns true if field start_time_str is set (has been assigned a value) and false otherwise */
+    public boolean isSetStart_time_str() {
+      return this.start_time_str != null;
+    }
+
+    public void setStart_time_strIsSet(boolean value) {
+      if (!value) {
+        this.start_time_str = null;
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.String getLabel() {
+      return this.label;
+    }
+
+    public invalidate_cur_session_args setLabel(@org.apache.thrift.annotation.Nullable java.lang.String label) {
+      this.label = label;
+      return this;
+    }
+
+    public void unsetLabel() {
+      this.label = null;
+    }
+
+    /** Returns true if field label is set (has been assigned a value) and false otherwise */
+    public boolean isSetLabel() {
+      return this.label != null;
+    }
+
+    public void setLabelIsSet(boolean value) {
+      if (!value) {
+        this.label = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
+      switch (field) {
+      case PARENT_SESSION:
+        if (value == null) {
+          unsetParent_session();
+        } else {
+          setParent_session((java.lang.String)value);
+        }
+        break;
+
+      case LEAF_SESSION:
+        if (value == null) {
+          unsetLeaf_session();
+        } else {
+          setLeaf_session((java.lang.String)value);
+        }
+        break;
+
+      case START_TIME_STR:
+        if (value == null) {
+          unsetStart_time_str();
+        } else {
+          setStart_time_str((java.lang.String)value);
+        }
+        break;
+
+      case LABEL:
+        if (value == null) {
+          unsetLabel();
+        } else {
+          setLabel((java.lang.String)value);
+        }
+        break;
+
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      case PARENT_SESSION:
+        return getParent_session();
+
+      case LEAF_SESSION:
+        return getLeaf_session();
+
+      case START_TIME_STR:
+        return getStart_time_str();
+
+      case LABEL:
+        return getLabel();
+
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      case PARENT_SESSION:
+        return isSetParent_session();
+      case LEAF_SESSION:
+        return isSetLeaf_session();
+      case START_TIME_STR:
+        return isSetStart_time_str();
+      case LABEL:
+        return isSetLabel();
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof invalidate_cur_session_args)
+        return this.equals((invalidate_cur_session_args)that);
+      return false;
+    }
+
+    public boolean equals(invalidate_cur_session_args that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      boolean this_present_parent_session = true && this.isSetParent_session();
+      boolean that_present_parent_session = true && that.isSetParent_session();
+      if (this_present_parent_session || that_present_parent_session) {
+        if (!(this_present_parent_session && that_present_parent_session))
+          return false;
+        if (!this.parent_session.equals(that.parent_session))
+          return false;
+      }
+
+      boolean this_present_leaf_session = true && this.isSetLeaf_session();
+      boolean that_present_leaf_session = true && that.isSetLeaf_session();
+      if (this_present_leaf_session || that_present_leaf_session) {
+        if (!(this_present_leaf_session && that_present_leaf_session))
+          return false;
+        if (!this.leaf_session.equals(that.leaf_session))
+          return false;
+      }
+
+      boolean this_present_start_time_str = true && this.isSetStart_time_str();
+      boolean that_present_start_time_str = true && that.isSetStart_time_str();
+      if (this_present_start_time_str || that_present_start_time_str) {
+        if (!(this_present_start_time_str && that_present_start_time_str))
+          return false;
+        if (!this.start_time_str.equals(that.start_time_str))
+          return false;
+      }
+
+      boolean this_present_label = true && this.isSetLabel();
+      boolean that_present_label = true && that.isSetLabel();
+      if (this_present_label || that_present_label) {
+        if (!(this_present_label && that_present_label))
+          return false;
+        if (!this.label.equals(that.label))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetParent_session()) ? 131071 : 524287);
+      if (isSetParent_session())
+        hashCode = hashCode * 8191 + parent_session.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetLeaf_session()) ? 131071 : 524287);
+      if (isSetLeaf_session())
+        hashCode = hashCode * 8191 + leaf_session.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetStart_time_str()) ? 131071 : 524287);
+      if (isSetStart_time_str())
+        hashCode = hashCode * 8191 + start_time_str.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetLabel()) ? 131071 : 524287);
+      if (isSetLabel())
+        hashCode = hashCode * 8191 + label.hashCode();
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(invalidate_cur_session_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = java.lang.Boolean.valueOf(isSetParent_session()).compareTo(other.isSetParent_session());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetParent_session()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.parent_session, other.parent_session);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetLeaf_session()).compareTo(other.isSetLeaf_session());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetLeaf_session()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.leaf_session, other.leaf_session);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetStart_time_str()).compareTo(other.isSetStart_time_str());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetStart_time_str()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.start_time_str, other.start_time_str);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetLabel()).compareTo(other.isSetLabel());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetLabel()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.label, other.label);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+    }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("invalidate_cur_session_args(");
+      boolean first = true;
+
+      sb.append("parent_session:");
+      if (this.parent_session == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.parent_session);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("leaf_session:");
+      if (this.leaf_session == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.leaf_session);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("start_time_str:");
+      if (this.start_time_str == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.start_time_str);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("label:");
+      if (this.label == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.label);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class invalidate_cur_session_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public invalidate_cur_session_argsStandardScheme getScheme() {
+        return new invalidate_cur_session_argsStandardScheme();
+      }
+    }
+
+    private static class invalidate_cur_session_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<invalidate_cur_session_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, invalidate_cur_session_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // PARENT_SESSION
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.parent_session = iprot.readString();
+                struct.setParent_sessionIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // LEAF_SESSION
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.leaf_session = iprot.readString();
+                struct.setLeaf_sessionIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 3: // START_TIME_STR
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.start_time_str = iprot.readString();
+                struct.setStart_time_strIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 4: // LABEL
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.label = iprot.readString();
+                struct.setLabelIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, invalidate_cur_session_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.parent_session != null) {
+          oprot.writeFieldBegin(PARENT_SESSION_FIELD_DESC);
+          oprot.writeString(struct.parent_session);
+          oprot.writeFieldEnd();
+        }
+        if (struct.leaf_session != null) {
+          oprot.writeFieldBegin(LEAF_SESSION_FIELD_DESC);
+          oprot.writeString(struct.leaf_session);
+          oprot.writeFieldEnd();
+        }
+        if (struct.start_time_str != null) {
+          oprot.writeFieldBegin(START_TIME_STR_FIELD_DESC);
+          oprot.writeString(struct.start_time_str);
+          oprot.writeFieldEnd();
+        }
+        if (struct.label != null) {
+          oprot.writeFieldBegin(LABEL_FIELD_DESC);
+          oprot.writeString(struct.label);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class invalidate_cur_session_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public invalidate_cur_session_argsTupleScheme getScheme() {
+        return new invalidate_cur_session_argsTupleScheme();
+      }
+    }
+
+    private static class invalidate_cur_session_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<invalidate_cur_session_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, invalidate_cur_session_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetParent_session()) {
+          optionals.set(0);
+        }
+        if (struct.isSetLeaf_session()) {
+          optionals.set(1);
+        }
+        if (struct.isSetStart_time_str()) {
+          optionals.set(2);
+        }
+        if (struct.isSetLabel()) {
+          optionals.set(3);
+        }
+        oprot.writeBitSet(optionals, 4);
+        if (struct.isSetParent_session()) {
+          oprot.writeString(struct.parent_session);
+        }
+        if (struct.isSetLeaf_session()) {
+          oprot.writeString(struct.leaf_session);
+        }
+        if (struct.isSetStart_time_str()) {
+          oprot.writeString(struct.start_time_str);
+        }
+        if (struct.isSetLabel()) {
+          oprot.writeString(struct.label);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, invalidate_cur_session_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(4);
+        if (incoming.get(0)) {
+          struct.parent_session = iprot.readString();
+          struct.setParent_sessionIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.leaf_session = iprot.readString();
+          struct.setLeaf_sessionIsSet(true);
+        }
+        if (incoming.get(2)) {
+          struct.start_time_str = iprot.readString();
+          struct.setStart_time_strIsSet(true);
+        }
+        if (incoming.get(3)) {
+          struct.label = iprot.readString();
+          struct.setLabelIsSet(true);
+        }
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  public static class invalidate_cur_session_result implements org.apache.thrift.TBase<invalidate_cur_session_result, invalidate_cur_session_result._Fields>, java.io.Serializable, Cloneable, Comparable<invalidate_cur_session_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("invalidate_cur_session_result");
+
+    private static final org.apache.thrift.protocol.TField E_FIELD_DESC = new org.apache.thrift.protocol.TField("e", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new invalidate_cur_session_resultStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new invalidate_cur_session_resultTupleSchemeFactory();
+
+    public @org.apache.thrift.annotation.Nullable TOmniSciException e; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      E((short)1, "e");
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // E
+            return E;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.E, new org.apache.thrift.meta_data.FieldMetaData("e", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TOmniSciException.class)));
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(invalidate_cur_session_result.class, metaDataMap);
+    }
+
+    public invalidate_cur_session_result() {
+    }
+
+    public invalidate_cur_session_result(
+      TOmniSciException e)
+    {
+      this();
+      this.e = e;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public invalidate_cur_session_result(invalidate_cur_session_result other) {
+      if (other.isSetE()) {
+        this.e = new TOmniSciException(other.e);
+      }
+    }
+
+    public invalidate_cur_session_result deepCopy() {
+      return new invalidate_cur_session_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.e = null;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public TOmniSciException getE() {
+      return this.e;
+    }
+
+    public invalidate_cur_session_result setE(@org.apache.thrift.annotation.Nullable TOmniSciException e) {
+      this.e = e;
+      return this;
+    }
+
+    public void unsetE() {
+      this.e = null;
+    }
+
+    /** Returns true if field e is set (has been assigned a value) and false otherwise */
+    public boolean isSetE() {
+      return this.e != null;
+    }
+
+    public void setEIsSet(boolean value) {
+      if (!value) {
+        this.e = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
+      switch (field) {
+      case E:
+        if (value == null) {
+          unsetE();
+        } else {
+          setE((TOmniSciException)value);
+        }
+        break;
+
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      case E:
+        return getE();
+
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      case E:
+        return isSetE();
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof invalidate_cur_session_result)
+        return this.equals((invalidate_cur_session_result)that);
+      return false;
+    }
+
+    public boolean equals(invalidate_cur_session_result that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      boolean this_present_e = true && this.isSetE();
+      boolean that_present_e = true && that.isSetE();
+      if (this_present_e || that_present_e) {
+        if (!(this_present_e && that_present_e))
+          return false;
+        if (!this.e.equals(that.e))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetE()) ? 131071 : 524287);
+      if (isSetE())
+        hashCode = hashCode * 8191 + e.hashCode();
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(invalidate_cur_session_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = java.lang.Boolean.valueOf(isSetE()).compareTo(other.isSetE());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetE()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.e, other.e);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+      }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("invalidate_cur_session_result(");
+      boolean first = true;
+
+      sb.append("e:");
+      if (this.e == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.e);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class invalidate_cur_session_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public invalidate_cur_session_resultStandardScheme getScheme() {
+        return new invalidate_cur_session_resultStandardScheme();
+      }
+    }
+
+    private static class invalidate_cur_session_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<invalidate_cur_session_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, invalidate_cur_session_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // E
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.e = new TOmniSciException();
+                struct.e.read(iprot);
+                struct.setEIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, invalidate_cur_session_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.e != null) {
+          oprot.writeFieldBegin(E_FIELD_DESC);
+          struct.e.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class invalidate_cur_session_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public invalidate_cur_session_resultTupleScheme getScheme() {
+        return new invalidate_cur_session_resultTupleScheme();
+      }
+    }
+
+    private static class invalidate_cur_session_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<invalidate_cur_session_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, invalidate_cur_session_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetE()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetE()) {
+          struct.e.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, invalidate_cur_session_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -38192,14 +40804,14 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list354 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TTableEpochInfo>(_list354.size);
-                  @org.apache.thrift.annotation.Nullable TTableEpochInfo _elem355;
-                  for (int _i356 = 0; _i356 < _list354.size; ++_i356)
+                  org.apache.thrift.protocol.TList _list362 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TTableEpochInfo>(_list362.size);
+                  @org.apache.thrift.annotation.Nullable TTableEpochInfo _elem363;
+                  for (int _i364 = 0; _i364 < _list362.size; ++_i364)
                   {
-                    _elem355 = new TTableEpochInfo();
-                    _elem355.read(iprot);
-                    struct.success.add(_elem355);
+                    _elem363 = new TTableEpochInfo();
+                    _elem363.read(iprot);
+                    struct.success.add(_elem363);
                   }
                   iprot.readListEnd();
                 }
@@ -38227,9 +40839,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TTableEpochInfo _iter357 : struct.success)
+            for (TTableEpochInfo _iter365 : struct.success)
             {
-              _iter357.write(oprot);
+              _iter365.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -38260,9 +40872,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TTableEpochInfo _iter358 : struct.success)
+            for (TTableEpochInfo _iter366 : struct.success)
             {
-              _iter358.write(oprot);
+              _iter366.write(oprot);
             }
           }
         }
@@ -38274,14 +40886,14 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list359 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TTableEpochInfo>(_list359.size);
-            @org.apache.thrift.annotation.Nullable TTableEpochInfo _elem360;
-            for (int _i361 = 0; _i361 < _list359.size; ++_i361)
+            org.apache.thrift.protocol.TList _list367 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TTableEpochInfo>(_list367.size);
+            @org.apache.thrift.annotation.Nullable TTableEpochInfo _elem368;
+            for (int _i369 = 0; _i369 < _list367.size; ++_i369)
             {
-              _elem360 = new TTableEpochInfo();
-              _elem360.read(iprot);
-              struct.success.add(_elem360);
+              _elem368 = new TTableEpochInfo();
+              _elem368.read(iprot);
+              struct.success.add(_elem368);
             }
           }
           struct.setSuccessIsSet(true);
@@ -38791,14 +41403,14 @@ public class OmniSci {
             case 3: // TABLE_EPOCHS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list362 = iprot.readListBegin();
-                  struct.table_epochs = new java.util.ArrayList<TTableEpochInfo>(_list362.size);
-                  @org.apache.thrift.annotation.Nullable TTableEpochInfo _elem363;
-                  for (int _i364 = 0; _i364 < _list362.size; ++_i364)
+                  org.apache.thrift.protocol.TList _list370 = iprot.readListBegin();
+                  struct.table_epochs = new java.util.ArrayList<TTableEpochInfo>(_list370.size);
+                  @org.apache.thrift.annotation.Nullable TTableEpochInfo _elem371;
+                  for (int _i372 = 0; _i372 < _list370.size; ++_i372)
                   {
-                    _elem363 = new TTableEpochInfo();
-                    _elem363.read(iprot);
-                    struct.table_epochs.add(_elem363);
+                    _elem371 = new TTableEpochInfo();
+                    _elem371.read(iprot);
+                    struct.table_epochs.add(_elem371);
                   }
                   iprot.readListEnd();
                 }
@@ -38834,9 +41446,9 @@ public class OmniSci {
           oprot.writeFieldBegin(TABLE_EPOCHS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.table_epochs.size()));
-            for (TTableEpochInfo _iter365 : struct.table_epochs)
+            for (TTableEpochInfo _iter373 : struct.table_epochs)
             {
-              _iter365.write(oprot);
+              _iter373.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -38879,9 +41491,9 @@ public class OmniSci {
         if (struct.isSetTable_epochs()) {
           {
             oprot.writeI32(struct.table_epochs.size());
-            for (TTableEpochInfo _iter366 : struct.table_epochs)
+            for (TTableEpochInfo _iter374 : struct.table_epochs)
             {
-              _iter366.write(oprot);
+              _iter374.write(oprot);
             }
           }
         }
@@ -38901,14 +41513,14 @@ public class OmniSci {
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TList _list367 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.table_epochs = new java.util.ArrayList<TTableEpochInfo>(_list367.size);
-            @org.apache.thrift.annotation.Nullable TTableEpochInfo _elem368;
-            for (int _i369 = 0; _i369 < _list367.size; ++_i369)
+            org.apache.thrift.protocol.TList _list375 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.table_epochs = new java.util.ArrayList<TTableEpochInfo>(_list375.size);
+            @org.apache.thrift.annotation.Nullable TTableEpochInfo _elem376;
+            for (int _i377 = 0; _i377 < _list375.size; ++_i377)
             {
-              _elem368 = new TTableEpochInfo();
-              _elem368.read(iprot);
-              struct.table_epochs.add(_elem368);
+              _elem376 = new TTableEpochInfo();
+              _elem376.read(iprot);
+              struct.table_epochs.add(_elem376);
             }
           }
           struct.setTable_epochsIsSet(true);
@@ -46700,14 +49312,14 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list370 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TColumnType>(_list370.size);
-                  @org.apache.thrift.annotation.Nullable TColumnType _elem371;
-                  for (int _i372 = 0; _i372 < _list370.size; ++_i372)
+                  org.apache.thrift.protocol.TList _list378 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TColumnType>(_list378.size);
+                  @org.apache.thrift.annotation.Nullable TColumnType _elem379;
+                  for (int _i380 = 0; _i380 < _list378.size; ++_i380)
                   {
-                    _elem371 = new TColumnType();
-                    _elem371.read(iprot);
-                    struct.success.add(_elem371);
+                    _elem379 = new TColumnType();
+                    _elem379.read(iprot);
+                    struct.success.add(_elem379);
                   }
                   iprot.readListEnd();
                 }
@@ -46744,9 +49356,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TColumnType _iter373 : struct.success)
+            for (TColumnType _iter381 : struct.success)
             {
-              _iter373.write(oprot);
+              _iter381.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -46785,9 +49397,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TColumnType _iter374 : struct.success)
+            for (TColumnType _iter382 : struct.success)
             {
-              _iter374.write(oprot);
+              _iter382.write(oprot);
             }
           }
         }
@@ -46802,14 +49414,14 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list375 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TColumnType>(_list375.size);
-            @org.apache.thrift.annotation.Nullable TColumnType _elem376;
-            for (int _i377 = 0; _i377 < _list375.size; ++_i377)
+            org.apache.thrift.protocol.TList _list383 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TColumnType>(_list383.size);
+            @org.apache.thrift.annotation.Nullable TColumnType _elem384;
+            for (int _i385 = 0; _i385 < _list383.size; ++_i385)
             {
-              _elem376 = new TColumnType();
-              _elem376.read(iprot);
-              struct.success.add(_elem376);
+              _elem384 = new TColumnType();
+              _elem384.read(iprot);
+              struct.success.add(_elem384);
             }
           }
           struct.setSuccessIsSet(true);
@@ -47801,14 +50413,14 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list378 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<com.omnisci.thrift.calciteserver.TCompletionHint>(_list378.size);
-                  @org.apache.thrift.annotation.Nullable com.omnisci.thrift.calciteserver.TCompletionHint _elem379;
-                  for (int _i380 = 0; _i380 < _list378.size; ++_i380)
+                  org.apache.thrift.protocol.TList _list386 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<com.omnisci.thrift.calciteserver.TCompletionHint>(_list386.size);
+                  @org.apache.thrift.annotation.Nullable com.omnisci.thrift.calciteserver.TCompletionHint _elem387;
+                  for (int _i388 = 0; _i388 < _list386.size; ++_i388)
                   {
-                    _elem379 = new com.omnisci.thrift.calciteserver.TCompletionHint();
-                    _elem379.read(iprot);
-                    struct.success.add(_elem379);
+                    _elem387 = new com.omnisci.thrift.calciteserver.TCompletionHint();
+                    _elem387.read(iprot);
+                    struct.success.add(_elem387);
                   }
                   iprot.readListEnd();
                 }
@@ -47845,9 +50457,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (com.omnisci.thrift.calciteserver.TCompletionHint _iter381 : struct.success)
+            for (com.omnisci.thrift.calciteserver.TCompletionHint _iter389 : struct.success)
             {
-              _iter381.write(oprot);
+              _iter389.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -47886,9 +50498,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (com.omnisci.thrift.calciteserver.TCompletionHint _iter382 : struct.success)
+            for (com.omnisci.thrift.calciteserver.TCompletionHint _iter390 : struct.success)
             {
-              _iter382.write(oprot);
+              _iter390.write(oprot);
             }
           }
         }
@@ -47903,14 +50515,14 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list383 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<com.omnisci.thrift.calciteserver.TCompletionHint>(_list383.size);
-            @org.apache.thrift.annotation.Nullable com.omnisci.thrift.calciteserver.TCompletionHint _elem384;
-            for (int _i385 = 0; _i385 < _list383.size; ++_i385)
+            org.apache.thrift.protocol.TList _list391 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<com.omnisci.thrift.calciteserver.TCompletionHint>(_list391.size);
+            @org.apache.thrift.annotation.Nullable com.omnisci.thrift.calciteserver.TCompletionHint _elem392;
+            for (int _i393 = 0; _i393 < _list391.size; ++_i393)
             {
-              _elem384 = new com.omnisci.thrift.calciteserver.TCompletionHint();
-              _elem384.read(iprot);
-              struct.success.add(_elem384);
+              _elem392 = new com.omnisci.thrift.calciteserver.TCompletionHint();
+              _elem392.read(iprot);
+              struct.success.add(_elem392);
             }
           }
           struct.setSuccessIsSet(true);
@@ -50865,25 +53477,25 @@ public class OmniSci {
             case 4: // TABLE_COL_NAMES
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map386 = iprot.readMapBegin();
-                  struct.table_col_names = new java.util.HashMap<java.lang.String,java.util.List<java.lang.String>>(2*_map386.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _key387;
-                  @org.apache.thrift.annotation.Nullable java.util.List<java.lang.String> _val388;
-                  for (int _i389 = 0; _i389 < _map386.size; ++_i389)
+                  org.apache.thrift.protocol.TMap _map394 = iprot.readMapBegin();
+                  struct.table_col_names = new java.util.HashMap<java.lang.String,java.util.List<java.lang.String>>(2*_map394.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _key395;
+                  @org.apache.thrift.annotation.Nullable java.util.List<java.lang.String> _val396;
+                  for (int _i397 = 0; _i397 < _map394.size; ++_i397)
                   {
-                    _key387 = iprot.readString();
+                    _key395 = iprot.readString();
                     {
-                      org.apache.thrift.protocol.TList _list390 = iprot.readListBegin();
-                      _val388 = new java.util.ArrayList<java.lang.String>(_list390.size);
-                      @org.apache.thrift.annotation.Nullable java.lang.String _elem391;
-                      for (int _i392 = 0; _i392 < _list390.size; ++_i392)
+                      org.apache.thrift.protocol.TList _list398 = iprot.readListBegin();
+                      _val396 = new java.util.ArrayList<java.lang.String>(_list398.size);
+                      @org.apache.thrift.annotation.Nullable java.lang.String _elem399;
+                      for (int _i400 = 0; _i400 < _list398.size; ++_i400)
                       {
-                        _elem391 = iprot.readString();
-                        _val388.add(_elem391);
+                        _elem399 = iprot.readString();
+                        _val396.add(_elem399);
                       }
                       iprot.readListEnd();
                     }
-                    struct.table_col_names.put(_key387, _val388);
+                    struct.table_col_names.put(_key395, _val396);
                   }
                   iprot.readMapEnd();
                 }
@@ -50948,14 +53560,14 @@ public class OmniSci {
           oprot.writeFieldBegin(TABLE_COL_NAMES_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, struct.table_col_names.size()));
-            for (java.util.Map.Entry<java.lang.String, java.util.List<java.lang.String>> _iter393 : struct.table_col_names.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.util.List<java.lang.String>> _iter401 : struct.table_col_names.entrySet())
             {
-              oprot.writeString(_iter393.getKey());
+              oprot.writeString(_iter401.getKey());
               {
-                oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, _iter393.getValue().size()));
-                for (java.lang.String _iter394 : _iter393.getValue())
+                oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, _iter401.getValue().size()));
+                for (java.lang.String _iter402 : _iter401.getValue())
                 {
-                  oprot.writeString(_iter394);
+                  oprot.writeString(_iter402);
                 }
                 oprot.writeListEnd();
               }
@@ -51027,14 +53639,14 @@ public class OmniSci {
         if (struct.isSetTable_col_names()) {
           {
             oprot.writeI32(struct.table_col_names.size());
-            for (java.util.Map.Entry<java.lang.String, java.util.List<java.lang.String>> _iter395 : struct.table_col_names.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.util.List<java.lang.String>> _iter403 : struct.table_col_names.entrySet())
             {
-              oprot.writeString(_iter395.getKey());
+              oprot.writeString(_iter403.getKey());
               {
-                oprot.writeI32(_iter395.getValue().size());
-                for (java.lang.String _iter396 : _iter395.getValue())
+                oprot.writeI32(_iter403.getValue().size());
+                for (java.lang.String _iter404 : _iter403.getValue())
                 {
-                  oprot.writeString(_iter396);
+                  oprot.writeString(_iter404);
                 }
               }
             }
@@ -51070,24 +53682,24 @@ public class OmniSci {
         }
         if (incoming.get(3)) {
           {
-            org.apache.thrift.protocol.TMap _map397 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, iprot.readI32());
-            struct.table_col_names = new java.util.HashMap<java.lang.String,java.util.List<java.lang.String>>(2*_map397.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _key398;
-            @org.apache.thrift.annotation.Nullable java.util.List<java.lang.String> _val399;
-            for (int _i400 = 0; _i400 < _map397.size; ++_i400)
+            org.apache.thrift.protocol.TMap _map405 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, iprot.readI32());
+            struct.table_col_names = new java.util.HashMap<java.lang.String,java.util.List<java.lang.String>>(2*_map405.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _key406;
+            @org.apache.thrift.annotation.Nullable java.util.List<java.lang.String> _val407;
+            for (int _i408 = 0; _i408 < _map405.size; ++_i408)
             {
-              _key398 = iprot.readString();
+              _key406 = iprot.readString();
               {
-                org.apache.thrift.protocol.TList _list401 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-                _val399 = new java.util.ArrayList<java.lang.String>(_list401.size);
-                @org.apache.thrift.annotation.Nullable java.lang.String _elem402;
-                for (int _i403 = 0; _i403 < _list401.size; ++_i403)
+                org.apache.thrift.protocol.TList _list409 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+                _val407 = new java.util.ArrayList<java.lang.String>(_list409.size);
+                @org.apache.thrift.annotation.Nullable java.lang.String _elem410;
+                for (int _i411 = 0; _i411 < _list409.size; ++_i411)
                 {
-                  _elem402 = iprot.readString();
-                  _val399.add(_elem402);
+                  _elem410 = iprot.readString();
+                  _val407.add(_elem410);
                 }
               }
-              struct.table_col_names.put(_key398, _val399);
+              struct.table_col_names.put(_key406, _val407);
             }
           }
           struct.setTable_col_namesIsSet(true);
@@ -53306,14 +55918,14 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list404 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TDashboard>(_list404.size);
-                  @org.apache.thrift.annotation.Nullable TDashboard _elem405;
-                  for (int _i406 = 0; _i406 < _list404.size; ++_i406)
+                  org.apache.thrift.protocol.TList _list412 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TDashboard>(_list412.size);
+                  @org.apache.thrift.annotation.Nullable TDashboard _elem413;
+                  for (int _i414 = 0; _i414 < _list412.size; ++_i414)
                   {
-                    _elem405 = new TDashboard();
-                    _elem405.read(iprot);
-                    struct.success.add(_elem405);
+                    _elem413 = new TDashboard();
+                    _elem413.read(iprot);
+                    struct.success.add(_elem413);
                   }
                   iprot.readListEnd();
                 }
@@ -53350,9 +55962,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TDashboard _iter407 : struct.success)
+            for (TDashboard _iter415 : struct.success)
             {
-              _iter407.write(oprot);
+              _iter415.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -53391,9 +56003,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TDashboard _iter408 : struct.success)
+            for (TDashboard _iter416 : struct.success)
             {
-              _iter408.write(oprot);
+              _iter416.write(oprot);
             }
           }
         }
@@ -53408,14 +56020,14 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list409 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TDashboard>(_list409.size);
-            @org.apache.thrift.annotation.Nullable TDashboard _elem410;
-            for (int _i411 = 0; _i411 < _list409.size; ++_i411)
+            org.apache.thrift.protocol.TList _list417 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TDashboard>(_list417.size);
+            @org.apache.thrift.annotation.Nullable TDashboard _elem418;
+            for (int _i419 = 0; _i419 < _list417.size; ++_i419)
             {
-              _elem410 = new TDashboard();
-              _elem410.read(iprot);
-              struct.success.add(_elem410);
+              _elem418 = new TDashboard();
+              _elem418.read(iprot);
+              struct.success.add(_elem418);
             }
           }
           struct.setSuccessIsSet(true);
@@ -57480,13 +60092,13 @@ public class OmniSci {
             case 2: // DASHBOARD_IDS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list412 = iprot.readListBegin();
-                  struct.dashboard_ids = new java.util.ArrayList<java.lang.Integer>(_list412.size);
-                  int _elem413;
-                  for (int _i414 = 0; _i414 < _list412.size; ++_i414)
+                  org.apache.thrift.protocol.TList _list420 = iprot.readListBegin();
+                  struct.dashboard_ids = new java.util.ArrayList<java.lang.Integer>(_list420.size);
+                  int _elem421;
+                  for (int _i422 = 0; _i422 < _list420.size; ++_i422)
                   {
-                    _elem413 = iprot.readI32();
-                    struct.dashboard_ids.add(_elem413);
+                    _elem421 = iprot.readI32();
+                    struct.dashboard_ids.add(_elem421);
                   }
                   iprot.readListEnd();
                 }
@@ -57498,13 +60110,13 @@ public class OmniSci {
             case 3: // GROUPS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list415 = iprot.readListBegin();
-                  struct.groups = new java.util.ArrayList<java.lang.String>(_list415.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem416;
-                  for (int _i417 = 0; _i417 < _list415.size; ++_i417)
+                  org.apache.thrift.protocol.TList _list423 = iprot.readListBegin();
+                  struct.groups = new java.util.ArrayList<java.lang.String>(_list423.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem424;
+                  for (int _i425 = 0; _i425 < _list423.size; ++_i425)
                   {
-                    _elem416 = iprot.readString();
-                    struct.groups.add(_elem416);
+                    _elem424 = iprot.readString();
+                    struct.groups.add(_elem424);
                   }
                   iprot.readListEnd();
                 }
@@ -57546,9 +60158,9 @@ public class OmniSci {
           oprot.writeFieldBegin(DASHBOARD_IDS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, struct.dashboard_ids.size()));
-            for (int _iter418 : struct.dashboard_ids)
+            for (int _iter426 : struct.dashboard_ids)
             {
-              oprot.writeI32(_iter418);
+              oprot.writeI32(_iter426);
             }
             oprot.writeListEnd();
           }
@@ -57558,9 +60170,9 @@ public class OmniSci {
           oprot.writeFieldBegin(GROUPS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.groups.size()));
-            for (java.lang.String _iter419 : struct.groups)
+            for (java.lang.String _iter427 : struct.groups)
             {
-              oprot.writeString(_iter419);
+              oprot.writeString(_iter427);
             }
             oprot.writeListEnd();
           }
@@ -57608,18 +60220,18 @@ public class OmniSci {
         if (struct.isSetDashboard_ids()) {
           {
             oprot.writeI32(struct.dashboard_ids.size());
-            for (int _iter420 : struct.dashboard_ids)
+            for (int _iter428 : struct.dashboard_ids)
             {
-              oprot.writeI32(_iter420);
+              oprot.writeI32(_iter428);
             }
           }
         }
         if (struct.isSetGroups()) {
           {
             oprot.writeI32(struct.groups.size());
-            for (java.lang.String _iter421 : struct.groups)
+            for (java.lang.String _iter429 : struct.groups)
             {
-              oprot.writeString(_iter421);
+              oprot.writeString(_iter429);
             }
           }
         }
@@ -57638,26 +60250,26 @@ public class OmniSci {
         }
         if (incoming.get(1)) {
           {
-            org.apache.thrift.protocol.TList _list422 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
-            struct.dashboard_ids = new java.util.ArrayList<java.lang.Integer>(_list422.size);
-            int _elem423;
-            for (int _i424 = 0; _i424 < _list422.size; ++_i424)
+            org.apache.thrift.protocol.TList _list430 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
+            struct.dashboard_ids = new java.util.ArrayList<java.lang.Integer>(_list430.size);
+            int _elem431;
+            for (int _i432 = 0; _i432 < _list430.size; ++_i432)
             {
-              _elem423 = iprot.readI32();
-              struct.dashboard_ids.add(_elem423);
+              _elem431 = iprot.readI32();
+              struct.dashboard_ids.add(_elem431);
             }
           }
           struct.setDashboard_idsIsSet(true);
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TList _list425 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.groups = new java.util.ArrayList<java.lang.String>(_list425.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem426;
-            for (int _i427 = 0; _i427 < _list425.size; ++_i427)
+            org.apache.thrift.protocol.TList _list433 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.groups = new java.util.ArrayList<java.lang.String>(_list433.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem434;
+            for (int _i435 = 0; _i435 < _list433.size; ++_i435)
             {
-              _elem426 = iprot.readString();
-              struct.groups.add(_elem426);
+              _elem434 = iprot.readString();
+              struct.groups.add(_elem434);
             }
           }
           struct.setGroupsIsSet(true);
@@ -58451,13 +61063,13 @@ public class OmniSci {
             case 2: // DASHBOARD_IDS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list428 = iprot.readListBegin();
-                  struct.dashboard_ids = new java.util.ArrayList<java.lang.Integer>(_list428.size);
-                  int _elem429;
-                  for (int _i430 = 0; _i430 < _list428.size; ++_i430)
+                  org.apache.thrift.protocol.TList _list436 = iprot.readListBegin();
+                  struct.dashboard_ids = new java.util.ArrayList<java.lang.Integer>(_list436.size);
+                  int _elem437;
+                  for (int _i438 = 0; _i438 < _list436.size; ++_i438)
                   {
-                    _elem429 = iprot.readI32();
-                    struct.dashboard_ids.add(_elem429);
+                    _elem437 = iprot.readI32();
+                    struct.dashboard_ids.add(_elem437);
                   }
                   iprot.readListEnd();
                 }
@@ -58490,9 +61102,9 @@ public class OmniSci {
           oprot.writeFieldBegin(DASHBOARD_IDS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, struct.dashboard_ids.size()));
-            for (int _iter431 : struct.dashboard_ids)
+            for (int _iter439 : struct.dashboard_ids)
             {
-              oprot.writeI32(_iter431);
+              oprot.writeI32(_iter439);
             }
             oprot.writeListEnd();
           }
@@ -58529,9 +61141,9 @@ public class OmniSci {
         if (struct.isSetDashboard_ids()) {
           {
             oprot.writeI32(struct.dashboard_ids.size());
-            for (int _iter432 : struct.dashboard_ids)
+            for (int _iter440 : struct.dashboard_ids)
             {
-              oprot.writeI32(_iter432);
+              oprot.writeI32(_iter440);
             }
           }
         }
@@ -58547,13 +61159,13 @@ public class OmniSci {
         }
         if (incoming.get(1)) {
           {
-            org.apache.thrift.protocol.TList _list433 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
-            struct.dashboard_ids = new java.util.ArrayList<java.lang.Integer>(_list433.size);
-            int _elem434;
-            for (int _i435 = 0; _i435 < _list433.size; ++_i435)
+            org.apache.thrift.protocol.TList _list441 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
+            struct.dashboard_ids = new java.util.ArrayList<java.lang.Integer>(_list441.size);
+            int _elem442;
+            for (int _i443 = 0; _i443 < _list441.size; ++_i443)
             {
-              _elem434 = iprot.readI32();
-              struct.dashboard_ids.add(_elem434);
+              _elem442 = iprot.readI32();
+              struct.dashboard_ids.add(_elem442);
             }
           }
           struct.setDashboard_idsIsSet(true);
@@ -59691,13 +62303,13 @@ public class OmniSci {
             case 3: // GROUPS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list436 = iprot.readListBegin();
-                  struct.groups = new java.util.ArrayList<java.lang.String>(_list436.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem437;
-                  for (int _i438 = 0; _i438 < _list436.size; ++_i438)
+                  org.apache.thrift.protocol.TList _list444 = iprot.readListBegin();
+                  struct.groups = new java.util.ArrayList<java.lang.String>(_list444.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem445;
+                  for (int _i446 = 0; _i446 < _list444.size; ++_i446)
                   {
-                    _elem437 = iprot.readString();
-                    struct.groups.add(_elem437);
+                    _elem445 = iprot.readString();
+                    struct.groups.add(_elem445);
                   }
                   iprot.readListEnd();
                 }
@@ -59709,13 +62321,13 @@ public class OmniSci {
             case 4: // OBJECTS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list439 = iprot.readListBegin();
-                  struct.objects = new java.util.ArrayList<java.lang.String>(_list439.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem440;
-                  for (int _i441 = 0; _i441 < _list439.size; ++_i441)
+                  org.apache.thrift.protocol.TList _list447 = iprot.readListBegin();
+                  struct.objects = new java.util.ArrayList<java.lang.String>(_list447.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem448;
+                  for (int _i449 = 0; _i449 < _list447.size; ++_i449)
                   {
-                    _elem440 = iprot.readString();
-                    struct.objects.add(_elem440);
+                    _elem448 = iprot.readString();
+                    struct.objects.add(_elem448);
                   }
                   iprot.readListEnd();
                 }
@@ -59768,9 +62380,9 @@ public class OmniSci {
           oprot.writeFieldBegin(GROUPS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.groups.size()));
-            for (java.lang.String _iter442 : struct.groups)
+            for (java.lang.String _iter450 : struct.groups)
             {
-              oprot.writeString(_iter442);
+              oprot.writeString(_iter450);
             }
             oprot.writeListEnd();
           }
@@ -59780,9 +62392,9 @@ public class OmniSci {
           oprot.writeFieldBegin(OBJECTS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.objects.size()));
-            for (java.lang.String _iter443 : struct.objects)
+            for (java.lang.String _iter451 : struct.objects)
             {
-              oprot.writeString(_iter443);
+              oprot.writeString(_iter451);
             }
             oprot.writeListEnd();
           }
@@ -59842,18 +62454,18 @@ public class OmniSci {
         if (struct.isSetGroups()) {
           {
             oprot.writeI32(struct.groups.size());
-            for (java.lang.String _iter444 : struct.groups)
+            for (java.lang.String _iter452 : struct.groups)
             {
-              oprot.writeString(_iter444);
+              oprot.writeString(_iter452);
             }
           }
         }
         if (struct.isSetObjects()) {
           {
             oprot.writeI32(struct.objects.size());
-            for (java.lang.String _iter445 : struct.objects)
+            for (java.lang.String _iter453 : struct.objects)
             {
-              oprot.writeString(_iter445);
+              oprot.writeString(_iter453);
             }
           }
         }
@@ -59879,26 +62491,26 @@ public class OmniSci {
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TList _list446 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.groups = new java.util.ArrayList<java.lang.String>(_list446.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem447;
-            for (int _i448 = 0; _i448 < _list446.size; ++_i448)
+            org.apache.thrift.protocol.TList _list454 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.groups = new java.util.ArrayList<java.lang.String>(_list454.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem455;
+            for (int _i456 = 0; _i456 < _list454.size; ++_i456)
             {
-              _elem447 = iprot.readString();
-              struct.groups.add(_elem447);
+              _elem455 = iprot.readString();
+              struct.groups.add(_elem455);
             }
           }
           struct.setGroupsIsSet(true);
         }
         if (incoming.get(3)) {
           {
-            org.apache.thrift.protocol.TList _list449 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.objects = new java.util.ArrayList<java.lang.String>(_list449.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem450;
-            for (int _i451 = 0; _i451 < _list449.size; ++_i451)
+            org.apache.thrift.protocol.TList _list457 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.objects = new java.util.ArrayList<java.lang.String>(_list457.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem458;
+            for (int _i459 = 0; _i459 < _list457.size; ++_i459)
             {
-              _elem450 = iprot.readString();
-              struct.objects.add(_elem450);
+              _elem458 = iprot.readString();
+              struct.objects.add(_elem458);
             }
           }
           struct.setObjectsIsSet(true);
@@ -60968,13 +63580,13 @@ public class OmniSci {
             case 3: // GROUPS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list452 = iprot.readListBegin();
-                  struct.groups = new java.util.ArrayList<java.lang.String>(_list452.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem453;
-                  for (int _i454 = 0; _i454 < _list452.size; ++_i454)
+                  org.apache.thrift.protocol.TList _list460 = iprot.readListBegin();
+                  struct.groups = new java.util.ArrayList<java.lang.String>(_list460.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem461;
+                  for (int _i462 = 0; _i462 < _list460.size; ++_i462)
                   {
-                    _elem453 = iprot.readString();
-                    struct.groups.add(_elem453);
+                    _elem461 = iprot.readString();
+                    struct.groups.add(_elem461);
                   }
                   iprot.readListEnd();
                 }
@@ -60986,13 +63598,13 @@ public class OmniSci {
             case 4: // OBJECTS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list455 = iprot.readListBegin();
-                  struct.objects = new java.util.ArrayList<java.lang.String>(_list455.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem456;
-                  for (int _i457 = 0; _i457 < _list455.size; ++_i457)
+                  org.apache.thrift.protocol.TList _list463 = iprot.readListBegin();
+                  struct.objects = new java.util.ArrayList<java.lang.String>(_list463.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem464;
+                  for (int _i465 = 0; _i465 < _list463.size; ++_i465)
                   {
-                    _elem456 = iprot.readString();
-                    struct.objects.add(_elem456);
+                    _elem464 = iprot.readString();
+                    struct.objects.add(_elem464);
                   }
                   iprot.readListEnd();
                 }
@@ -61037,9 +63649,9 @@ public class OmniSci {
           oprot.writeFieldBegin(GROUPS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.groups.size()));
-            for (java.lang.String _iter458 : struct.groups)
+            for (java.lang.String _iter466 : struct.groups)
             {
-              oprot.writeString(_iter458);
+              oprot.writeString(_iter466);
             }
             oprot.writeListEnd();
           }
@@ -61049,9 +63661,9 @@ public class OmniSci {
           oprot.writeFieldBegin(OBJECTS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.objects.size()));
-            for (java.lang.String _iter459 : struct.objects)
+            for (java.lang.String _iter467 : struct.objects)
             {
-              oprot.writeString(_iter459);
+              oprot.writeString(_iter467);
             }
             oprot.writeListEnd();
           }
@@ -61105,18 +63717,18 @@ public class OmniSci {
         if (struct.isSetGroups()) {
           {
             oprot.writeI32(struct.groups.size());
-            for (java.lang.String _iter460 : struct.groups)
+            for (java.lang.String _iter468 : struct.groups)
             {
-              oprot.writeString(_iter460);
+              oprot.writeString(_iter468);
             }
           }
         }
         if (struct.isSetObjects()) {
           {
             oprot.writeI32(struct.objects.size());
-            for (java.lang.String _iter461 : struct.objects)
+            for (java.lang.String _iter469 : struct.objects)
             {
-              oprot.writeString(_iter461);
+              oprot.writeString(_iter469);
             }
           }
         }
@@ -61139,26 +63751,26 @@ public class OmniSci {
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TList _list462 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.groups = new java.util.ArrayList<java.lang.String>(_list462.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem463;
-            for (int _i464 = 0; _i464 < _list462.size; ++_i464)
+            org.apache.thrift.protocol.TList _list470 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.groups = new java.util.ArrayList<java.lang.String>(_list470.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem471;
+            for (int _i472 = 0; _i472 < _list470.size; ++_i472)
             {
-              _elem463 = iprot.readString();
-              struct.groups.add(_elem463);
+              _elem471 = iprot.readString();
+              struct.groups.add(_elem471);
             }
           }
           struct.setGroupsIsSet(true);
         }
         if (incoming.get(3)) {
           {
-            org.apache.thrift.protocol.TList _list465 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.objects = new java.util.ArrayList<java.lang.String>(_list465.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem466;
-            for (int _i467 = 0; _i467 < _list465.size; ++_i467)
+            org.apache.thrift.protocol.TList _list473 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.objects = new java.util.ArrayList<java.lang.String>(_list473.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem474;
+            for (int _i475 = 0; _i475 < _list473.size; ++_i475)
             {
-              _elem466 = iprot.readString();
-              struct.objects.add(_elem466);
+              _elem474 = iprot.readString();
+              struct.objects.add(_elem474);
             }
           }
           struct.setObjectsIsSet(true);
@@ -62137,13 +64749,13 @@ public class OmniSci {
             case 2: // DASHBOARD_IDS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list468 = iprot.readListBegin();
-                  struct.dashboard_ids = new java.util.ArrayList<java.lang.Integer>(_list468.size);
-                  int _elem469;
-                  for (int _i470 = 0; _i470 < _list468.size; ++_i470)
+                  org.apache.thrift.protocol.TList _list476 = iprot.readListBegin();
+                  struct.dashboard_ids = new java.util.ArrayList<java.lang.Integer>(_list476.size);
+                  int _elem477;
+                  for (int _i478 = 0; _i478 < _list476.size; ++_i478)
                   {
-                    _elem469 = iprot.readI32();
-                    struct.dashboard_ids.add(_elem469);
+                    _elem477 = iprot.readI32();
+                    struct.dashboard_ids.add(_elem477);
                   }
                   iprot.readListEnd();
                 }
@@ -62155,13 +64767,13 @@ public class OmniSci {
             case 3: // GROUPS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list471 = iprot.readListBegin();
-                  struct.groups = new java.util.ArrayList<java.lang.String>(_list471.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem472;
-                  for (int _i473 = 0; _i473 < _list471.size; ++_i473)
+                  org.apache.thrift.protocol.TList _list479 = iprot.readListBegin();
+                  struct.groups = new java.util.ArrayList<java.lang.String>(_list479.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem480;
+                  for (int _i481 = 0; _i481 < _list479.size; ++_i481)
                   {
-                    _elem472 = iprot.readString();
-                    struct.groups.add(_elem472);
+                    _elem480 = iprot.readString();
+                    struct.groups.add(_elem480);
                   }
                   iprot.readListEnd();
                 }
@@ -62203,9 +64815,9 @@ public class OmniSci {
           oprot.writeFieldBegin(DASHBOARD_IDS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, struct.dashboard_ids.size()));
-            for (int _iter474 : struct.dashboard_ids)
+            for (int _iter482 : struct.dashboard_ids)
             {
-              oprot.writeI32(_iter474);
+              oprot.writeI32(_iter482);
             }
             oprot.writeListEnd();
           }
@@ -62215,9 +64827,9 @@ public class OmniSci {
           oprot.writeFieldBegin(GROUPS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.groups.size()));
-            for (java.lang.String _iter475 : struct.groups)
+            for (java.lang.String _iter483 : struct.groups)
             {
-              oprot.writeString(_iter475);
+              oprot.writeString(_iter483);
             }
             oprot.writeListEnd();
           }
@@ -62265,18 +64877,18 @@ public class OmniSci {
         if (struct.isSetDashboard_ids()) {
           {
             oprot.writeI32(struct.dashboard_ids.size());
-            for (int _iter476 : struct.dashboard_ids)
+            for (int _iter484 : struct.dashboard_ids)
             {
-              oprot.writeI32(_iter476);
+              oprot.writeI32(_iter484);
             }
           }
         }
         if (struct.isSetGroups()) {
           {
             oprot.writeI32(struct.groups.size());
-            for (java.lang.String _iter477 : struct.groups)
+            for (java.lang.String _iter485 : struct.groups)
             {
-              oprot.writeString(_iter477);
+              oprot.writeString(_iter485);
             }
           }
         }
@@ -62295,26 +64907,26 @@ public class OmniSci {
         }
         if (incoming.get(1)) {
           {
-            org.apache.thrift.protocol.TList _list478 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
-            struct.dashboard_ids = new java.util.ArrayList<java.lang.Integer>(_list478.size);
-            int _elem479;
-            for (int _i480 = 0; _i480 < _list478.size; ++_i480)
+            org.apache.thrift.protocol.TList _list486 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
+            struct.dashboard_ids = new java.util.ArrayList<java.lang.Integer>(_list486.size);
+            int _elem487;
+            for (int _i488 = 0; _i488 < _list486.size; ++_i488)
             {
-              _elem479 = iprot.readI32();
-              struct.dashboard_ids.add(_elem479);
+              _elem487 = iprot.readI32();
+              struct.dashboard_ids.add(_elem487);
             }
           }
           struct.setDashboard_idsIsSet(true);
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TList _list481 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.groups = new java.util.ArrayList<java.lang.String>(_list481.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem482;
-            for (int _i483 = 0; _i483 < _list481.size; ++_i483)
+            org.apache.thrift.protocol.TList _list489 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.groups = new java.util.ArrayList<java.lang.String>(_list489.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem490;
+            for (int _i491 = 0; _i491 < _list489.size; ++_i491)
             {
-              _elem482 = iprot.readString();
-              struct.groups.add(_elem482);
+              _elem490 = iprot.readString();
+              struct.groups.add(_elem490);
             }
           }
           struct.setGroupsIsSet(true);
@@ -63570,14 +66182,14 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list484 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TDashboardGrantees>(_list484.size);
-                  @org.apache.thrift.annotation.Nullable TDashboardGrantees _elem485;
-                  for (int _i486 = 0; _i486 < _list484.size; ++_i486)
+                  org.apache.thrift.protocol.TList _list492 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TDashboardGrantees>(_list492.size);
+                  @org.apache.thrift.annotation.Nullable TDashboardGrantees _elem493;
+                  for (int _i494 = 0; _i494 < _list492.size; ++_i494)
                   {
-                    _elem485 = new TDashboardGrantees();
-                    _elem485.read(iprot);
-                    struct.success.add(_elem485);
+                    _elem493 = new TDashboardGrantees();
+                    _elem493.read(iprot);
+                    struct.success.add(_elem493);
                   }
                   iprot.readListEnd();
                 }
@@ -63614,9 +66226,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TDashboardGrantees _iter487 : struct.success)
+            for (TDashboardGrantees _iter495 : struct.success)
             {
-              _iter487.write(oprot);
+              _iter495.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -63655,9 +66267,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TDashboardGrantees _iter488 : struct.success)
+            for (TDashboardGrantees _iter496 : struct.success)
             {
-              _iter488.write(oprot);
+              _iter496.write(oprot);
             }
           }
         }
@@ -63672,14 +66284,14 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list489 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TDashboardGrantees>(_list489.size);
-            @org.apache.thrift.annotation.Nullable TDashboardGrantees _elem490;
-            for (int _i491 = 0; _i491 < _list489.size; ++_i491)
+            org.apache.thrift.protocol.TList _list497 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TDashboardGrantees>(_list497.size);
+            @org.apache.thrift.annotation.Nullable TDashboardGrantees _elem498;
+            for (int _i499 = 0; _i499 < _list497.size; ++_i499)
             {
-              _elem490 = new TDashboardGrantees();
-              _elem490.read(iprot);
-              struct.success.add(_elem490);
+              _elem498 = new TDashboardGrantees();
+              _elem498.read(iprot);
+              struct.success.add(_elem498);
             }
           }
           struct.setSuccessIsSet(true);
@@ -66302,14 +68914,14 @@ public class OmniSci {
             case 3: // ROWS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list492 = iprot.readListBegin();
-                  struct.rows = new java.util.ArrayList<TRow>(_list492.size);
-                  @org.apache.thrift.annotation.Nullable TRow _elem493;
-                  for (int _i494 = 0; _i494 < _list492.size; ++_i494)
+                  org.apache.thrift.protocol.TList _list500 = iprot.readListBegin();
+                  struct.rows = new java.util.ArrayList<TRow>(_list500.size);
+                  @org.apache.thrift.annotation.Nullable TRow _elem501;
+                  for (int _i502 = 0; _i502 < _list500.size; ++_i502)
                   {
-                    _elem493 = new TRow();
-                    _elem493.read(iprot);
-                    struct.rows.add(_elem493);
+                    _elem501 = new TRow();
+                    _elem501.read(iprot);
+                    struct.rows.add(_elem501);
                   }
                   iprot.readListEnd();
                 }
@@ -66321,13 +68933,13 @@ public class OmniSci {
             case 4: // COLUMN_NAMES
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list495 = iprot.readListBegin();
-                  struct.column_names = new java.util.ArrayList<java.lang.String>(_list495.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem496;
-                  for (int _i497 = 0; _i497 < _list495.size; ++_i497)
+                  org.apache.thrift.protocol.TList _list503 = iprot.readListBegin();
+                  struct.column_names = new java.util.ArrayList<java.lang.String>(_list503.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem504;
+                  for (int _i505 = 0; _i505 < _list503.size; ++_i505)
                   {
-                    _elem496 = iprot.readString();
-                    struct.column_names.add(_elem496);
+                    _elem504 = iprot.readString();
+                    struct.column_names.add(_elem504);
                   }
                   iprot.readListEnd();
                 }
@@ -66365,9 +68977,9 @@ public class OmniSci {
           oprot.writeFieldBegin(ROWS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.rows.size()));
-            for (TRow _iter498 : struct.rows)
+            for (TRow _iter506 : struct.rows)
             {
-              _iter498.write(oprot);
+              _iter506.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -66377,9 +68989,9 @@ public class OmniSci {
           oprot.writeFieldBegin(COLUMN_NAMES_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.column_names.size()));
-            for (java.lang.String _iter499 : struct.column_names)
+            for (java.lang.String _iter507 : struct.column_names)
             {
-              oprot.writeString(_iter499);
+              oprot.writeString(_iter507);
             }
             oprot.writeListEnd();
           }
@@ -66425,18 +69037,18 @@ public class OmniSci {
         if (struct.isSetRows()) {
           {
             oprot.writeI32(struct.rows.size());
-            for (TRow _iter500 : struct.rows)
+            for (TRow _iter508 : struct.rows)
             {
-              _iter500.write(oprot);
+              _iter508.write(oprot);
             }
           }
         }
         if (struct.isSetColumn_names()) {
           {
             oprot.writeI32(struct.column_names.size());
-            for (java.lang.String _iter501 : struct.column_names)
+            for (java.lang.String _iter509 : struct.column_names)
             {
-              oprot.writeString(_iter501);
+              oprot.writeString(_iter509);
             }
           }
         }
@@ -66456,27 +69068,27 @@ public class OmniSci {
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TList _list502 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.rows = new java.util.ArrayList<TRow>(_list502.size);
-            @org.apache.thrift.annotation.Nullable TRow _elem503;
-            for (int _i504 = 0; _i504 < _list502.size; ++_i504)
+            org.apache.thrift.protocol.TList _list510 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.rows = new java.util.ArrayList<TRow>(_list510.size);
+            @org.apache.thrift.annotation.Nullable TRow _elem511;
+            for (int _i512 = 0; _i512 < _list510.size; ++_i512)
             {
-              _elem503 = new TRow();
-              _elem503.read(iprot);
-              struct.rows.add(_elem503);
+              _elem511 = new TRow();
+              _elem511.read(iprot);
+              struct.rows.add(_elem511);
             }
           }
           struct.setRowsIsSet(true);
         }
         if (incoming.get(3)) {
           {
-            org.apache.thrift.protocol.TList _list505 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.column_names = new java.util.ArrayList<java.lang.String>(_list505.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem506;
-            for (int _i507 = 0; _i507 < _list505.size; ++_i507)
+            org.apache.thrift.protocol.TList _list513 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.column_names = new java.util.ArrayList<java.lang.String>(_list513.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem514;
+            for (int _i515 = 0; _i515 < _list513.size; ++_i515)
             {
-              _elem506 = iprot.readString();
-              struct.column_names.add(_elem506);
+              _elem514 = iprot.readString();
+              struct.column_names.add(_elem514);
             }
           }
           struct.setColumn_namesIsSet(true);
@@ -67461,14 +70073,14 @@ public class OmniSci {
             case 3: // COLS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list508 = iprot.readListBegin();
-                  struct.cols = new java.util.ArrayList<TColumn>(_list508.size);
-                  @org.apache.thrift.annotation.Nullable TColumn _elem509;
-                  for (int _i510 = 0; _i510 < _list508.size; ++_i510)
+                  org.apache.thrift.protocol.TList _list516 = iprot.readListBegin();
+                  struct.cols = new java.util.ArrayList<TColumn>(_list516.size);
+                  @org.apache.thrift.annotation.Nullable TColumn _elem517;
+                  for (int _i518 = 0; _i518 < _list516.size; ++_i518)
                   {
-                    _elem509 = new TColumn();
-                    _elem509.read(iprot);
-                    struct.cols.add(_elem509);
+                    _elem517 = new TColumn();
+                    _elem517.read(iprot);
+                    struct.cols.add(_elem517);
                   }
                   iprot.readListEnd();
                 }
@@ -67480,13 +70092,13 @@ public class OmniSci {
             case 4: // COLUMN_NAMES
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list511 = iprot.readListBegin();
-                  struct.column_names = new java.util.ArrayList<java.lang.String>(_list511.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem512;
-                  for (int _i513 = 0; _i513 < _list511.size; ++_i513)
+                  org.apache.thrift.protocol.TList _list519 = iprot.readListBegin();
+                  struct.column_names = new java.util.ArrayList<java.lang.String>(_list519.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem520;
+                  for (int _i521 = 0; _i521 < _list519.size; ++_i521)
                   {
-                    _elem512 = iprot.readString();
-                    struct.column_names.add(_elem512);
+                    _elem520 = iprot.readString();
+                    struct.column_names.add(_elem520);
                   }
                   iprot.readListEnd();
                 }
@@ -67524,9 +70136,9 @@ public class OmniSci {
           oprot.writeFieldBegin(COLS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.cols.size()));
-            for (TColumn _iter514 : struct.cols)
+            for (TColumn _iter522 : struct.cols)
             {
-              _iter514.write(oprot);
+              _iter522.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -67536,9 +70148,9 @@ public class OmniSci {
           oprot.writeFieldBegin(COLUMN_NAMES_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.column_names.size()));
-            for (java.lang.String _iter515 : struct.column_names)
+            for (java.lang.String _iter523 : struct.column_names)
             {
-              oprot.writeString(_iter515);
+              oprot.writeString(_iter523);
             }
             oprot.writeListEnd();
           }
@@ -67584,18 +70196,18 @@ public class OmniSci {
         if (struct.isSetCols()) {
           {
             oprot.writeI32(struct.cols.size());
-            for (TColumn _iter516 : struct.cols)
+            for (TColumn _iter524 : struct.cols)
             {
-              _iter516.write(oprot);
+              _iter524.write(oprot);
             }
           }
         }
         if (struct.isSetColumn_names()) {
           {
             oprot.writeI32(struct.column_names.size());
-            for (java.lang.String _iter517 : struct.column_names)
+            for (java.lang.String _iter525 : struct.column_names)
             {
-              oprot.writeString(_iter517);
+              oprot.writeString(_iter525);
             }
           }
         }
@@ -67615,27 +70227,27 @@ public class OmniSci {
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TList _list518 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.cols = new java.util.ArrayList<TColumn>(_list518.size);
-            @org.apache.thrift.annotation.Nullable TColumn _elem519;
-            for (int _i520 = 0; _i520 < _list518.size; ++_i520)
+            org.apache.thrift.protocol.TList _list526 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.cols = new java.util.ArrayList<TColumn>(_list526.size);
+            @org.apache.thrift.annotation.Nullable TColumn _elem527;
+            for (int _i528 = 0; _i528 < _list526.size; ++_i528)
             {
-              _elem519 = new TColumn();
-              _elem519.read(iprot);
-              struct.cols.add(_elem519);
+              _elem527 = new TColumn();
+              _elem527.read(iprot);
+              struct.cols.add(_elem527);
             }
           }
           struct.setColsIsSet(true);
         }
         if (incoming.get(3)) {
           {
-            org.apache.thrift.protocol.TList _list521 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.column_names = new java.util.ArrayList<java.lang.String>(_list521.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem522;
-            for (int _i523 = 0; _i523 < _list521.size; ++_i523)
+            org.apache.thrift.protocol.TList _list529 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.column_names = new java.util.ArrayList<java.lang.String>(_list529.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem530;
+            for (int _i531 = 0; _i531 < _list529.size; ++_i531)
             {
-              _elem522 = iprot.readString();
-              struct.column_names.add(_elem522);
+              _elem530 = iprot.readString();
+              struct.column_names.add(_elem530);
             }
           }
           struct.setColumn_namesIsSet(true);
@@ -68002,6 +70614,1267 @@ public class OmniSci {
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, load_table_binary_columnar_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.e = new TOmniSciException();
+          struct.e.read(iprot);
+          struct.setEIsSet(true);
+        }
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  public static class load_table_binary_columnar_polys_args implements org.apache.thrift.TBase<load_table_binary_columnar_polys_args, load_table_binary_columnar_polys_args._Fields>, java.io.Serializable, Cloneable, Comparable<load_table_binary_columnar_polys_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("load_table_binary_columnar_polys_args");
+
+    private static final org.apache.thrift.protocol.TField SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("session", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField TABLE_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("table_name", org.apache.thrift.protocol.TType.STRING, (short)2);
+    private static final org.apache.thrift.protocol.TField COLS_FIELD_DESC = new org.apache.thrift.protocol.TField("cols", org.apache.thrift.protocol.TType.LIST, (short)3);
+    private static final org.apache.thrift.protocol.TField COLUMN_NAMES_FIELD_DESC = new org.apache.thrift.protocol.TField("column_names", org.apache.thrift.protocol.TType.LIST, (short)4);
+    private static final org.apache.thrift.protocol.TField ASSIGN_RENDER_GROUPS_FIELD_DESC = new org.apache.thrift.protocol.TField("assign_render_groups", org.apache.thrift.protocol.TType.BOOL, (short)5);
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new load_table_binary_columnar_polys_argsStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new load_table_binary_columnar_polys_argsTupleSchemeFactory();
+
+    public @org.apache.thrift.annotation.Nullable java.lang.String session; // required
+    public @org.apache.thrift.annotation.Nullable java.lang.String table_name; // required
+    public @org.apache.thrift.annotation.Nullable java.util.List<TColumn> cols; // required
+    public @org.apache.thrift.annotation.Nullable java.util.List<java.lang.String> column_names; // required
+    public boolean assign_render_groups; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SESSION((short)1, "session"),
+      TABLE_NAME((short)2, "table_name"),
+      COLS((short)3, "cols"),
+      COLUMN_NAMES((short)4, "column_names"),
+      ASSIGN_RENDER_GROUPS((short)5, "assign_render_groups");
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // SESSION
+            return SESSION;
+          case 2: // TABLE_NAME
+            return TABLE_NAME;
+          case 3: // COLS
+            return COLS;
+          case 4: // COLUMN_NAMES
+            return COLUMN_NAMES;
+          case 5: // ASSIGN_RENDER_GROUPS
+            return ASSIGN_RENDER_GROUPS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __ASSIGN_RENDER_GROUPS_ISSET_ID = 0;
+    private byte __isset_bitfield = 0;
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SESSION, new org.apache.thrift.meta_data.FieldMetaData("session", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING          , "TSessionId")));
+      tmpMap.put(_Fields.TABLE_NAME, new org.apache.thrift.meta_data.FieldMetaData("table_name", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.COLS, new org.apache.thrift.meta_data.FieldMetaData("cols", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+              new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TColumn.class))));
+      tmpMap.put(_Fields.COLUMN_NAMES, new org.apache.thrift.meta_data.FieldMetaData("column_names", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+              new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
+      tmpMap.put(_Fields.ASSIGN_RENDER_GROUPS, new org.apache.thrift.meta_data.FieldMetaData("assign_render_groups", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(load_table_binary_columnar_polys_args.class, metaDataMap);
+    }
+
+    public load_table_binary_columnar_polys_args() {
+      this.column_names = new java.util.ArrayList<java.lang.String>();
+
+      this.assign_render_groups = true;
+
+    }
+
+    public load_table_binary_columnar_polys_args(
+      java.lang.String session,
+      java.lang.String table_name,
+      java.util.List<TColumn> cols,
+      java.util.List<java.lang.String> column_names,
+      boolean assign_render_groups)
+    {
+      this();
+      this.session = session;
+      this.table_name = table_name;
+      this.cols = cols;
+      this.column_names = column_names;
+      this.assign_render_groups = assign_render_groups;
+      setAssign_render_groupsIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public load_table_binary_columnar_polys_args(load_table_binary_columnar_polys_args other) {
+      __isset_bitfield = other.__isset_bitfield;
+      if (other.isSetSession()) {
+        this.session = other.session;
+      }
+      if (other.isSetTable_name()) {
+        this.table_name = other.table_name;
+      }
+      if (other.isSetCols()) {
+        java.util.List<TColumn> __this__cols = new java.util.ArrayList<TColumn>(other.cols.size());
+        for (TColumn other_element : other.cols) {
+          __this__cols.add(new TColumn(other_element));
+        }
+        this.cols = __this__cols;
+      }
+      if (other.isSetColumn_names()) {
+        java.util.List<java.lang.String> __this__column_names = new java.util.ArrayList<java.lang.String>(other.column_names);
+        this.column_names = __this__column_names;
+      }
+      this.assign_render_groups = other.assign_render_groups;
+    }
+
+    public load_table_binary_columnar_polys_args deepCopy() {
+      return new load_table_binary_columnar_polys_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this.session = null;
+      this.table_name = null;
+      this.cols = null;
+      this.column_names = new java.util.ArrayList<java.lang.String>();
+
+      this.assign_render_groups = true;
+
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.String getSession() {
+      return this.session;
+    }
+
+    public load_table_binary_columnar_polys_args setSession(@org.apache.thrift.annotation.Nullable java.lang.String session) {
+      this.session = session;
+      return this;
+    }
+
+    public void unsetSession() {
+      this.session = null;
+    }
+
+    /** Returns true if field session is set (has been assigned a value) and false otherwise */
+    public boolean isSetSession() {
+      return this.session != null;
+    }
+
+    public void setSessionIsSet(boolean value) {
+      if (!value) {
+        this.session = null;
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.String getTable_name() {
+      return this.table_name;
+    }
+
+    public load_table_binary_columnar_polys_args setTable_name(@org.apache.thrift.annotation.Nullable java.lang.String table_name) {
+      this.table_name = table_name;
+      return this;
+    }
+
+    public void unsetTable_name() {
+      this.table_name = null;
+    }
+
+    /** Returns true if field table_name is set (has been assigned a value) and false otherwise */
+    public boolean isSetTable_name() {
+      return this.table_name != null;
+    }
+
+    public void setTable_nameIsSet(boolean value) {
+      if (!value) {
+        this.table_name = null;
+      }
+    }
+
+    public int getColsSize() {
+      return (this.cols == null) ? 0 : this.cols.size();
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.util.Iterator<TColumn> getColsIterator() {
+      return (this.cols == null) ? null : this.cols.iterator();
+    }
+
+    public void addToCols(TColumn elem) {
+      if (this.cols == null) {
+        this.cols = new java.util.ArrayList<TColumn>();
+      }
+      this.cols.add(elem);
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.util.List<TColumn> getCols() {
+      return this.cols;
+    }
+
+    public load_table_binary_columnar_polys_args setCols(@org.apache.thrift.annotation.Nullable java.util.List<TColumn> cols) {
+      this.cols = cols;
+      return this;
+    }
+
+    public void unsetCols() {
+      this.cols = null;
+    }
+
+    /** Returns true if field cols is set (has been assigned a value) and false otherwise */
+    public boolean isSetCols() {
+      return this.cols != null;
+    }
+
+    public void setColsIsSet(boolean value) {
+      if (!value) {
+        this.cols = null;
+      }
+    }
+
+    public int getColumn_namesSize() {
+      return (this.column_names == null) ? 0 : this.column_names.size();
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.util.Iterator<java.lang.String> getColumn_namesIterator() {
+      return (this.column_names == null) ? null : this.column_names.iterator();
+    }
+
+    public void addToColumn_names(java.lang.String elem) {
+      if (this.column_names == null) {
+        this.column_names = new java.util.ArrayList<java.lang.String>();
+      }
+      this.column_names.add(elem);
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.util.List<java.lang.String> getColumn_names() {
+      return this.column_names;
+    }
+
+    public load_table_binary_columnar_polys_args setColumn_names(@org.apache.thrift.annotation.Nullable java.util.List<java.lang.String> column_names) {
+      this.column_names = column_names;
+      return this;
+    }
+
+    public void unsetColumn_names() {
+      this.column_names = null;
+    }
+
+    /** Returns true if field column_names is set (has been assigned a value) and false otherwise */
+    public boolean isSetColumn_names() {
+      return this.column_names != null;
+    }
+
+    public void setColumn_namesIsSet(boolean value) {
+      if (!value) {
+        this.column_names = null;
+      }
+    }
+
+    public boolean isAssign_render_groups() {
+      return this.assign_render_groups;
+    }
+
+    public load_table_binary_columnar_polys_args setAssign_render_groups(boolean assign_render_groups) {
+      this.assign_render_groups = assign_render_groups;
+      setAssign_render_groupsIsSet(true);
+      return this;
+    }
+
+    public void unsetAssign_render_groups() {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __ASSIGN_RENDER_GROUPS_ISSET_ID);
+    }
+
+    /** Returns true if field assign_render_groups is set (has been assigned a value) and false otherwise */
+    public boolean isSetAssign_render_groups() {
+      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __ASSIGN_RENDER_GROUPS_ISSET_ID);
+    }
+
+    public void setAssign_render_groupsIsSet(boolean value) {
+      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __ASSIGN_RENDER_GROUPS_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
+      switch (field) {
+      case SESSION:
+        if (value == null) {
+          unsetSession();
+        } else {
+          setSession((java.lang.String)value);
+        }
+        break;
+
+      case TABLE_NAME:
+        if (value == null) {
+          unsetTable_name();
+        } else {
+          setTable_name((java.lang.String)value);
+        }
+        break;
+
+      case COLS:
+        if (value == null) {
+          unsetCols();
+        } else {
+          setCols((java.util.List<TColumn>)value);
+        }
+        break;
+
+      case COLUMN_NAMES:
+        if (value == null) {
+          unsetColumn_names();
+        } else {
+          setColumn_names((java.util.List<java.lang.String>)value);
+        }
+        break;
+
+      case ASSIGN_RENDER_GROUPS:
+        if (value == null) {
+          unsetAssign_render_groups();
+        } else {
+          setAssign_render_groups((java.lang.Boolean)value);
+        }
+        break;
+
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SESSION:
+        return getSession();
+
+      case TABLE_NAME:
+        return getTable_name();
+
+      case COLS:
+        return getCols();
+
+      case COLUMN_NAMES:
+        return getColumn_names();
+
+      case ASSIGN_RENDER_GROUPS:
+        return isAssign_render_groups();
+
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SESSION:
+        return isSetSession();
+      case TABLE_NAME:
+        return isSetTable_name();
+      case COLS:
+        return isSetCols();
+      case COLUMN_NAMES:
+        return isSetColumn_names();
+      case ASSIGN_RENDER_GROUPS:
+        return isSetAssign_render_groups();
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof load_table_binary_columnar_polys_args)
+        return this.equals((load_table_binary_columnar_polys_args)that);
+      return false;
+    }
+
+    public boolean equals(load_table_binary_columnar_polys_args that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      boolean this_present_session = true && this.isSetSession();
+      boolean that_present_session = true && that.isSetSession();
+      if (this_present_session || that_present_session) {
+        if (!(this_present_session && that_present_session))
+          return false;
+        if (!this.session.equals(that.session))
+          return false;
+      }
+
+      boolean this_present_table_name = true && this.isSetTable_name();
+      boolean that_present_table_name = true && that.isSetTable_name();
+      if (this_present_table_name || that_present_table_name) {
+        if (!(this_present_table_name && that_present_table_name))
+          return false;
+        if (!this.table_name.equals(that.table_name))
+          return false;
+      }
+
+      boolean this_present_cols = true && this.isSetCols();
+      boolean that_present_cols = true && that.isSetCols();
+      if (this_present_cols || that_present_cols) {
+        if (!(this_present_cols && that_present_cols))
+          return false;
+        if (!this.cols.equals(that.cols))
+          return false;
+      }
+
+      boolean this_present_column_names = true && this.isSetColumn_names();
+      boolean that_present_column_names = true && that.isSetColumn_names();
+      if (this_present_column_names || that_present_column_names) {
+        if (!(this_present_column_names && that_present_column_names))
+          return false;
+        if (!this.column_names.equals(that.column_names))
+          return false;
+      }
+
+      boolean this_present_assign_render_groups = true;
+      boolean that_present_assign_render_groups = true;
+      if (this_present_assign_render_groups || that_present_assign_render_groups) {
+        if (!(this_present_assign_render_groups && that_present_assign_render_groups))
+          return false;
+        if (this.assign_render_groups != that.assign_render_groups)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetSession()) ? 131071 : 524287);
+      if (isSetSession())
+        hashCode = hashCode * 8191 + session.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetTable_name()) ? 131071 : 524287);
+      if (isSetTable_name())
+        hashCode = hashCode * 8191 + table_name.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetCols()) ? 131071 : 524287);
+      if (isSetCols())
+        hashCode = hashCode * 8191 + cols.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetColumn_names()) ? 131071 : 524287);
+      if (isSetColumn_names())
+        hashCode = hashCode * 8191 + column_names.hashCode();
+
+      hashCode = hashCode * 8191 + ((assign_render_groups) ? 131071 : 524287);
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(load_table_binary_columnar_polys_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = java.lang.Boolean.valueOf(isSetSession()).compareTo(other.isSetSession());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSession()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.session, other.session);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetTable_name()).compareTo(other.isSetTable_name());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetTable_name()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.table_name, other.table_name);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetCols()).compareTo(other.isSetCols());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCols()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.cols, other.cols);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetColumn_names()).compareTo(other.isSetColumn_names());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetColumn_names()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.column_names, other.column_names);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetAssign_render_groups()).compareTo(other.isSetAssign_render_groups());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetAssign_render_groups()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.assign_render_groups, other.assign_render_groups);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+    }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("load_table_binary_columnar_polys_args(");
+      boolean first = true;
+
+      sb.append("session:");
+      if (this.session == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.session);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("table_name:");
+      if (this.table_name == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.table_name);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("cols:");
+      if (this.cols == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.cols);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("column_names:");
+      if (this.column_names == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.column_names);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("assign_render_groups:");
+      sb.append(this.assign_render_groups);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class load_table_binary_columnar_polys_argsStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public load_table_binary_columnar_polys_argsStandardScheme getScheme() {
+        return new load_table_binary_columnar_polys_argsStandardScheme();
+      }
+    }
+
+    private static class load_table_binary_columnar_polys_argsStandardScheme extends org.apache.thrift.scheme.StandardScheme<load_table_binary_columnar_polys_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, load_table_binary_columnar_polys_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // SESSION
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.session = iprot.readString();
+                struct.setSessionIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // TABLE_NAME
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.table_name = iprot.readString();
+                struct.setTable_nameIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 3: // COLS
+              if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+                {
+                  org.apache.thrift.protocol.TList _list532 = iprot.readListBegin();
+                  struct.cols = new java.util.ArrayList<TColumn>(_list532.size);
+                  @org.apache.thrift.annotation.Nullable TColumn _elem533;
+                  for (int _i534 = 0; _i534 < _list532.size; ++_i534)
+                  {
+                    _elem533 = new TColumn();
+                    _elem533.read(iprot);
+                    struct.cols.add(_elem533);
+                  }
+                  iprot.readListEnd();
+                }
+                struct.setColsIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 4: // COLUMN_NAMES
+              if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+                {
+                  org.apache.thrift.protocol.TList _list535 = iprot.readListBegin();
+                  struct.column_names = new java.util.ArrayList<java.lang.String>(_list535.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem536;
+                  for (int _i537 = 0; _i537 < _list535.size; ++_i537)
+                  {
+                    _elem536 = iprot.readString();
+                    struct.column_names.add(_elem536);
+                  }
+                  iprot.readListEnd();
+                }
+                struct.setColumn_namesIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 5: // ASSIGN_RENDER_GROUPS
+              if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+                struct.assign_render_groups = iprot.readBool();
+                struct.setAssign_render_groupsIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, load_table_binary_columnar_polys_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.session != null) {
+          oprot.writeFieldBegin(SESSION_FIELD_DESC);
+          oprot.writeString(struct.session);
+          oprot.writeFieldEnd();
+        }
+        if (struct.table_name != null) {
+          oprot.writeFieldBegin(TABLE_NAME_FIELD_DESC);
+          oprot.writeString(struct.table_name);
+          oprot.writeFieldEnd();
+        }
+        if (struct.cols != null) {
+          oprot.writeFieldBegin(COLS_FIELD_DESC);
+          {
+            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.cols.size()));
+            for (TColumn _iter538 : struct.cols)
+            {
+              _iter538.write(oprot);
+            }
+            oprot.writeListEnd();
+          }
+          oprot.writeFieldEnd();
+        }
+        if (struct.column_names != null) {
+          oprot.writeFieldBegin(COLUMN_NAMES_FIELD_DESC);
+          {
+            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.column_names.size()));
+            for (java.lang.String _iter539 : struct.column_names)
+            {
+              oprot.writeString(_iter539);
+            }
+            oprot.writeListEnd();
+          }
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldBegin(ASSIGN_RENDER_GROUPS_FIELD_DESC);
+        oprot.writeBool(struct.assign_render_groups);
+        oprot.writeFieldEnd();
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class load_table_binary_columnar_polys_argsTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public load_table_binary_columnar_polys_argsTupleScheme getScheme() {
+        return new load_table_binary_columnar_polys_argsTupleScheme();
+      }
+    }
+
+    private static class load_table_binary_columnar_polys_argsTupleScheme extends org.apache.thrift.scheme.TupleScheme<load_table_binary_columnar_polys_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, load_table_binary_columnar_polys_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetSession()) {
+          optionals.set(0);
+        }
+        if (struct.isSetTable_name()) {
+          optionals.set(1);
+        }
+        if (struct.isSetCols()) {
+          optionals.set(2);
+        }
+        if (struct.isSetColumn_names()) {
+          optionals.set(3);
+        }
+        if (struct.isSetAssign_render_groups()) {
+          optionals.set(4);
+        }
+        oprot.writeBitSet(optionals, 5);
+        if (struct.isSetSession()) {
+          oprot.writeString(struct.session);
+        }
+        if (struct.isSetTable_name()) {
+          oprot.writeString(struct.table_name);
+        }
+        if (struct.isSetCols()) {
+          {
+            oprot.writeI32(struct.cols.size());
+            for (TColumn _iter540 : struct.cols)
+            {
+              _iter540.write(oprot);
+            }
+          }
+        }
+        if (struct.isSetColumn_names()) {
+          {
+            oprot.writeI32(struct.column_names.size());
+            for (java.lang.String _iter541 : struct.column_names)
+            {
+              oprot.writeString(_iter541);
+            }
+          }
+        }
+        if (struct.isSetAssign_render_groups()) {
+          oprot.writeBool(struct.assign_render_groups);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, load_table_binary_columnar_polys_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(5);
+        if (incoming.get(0)) {
+          struct.session = iprot.readString();
+          struct.setSessionIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.table_name = iprot.readString();
+          struct.setTable_nameIsSet(true);
+        }
+        if (incoming.get(2)) {
+          {
+            org.apache.thrift.protocol.TList _list542 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.cols = new java.util.ArrayList<TColumn>(_list542.size);
+            @org.apache.thrift.annotation.Nullable TColumn _elem543;
+            for (int _i544 = 0; _i544 < _list542.size; ++_i544)
+            {
+              _elem543 = new TColumn();
+              _elem543.read(iprot);
+              struct.cols.add(_elem543);
+            }
+          }
+          struct.setColsIsSet(true);
+        }
+        if (incoming.get(3)) {
+          {
+            org.apache.thrift.protocol.TList _list545 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.column_names = new java.util.ArrayList<java.lang.String>(_list545.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem546;
+            for (int _i547 = 0; _i547 < _list545.size; ++_i547)
+            {
+              _elem546 = iprot.readString();
+              struct.column_names.add(_elem546);
+            }
+          }
+          struct.setColumn_namesIsSet(true);
+        }
+        if (incoming.get(4)) {
+          struct.assign_render_groups = iprot.readBool();
+          struct.setAssign_render_groupsIsSet(true);
+        }
+      }
+    }
+
+    private static <S extends org.apache.thrift.scheme.IScheme> S scheme(org.apache.thrift.protocol.TProtocol proto) {
+      return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
+    }
+  }
+
+  public static class load_table_binary_columnar_polys_result implements org.apache.thrift.TBase<load_table_binary_columnar_polys_result, load_table_binary_columnar_polys_result._Fields>, java.io.Serializable, Cloneable, Comparable<load_table_binary_columnar_polys_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("load_table_binary_columnar_polys_result");
+
+    private static final org.apache.thrift.protocol.TField E_FIELD_DESC = new org.apache.thrift.protocol.TField("e", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new load_table_binary_columnar_polys_resultStandardSchemeFactory();
+    private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new load_table_binary_columnar_polys_resultTupleSchemeFactory();
+
+    public @org.apache.thrift.annotation.Nullable TOmniSciException e; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      E((short)1, "e");
+
+      private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
+
+      static {
+        for (_Fields field : java.util.EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // E
+            return E;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new java.lang.IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      @org.apache.thrift.annotation.Nullable
+      public static _Fields findByName(java.lang.String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final java.lang.String _fieldName;
+
+      _Fields(short thriftId, java.lang.String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public java.lang.String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.E, new org.apache.thrift.meta_data.FieldMetaData("e", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TOmniSciException.class)));
+      metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(load_table_binary_columnar_polys_result.class, metaDataMap);
+    }
+
+    public load_table_binary_columnar_polys_result() {
+    }
+
+    public load_table_binary_columnar_polys_result(
+      TOmniSciException e)
+    {
+      this();
+      this.e = e;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public load_table_binary_columnar_polys_result(load_table_binary_columnar_polys_result other) {
+      if (other.isSetE()) {
+        this.e = new TOmniSciException(other.e);
+      }
+    }
+
+    public load_table_binary_columnar_polys_result deepCopy() {
+      return new load_table_binary_columnar_polys_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.e = null;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public TOmniSciException getE() {
+      return this.e;
+    }
+
+    public load_table_binary_columnar_polys_result setE(@org.apache.thrift.annotation.Nullable TOmniSciException e) {
+      this.e = e;
+      return this;
+    }
+
+    public void unsetE() {
+      this.e = null;
+    }
+
+    /** Returns true if field e is set (has been assigned a value) and false otherwise */
+    public boolean isSetE() {
+      return this.e != null;
+    }
+
+    public void setEIsSet(boolean value) {
+      if (!value) {
+        this.e = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
+      switch (field) {
+      case E:
+        if (value == null) {
+          unsetE();
+        } else {
+          setE((TOmniSciException)value);
+        }
+        break;
+
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.Object getFieldValue(_Fields field) {
+      switch (field) {
+      case E:
+        return getE();
+
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new java.lang.IllegalArgumentException();
+      }
+
+      switch (field) {
+      case E:
+        return isSetE();
+      }
+      throw new java.lang.IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(java.lang.Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof load_table_binary_columnar_polys_result)
+        return this.equals((load_table_binary_columnar_polys_result)that);
+      return false;
+    }
+
+    public boolean equals(load_table_binary_columnar_polys_result that) {
+      if (that == null)
+        return false;
+      if (this == that)
+        return true;
+
+      boolean this_present_e = true && this.isSetE();
+      boolean that_present_e = true && that.isSetE();
+      if (this_present_e || that_present_e) {
+        if (!(this_present_e && that_present_e))
+          return false;
+        if (!this.e.equals(that.e))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetE()) ? 131071 : 524287);
+      if (isSetE())
+        hashCode = hashCode * 8191 + e.hashCode();
+
+      return hashCode;
+    }
+
+    @Override
+    public int compareTo(load_table_binary_columnar_polys_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = java.lang.Boolean.valueOf(isSetE()).compareTo(other.isSetE());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetE()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.e, other.e);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      scheme(iprot).read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      scheme(oprot).write(oprot, this);
+      }
+
+    @Override
+    public java.lang.String toString() {
+      java.lang.StringBuilder sb = new java.lang.StringBuilder("load_table_binary_columnar_polys_result(");
+      boolean first = true;
+
+      sb.append("e:");
+      if (this.e == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.e);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class load_table_binary_columnar_polys_resultStandardSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public load_table_binary_columnar_polys_resultStandardScheme getScheme() {
+        return new load_table_binary_columnar_polys_resultStandardScheme();
+      }
+    }
+
+    private static class load_table_binary_columnar_polys_resultStandardScheme extends org.apache.thrift.scheme.StandardScheme<load_table_binary_columnar_polys_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, load_table_binary_columnar_polys_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // E
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.e = new TOmniSciException();
+                struct.e.read(iprot);
+                struct.setEIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, load_table_binary_columnar_polys_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.e != null) {
+          oprot.writeFieldBegin(E_FIELD_DESC);
+          struct.e.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class load_table_binary_columnar_polys_resultTupleSchemeFactory implements org.apache.thrift.scheme.SchemeFactory {
+      public load_table_binary_columnar_polys_resultTupleScheme getScheme() {
+        return new load_table_binary_columnar_polys_resultTupleScheme();
+      }
+    }
+
+    private static class load_table_binary_columnar_polys_resultTupleScheme extends org.apache.thrift.scheme.TupleScheme<load_table_binary_columnar_polys_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, load_table_binary_columnar_polys_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetE()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetE()) {
+          struct.e.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, load_table_binary_columnar_polys_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -69681,14 +73554,14 @@ public class OmniSci {
             case 3: // ROWS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list524 = iprot.readListBegin();
-                  struct.rows = new java.util.ArrayList<TStringRow>(_list524.size);
-                  @org.apache.thrift.annotation.Nullable TStringRow _elem525;
-                  for (int _i526 = 0; _i526 < _list524.size; ++_i526)
+                  org.apache.thrift.protocol.TList _list548 = iprot.readListBegin();
+                  struct.rows = new java.util.ArrayList<TStringRow>(_list548.size);
+                  @org.apache.thrift.annotation.Nullable TStringRow _elem549;
+                  for (int _i550 = 0; _i550 < _list548.size; ++_i550)
                   {
-                    _elem525 = new TStringRow();
-                    _elem525.read(iprot);
-                    struct.rows.add(_elem525);
+                    _elem549 = new TStringRow();
+                    _elem549.read(iprot);
+                    struct.rows.add(_elem549);
                   }
                   iprot.readListEnd();
                 }
@@ -69700,13 +73573,13 @@ public class OmniSci {
             case 4: // COLUMN_NAMES
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list527 = iprot.readListBegin();
-                  struct.column_names = new java.util.ArrayList<java.lang.String>(_list527.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem528;
-                  for (int _i529 = 0; _i529 < _list527.size; ++_i529)
+                  org.apache.thrift.protocol.TList _list551 = iprot.readListBegin();
+                  struct.column_names = new java.util.ArrayList<java.lang.String>(_list551.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem552;
+                  for (int _i553 = 0; _i553 < _list551.size; ++_i553)
                   {
-                    _elem528 = iprot.readString();
-                    struct.column_names.add(_elem528);
+                    _elem552 = iprot.readString();
+                    struct.column_names.add(_elem552);
                   }
                   iprot.readListEnd();
                 }
@@ -69744,9 +73617,9 @@ public class OmniSci {
           oprot.writeFieldBegin(ROWS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.rows.size()));
-            for (TStringRow _iter530 : struct.rows)
+            for (TStringRow _iter554 : struct.rows)
             {
-              _iter530.write(oprot);
+              _iter554.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -69756,9 +73629,9 @@ public class OmniSci {
           oprot.writeFieldBegin(COLUMN_NAMES_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.column_names.size()));
-            for (java.lang.String _iter531 : struct.column_names)
+            for (java.lang.String _iter555 : struct.column_names)
             {
-              oprot.writeString(_iter531);
+              oprot.writeString(_iter555);
             }
             oprot.writeListEnd();
           }
@@ -69804,18 +73677,18 @@ public class OmniSci {
         if (struct.isSetRows()) {
           {
             oprot.writeI32(struct.rows.size());
-            for (TStringRow _iter532 : struct.rows)
+            for (TStringRow _iter556 : struct.rows)
             {
-              _iter532.write(oprot);
+              _iter556.write(oprot);
             }
           }
         }
         if (struct.isSetColumn_names()) {
           {
             oprot.writeI32(struct.column_names.size());
-            for (java.lang.String _iter533 : struct.column_names)
+            for (java.lang.String _iter557 : struct.column_names)
             {
-              oprot.writeString(_iter533);
+              oprot.writeString(_iter557);
             }
           }
         }
@@ -69835,27 +73708,27 @@ public class OmniSci {
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TList _list534 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.rows = new java.util.ArrayList<TStringRow>(_list534.size);
-            @org.apache.thrift.annotation.Nullable TStringRow _elem535;
-            for (int _i536 = 0; _i536 < _list534.size; ++_i536)
+            org.apache.thrift.protocol.TList _list558 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.rows = new java.util.ArrayList<TStringRow>(_list558.size);
+            @org.apache.thrift.annotation.Nullable TStringRow _elem559;
+            for (int _i560 = 0; _i560 < _list558.size; ++_i560)
             {
-              _elem535 = new TStringRow();
-              _elem535.read(iprot);
-              struct.rows.add(_elem535);
+              _elem559 = new TStringRow();
+              _elem559.read(iprot);
+              struct.rows.add(_elem559);
             }
           }
           struct.setRowsIsSet(true);
         }
         if (incoming.get(3)) {
           {
-            org.apache.thrift.protocol.TList _list537 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.column_names = new java.util.ArrayList<java.lang.String>(_list537.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem538;
-            for (int _i539 = 0; _i539 < _list537.size; ++_i539)
+            org.apache.thrift.protocol.TList _list561 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.column_names = new java.util.ArrayList<java.lang.String>(_list561.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem562;
+            for (int _i563 = 0; _i563 < _list561.size; ++_i563)
             {
-              _elem538 = iprot.readString();
-              struct.column_names.add(_elem538);
+              _elem562 = iprot.readString();
+              struct.column_names.add(_elem562);
             }
           }
           struct.setColumn_namesIsSet(true);
@@ -71983,14 +75856,14 @@ public class OmniSci {
             case 3: // ROW_DESC
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list540 = iprot.readListBegin();
-                  struct.row_desc = new java.util.ArrayList<TColumnType>(_list540.size);
-                  @org.apache.thrift.annotation.Nullable TColumnType _elem541;
-                  for (int _i542 = 0; _i542 < _list540.size; ++_i542)
+                  org.apache.thrift.protocol.TList _list564 = iprot.readListBegin();
+                  struct.row_desc = new java.util.ArrayList<TColumnType>(_list564.size);
+                  @org.apache.thrift.annotation.Nullable TColumnType _elem565;
+                  for (int _i566 = 0; _i566 < _list564.size; ++_i566)
                   {
-                    _elem541 = new TColumnType();
-                    _elem541.read(iprot);
-                    struct.row_desc.add(_elem541);
+                    _elem565 = new TColumnType();
+                    _elem565.read(iprot);
+                    struct.row_desc.add(_elem565);
                   }
                   iprot.readListEnd();
                 }
@@ -72045,9 +75918,9 @@ public class OmniSci {
           oprot.writeFieldBegin(ROW_DESC_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.row_desc.size()));
-            for (TColumnType _iter543 : struct.row_desc)
+            for (TColumnType _iter567 : struct.row_desc)
             {
-              _iter543.write(oprot);
+              _iter567.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -72106,9 +75979,9 @@ public class OmniSci {
         if (struct.isSetRow_desc()) {
           {
             oprot.writeI32(struct.row_desc.size());
-            for (TColumnType _iter544 : struct.row_desc)
+            for (TColumnType _iter568 : struct.row_desc)
             {
-              _iter544.write(oprot);
+              _iter568.write(oprot);
             }
           }
         }
@@ -72134,14 +76007,14 @@ public class OmniSci {
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TList _list545 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.row_desc = new java.util.ArrayList<TColumnType>(_list545.size);
-            @org.apache.thrift.annotation.Nullable TColumnType _elem546;
-            for (int _i547 = 0; _i547 < _list545.size; ++_i547)
+            org.apache.thrift.protocol.TList _list569 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.row_desc = new java.util.ArrayList<TColumnType>(_list569.size);
+            @org.apache.thrift.annotation.Nullable TColumnType _elem570;
+            for (int _i571 = 0; _i571 < _list569.size; ++_i571)
             {
-              _elem546 = new TColumnType();
-              _elem546.read(iprot);
-              struct.row_desc.add(_elem546);
+              _elem570 = new TColumnType();
+              _elem570.read(iprot);
+              struct.row_desc.add(_elem570);
             }
           }
           struct.setRow_descIsSet(true);
@@ -74356,14 +78229,14 @@ public class OmniSci {
             case 5: // ROW_DESC
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list548 = iprot.readListBegin();
-                  struct.row_desc = new java.util.ArrayList<TColumnType>(_list548.size);
-                  @org.apache.thrift.annotation.Nullable TColumnType _elem549;
-                  for (int _i550 = 0; _i550 < _list548.size; ++_i550)
+                  org.apache.thrift.protocol.TList _list572 = iprot.readListBegin();
+                  struct.row_desc = new java.util.ArrayList<TColumnType>(_list572.size);
+                  @org.apache.thrift.annotation.Nullable TColumnType _elem573;
+                  for (int _i574 = 0; _i574 < _list572.size; ++_i574)
                   {
-                    _elem549 = new TColumnType();
-                    _elem549.read(iprot);
-                    struct.row_desc.add(_elem549);
+                    _elem573 = new TColumnType();
+                    _elem573.read(iprot);
+                    struct.row_desc.add(_elem573);
                   }
                   iprot.readListEnd();
                 }
@@ -74420,9 +78293,9 @@ public class OmniSci {
           oprot.writeFieldBegin(ROW_DESC_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.row_desc.size()));
-            for (TColumnType _iter551 : struct.row_desc)
+            for (TColumnType _iter575 : struct.row_desc)
             {
-              _iter551.write(oprot);
+              _iter575.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -74485,9 +78358,9 @@ public class OmniSci {
         if (struct.isSetRow_desc()) {
           {
             oprot.writeI32(struct.row_desc.size());
-            for (TColumnType _iter552 : struct.row_desc)
+            for (TColumnType _iter576 : struct.row_desc)
             {
-              _iter552.write(oprot);
+              _iter576.write(oprot);
             }
           }
         }
@@ -74519,14 +78392,14 @@ public class OmniSci {
         }
         if (incoming.get(4)) {
           {
-            org.apache.thrift.protocol.TList _list553 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.row_desc = new java.util.ArrayList<TColumnType>(_list553.size);
-            @org.apache.thrift.annotation.Nullable TColumnType _elem554;
-            for (int _i555 = 0; _i555 < _list553.size; ++_i555)
+            org.apache.thrift.protocol.TList _list577 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.row_desc = new java.util.ArrayList<TColumnType>(_list577.size);
+            @org.apache.thrift.annotation.Nullable TColumnType _elem578;
+            for (int _i579 = 0; _i579 < _list577.size; ++_i579)
             {
-              _elem554 = new TColumnType();
-              _elem554.read(iprot);
-              struct.row_desc.add(_elem554);
+              _elem578 = new TColumnType();
+              _elem578.read(iprot);
+              struct.row_desc.add(_elem578);
             }
           }
           struct.setRow_descIsSet(true);
@@ -77901,13 +81774,13 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list556 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<java.lang.String>(_list556.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem557;
-                  for (int _i558 = 0; _i558 < _list556.size; ++_i558)
+                  org.apache.thrift.protocol.TList _list580 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<java.lang.String>(_list580.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem581;
+                  for (int _i582 = 0; _i582 < _list580.size; ++_i582)
                   {
-                    _elem557 = iprot.readString();
-                    struct.success.add(_elem557);
+                    _elem581 = iprot.readString();
+                    struct.success.add(_elem581);
                   }
                   iprot.readListEnd();
                 }
@@ -77944,9 +81817,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.lang.String _iter559 : struct.success)
+            for (java.lang.String _iter583 : struct.success)
             {
-              oprot.writeString(_iter559);
+              oprot.writeString(_iter583);
             }
             oprot.writeListEnd();
           }
@@ -77985,9 +81858,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.lang.String _iter560 : struct.success)
+            for (java.lang.String _iter584 : struct.success)
             {
-              oprot.writeString(_iter560);
+              oprot.writeString(_iter584);
             }
           }
         }
@@ -78002,13 +81875,13 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list561 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.success = new java.util.ArrayList<java.lang.String>(_list561.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem562;
-            for (int _i563 = 0; _i563 < _list561.size; ++_i563)
+            org.apache.thrift.protocol.TList _list585 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new java.util.ArrayList<java.lang.String>(_list585.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem586;
+            for (int _i587 = 0; _i587 < _list585.size; ++_i587)
             {
-              _elem562 = iprot.readString();
-              struct.success.add(_elem562);
+              _elem586 = iprot.readString();
+              struct.success.add(_elem586);
             }
           }
           struct.setSuccessIsSet(true);
@@ -79010,14 +82883,14 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list564 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TGeoFileLayerInfo>(_list564.size);
-                  @org.apache.thrift.annotation.Nullable TGeoFileLayerInfo _elem565;
-                  for (int _i566 = 0; _i566 < _list564.size; ++_i566)
+                  org.apache.thrift.protocol.TList _list588 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TGeoFileLayerInfo>(_list588.size);
+                  @org.apache.thrift.annotation.Nullable TGeoFileLayerInfo _elem589;
+                  for (int _i590 = 0; _i590 < _list588.size; ++_i590)
                   {
-                    _elem565 = new TGeoFileLayerInfo();
-                    _elem565.read(iprot);
-                    struct.success.add(_elem565);
+                    _elem589 = new TGeoFileLayerInfo();
+                    _elem589.read(iprot);
+                    struct.success.add(_elem589);
                   }
                   iprot.readListEnd();
                 }
@@ -79054,9 +82927,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TGeoFileLayerInfo _iter567 : struct.success)
+            for (TGeoFileLayerInfo _iter591 : struct.success)
             {
-              _iter567.write(oprot);
+              _iter591.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -79095,9 +82968,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TGeoFileLayerInfo _iter568 : struct.success)
+            for (TGeoFileLayerInfo _iter592 : struct.success)
             {
-              _iter568.write(oprot);
+              _iter592.write(oprot);
             }
           }
         }
@@ -79112,14 +82985,14 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list569 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TGeoFileLayerInfo>(_list569.size);
-            @org.apache.thrift.annotation.Nullable TGeoFileLayerInfo _elem570;
-            for (int _i571 = 0; _i571 < _list569.size; ++_i571)
+            org.apache.thrift.protocol.TList _list593 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TGeoFileLayerInfo>(_list593.size);
+            @org.apache.thrift.annotation.Nullable TGeoFileLayerInfo _elem594;
+            for (int _i595 = 0; _i595 < _list593.size; ++_i595)
             {
-              _elem570 = new TGeoFileLayerInfo();
-              _elem570.read(iprot);
-              struct.success.add(_elem570);
+              _elem594 = new TGeoFileLayerInfo();
+              _elem594.read(iprot);
+              struct.success.add(_elem594);
             }
           }
           struct.setSuccessIsSet(true);
@@ -81032,8 +84905,9 @@ public class OmniSci {
     private static final org.apache.thrift.protocol.TField LEAF_SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("leaf_session", org.apache.thrift.protocol.TType.STRING, (short)1);
     private static final org.apache.thrift.protocol.TField PARENT_SESSION_FIELD_DESC = new org.apache.thrift.protocol.TField("parent_session", org.apache.thrift.protocol.TType.STRING, (short)2);
     private static final org.apache.thrift.protocol.TField QUERY_RA_FIELD_DESC = new org.apache.thrift.protocol.TField("query_ra", org.apache.thrift.protocol.TType.STRING, (short)3);
-    private static final org.apache.thrift.protocol.TField JUST_EXPLAIN_FIELD_DESC = new org.apache.thrift.protocol.TField("just_explain", org.apache.thrift.protocol.TType.BOOL, (short)4);
-    private static final org.apache.thrift.protocol.TField OUTER_FRAGMENT_INDICES_FIELD_DESC = new org.apache.thrift.protocol.TField("outer_fragment_indices", org.apache.thrift.protocol.TType.LIST, (short)5);
+    private static final org.apache.thrift.protocol.TField START_TIME_STR_FIELD_DESC = new org.apache.thrift.protocol.TField("start_time_str", org.apache.thrift.protocol.TType.STRING, (short)4);
+    private static final org.apache.thrift.protocol.TField JUST_EXPLAIN_FIELD_DESC = new org.apache.thrift.protocol.TField("just_explain", org.apache.thrift.protocol.TType.BOOL, (short)5);
+    private static final org.apache.thrift.protocol.TField OUTER_FRAGMENT_INDICES_FIELD_DESC = new org.apache.thrift.protocol.TField("outer_fragment_indices", org.apache.thrift.protocol.TType.LIST, (short)6);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new start_query_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new start_query_argsTupleSchemeFactory();
@@ -81041,6 +84915,7 @@ public class OmniSci {
     public @org.apache.thrift.annotation.Nullable java.lang.String leaf_session; // required
     public @org.apache.thrift.annotation.Nullable java.lang.String parent_session; // required
     public @org.apache.thrift.annotation.Nullable java.lang.String query_ra; // required
+    public @org.apache.thrift.annotation.Nullable java.lang.String start_time_str; // required
     public boolean just_explain; // required
     public @org.apache.thrift.annotation.Nullable java.util.List<java.lang.Long> outer_fragment_indices; // required
 
@@ -81049,8 +84924,9 @@ public class OmniSci {
       LEAF_SESSION((short)1, "leaf_session"),
       PARENT_SESSION((short)2, "parent_session"),
       QUERY_RA((short)3, "query_ra"),
-      JUST_EXPLAIN((short)4, "just_explain"),
-      OUTER_FRAGMENT_INDICES((short)5, "outer_fragment_indices");
+      START_TIME_STR((short)4, "start_time_str"),
+      JUST_EXPLAIN((short)5, "just_explain"),
+      OUTER_FRAGMENT_INDICES((short)6, "outer_fragment_indices");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -81072,9 +84948,11 @@ public class OmniSci {
             return PARENT_SESSION;
           case 3: // QUERY_RA
             return QUERY_RA;
-          case 4: // JUST_EXPLAIN
+          case 4: // START_TIME_STR
+            return START_TIME_STR;
+          case 5: // JUST_EXPLAIN
             return JUST_EXPLAIN;
-          case 5: // OUTER_FRAGMENT_INDICES
+          case 6: // OUTER_FRAGMENT_INDICES
             return OUTER_FRAGMENT_INDICES;
           default:
             return null;
@@ -81128,6 +85006,8 @@ public class OmniSci {
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING          , "TSessionId")));
       tmpMap.put(_Fields.QUERY_RA, new org.apache.thrift.meta_data.FieldMetaData("query_ra", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+      tmpMap.put(_Fields.START_TIME_STR, new org.apache.thrift.meta_data.FieldMetaData("start_time_str", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
       tmpMap.put(_Fields.JUST_EXPLAIN, new org.apache.thrift.meta_data.FieldMetaData("just_explain", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
       tmpMap.put(_Fields.OUTER_FRAGMENT_INDICES, new org.apache.thrift.meta_data.FieldMetaData("outer_fragment_indices", org.apache.thrift.TFieldRequirementType.DEFAULT, 
@@ -81144,6 +85024,7 @@ public class OmniSci {
       java.lang.String leaf_session,
       java.lang.String parent_session,
       java.lang.String query_ra,
+      java.lang.String start_time_str,
       boolean just_explain,
       java.util.List<java.lang.Long> outer_fragment_indices)
     {
@@ -81151,6 +85032,7 @@ public class OmniSci {
       this.leaf_session = leaf_session;
       this.parent_session = parent_session;
       this.query_ra = query_ra;
+      this.start_time_str = start_time_str;
       this.just_explain = just_explain;
       setJust_explainIsSet(true);
       this.outer_fragment_indices = outer_fragment_indices;
@@ -81170,6 +85052,9 @@ public class OmniSci {
       if (other.isSetQuery_ra()) {
         this.query_ra = other.query_ra;
       }
+      if (other.isSetStart_time_str()) {
+        this.start_time_str = other.start_time_str;
+      }
       this.just_explain = other.just_explain;
       if (other.isSetOuter_fragment_indices()) {
         java.util.List<java.lang.Long> __this__outer_fragment_indices = new java.util.ArrayList<java.lang.Long>(other.outer_fragment_indices);
@@ -81186,6 +85071,7 @@ public class OmniSci {
       this.leaf_session = null;
       this.parent_session = null;
       this.query_ra = null;
+      this.start_time_str = null;
       setJust_explainIsSet(false);
       this.just_explain = false;
       this.outer_fragment_indices = null;
@@ -81263,6 +85149,31 @@ public class OmniSci {
     public void setQuery_raIsSet(boolean value) {
       if (!value) {
         this.query_ra = null;
+      }
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.String getStart_time_str() {
+      return this.start_time_str;
+    }
+
+    public start_query_args setStart_time_str(@org.apache.thrift.annotation.Nullable java.lang.String start_time_str) {
+      this.start_time_str = start_time_str;
+      return this;
+    }
+
+    public void unsetStart_time_str() {
+      this.start_time_str = null;
+    }
+
+    /** Returns true if field start_time_str is set (has been assigned a value) and false otherwise */
+    public boolean isSetStart_time_str() {
+      return this.start_time_str != null;
+    }
+
+    public void setStart_time_strIsSet(boolean value) {
+      if (!value) {
+        this.start_time_str = null;
       }
     }
 
@@ -81356,6 +85267,14 @@ public class OmniSci {
         }
         break;
 
+      case START_TIME_STR:
+        if (value == null) {
+          unsetStart_time_str();
+        } else {
+          setStart_time_str((java.lang.String)value);
+        }
+        break;
+
       case JUST_EXPLAIN:
         if (value == null) {
           unsetJust_explain();
@@ -81387,6 +85306,9 @@ public class OmniSci {
       case QUERY_RA:
         return getQuery_ra();
 
+      case START_TIME_STR:
+        return getStart_time_str();
+
       case JUST_EXPLAIN:
         return isJust_explain();
 
@@ -81410,6 +85332,8 @@ public class OmniSci {
         return isSetParent_session();
       case QUERY_RA:
         return isSetQuery_ra();
+      case START_TIME_STR:
+        return isSetStart_time_str();
       case JUST_EXPLAIN:
         return isSetJust_explain();
       case OUTER_FRAGMENT_INDICES:
@@ -81460,6 +85384,15 @@ public class OmniSci {
           return false;
       }
 
+      boolean this_present_start_time_str = true && this.isSetStart_time_str();
+      boolean that_present_start_time_str = true && that.isSetStart_time_str();
+      if (this_present_start_time_str || that_present_start_time_str) {
+        if (!(this_present_start_time_str && that_present_start_time_str))
+          return false;
+        if (!this.start_time_str.equals(that.start_time_str))
+          return false;
+      }
+
       boolean this_present_just_explain = true;
       boolean that_present_just_explain = true;
       if (this_present_just_explain || that_present_just_explain) {
@@ -81496,6 +85429,10 @@ public class OmniSci {
       hashCode = hashCode * 8191 + ((isSetQuery_ra()) ? 131071 : 524287);
       if (isSetQuery_ra())
         hashCode = hashCode * 8191 + query_ra.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetStart_time_str()) ? 131071 : 524287);
+      if (isSetStart_time_str())
+        hashCode = hashCode * 8191 + start_time_str.hashCode();
 
       hashCode = hashCode * 8191 + ((just_explain) ? 131071 : 524287);
 
@@ -81540,6 +85477,16 @@ public class OmniSci {
       }
       if (isSetQuery_ra()) {
         lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.query_ra, other.query_ra);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetStart_time_str()).compareTo(other.isSetStart_time_str());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetStart_time_str()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.start_time_str, other.start_time_str);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -81606,6 +85553,14 @@ public class OmniSci {
         sb.append("null");
       } else {
         sb.append(this.query_ra);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("start_time_str:");
+      if (this.start_time_str == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.start_time_str);
       }
       first = false;
       if (!first) sb.append(", ");
@@ -81689,7 +85644,15 @@ public class OmniSci {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
-            case 4: // JUST_EXPLAIN
+            case 4: // START_TIME_STR
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.start_time_str = iprot.readString();
+                struct.setStart_time_strIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 5: // JUST_EXPLAIN
               if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
                 struct.just_explain = iprot.readBool();
                 struct.setJust_explainIsSet(true);
@@ -81697,16 +85660,16 @@ public class OmniSci {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
-            case 5: // OUTER_FRAGMENT_INDICES
+            case 6: // OUTER_FRAGMENT_INDICES
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list572 = iprot.readListBegin();
-                  struct.outer_fragment_indices = new java.util.ArrayList<java.lang.Long>(_list572.size);
-                  long _elem573;
-                  for (int _i574 = 0; _i574 < _list572.size; ++_i574)
+                  org.apache.thrift.protocol.TList _list596 = iprot.readListBegin();
+                  struct.outer_fragment_indices = new java.util.ArrayList<java.lang.Long>(_list596.size);
+                  long _elem597;
+                  for (int _i598 = 0; _i598 < _list596.size; ++_i598)
                   {
-                    _elem573 = iprot.readI64();
-                    struct.outer_fragment_indices.add(_elem573);
+                    _elem597 = iprot.readI64();
+                    struct.outer_fragment_indices.add(_elem597);
                   }
                   iprot.readListEnd();
                 }
@@ -81745,6 +85708,11 @@ public class OmniSci {
           oprot.writeString(struct.query_ra);
           oprot.writeFieldEnd();
         }
+        if (struct.start_time_str != null) {
+          oprot.writeFieldBegin(START_TIME_STR_FIELD_DESC);
+          oprot.writeString(struct.start_time_str);
+          oprot.writeFieldEnd();
+        }
         oprot.writeFieldBegin(JUST_EXPLAIN_FIELD_DESC);
         oprot.writeBool(struct.just_explain);
         oprot.writeFieldEnd();
@@ -81752,9 +85720,9 @@ public class OmniSci {
           oprot.writeFieldBegin(OUTER_FRAGMENT_INDICES_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I64, struct.outer_fragment_indices.size()));
-            for (long _iter575 : struct.outer_fragment_indices)
+            for (long _iter599 : struct.outer_fragment_indices)
             {
-              oprot.writeI64(_iter575);
+              oprot.writeI64(_iter599);
             }
             oprot.writeListEnd();
           }
@@ -81787,13 +85755,16 @@ public class OmniSci {
         if (struct.isSetQuery_ra()) {
           optionals.set(2);
         }
-        if (struct.isSetJust_explain()) {
+        if (struct.isSetStart_time_str()) {
           optionals.set(3);
         }
-        if (struct.isSetOuter_fragment_indices()) {
+        if (struct.isSetJust_explain()) {
           optionals.set(4);
         }
-        oprot.writeBitSet(optionals, 5);
+        if (struct.isSetOuter_fragment_indices()) {
+          optionals.set(5);
+        }
+        oprot.writeBitSet(optionals, 6);
         if (struct.isSetLeaf_session()) {
           oprot.writeString(struct.leaf_session);
         }
@@ -81803,15 +85774,18 @@ public class OmniSci {
         if (struct.isSetQuery_ra()) {
           oprot.writeString(struct.query_ra);
         }
+        if (struct.isSetStart_time_str()) {
+          oprot.writeString(struct.start_time_str);
+        }
         if (struct.isSetJust_explain()) {
           oprot.writeBool(struct.just_explain);
         }
         if (struct.isSetOuter_fragment_indices()) {
           {
             oprot.writeI32(struct.outer_fragment_indices.size());
-            for (long _iter576 : struct.outer_fragment_indices)
+            for (long _iter600 : struct.outer_fragment_indices)
             {
-              oprot.writeI64(_iter576);
+              oprot.writeI64(_iter600);
             }
           }
         }
@@ -81820,7 +85794,7 @@ public class OmniSci {
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, start_query_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-        java.util.BitSet incoming = iprot.readBitSet(5);
+        java.util.BitSet incoming = iprot.readBitSet(6);
         if (incoming.get(0)) {
           struct.leaf_session = iprot.readString();
           struct.setLeaf_sessionIsSet(true);
@@ -81834,18 +85808,22 @@ public class OmniSci {
           struct.setQuery_raIsSet(true);
         }
         if (incoming.get(3)) {
+          struct.start_time_str = iprot.readString();
+          struct.setStart_time_strIsSet(true);
+        }
+        if (incoming.get(4)) {
           struct.just_explain = iprot.readBool();
           struct.setJust_explainIsSet(true);
         }
-        if (incoming.get(4)) {
+        if (incoming.get(5)) {
           {
-            org.apache.thrift.protocol.TList _list577 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I64, iprot.readI32());
-            struct.outer_fragment_indices = new java.util.ArrayList<java.lang.Long>(_list577.size);
-            long _elem578;
-            for (int _i579 = 0; _i579 < _list577.size; ++_i579)
+            org.apache.thrift.protocol.TList _list601 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I64, iprot.readI32());
+            struct.outer_fragment_indices = new java.util.ArrayList<java.lang.Long>(_list601.size);
+            long _elem602;
+            for (int _i603 = 0; _i603 < _list601.size; ++_i603)
             {
-              _elem578 = iprot.readI64();
-              struct.outer_fragment_indices.add(_elem578);
+              _elem602 = iprot.readI64();
+              struct.outer_fragment_indices.add(_elem602);
             }
           }
           struct.setOuter_fragment_indicesIsSet(true);
@@ -82342,17 +86320,20 @@ public class OmniSci {
 
     private static final org.apache.thrift.protocol.TField PENDING_QUERY_FIELD_DESC = new org.apache.thrift.protocol.TField("pending_query", org.apache.thrift.protocol.TType.STRUCT, (short)1);
     private static final org.apache.thrift.protocol.TField SUBQUERY_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("subquery_id", org.apache.thrift.protocol.TType.I64, (short)2);
+    private static final org.apache.thrift.protocol.TField START_TIME_STR_FIELD_DESC = new org.apache.thrift.protocol.TField("start_time_str", org.apache.thrift.protocol.TType.STRING, (short)3);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new execute_query_step_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new execute_query_step_argsTupleSchemeFactory();
 
     public @org.apache.thrift.annotation.Nullable TPendingQuery pending_query; // required
     public long subquery_id; // required
+    public @org.apache.thrift.annotation.Nullable java.lang.String start_time_str; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       PENDING_QUERY((short)1, "pending_query"),
-      SUBQUERY_ID((short)2, "subquery_id");
+      SUBQUERY_ID((short)2, "subquery_id"),
+      START_TIME_STR((short)3, "start_time_str");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -82372,6 +86353,8 @@ public class OmniSci {
             return PENDING_QUERY;
           case 2: // SUBQUERY_ID
             return SUBQUERY_ID;
+          case 3: // START_TIME_STR
+            return START_TIME_STR;
           default:
             return null;
         }
@@ -82422,6 +86405,8 @@ public class OmniSci {
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TPendingQuery.class)));
       tmpMap.put(_Fields.SUBQUERY_ID, new org.apache.thrift.meta_data.FieldMetaData("subquery_id", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64          , "TSubqueryId")));
+      tmpMap.put(_Fields.START_TIME_STR, new org.apache.thrift.meta_data.FieldMetaData("start_time_str", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(execute_query_step_args.class, metaDataMap);
     }
@@ -82431,12 +86416,14 @@ public class OmniSci {
 
     public execute_query_step_args(
       TPendingQuery pending_query,
-      long subquery_id)
+      long subquery_id,
+      java.lang.String start_time_str)
     {
       this();
       this.pending_query = pending_query;
       this.subquery_id = subquery_id;
       setSubquery_idIsSet(true);
+      this.start_time_str = start_time_str;
     }
 
     /**
@@ -82448,6 +86435,9 @@ public class OmniSci {
         this.pending_query = new TPendingQuery(other.pending_query);
       }
       this.subquery_id = other.subquery_id;
+      if (other.isSetStart_time_str()) {
+        this.start_time_str = other.start_time_str;
+      }
     }
 
     public execute_query_step_args deepCopy() {
@@ -82459,6 +86449,7 @@ public class OmniSci {
       this.pending_query = null;
       setSubquery_idIsSet(false);
       this.subquery_id = 0;
+      this.start_time_str = null;
     }
 
     @org.apache.thrift.annotation.Nullable
@@ -82509,6 +86500,31 @@ public class OmniSci {
       __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __SUBQUERY_ID_ISSET_ID, value);
     }
 
+    @org.apache.thrift.annotation.Nullable
+    public java.lang.String getStart_time_str() {
+      return this.start_time_str;
+    }
+
+    public execute_query_step_args setStart_time_str(@org.apache.thrift.annotation.Nullable java.lang.String start_time_str) {
+      this.start_time_str = start_time_str;
+      return this;
+    }
+
+    public void unsetStart_time_str() {
+      this.start_time_str = null;
+    }
+
+    /** Returns true if field start_time_str is set (has been assigned a value) and false otherwise */
+    public boolean isSetStart_time_str() {
+      return this.start_time_str != null;
+    }
+
+    public void setStart_time_strIsSet(boolean value) {
+      if (!value) {
+        this.start_time_str = null;
+      }
+    }
+
     public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
       switch (field) {
       case PENDING_QUERY:
@@ -82527,6 +86543,14 @@ public class OmniSci {
         }
         break;
 
+      case START_TIME_STR:
+        if (value == null) {
+          unsetStart_time_str();
+        } else {
+          setStart_time_str((java.lang.String)value);
+        }
+        break;
+
       }
     }
 
@@ -82538,6 +86562,9 @@ public class OmniSci {
 
       case SUBQUERY_ID:
         return getSubquery_id();
+
+      case START_TIME_STR:
+        return getStart_time_str();
 
       }
       throw new java.lang.IllegalStateException();
@@ -82554,6 +86581,8 @@ public class OmniSci {
         return isSetPending_query();
       case SUBQUERY_ID:
         return isSetSubquery_id();
+      case START_TIME_STR:
+        return isSetStart_time_str();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -82591,6 +86620,15 @@ public class OmniSci {
           return false;
       }
 
+      boolean this_present_start_time_str = true && this.isSetStart_time_str();
+      boolean that_present_start_time_str = true && that.isSetStart_time_str();
+      if (this_present_start_time_str || that_present_start_time_str) {
+        if (!(this_present_start_time_str && that_present_start_time_str))
+          return false;
+        if (!this.start_time_str.equals(that.start_time_str))
+          return false;
+      }
+
       return true;
     }
 
@@ -82603,6 +86641,10 @@ public class OmniSci {
         hashCode = hashCode * 8191 + pending_query.hashCode();
 
       hashCode = hashCode * 8191 + org.apache.thrift.TBaseHelper.hashCode(subquery_id);
+
+      hashCode = hashCode * 8191 + ((isSetStart_time_str()) ? 131071 : 524287);
+      if (isSetStart_time_str())
+        hashCode = hashCode * 8191 + start_time_str.hashCode();
 
       return hashCode;
     }
@@ -82631,6 +86673,16 @@ public class OmniSci {
       }
       if (isSetSubquery_id()) {
         lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.subquery_id, other.subquery_id);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetStart_time_str()).compareTo(other.isSetStart_time_str());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetStart_time_str()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.start_time_str, other.start_time_str);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -82666,6 +86718,14 @@ public class OmniSci {
       if (!first) sb.append(", ");
       sb.append("subquery_id:");
       sb.append(this.subquery_id);
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("start_time_str:");
+      if (this.start_time_str == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.start_time_str);
+      }
       first = false;
       sb.append(")");
       return sb.toString();
@@ -82732,6 +86792,14 @@ public class OmniSci {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
+            case 3: // START_TIME_STR
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.start_time_str = iprot.readString();
+                struct.setStart_time_strIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -82755,6 +86823,11 @@ public class OmniSci {
         oprot.writeFieldBegin(SUBQUERY_ID_FIELD_DESC);
         oprot.writeI64(struct.subquery_id);
         oprot.writeFieldEnd();
+        if (struct.start_time_str != null) {
+          oprot.writeFieldBegin(START_TIME_STR_FIELD_DESC);
+          oprot.writeString(struct.start_time_str);
+          oprot.writeFieldEnd();
+        }
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -82779,19 +86852,25 @@ public class OmniSci {
         if (struct.isSetSubquery_id()) {
           optionals.set(1);
         }
-        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetStart_time_str()) {
+          optionals.set(2);
+        }
+        oprot.writeBitSet(optionals, 3);
         if (struct.isSetPending_query()) {
           struct.pending_query.write(oprot);
         }
         if (struct.isSetSubquery_id()) {
           oprot.writeI64(struct.subquery_id);
         }
+        if (struct.isSetStart_time_str()) {
+          oprot.writeString(struct.start_time_str);
+        }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, execute_query_step_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-        java.util.BitSet incoming = iprot.readBitSet(2);
+        java.util.BitSet incoming = iprot.readBitSet(3);
         if (incoming.get(0)) {
           struct.pending_query = new TPendingQuery();
           struct.pending_query.read(iprot);
@@ -82800,6 +86879,10 @@ public class OmniSci {
         if (incoming.get(1)) {
           struct.subquery_id = iprot.readI64();
           struct.setSubquery_idIsSet(true);
+        }
+        if (incoming.get(2)) {
+          struct.start_time_str = iprot.readString();
+          struct.setStart_time_strIsSet(true);
         }
       }
     }
@@ -83930,14 +88013,14 @@ public class OmniSci {
             case 2: // ROW_DESC
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list580 = iprot.readListBegin();
-                  struct.row_desc = new java.util.ArrayList<TColumnType>(_list580.size);
-                  @org.apache.thrift.annotation.Nullable TColumnType _elem581;
-                  for (int _i582 = 0; _i582 < _list580.size; ++_i582)
+                  org.apache.thrift.protocol.TList _list604 = iprot.readListBegin();
+                  struct.row_desc = new java.util.ArrayList<TColumnType>(_list604.size);
+                  @org.apache.thrift.annotation.Nullable TColumnType _elem605;
+                  for (int _i606 = 0; _i606 < _list604.size; ++_i606)
                   {
-                    _elem581 = new TColumnType();
-                    _elem581.read(iprot);
-                    struct.row_desc.add(_elem581);
+                    _elem605 = new TColumnType();
+                    _elem605.read(iprot);
+                    struct.row_desc.add(_elem605);
                   }
                   iprot.readListEnd();
                 }
@@ -83994,9 +88077,9 @@ public class OmniSci {
           oprot.writeFieldBegin(ROW_DESC_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.row_desc.size()));
-            for (TColumnType _iter583 : struct.row_desc)
+            for (TColumnType _iter607 : struct.row_desc)
             {
-              _iter583.write(oprot);
+              _iter607.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -84051,9 +88134,9 @@ public class OmniSci {
         if (struct.isSetRow_desc()) {
           {
             oprot.writeI32(struct.row_desc.size());
-            for (TColumnType _iter584 : struct.row_desc)
+            for (TColumnType _iter608 : struct.row_desc)
             {
-              _iter584.write(oprot);
+              _iter608.write(oprot);
             }
           }
         }
@@ -84079,14 +88162,14 @@ public class OmniSci {
         }
         if (incoming.get(1)) {
           {
-            org.apache.thrift.protocol.TList _list585 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.row_desc = new java.util.ArrayList<TColumnType>(_list585.size);
-            @org.apache.thrift.annotation.Nullable TColumnType _elem586;
-            for (int _i587 = 0; _i587 < _list585.size; ++_i587)
+            org.apache.thrift.protocol.TList _list609 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.row_desc = new java.util.ArrayList<TColumnType>(_list609.size);
+            @org.apache.thrift.annotation.Nullable TColumnType _elem610;
+            for (int _i611 = 0; _i611 < _list609.size; ++_i611)
             {
-              _elem586 = new TColumnType();
-              _elem586.read(iprot);
-              struct.row_desc.add(_elem586);
+              _elem610 = new TColumnType();
+              _elem610.read(iprot);
+              struct.row_desc.add(_elem610);
             }
           }
           struct.setRow_descIsSet(true);
@@ -86079,62 +90162,62 @@ public class OmniSci {
             case 2: // MERGED_DATA
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map588 = iprot.readMapBegin();
-                  struct.merged_data = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>>(2*_map588.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _key589;
-                  @org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>> _val590;
-                  for (int _i591 = 0; _i591 < _map588.size; ++_i591)
+                  org.apache.thrift.protocol.TMap _map612 = iprot.readMapBegin();
+                  struct.merged_data = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>>(2*_map612.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _key613;
+                  @org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>> _val614;
+                  for (int _i615 = 0; _i615 < _map612.size; ++_i615)
                   {
-                    _key589 = iprot.readString();
+                    _key613 = iprot.readString();
                     {
-                      org.apache.thrift.protocol.TMap _map592 = iprot.readMapBegin();
-                      _val590 = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>(2*_map592.size);
-                      @org.apache.thrift.annotation.Nullable java.lang.String _key593;
-                      @org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>> _val594;
-                      for (int _i595 = 0; _i595 < _map592.size; ++_i595)
+                      org.apache.thrift.protocol.TMap _map616 = iprot.readMapBegin();
+                      _val614 = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>(2*_map616.size);
+                      @org.apache.thrift.annotation.Nullable java.lang.String _key617;
+                      @org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>> _val618;
+                      for (int _i619 = 0; _i619 < _map616.size; ++_i619)
                       {
-                        _key593 = iprot.readString();
+                        _key617 = iprot.readString();
                         {
-                          org.apache.thrift.protocol.TMap _map596 = iprot.readMapBegin();
-                          _val594 = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>(2*_map596.size);
-                          @org.apache.thrift.annotation.Nullable java.lang.String _key597;
-                          @org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.util.List<TRenderDatum>> _val598;
-                          for (int _i599 = 0; _i599 < _map596.size; ++_i599)
+                          org.apache.thrift.protocol.TMap _map620 = iprot.readMapBegin();
+                          _val618 = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>(2*_map620.size);
+                          @org.apache.thrift.annotation.Nullable java.lang.String _key621;
+                          @org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.util.List<TRenderDatum>> _val622;
+                          for (int _i623 = 0; _i623 < _map620.size; ++_i623)
                           {
-                            _key597 = iprot.readString();
+                            _key621 = iprot.readString();
                             {
-                              org.apache.thrift.protocol.TMap _map600 = iprot.readMapBegin();
-                              _val598 = new java.util.HashMap<java.lang.String,java.util.List<TRenderDatum>>(2*_map600.size);
-                              @org.apache.thrift.annotation.Nullable java.lang.String _key601;
-                              @org.apache.thrift.annotation.Nullable java.util.List<TRenderDatum> _val602;
-                              for (int _i603 = 0; _i603 < _map600.size; ++_i603)
+                              org.apache.thrift.protocol.TMap _map624 = iprot.readMapBegin();
+                              _val622 = new java.util.HashMap<java.lang.String,java.util.List<TRenderDatum>>(2*_map624.size);
+                              @org.apache.thrift.annotation.Nullable java.lang.String _key625;
+                              @org.apache.thrift.annotation.Nullable java.util.List<TRenderDatum> _val626;
+                              for (int _i627 = 0; _i627 < _map624.size; ++_i627)
                               {
-                                _key601 = iprot.readString();
+                                _key625 = iprot.readString();
                                 {
-                                  org.apache.thrift.protocol.TList _list604 = iprot.readListBegin();
-                                  _val602 = new java.util.ArrayList<TRenderDatum>(_list604.size);
-                                  @org.apache.thrift.annotation.Nullable TRenderDatum _elem605;
-                                  for (int _i606 = 0; _i606 < _list604.size; ++_i606)
+                                  org.apache.thrift.protocol.TList _list628 = iprot.readListBegin();
+                                  _val626 = new java.util.ArrayList<TRenderDatum>(_list628.size);
+                                  @org.apache.thrift.annotation.Nullable TRenderDatum _elem629;
+                                  for (int _i630 = 0; _i630 < _list628.size; ++_i630)
                                   {
-                                    _elem605 = new TRenderDatum();
-                                    _elem605.read(iprot);
-                                    _val602.add(_elem605);
+                                    _elem629 = new TRenderDatum();
+                                    _elem629.read(iprot);
+                                    _val626.add(_elem629);
                                   }
                                   iprot.readListEnd();
                                 }
-                                _val598.put(_key601, _val602);
+                                _val622.put(_key625, _val626);
                               }
                               iprot.readMapEnd();
                             }
-                            _val594.put(_key597, _val598);
+                            _val618.put(_key621, _val622);
                           }
                           iprot.readMapEnd();
                         }
-                        _val590.put(_key593, _val594);
+                        _val614.put(_key617, _val618);
                       }
                       iprot.readMapEnd();
                     }
-                    struct.merged_data.put(_key589, _val590);
+                    struct.merged_data.put(_key613, _val614);
                   }
                   iprot.readMapEnd();
                 }
@@ -86167,29 +90250,29 @@ public class OmniSci {
           oprot.writeFieldBegin(MERGED_DATA_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, struct.merged_data.size()));
-            for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>> _iter607 : struct.merged_data.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>> _iter631 : struct.merged_data.entrySet())
             {
-              oprot.writeString(_iter607.getKey());
+              oprot.writeString(_iter631.getKey());
               {
-                oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, _iter607.getValue().size()));
-                for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>> _iter608 : _iter607.getValue().entrySet())
+                oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, _iter631.getValue().size()));
+                for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>> _iter632 : _iter631.getValue().entrySet())
                 {
-                  oprot.writeString(_iter608.getKey());
+                  oprot.writeString(_iter632.getKey());
                   {
-                    oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, _iter608.getValue().size()));
-                    for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.List<TRenderDatum>>> _iter609 : _iter608.getValue().entrySet())
+                    oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, _iter632.getValue().size()));
+                    for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.List<TRenderDatum>>> _iter633 : _iter632.getValue().entrySet())
                     {
-                      oprot.writeString(_iter609.getKey());
+                      oprot.writeString(_iter633.getKey());
                       {
-                        oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, _iter609.getValue().size()));
-                        for (java.util.Map.Entry<java.lang.String, java.util.List<TRenderDatum>> _iter610 : _iter609.getValue().entrySet())
+                        oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, _iter633.getValue().size()));
+                        for (java.util.Map.Entry<java.lang.String, java.util.List<TRenderDatum>> _iter634 : _iter633.getValue().entrySet())
                         {
-                          oprot.writeString(_iter610.getKey());
+                          oprot.writeString(_iter634.getKey());
                           {
-                            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, _iter610.getValue().size()));
-                            for (TRenderDatum _iter611 : _iter610.getValue())
+                            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, _iter634.getValue().size()));
+                            for (TRenderDatum _iter635 : _iter634.getValue())
                             {
-                              _iter611.write(oprot);
+                              _iter635.write(oprot);
                             }
                             oprot.writeListEnd();
                           }
@@ -86238,29 +90321,29 @@ public class OmniSci {
         if (struct.isSetMerged_data()) {
           {
             oprot.writeI32(struct.merged_data.size());
-            for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>> _iter612 : struct.merged_data.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>> _iter636 : struct.merged_data.entrySet())
             {
-              oprot.writeString(_iter612.getKey());
+              oprot.writeString(_iter636.getKey());
               {
-                oprot.writeI32(_iter612.getValue().size());
-                for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>> _iter613 : _iter612.getValue().entrySet())
+                oprot.writeI32(_iter636.getValue().size());
+                for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>> _iter637 : _iter636.getValue().entrySet())
                 {
-                  oprot.writeString(_iter613.getKey());
+                  oprot.writeString(_iter637.getKey());
                   {
-                    oprot.writeI32(_iter613.getValue().size());
-                    for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.List<TRenderDatum>>> _iter614 : _iter613.getValue().entrySet())
+                    oprot.writeI32(_iter637.getValue().size());
+                    for (java.util.Map.Entry<java.lang.String, java.util.Map<java.lang.String,java.util.List<TRenderDatum>>> _iter638 : _iter637.getValue().entrySet())
                     {
-                      oprot.writeString(_iter614.getKey());
+                      oprot.writeString(_iter638.getKey());
                       {
-                        oprot.writeI32(_iter614.getValue().size());
-                        for (java.util.Map.Entry<java.lang.String, java.util.List<TRenderDatum>> _iter615 : _iter614.getValue().entrySet())
+                        oprot.writeI32(_iter638.getValue().size());
+                        for (java.util.Map.Entry<java.lang.String, java.util.List<TRenderDatum>> _iter639 : _iter638.getValue().entrySet())
                         {
-                          oprot.writeString(_iter615.getKey());
+                          oprot.writeString(_iter639.getKey());
                           {
-                            oprot.writeI32(_iter615.getValue().size());
-                            for (TRenderDatum _iter616 : _iter615.getValue())
+                            oprot.writeI32(_iter639.getValue().size());
+                            for (TRenderDatum _iter640 : _iter639.getValue())
                             {
-                              _iter616.write(oprot);
+                              _iter640.write(oprot);
                             }
                           }
                         }
@@ -86285,58 +90368,58 @@ public class OmniSci {
         }
         if (incoming.get(1)) {
           {
-            org.apache.thrift.protocol.TMap _map617 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, iprot.readI32());
-            struct.merged_data = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>>(2*_map617.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _key618;
-            @org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>> _val619;
-            for (int _i620 = 0; _i620 < _map617.size; ++_i620)
+            org.apache.thrift.protocol.TMap _map641 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, iprot.readI32());
+            struct.merged_data = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>>(2*_map641.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _key642;
+            @org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>> _val643;
+            for (int _i644 = 0; _i644 < _map641.size; ++_i644)
             {
-              _key618 = iprot.readString();
+              _key642 = iprot.readString();
               {
-                org.apache.thrift.protocol.TMap _map621 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, iprot.readI32());
-                _val619 = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>(2*_map621.size);
-                @org.apache.thrift.annotation.Nullable java.lang.String _key622;
-                @org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>> _val623;
-                for (int _i624 = 0; _i624 < _map621.size; ++_i624)
+                org.apache.thrift.protocol.TMap _map645 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, iprot.readI32());
+                _val643 = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>>(2*_map645.size);
+                @org.apache.thrift.annotation.Nullable java.lang.String _key646;
+                @org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>> _val647;
+                for (int _i648 = 0; _i648 < _map645.size; ++_i648)
                 {
-                  _key622 = iprot.readString();
+                  _key646 = iprot.readString();
                   {
-                    org.apache.thrift.protocol.TMap _map625 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, iprot.readI32());
-                    _val623 = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>(2*_map625.size);
-                    @org.apache.thrift.annotation.Nullable java.lang.String _key626;
-                    @org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.util.List<TRenderDatum>> _val627;
-                    for (int _i628 = 0; _i628 < _map625.size; ++_i628)
+                    org.apache.thrift.protocol.TMap _map649 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.MAP, iprot.readI32());
+                    _val647 = new java.util.HashMap<java.lang.String,java.util.Map<java.lang.String,java.util.List<TRenderDatum>>>(2*_map649.size);
+                    @org.apache.thrift.annotation.Nullable java.lang.String _key650;
+                    @org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.util.List<TRenderDatum>> _val651;
+                    for (int _i652 = 0; _i652 < _map649.size; ++_i652)
                     {
-                      _key626 = iprot.readString();
+                      _key650 = iprot.readString();
                       {
-                        org.apache.thrift.protocol.TMap _map629 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, iprot.readI32());
-                        _val627 = new java.util.HashMap<java.lang.String,java.util.List<TRenderDatum>>(2*_map629.size);
-                        @org.apache.thrift.annotation.Nullable java.lang.String _key630;
-                        @org.apache.thrift.annotation.Nullable java.util.List<TRenderDatum> _val631;
-                        for (int _i632 = 0; _i632 < _map629.size; ++_i632)
+                        org.apache.thrift.protocol.TMap _map653 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, iprot.readI32());
+                        _val651 = new java.util.HashMap<java.lang.String,java.util.List<TRenderDatum>>(2*_map653.size);
+                        @org.apache.thrift.annotation.Nullable java.lang.String _key654;
+                        @org.apache.thrift.annotation.Nullable java.util.List<TRenderDatum> _val655;
+                        for (int _i656 = 0; _i656 < _map653.size; ++_i656)
                         {
-                          _key630 = iprot.readString();
+                          _key654 = iprot.readString();
                           {
-                            org.apache.thrift.protocol.TList _list633 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-                            _val631 = new java.util.ArrayList<TRenderDatum>(_list633.size);
-                            @org.apache.thrift.annotation.Nullable TRenderDatum _elem634;
-                            for (int _i635 = 0; _i635 < _list633.size; ++_i635)
+                            org.apache.thrift.protocol.TList _list657 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+                            _val655 = new java.util.ArrayList<TRenderDatum>(_list657.size);
+                            @org.apache.thrift.annotation.Nullable TRenderDatum _elem658;
+                            for (int _i659 = 0; _i659 < _list657.size; ++_i659)
                             {
-                              _elem634 = new TRenderDatum();
-                              _elem634.read(iprot);
-                              _val631.add(_elem634);
+                              _elem658 = new TRenderDatum();
+                              _elem658.read(iprot);
+                              _val655.add(_elem658);
                             }
                           }
-                          _val627.put(_key630, _val631);
+                          _val651.put(_key654, _val655);
                         }
                       }
-                      _val623.put(_key626, _val627);
+                      _val647.put(_key650, _val651);
                     }
                   }
-                  _val619.put(_key622, _val623);
+                  _val643.put(_key646, _val647);
                 }
               }
-              struct.merged_data.put(_key618, _val619);
+              struct.merged_data.put(_key642, _val643);
             }
           }
           struct.setMerged_dataIsSet(true);
@@ -89276,13 +93359,13 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list636 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<java.lang.String>(_list636.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem637;
-                  for (int _i638 = 0; _i638 < _list636.size; ++_i638)
+                  org.apache.thrift.protocol.TList _list660 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<java.lang.String>(_list660.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem661;
+                  for (int _i662 = 0; _i662 < _list660.size; ++_i662)
                   {
-                    _elem637 = iprot.readString();
-                    struct.success.add(_elem637);
+                    _elem661 = iprot.readString();
+                    struct.success.add(_elem661);
                   }
                   iprot.readListEnd();
                 }
@@ -89319,9 +93402,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.lang.String _iter639 : struct.success)
+            for (java.lang.String _iter663 : struct.success)
             {
-              oprot.writeString(_iter639);
+              oprot.writeString(_iter663);
             }
             oprot.writeListEnd();
           }
@@ -89360,9 +93443,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.lang.String _iter640 : struct.success)
+            for (java.lang.String _iter664 : struct.success)
             {
-              oprot.writeString(_iter640);
+              oprot.writeString(_iter664);
             }
           }
         }
@@ -89377,13 +93460,13 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list641 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.success = new java.util.ArrayList<java.lang.String>(_list641.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem642;
-            for (int _i643 = 0; _i643 < _list641.size; ++_i643)
+            org.apache.thrift.protocol.TList _list665 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new java.util.ArrayList<java.lang.String>(_list665.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem666;
+            for (int _i667 = 0; _i667 < _list665.size; ++_i667)
             {
-              _elem642 = iprot.readString();
-              struct.success.add(_elem642);
+              _elem666 = iprot.readString();
+              struct.success.add(_elem666);
             }
           }
           struct.setSuccessIsSet(true);
@@ -90275,14 +94358,14 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list644 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TDBObject>(_list644.size);
-                  @org.apache.thrift.annotation.Nullable TDBObject _elem645;
-                  for (int _i646 = 0; _i646 < _list644.size; ++_i646)
+                  org.apache.thrift.protocol.TList _list668 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TDBObject>(_list668.size);
+                  @org.apache.thrift.annotation.Nullable TDBObject _elem669;
+                  for (int _i670 = 0; _i670 < _list668.size; ++_i670)
                   {
-                    _elem645 = new TDBObject();
-                    _elem645.read(iprot);
-                    struct.success.add(_elem645);
+                    _elem669 = new TDBObject();
+                    _elem669.read(iprot);
+                    struct.success.add(_elem669);
                   }
                   iprot.readListEnd();
                 }
@@ -90319,9 +94402,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TDBObject _iter647 : struct.success)
+            for (TDBObject _iter671 : struct.success)
             {
-              _iter647.write(oprot);
+              _iter671.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -90360,9 +94443,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TDBObject _iter648 : struct.success)
+            for (TDBObject _iter672 : struct.success)
             {
-              _iter648.write(oprot);
+              _iter672.write(oprot);
             }
           }
         }
@@ -90377,14 +94460,14 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list649 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TDBObject>(_list649.size);
-            @org.apache.thrift.annotation.Nullable TDBObject _elem650;
-            for (int _i651 = 0; _i651 < _list649.size; ++_i651)
+            org.apache.thrift.protocol.TList _list673 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TDBObject>(_list673.size);
+            @org.apache.thrift.annotation.Nullable TDBObject _elem674;
+            for (int _i675 = 0; _i675 < _list673.size; ++_i675)
             {
-              _elem650 = new TDBObject();
-              _elem650.read(iprot);
-              struct.success.add(_elem650);
+              _elem674 = new TDBObject();
+              _elem674.read(iprot);
+              struct.success.add(_elem674);
             }
           }
           struct.setSuccessIsSet(true);
@@ -91397,14 +95480,14 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list652 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<TDBObject>(_list652.size);
-                  @org.apache.thrift.annotation.Nullable TDBObject _elem653;
-                  for (int _i654 = 0; _i654 < _list652.size; ++_i654)
+                  org.apache.thrift.protocol.TList _list676 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<TDBObject>(_list676.size);
+                  @org.apache.thrift.annotation.Nullable TDBObject _elem677;
+                  for (int _i678 = 0; _i678 < _list676.size; ++_i678)
                   {
-                    _elem653 = new TDBObject();
-                    _elem653.read(iprot);
-                    struct.success.add(_elem653);
+                    _elem677 = new TDBObject();
+                    _elem677.read(iprot);
+                    struct.success.add(_elem677);
                   }
                   iprot.readListEnd();
                 }
@@ -91441,9 +95524,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TDBObject _iter655 : struct.success)
+            for (TDBObject _iter679 : struct.success)
             {
-              _iter655.write(oprot);
+              _iter679.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -91482,9 +95565,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TDBObject _iter656 : struct.success)
+            for (TDBObject _iter680 : struct.success)
             {
-              _iter656.write(oprot);
+              _iter680.write(oprot);
             }
           }
         }
@@ -91499,14 +95582,14 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list657 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new java.util.ArrayList<TDBObject>(_list657.size);
-            @org.apache.thrift.annotation.Nullable TDBObject _elem658;
-            for (int _i659 = 0; _i659 < _list657.size; ++_i659)
+            org.apache.thrift.protocol.TList _list681 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new java.util.ArrayList<TDBObject>(_list681.size);
+            @org.apache.thrift.annotation.Nullable TDBObject _elem682;
+            for (int _i683 = 0; _i683 < _list681.size; ++_i683)
             {
-              _elem658 = new TDBObject();
-              _elem658.read(iprot);
-              struct.success.add(_elem658);
+              _elem682 = new TDBObject();
+              _elem682.read(iprot);
+              struct.success.add(_elem682);
             }
           }
           struct.setSuccessIsSet(true);
@@ -92395,13 +96478,13 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list660 = iprot.readListBegin();
-                  struct.success = new java.util.ArrayList<java.lang.String>(_list660.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _elem661;
-                  for (int _i662 = 0; _i662 < _list660.size; ++_i662)
+                  org.apache.thrift.protocol.TList _list684 = iprot.readListBegin();
+                  struct.success = new java.util.ArrayList<java.lang.String>(_list684.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _elem685;
+                  for (int _i686 = 0; _i686 < _list684.size; ++_i686)
                   {
-                    _elem661 = iprot.readString();
-                    struct.success.add(_elem661);
+                    _elem685 = iprot.readString();
+                    struct.success.add(_elem685);
                   }
                   iprot.readListEnd();
                 }
@@ -92438,9 +96521,9 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.lang.String _iter663 : struct.success)
+            for (java.lang.String _iter687 : struct.success)
             {
-              oprot.writeString(_iter663);
+              oprot.writeString(_iter687);
             }
             oprot.writeListEnd();
           }
@@ -92479,9 +96562,9 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.lang.String _iter664 : struct.success)
+            for (java.lang.String _iter688 : struct.success)
             {
-              oprot.writeString(_iter664);
+              oprot.writeString(_iter688);
             }
           }
         }
@@ -92496,13 +96579,13 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list665 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.success = new java.util.ArrayList<java.lang.String>(_list665.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _elem666;
-            for (int _i667 = 0; _i667 < _list665.size; ++_i667)
+            org.apache.thrift.protocol.TList _list689 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new java.util.ArrayList<java.lang.String>(_list689.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _elem690;
+            for (int _i691 = 0; _i691 < _list689.size; ++_i691)
             {
-              _elem666 = iprot.readString();
-              struct.success.add(_elem666);
+              _elem690 = iprot.readString();
+              struct.success.add(_elem690);
             }
           }
           struct.setSuccessIsSet(true);
@@ -97619,15 +101702,15 @@ public class OmniSci {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map668 = iprot.readMapBegin();
-                  struct.success = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map668.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _key669;
-                  @org.apache.thrift.annotation.Nullable java.lang.String _val670;
-                  for (int _i671 = 0; _i671 < _map668.size; ++_i671)
+                  org.apache.thrift.protocol.TMap _map692 = iprot.readMapBegin();
+                  struct.success = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map692.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _key693;
+                  @org.apache.thrift.annotation.Nullable java.lang.String _val694;
+                  for (int _i695 = 0; _i695 < _map692.size; ++_i695)
                   {
-                    _key669 = iprot.readString();
-                    _val670 = iprot.readString();
-                    struct.success.put(_key669, _val670);
+                    _key693 = iprot.readString();
+                    _val694 = iprot.readString();
+                    struct.success.put(_key693, _val694);
                   }
                   iprot.readMapEnd();
                 }
@@ -97664,10 +101747,10 @@ public class OmniSci {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, struct.success.size()));
-            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter672 : struct.success.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter696 : struct.success.entrySet())
             {
-              oprot.writeString(_iter672.getKey());
-              oprot.writeString(_iter672.getValue());
+              oprot.writeString(_iter696.getKey());
+              oprot.writeString(_iter696.getValue());
             }
             oprot.writeMapEnd();
           }
@@ -97706,10 +101789,10 @@ public class OmniSci {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter673 : struct.success.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter697 : struct.success.entrySet())
             {
-              oprot.writeString(_iter673.getKey());
-              oprot.writeString(_iter673.getValue());
+              oprot.writeString(_iter697.getKey());
+              oprot.writeString(_iter697.getValue());
             }
           }
         }
@@ -97724,15 +101807,15 @@ public class OmniSci {
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TMap _map674 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.success = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map674.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _key675;
-            @org.apache.thrift.annotation.Nullable java.lang.String _val676;
-            for (int _i677 = 0; _i677 < _map674.size; ++_i677)
+            org.apache.thrift.protocol.TMap _map698 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.success = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map698.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _key699;
+            @org.apache.thrift.annotation.Nullable java.lang.String _val700;
+            for (int _i701 = 0; _i701 < _map698.size; ++_i701)
             {
-              _key675 = iprot.readString();
-              _val676 = iprot.readString();
-              struct.success.put(_key675, _val676);
+              _key699 = iprot.readString();
+              _val700 = iprot.readString();
+              struct.success.put(_key699, _val700);
             }
           }
           struct.setSuccessIsSet(true);
@@ -98359,14 +102442,14 @@ public class OmniSci {
             case 2: // UDFS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list678 = iprot.readListBegin();
-                  struct.udfs = new java.util.ArrayList<com.omnisci.thrift.calciteserver.TUserDefinedFunction>(_list678.size);
-                  @org.apache.thrift.annotation.Nullable com.omnisci.thrift.calciteserver.TUserDefinedFunction _elem679;
-                  for (int _i680 = 0; _i680 < _list678.size; ++_i680)
+                  org.apache.thrift.protocol.TList _list702 = iprot.readListBegin();
+                  struct.udfs = new java.util.ArrayList<com.omnisci.thrift.calciteserver.TUserDefinedFunction>(_list702.size);
+                  @org.apache.thrift.annotation.Nullable com.omnisci.thrift.calciteserver.TUserDefinedFunction _elem703;
+                  for (int _i704 = 0; _i704 < _list702.size; ++_i704)
                   {
-                    _elem679 = new com.omnisci.thrift.calciteserver.TUserDefinedFunction();
-                    _elem679.read(iprot);
-                    struct.udfs.add(_elem679);
+                    _elem703 = new com.omnisci.thrift.calciteserver.TUserDefinedFunction();
+                    _elem703.read(iprot);
+                    struct.udfs.add(_elem703);
                   }
                   iprot.readListEnd();
                 }
@@ -98378,14 +102461,14 @@ public class OmniSci {
             case 3: // UDTFS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list681 = iprot.readListBegin();
-                  struct.udtfs = new java.util.ArrayList<com.omnisci.thrift.calciteserver.TUserDefinedTableFunction>(_list681.size);
-                  @org.apache.thrift.annotation.Nullable com.omnisci.thrift.calciteserver.TUserDefinedTableFunction _elem682;
-                  for (int _i683 = 0; _i683 < _list681.size; ++_i683)
+                  org.apache.thrift.protocol.TList _list705 = iprot.readListBegin();
+                  struct.udtfs = new java.util.ArrayList<com.omnisci.thrift.calciteserver.TUserDefinedTableFunction>(_list705.size);
+                  @org.apache.thrift.annotation.Nullable com.omnisci.thrift.calciteserver.TUserDefinedTableFunction _elem706;
+                  for (int _i707 = 0; _i707 < _list705.size; ++_i707)
                   {
-                    _elem682 = new com.omnisci.thrift.calciteserver.TUserDefinedTableFunction();
-                    _elem682.read(iprot);
-                    struct.udtfs.add(_elem682);
+                    _elem706 = new com.omnisci.thrift.calciteserver.TUserDefinedTableFunction();
+                    _elem706.read(iprot);
+                    struct.udtfs.add(_elem706);
                   }
                   iprot.readListEnd();
                 }
@@ -98397,15 +102480,15 @@ public class OmniSci {
             case 4: // DEVICE_IR_MAP
               if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
                 {
-                  org.apache.thrift.protocol.TMap _map684 = iprot.readMapBegin();
-                  struct.device_ir_map = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map684.size);
-                  @org.apache.thrift.annotation.Nullable java.lang.String _key685;
-                  @org.apache.thrift.annotation.Nullable java.lang.String _val686;
-                  for (int _i687 = 0; _i687 < _map684.size; ++_i687)
+                  org.apache.thrift.protocol.TMap _map708 = iprot.readMapBegin();
+                  struct.device_ir_map = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map708.size);
+                  @org.apache.thrift.annotation.Nullable java.lang.String _key709;
+                  @org.apache.thrift.annotation.Nullable java.lang.String _val710;
+                  for (int _i711 = 0; _i711 < _map708.size; ++_i711)
                   {
-                    _key685 = iprot.readString();
-                    _val686 = iprot.readString();
-                    struct.device_ir_map.put(_key685, _val686);
+                    _key709 = iprot.readString();
+                    _val710 = iprot.readString();
+                    struct.device_ir_map.put(_key709, _val710);
                   }
                   iprot.readMapEnd();
                 }
@@ -98438,9 +102521,9 @@ public class OmniSci {
           oprot.writeFieldBegin(UDFS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.udfs.size()));
-            for (com.omnisci.thrift.calciteserver.TUserDefinedFunction _iter688 : struct.udfs)
+            for (com.omnisci.thrift.calciteserver.TUserDefinedFunction _iter712 : struct.udfs)
             {
-              _iter688.write(oprot);
+              _iter712.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -98450,9 +102533,9 @@ public class OmniSci {
           oprot.writeFieldBegin(UDTFS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.udtfs.size()));
-            for (com.omnisci.thrift.calciteserver.TUserDefinedTableFunction _iter689 : struct.udtfs)
+            for (com.omnisci.thrift.calciteserver.TUserDefinedTableFunction _iter713 : struct.udtfs)
             {
-              _iter689.write(oprot);
+              _iter713.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -98462,10 +102545,10 @@ public class OmniSci {
           oprot.writeFieldBegin(DEVICE_IR_MAP_FIELD_DESC);
           {
             oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, struct.device_ir_map.size()));
-            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter690 : struct.device_ir_map.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter714 : struct.device_ir_map.entrySet())
             {
-              oprot.writeString(_iter690.getKey());
-              oprot.writeString(_iter690.getValue());
+              oprot.writeString(_iter714.getKey());
+              oprot.writeString(_iter714.getValue());
             }
             oprot.writeMapEnd();
           }
@@ -98508,28 +102591,28 @@ public class OmniSci {
         if (struct.isSetUdfs()) {
           {
             oprot.writeI32(struct.udfs.size());
-            for (com.omnisci.thrift.calciteserver.TUserDefinedFunction _iter691 : struct.udfs)
+            for (com.omnisci.thrift.calciteserver.TUserDefinedFunction _iter715 : struct.udfs)
             {
-              _iter691.write(oprot);
+              _iter715.write(oprot);
             }
           }
         }
         if (struct.isSetUdtfs()) {
           {
             oprot.writeI32(struct.udtfs.size());
-            for (com.omnisci.thrift.calciteserver.TUserDefinedTableFunction _iter692 : struct.udtfs)
+            for (com.omnisci.thrift.calciteserver.TUserDefinedTableFunction _iter716 : struct.udtfs)
             {
-              _iter692.write(oprot);
+              _iter716.write(oprot);
             }
           }
         }
         if (struct.isSetDevice_ir_map()) {
           {
             oprot.writeI32(struct.device_ir_map.size());
-            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter693 : struct.device_ir_map.entrySet())
+            for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter717 : struct.device_ir_map.entrySet())
             {
-              oprot.writeString(_iter693.getKey());
-              oprot.writeString(_iter693.getValue());
+              oprot.writeString(_iter717.getKey());
+              oprot.writeString(_iter717.getValue());
             }
           }
         }
@@ -98545,43 +102628,43 @@ public class OmniSci {
         }
         if (incoming.get(1)) {
           {
-            org.apache.thrift.protocol.TList _list694 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.udfs = new java.util.ArrayList<com.omnisci.thrift.calciteserver.TUserDefinedFunction>(_list694.size);
-            @org.apache.thrift.annotation.Nullable com.omnisci.thrift.calciteserver.TUserDefinedFunction _elem695;
-            for (int _i696 = 0; _i696 < _list694.size; ++_i696)
+            org.apache.thrift.protocol.TList _list718 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.udfs = new java.util.ArrayList<com.omnisci.thrift.calciteserver.TUserDefinedFunction>(_list718.size);
+            @org.apache.thrift.annotation.Nullable com.omnisci.thrift.calciteserver.TUserDefinedFunction _elem719;
+            for (int _i720 = 0; _i720 < _list718.size; ++_i720)
             {
-              _elem695 = new com.omnisci.thrift.calciteserver.TUserDefinedFunction();
-              _elem695.read(iprot);
-              struct.udfs.add(_elem695);
+              _elem719 = new com.omnisci.thrift.calciteserver.TUserDefinedFunction();
+              _elem719.read(iprot);
+              struct.udfs.add(_elem719);
             }
           }
           struct.setUdfsIsSet(true);
         }
         if (incoming.get(2)) {
           {
-            org.apache.thrift.protocol.TList _list697 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.udtfs = new java.util.ArrayList<com.omnisci.thrift.calciteserver.TUserDefinedTableFunction>(_list697.size);
-            @org.apache.thrift.annotation.Nullable com.omnisci.thrift.calciteserver.TUserDefinedTableFunction _elem698;
-            for (int _i699 = 0; _i699 < _list697.size; ++_i699)
+            org.apache.thrift.protocol.TList _list721 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.udtfs = new java.util.ArrayList<com.omnisci.thrift.calciteserver.TUserDefinedTableFunction>(_list721.size);
+            @org.apache.thrift.annotation.Nullable com.omnisci.thrift.calciteserver.TUserDefinedTableFunction _elem722;
+            for (int _i723 = 0; _i723 < _list721.size; ++_i723)
             {
-              _elem698 = new com.omnisci.thrift.calciteserver.TUserDefinedTableFunction();
-              _elem698.read(iprot);
-              struct.udtfs.add(_elem698);
+              _elem722 = new com.omnisci.thrift.calciteserver.TUserDefinedTableFunction();
+              _elem722.read(iprot);
+              struct.udtfs.add(_elem722);
             }
           }
           struct.setUdtfsIsSet(true);
         }
         if (incoming.get(3)) {
           {
-            org.apache.thrift.protocol.TMap _map700 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-            struct.device_ir_map = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map700.size);
-            @org.apache.thrift.annotation.Nullable java.lang.String _key701;
-            @org.apache.thrift.annotation.Nullable java.lang.String _val702;
-            for (int _i703 = 0; _i703 < _map700.size; ++_i703)
+            org.apache.thrift.protocol.TMap _map724 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+            struct.device_ir_map = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map724.size);
+            @org.apache.thrift.annotation.Nullable java.lang.String _key725;
+            @org.apache.thrift.annotation.Nullable java.lang.String _val726;
+            for (int _i727 = 0; _i727 < _map724.size; ++_i727)
             {
-              _key701 = iprot.readString();
-              _val702 = iprot.readString();
-              struct.device_ir_map.put(_key701, _val702);
+              _key725 = iprot.readString();
+              _val726 = iprot.readString();
+              struct.device_ir_map.put(_key725, _val726);
             }
           }
           struct.setDevice_ir_mapIsSet(true);

@@ -499,16 +499,16 @@ public class TRawPixelData implements org.apache.thrift.TBase<TRawPixelData, TRa
           case 3: // RENDER_PASS_MAP
             if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
               {
-                org.apache.thrift.protocol.TMap _map216 = iprot.readMapBegin();
-                struct.render_pass_map = new java.util.HashMap<java.lang.Integer,TRawRenderPassDataResult>(2*_map216.size);
-                int _key217;
-                @org.apache.thrift.annotation.Nullable TRawRenderPassDataResult _val218;
-                for (int _i219 = 0; _i219 < _map216.size; ++_i219)
+                org.apache.thrift.protocol.TMap _map224 = iprot.readMapBegin();
+                struct.render_pass_map = new java.util.HashMap<java.lang.Integer,TRawRenderPassDataResult>(2*_map224.size);
+                int _key225;
+                @org.apache.thrift.annotation.Nullable TRawRenderPassDataResult _val226;
+                for (int _i227 = 0; _i227 < _map224.size; ++_i227)
                 {
-                  _key217 = iprot.readI32();
-                  _val218 = new TRawRenderPassDataResult();
-                  _val218.read(iprot);
-                  struct.render_pass_map.put(_key217, _val218);
+                  _key225 = iprot.readI32();
+                  _val226 = new TRawRenderPassDataResult();
+                  _val226.read(iprot);
+                  struct.render_pass_map.put(_key225, _val226);
                 }
                 iprot.readMapEnd();
               }
@@ -542,10 +542,10 @@ public class TRawPixelData implements org.apache.thrift.TBase<TRawPixelData, TRa
         oprot.writeFieldBegin(RENDER_PASS_MAP_FIELD_DESC);
         {
           oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I32, org.apache.thrift.protocol.TType.STRUCT, struct.render_pass_map.size()));
-          for (java.util.Map.Entry<java.lang.Integer, TRawRenderPassDataResult> _iter220 : struct.render_pass_map.entrySet())
+          for (java.util.Map.Entry<java.lang.Integer, TRawRenderPassDataResult> _iter228 : struct.render_pass_map.entrySet())
           {
-            oprot.writeI32(_iter220.getKey());
-            _iter220.getValue().write(oprot);
+            oprot.writeI32(_iter228.getKey());
+            _iter228.getValue().write(oprot);
           }
           oprot.writeMapEnd();
         }
@@ -588,10 +588,10 @@ public class TRawPixelData implements org.apache.thrift.TBase<TRawPixelData, TRa
       if (struct.isSetRender_pass_map()) {
         {
           oprot.writeI32(struct.render_pass_map.size());
-          for (java.util.Map.Entry<java.lang.Integer, TRawRenderPassDataResult> _iter221 : struct.render_pass_map.entrySet())
+          for (java.util.Map.Entry<java.lang.Integer, TRawRenderPassDataResult> _iter229 : struct.render_pass_map.entrySet())
           {
-            oprot.writeI32(_iter221.getKey());
-            _iter221.getValue().write(oprot);
+            oprot.writeI32(_iter229.getKey());
+            _iter229.getValue().write(oprot);
           }
         }
       }
@@ -611,16 +611,16 @@ public class TRawPixelData implements org.apache.thrift.TBase<TRawPixelData, TRa
       }
       if (incoming.get(2)) {
         {
-          org.apache.thrift.protocol.TMap _map222 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I32, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.render_pass_map = new java.util.HashMap<java.lang.Integer,TRawRenderPassDataResult>(2*_map222.size);
-          int _key223;
-          @org.apache.thrift.annotation.Nullable TRawRenderPassDataResult _val224;
-          for (int _i225 = 0; _i225 < _map222.size; ++_i225)
+          org.apache.thrift.protocol.TMap _map230 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I32, org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.render_pass_map = new java.util.HashMap<java.lang.Integer,TRawRenderPassDataResult>(2*_map230.size);
+          int _key231;
+          @org.apache.thrift.annotation.Nullable TRawRenderPassDataResult _val232;
+          for (int _i233 = 0; _i233 < _map230.size; ++_i233)
           {
-            _key223 = iprot.readI32();
-            _val224 = new TRawRenderPassDataResult();
-            _val224.read(iprot);
-            struct.render_pass_map.put(_key223, _val224);
+            _key231 = iprot.readI32();
+            _val232 = new TRawRenderPassDataResult();
+            _val232.read(iprot);
+            struct.render_pass_map.put(_key231, _val232);
           }
         }
         struct.setRender_pass_mapIsSet(true);

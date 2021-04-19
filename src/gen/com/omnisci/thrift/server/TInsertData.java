@@ -15,6 +15,7 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
   private static final org.apache.thrift.protocol.TField COLUMN_IDS_FIELD_DESC = new org.apache.thrift.protocol.TField("column_ids", org.apache.thrift.protocol.TType.LIST, (short)3);
   private static final org.apache.thrift.protocol.TField DATA_FIELD_DESC = new org.apache.thrift.protocol.TField("data", org.apache.thrift.protocol.TType.LIST, (short)4);
   private static final org.apache.thrift.protocol.TField NUM_ROWS_FIELD_DESC = new org.apache.thrift.protocol.TField("num_rows", org.apache.thrift.protocol.TType.I64, (short)5);
+  private static final org.apache.thrift.protocol.TField IS_DEFAULT_FIELD_DESC = new org.apache.thrift.protocol.TField("is_default", org.apache.thrift.protocol.TType.LIST, (short)6);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TInsertDataStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TInsertDataTupleSchemeFactory();
@@ -24,6 +25,7 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
   public @org.apache.thrift.annotation.Nullable java.util.List<java.lang.Integer> column_ids; // required
   public @org.apache.thrift.annotation.Nullable java.util.List<TDataBlockPtr> data; // required
   public long num_rows; // required
+  public @org.apache.thrift.annotation.Nullable java.util.List<java.lang.Boolean> is_default; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -31,7 +33,8 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
     TABLE_ID((short)2, "table_id"),
     COLUMN_IDS((short)3, "column_ids"),
     DATA((short)4, "data"),
-    NUM_ROWS((short)5, "num_rows");
+    NUM_ROWS((short)5, "num_rows"),
+    IS_DEFAULT((short)6, "is_default");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -57,6 +60,8 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
           return DATA;
         case 5: // NUM_ROWS
           return NUM_ROWS;
+        case 6: // IS_DEFAULT
+          return IS_DEFAULT;
         default:
           return null;
       }
@@ -117,6 +122,9 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TDataBlockPtr.class))));
     tmpMap.put(_Fields.NUM_ROWS, new org.apache.thrift.meta_data.FieldMetaData("num_rows", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
+    tmpMap.put(_Fields.IS_DEFAULT, new org.apache.thrift.meta_data.FieldMetaData("is_default", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL))));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TInsertData.class, metaDataMap);
   }
@@ -129,7 +137,8 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
     int table_id,
     java.util.List<java.lang.Integer> column_ids,
     java.util.List<TDataBlockPtr> data,
-    long num_rows)
+    long num_rows,
+    java.util.List<java.lang.Boolean> is_default)
   {
     this();
     this.db_id = db_id;
@@ -140,6 +149,7 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
     this.data = data;
     this.num_rows = num_rows;
     setNum_rowsIsSet(true);
+    this.is_default = is_default;
   }
 
   /**
@@ -161,6 +171,10 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
       this.data = __this__data;
     }
     this.num_rows = other.num_rows;
+    if (other.isSetIs_default()) {
+      java.util.List<java.lang.Boolean> __this__is_default = new java.util.ArrayList<java.lang.Boolean>(other.is_default);
+      this.is_default = __this__is_default;
+    }
   }
 
   public TInsertData deepCopy() {
@@ -177,6 +191,7 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
     this.data = null;
     setNum_rowsIsSet(false);
     this.num_rows = 0;
+    this.is_default = null;
   }
 
   public int getDb_id() {
@@ -330,6 +345,47 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
     __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __NUM_ROWS_ISSET_ID, value);
   }
 
+  public int getIs_defaultSize() {
+    return (this.is_default == null) ? 0 : this.is_default.size();
+  }
+
+  @org.apache.thrift.annotation.Nullable
+  public java.util.Iterator<java.lang.Boolean> getIs_defaultIterator() {
+    return (this.is_default == null) ? null : this.is_default.iterator();
+  }
+
+  public void addToIs_default(boolean elem) {
+    if (this.is_default == null) {
+      this.is_default = new java.util.ArrayList<java.lang.Boolean>();
+    }
+    this.is_default.add(elem);
+  }
+
+  @org.apache.thrift.annotation.Nullable
+  public java.util.List<java.lang.Boolean> getIs_default() {
+    return this.is_default;
+  }
+
+  public TInsertData setIs_default(@org.apache.thrift.annotation.Nullable java.util.List<java.lang.Boolean> is_default) {
+    this.is_default = is_default;
+    return this;
+  }
+
+  public void unsetIs_default() {
+    this.is_default = null;
+  }
+
+  /** Returns true if field is_default is set (has been assigned a value) and false otherwise */
+  public boolean isSetIs_default() {
+    return this.is_default != null;
+  }
+
+  public void setIs_defaultIsSet(boolean value) {
+    if (!value) {
+      this.is_default = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
     switch (field) {
     case DB_ID:
@@ -372,6 +428,14 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
       }
       break;
 
+    case IS_DEFAULT:
+      if (value == null) {
+        unsetIs_default();
+      } else {
+        setIs_default((java.util.List<java.lang.Boolean>)value);
+      }
+      break;
+
     }
   }
 
@@ -392,6 +456,9 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
 
     case NUM_ROWS:
       return getNum_rows();
+
+    case IS_DEFAULT:
+      return getIs_default();
 
     }
     throw new java.lang.IllegalStateException();
@@ -414,6 +481,8 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
       return isSetData();
     case NUM_ROWS:
       return isSetNum_rows();
+    case IS_DEFAULT:
+      return isSetIs_default();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -478,6 +547,15 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
         return false;
     }
 
+    boolean this_present_is_default = true && this.isSetIs_default();
+    boolean that_present_is_default = true && that.isSetIs_default();
+    if (this_present_is_default || that_present_is_default) {
+      if (!(this_present_is_default && that_present_is_default))
+        return false;
+      if (!this.is_default.equals(that.is_default))
+        return false;
+    }
+
     return true;
   }
 
@@ -498,6 +576,10 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
       hashCode = hashCode * 8191 + data.hashCode();
 
     hashCode = hashCode * 8191 + org.apache.thrift.TBaseHelper.hashCode(num_rows);
+
+    hashCode = hashCode * 8191 + ((isSetIs_default()) ? 131071 : 524287);
+    if (isSetIs_default())
+      hashCode = hashCode * 8191 + is_default.hashCode();
 
     return hashCode;
   }
@@ -560,6 +642,16 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.valueOf(isSetIs_default()).compareTo(other.isSetIs_default());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetIs_default()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.is_default, other.is_default);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -607,6 +699,14 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
     if (!first) sb.append(", ");
     sb.append("num_rows:");
     sb.append(this.num_rows);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("is_default:");
+    if (this.is_default == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.is_default);
+    }
     first = false;
     sb.append(")");
     return sb.toString();
@@ -714,6 +814,24 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 6: // IS_DEFAULT
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list206 = iprot.readListBegin();
+                struct.is_default = new java.util.ArrayList<java.lang.Boolean>(_list206.size);
+                boolean _elem207;
+                for (int _i208 = 0; _i208 < _list206.size; ++_i208)
+                {
+                  _elem207 = iprot.readBool();
+                  struct.is_default.add(_elem207);
+                }
+                iprot.readListEnd();
+              }
+              struct.setIs_defaultIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -739,9 +857,9 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
         oprot.writeFieldBegin(COLUMN_IDS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, struct.column_ids.size()));
-          for (int _iter206 : struct.column_ids)
+          for (int _iter209 : struct.column_ids)
           {
-            oprot.writeI32(_iter206);
+            oprot.writeI32(_iter209);
           }
           oprot.writeListEnd();
         }
@@ -751,9 +869,9 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
         oprot.writeFieldBegin(DATA_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.data.size()));
-          for (TDataBlockPtr _iter207 : struct.data)
+          for (TDataBlockPtr _iter210 : struct.data)
           {
-            _iter207.write(oprot);
+            _iter210.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -762,6 +880,18 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
       oprot.writeFieldBegin(NUM_ROWS_FIELD_DESC);
       oprot.writeI64(struct.num_rows);
       oprot.writeFieldEnd();
+      if (struct.is_default != null) {
+        oprot.writeFieldBegin(IS_DEFAULT_FIELD_DESC);
+        {
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.BOOL, struct.is_default.size()));
+          for (boolean _iter211 : struct.is_default)
+          {
+            oprot.writeBool(_iter211);
+          }
+          oprot.writeListEnd();
+        }
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -795,7 +925,10 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
       if (struct.isSetNum_rows()) {
         optionals.set(4);
       }
-      oprot.writeBitSet(optionals, 5);
+      if (struct.isSetIs_default()) {
+        optionals.set(5);
+      }
+      oprot.writeBitSet(optionals, 6);
       if (struct.isSetDb_id()) {
         oprot.writeI32(struct.db_id);
       }
@@ -805,30 +938,39 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
       if (struct.isSetColumn_ids()) {
         {
           oprot.writeI32(struct.column_ids.size());
-          for (int _iter208 : struct.column_ids)
+          for (int _iter212 : struct.column_ids)
           {
-            oprot.writeI32(_iter208);
+            oprot.writeI32(_iter212);
           }
         }
       }
       if (struct.isSetData()) {
         {
           oprot.writeI32(struct.data.size());
-          for (TDataBlockPtr _iter209 : struct.data)
+          for (TDataBlockPtr _iter213 : struct.data)
           {
-            _iter209.write(oprot);
+            _iter213.write(oprot);
           }
         }
       }
       if (struct.isSetNum_rows()) {
         oprot.writeI64(struct.num_rows);
       }
+      if (struct.isSetIs_default()) {
+        {
+          oprot.writeI32(struct.is_default.size());
+          for (boolean _iter214 : struct.is_default)
+          {
+            oprot.writeBool(_iter214);
+          }
+        }
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TInsertData struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(5);
+      java.util.BitSet incoming = iprot.readBitSet(6);
       if (incoming.get(0)) {
         struct.db_id = iprot.readI32();
         struct.setDb_idIsSet(true);
@@ -839,27 +981,27 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
       }
       if (incoming.get(2)) {
         {
-          org.apache.thrift.protocol.TList _list210 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
-          struct.column_ids = new java.util.ArrayList<java.lang.Integer>(_list210.size);
-          int _elem211;
-          for (int _i212 = 0; _i212 < _list210.size; ++_i212)
+          org.apache.thrift.protocol.TList _list215 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
+          struct.column_ids = new java.util.ArrayList<java.lang.Integer>(_list215.size);
+          int _elem216;
+          for (int _i217 = 0; _i217 < _list215.size; ++_i217)
           {
-            _elem211 = iprot.readI32();
-            struct.column_ids.add(_elem211);
+            _elem216 = iprot.readI32();
+            struct.column_ids.add(_elem216);
           }
         }
         struct.setColumn_idsIsSet(true);
       }
       if (incoming.get(3)) {
         {
-          org.apache.thrift.protocol.TList _list213 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.data = new java.util.ArrayList<TDataBlockPtr>(_list213.size);
-          @org.apache.thrift.annotation.Nullable TDataBlockPtr _elem214;
-          for (int _i215 = 0; _i215 < _list213.size; ++_i215)
+          org.apache.thrift.protocol.TList _list218 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.data = new java.util.ArrayList<TDataBlockPtr>(_list218.size);
+          @org.apache.thrift.annotation.Nullable TDataBlockPtr _elem219;
+          for (int _i220 = 0; _i220 < _list218.size; ++_i220)
           {
-            _elem214 = new TDataBlockPtr();
-            _elem214.read(iprot);
-            struct.data.add(_elem214);
+            _elem219 = new TDataBlockPtr();
+            _elem219.read(iprot);
+            struct.data.add(_elem219);
           }
         }
         struct.setDataIsSet(true);
@@ -867,6 +1009,19 @@ public class TInsertData implements org.apache.thrift.TBase<TInsertData, TInsert
       if (incoming.get(4)) {
         struct.num_rows = iprot.readI64();
         struct.setNum_rowsIsSet(true);
+      }
+      if (incoming.get(5)) {
+        {
+          org.apache.thrift.protocol.TList _list221 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.BOOL, iprot.readI32());
+          struct.is_default = new java.util.ArrayList<java.lang.Boolean>(_list221.size);
+          boolean _elem222;
+          for (int _i223 = 0; _i223 < _list221.size; ++_i223)
+          {
+            _elem222 = iprot.readBool();
+            struct.is_default.add(_elem222);
+          }
+        }
+        struct.setIs_defaultIsSet(true);
       }
     }
   }

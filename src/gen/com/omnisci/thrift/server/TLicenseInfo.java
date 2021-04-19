@@ -324,13 +324,13 @@ public class TLicenseInfo implements org.apache.thrift.TBase<TLicenseInfo, TLice
           case 1: // CLAIMS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list282 = iprot.readListBegin();
-                struct.claims = new java.util.ArrayList<java.lang.String>(_list282.size);
-                @org.apache.thrift.annotation.Nullable java.lang.String _elem283;
-                for (int _i284 = 0; _i284 < _list282.size; ++_i284)
+                org.apache.thrift.protocol.TList _list290 = iprot.readListBegin();
+                struct.claims = new java.util.ArrayList<java.lang.String>(_list290.size);
+                @org.apache.thrift.annotation.Nullable java.lang.String _elem291;
+                for (int _i292 = 0; _i292 < _list290.size; ++_i292)
                 {
-                  _elem283 = iprot.readString();
-                  struct.claims.add(_elem283);
+                  _elem291 = iprot.readString();
+                  struct.claims.add(_elem291);
                 }
                 iprot.readListEnd();
               }
@@ -358,9 +358,9 @@ public class TLicenseInfo implements org.apache.thrift.TBase<TLicenseInfo, TLice
         oprot.writeFieldBegin(CLAIMS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.claims.size()));
-          for (java.lang.String _iter285 : struct.claims)
+          for (java.lang.String _iter293 : struct.claims)
           {
-            oprot.writeString(_iter285);
+            oprot.writeString(_iter293);
           }
           oprot.writeListEnd();
         }
@@ -391,9 +391,9 @@ public class TLicenseInfo implements org.apache.thrift.TBase<TLicenseInfo, TLice
       if (struct.isSetClaims()) {
         {
           oprot.writeI32(struct.claims.size());
-          for (java.lang.String _iter286 : struct.claims)
+          for (java.lang.String _iter294 : struct.claims)
           {
-            oprot.writeString(_iter286);
+            oprot.writeString(_iter294);
           }
         }
       }
@@ -405,13 +405,13 @@ public class TLicenseInfo implements org.apache.thrift.TBase<TLicenseInfo, TLice
       java.util.BitSet incoming = iprot.readBitSet(1);
       if (incoming.get(0)) {
         {
-          org.apache.thrift.protocol.TList _list287 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-          struct.claims = new java.util.ArrayList<java.lang.String>(_list287.size);
-          @org.apache.thrift.annotation.Nullable java.lang.String _elem288;
-          for (int _i289 = 0; _i289 < _list287.size; ++_i289)
+          org.apache.thrift.protocol.TList _list295 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+          struct.claims = new java.util.ArrayList<java.lang.String>(_list295.size);
+          @org.apache.thrift.annotation.Nullable java.lang.String _elem296;
+          for (int _i297 = 0; _i297 < _list295.size; ++_i297)
           {
-            _elem288 = iprot.readString();
-            struct.claims.add(_elem288);
+            _elem296 = iprot.readString();
+            struct.claims.add(_elem296);
           }
         }
         struct.setClaimsIsSet(true);

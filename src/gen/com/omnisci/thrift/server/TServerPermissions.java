@@ -13,6 +13,7 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
   private static final org.apache.thrift.protocol.TField CREATE__FIELD_DESC = new org.apache.thrift.protocol.TField("create_", org.apache.thrift.protocol.TType.BOOL, (short)1);
   private static final org.apache.thrift.protocol.TField DROP__FIELD_DESC = new org.apache.thrift.protocol.TField("drop_", org.apache.thrift.protocol.TType.BOOL, (short)2);
   private static final org.apache.thrift.protocol.TField ALTER__FIELD_DESC = new org.apache.thrift.protocol.TField("alter_", org.apache.thrift.protocol.TType.BOOL, (short)3);
+  private static final org.apache.thrift.protocol.TField USAGE__FIELD_DESC = new org.apache.thrift.protocol.TField("usage_", org.apache.thrift.protocol.TType.BOOL, (short)4);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TServerPermissionsStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TServerPermissionsTupleSchemeFactory();
@@ -20,12 +21,14 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
   public boolean create_; // required
   public boolean drop_; // required
   public boolean alter_; // required
+  public boolean usage_; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     CREATE_((short)1, "create_"),
     DROP_((short)2, "drop_"),
-    ALTER_((short)3, "alter_");
+    ALTER_((short)3, "alter_"),
+    USAGE_((short)4, "usage_");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -47,6 +50,8 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
           return DROP_;
         case 3: // ALTER_
           return ALTER_;
+        case 4: // USAGE_
+          return USAGE_;
         default:
           return null;
       }
@@ -91,6 +96,7 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
   private static final int __CREATE__ISSET_ID = 0;
   private static final int __DROP__ISSET_ID = 1;
   private static final int __ALTER__ISSET_ID = 2;
+  private static final int __USAGE__ISSET_ID = 3;
   private byte __isset_bitfield = 0;
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -100,6 +106,8 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
     tmpMap.put(_Fields.DROP_, new org.apache.thrift.meta_data.FieldMetaData("drop_", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     tmpMap.put(_Fields.ALTER_, new org.apache.thrift.meta_data.FieldMetaData("alter_", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+    tmpMap.put(_Fields.USAGE_, new org.apache.thrift.meta_data.FieldMetaData("usage_", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TServerPermissions.class, metaDataMap);
@@ -111,7 +119,8 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
   public TServerPermissions(
     boolean create_,
     boolean drop_,
-    boolean alter_)
+    boolean alter_,
+    boolean usage_)
   {
     this();
     this.create_ = create_;
@@ -120,6 +129,8 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
     setDrop_IsSet(true);
     this.alter_ = alter_;
     setAlter_IsSet(true);
+    this.usage_ = usage_;
+    setUsage_IsSet(true);
   }
 
   /**
@@ -130,6 +141,7 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
     this.create_ = other.create_;
     this.drop_ = other.drop_;
     this.alter_ = other.alter_;
+    this.usage_ = other.usage_;
   }
 
   public TServerPermissions deepCopy() {
@@ -144,6 +156,8 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
     this.drop_ = false;
     setAlter_IsSet(false);
     this.alter_ = false;
+    setUsage_IsSet(false);
+    this.usage_ = false;
   }
 
   public boolean isCreate_() {
@@ -215,6 +229,29 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
     __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __ALTER__ISSET_ID, value);
   }
 
+  public boolean isUsage_() {
+    return this.usage_;
+  }
+
+  public TServerPermissions setUsage_(boolean usage_) {
+    this.usage_ = usage_;
+    setUsage_IsSet(true);
+    return this;
+  }
+
+  public void unsetUsage_() {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __USAGE__ISSET_ID);
+  }
+
+  /** Returns true if field usage_ is set (has been assigned a value) and false otherwise */
+  public boolean isSetUsage_() {
+    return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __USAGE__ISSET_ID);
+  }
+
+  public void setUsage_IsSet(boolean value) {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __USAGE__ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
     switch (field) {
     case CREATE_:
@@ -241,6 +278,14 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
       }
       break;
 
+    case USAGE_:
+      if (value == null) {
+        unsetUsage_();
+      } else {
+        setUsage_((java.lang.Boolean)value);
+      }
+      break;
+
     }
   }
 
@@ -255,6 +300,9 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
 
     case ALTER_:
       return isAlter_();
+
+    case USAGE_:
+      return isUsage_();
 
     }
     throw new java.lang.IllegalStateException();
@@ -273,6 +321,8 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
       return isSetDrop_();
     case ALTER_:
       return isSetAlter_();
+    case USAGE_:
+      return isSetUsage_();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -319,6 +369,15 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
         return false;
     }
 
+    boolean this_present_usage_ = true;
+    boolean that_present_usage_ = true;
+    if (this_present_usage_ || that_present_usage_) {
+      if (!(this_present_usage_ && that_present_usage_))
+        return false;
+      if (this.usage_ != that.usage_)
+        return false;
+    }
+
     return true;
   }
 
@@ -331,6 +390,8 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
     hashCode = hashCode * 8191 + ((drop_) ? 131071 : 524287);
 
     hashCode = hashCode * 8191 + ((alter_) ? 131071 : 524287);
+
+    hashCode = hashCode * 8191 + ((usage_) ? 131071 : 524287);
 
     return hashCode;
   }
@@ -373,6 +434,16 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.valueOf(isSetUsage_()).compareTo(other.isSetUsage_());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetUsage_()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.usage_, other.usage_);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -404,6 +475,10 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
     if (!first) sb.append(", ");
     sb.append("alter_:");
     sb.append(this.alter_);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("usage_:");
+    sb.append(this.usage_);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -474,6 +549,14 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 4: // USAGE_
+            if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+              struct.usage_ = iprot.readBool();
+              struct.setUsage_IsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -497,6 +580,9 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
       oprot.writeFieldEnd();
       oprot.writeFieldBegin(ALTER__FIELD_DESC);
       oprot.writeBool(struct.alter_);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(USAGE__FIELD_DESC);
+      oprot.writeBool(struct.usage_);
       oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
@@ -525,7 +611,10 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
       if (struct.isSetAlter_()) {
         optionals.set(2);
       }
-      oprot.writeBitSet(optionals, 3);
+      if (struct.isSetUsage_()) {
+        optionals.set(3);
+      }
+      oprot.writeBitSet(optionals, 4);
       if (struct.isSetCreate_()) {
         oprot.writeBool(struct.create_);
       }
@@ -535,12 +624,15 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
       if (struct.isSetAlter_()) {
         oprot.writeBool(struct.alter_);
       }
+      if (struct.isSetUsage_()) {
+        oprot.writeBool(struct.usage_);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TServerPermissions struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(3);
+      java.util.BitSet incoming = iprot.readBitSet(4);
       if (incoming.get(0)) {
         struct.create_ = iprot.readBool();
         struct.setCreate_IsSet(true);
@@ -552,6 +644,10 @@ public class TServerPermissions implements org.apache.thrift.TBase<TServerPermis
       if (incoming.get(2)) {
         struct.alter_ = iprot.readBool();
         struct.setAlter_IsSet(true);
+      }
+      if (incoming.get(3)) {
+        struct.usage_ = iprot.readBool();
+        struct.setUsage_IsSet(true);
       }
     }
   }
