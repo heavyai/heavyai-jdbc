@@ -16,6 +16,7 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
   private static final org.apache.thrift.protocol.TField INPUT_ARG_TYPES_FIELD_DESC = new org.apache.thrift.protocol.TField("inputArgTypes", org.apache.thrift.protocol.TType.LIST, (short)4);
   private static final org.apache.thrift.protocol.TField OUTPUT_ARG_TYPES_FIELD_DESC = new org.apache.thrift.protocol.TField("outputArgTypes", org.apache.thrift.protocol.TType.LIST, (short)5);
   private static final org.apache.thrift.protocol.TField SQL_ARG_TYPES_FIELD_DESC = new org.apache.thrift.protocol.TField("sqlArgTypes", org.apache.thrift.protocol.TType.LIST, (short)6);
+  private static final org.apache.thrift.protocol.TField ANNOTATIONS_FIELD_DESC = new org.apache.thrift.protocol.TField("annotations", org.apache.thrift.protocol.TType.LIST, (short)7);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TUserDefinedTableFunctionStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TUserDefinedTableFunctionTupleSchemeFactory();
@@ -30,6 +31,7 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
   public @org.apache.thrift.annotation.Nullable java.util.List<TExtArgumentType> inputArgTypes; // required
   public @org.apache.thrift.annotation.Nullable java.util.List<TExtArgumentType> outputArgTypes; // required
   public @org.apache.thrift.annotation.Nullable java.util.List<TExtArgumentType> sqlArgTypes; // required
+  public @org.apache.thrift.annotation.Nullable java.util.List<java.util.Map<java.lang.String,java.lang.String>> annotations; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -42,7 +44,8 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
     SIZER_ARG_POS((short)3, "sizerArgPos"),
     INPUT_ARG_TYPES((short)4, "inputArgTypes"),
     OUTPUT_ARG_TYPES((short)5, "outputArgTypes"),
-    SQL_ARG_TYPES((short)6, "sqlArgTypes");
+    SQL_ARG_TYPES((short)6, "sqlArgTypes"),
+    ANNOTATIONS((short)7, "annotations");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -70,6 +73,8 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
           return OUTPUT_ARG_TYPES;
         case 6: // SQL_ARG_TYPES
           return SQL_ARG_TYPES;
+        case 7: // ANNOTATIONS
+          return ANNOTATIONS;
         default:
           return null;
       }
@@ -131,6 +136,11 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
     tmpMap.put(_Fields.SQL_ARG_TYPES, new org.apache.thrift.meta_data.FieldMetaData("sqlArgTypes", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, TExtArgumentType.class))));
+    tmpMap.put(_Fields.ANNOTATIONS, new org.apache.thrift.meta_data.FieldMetaData("annotations", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.MapMetaData(org.apache.thrift.protocol.TType.MAP, 
+                new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING), 
+                new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)))));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TUserDefinedTableFunction.class, metaDataMap);
   }
@@ -144,7 +154,8 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
     int sizerArgPos,
     java.util.List<TExtArgumentType> inputArgTypes,
     java.util.List<TExtArgumentType> outputArgTypes,
-    java.util.List<TExtArgumentType> sqlArgTypes)
+    java.util.List<TExtArgumentType> sqlArgTypes,
+    java.util.List<java.util.Map<java.lang.String,java.lang.String>> annotations)
   {
     this();
     this.name = name;
@@ -154,6 +165,7 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
     this.inputArgTypes = inputArgTypes;
     this.outputArgTypes = outputArgTypes;
     this.sqlArgTypes = sqlArgTypes;
+    this.annotations = annotations;
   }
 
   /**
@@ -189,6 +201,14 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
       }
       this.sqlArgTypes = __this__sqlArgTypes;
     }
+    if (other.isSetAnnotations()) {
+      java.util.List<java.util.Map<java.lang.String,java.lang.String>> __this__annotations = new java.util.ArrayList<java.util.Map<java.lang.String,java.lang.String>>(other.annotations.size());
+      for (java.util.Map<java.lang.String,java.lang.String> other_element : other.annotations) {
+        java.util.Map<java.lang.String,java.lang.String> __this__annotations_copy = new java.util.HashMap<java.lang.String,java.lang.String>(other_element);
+        __this__annotations.add(__this__annotations_copy);
+      }
+      this.annotations = __this__annotations;
+    }
   }
 
   public TUserDefinedTableFunction deepCopy() {
@@ -204,6 +224,7 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
     this.inputArgTypes = null;
     this.outputArgTypes = null;
     this.sqlArgTypes = null;
+    this.annotations = null;
   }
 
   @org.apache.thrift.annotation.Nullable
@@ -410,6 +431,47 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
     }
   }
 
+  public int getAnnotationsSize() {
+    return (this.annotations == null) ? 0 : this.annotations.size();
+  }
+
+  @org.apache.thrift.annotation.Nullable
+  public java.util.Iterator<java.util.Map<java.lang.String,java.lang.String>> getAnnotationsIterator() {
+    return (this.annotations == null) ? null : this.annotations.iterator();
+  }
+
+  public void addToAnnotations(java.util.Map<java.lang.String,java.lang.String> elem) {
+    if (this.annotations == null) {
+      this.annotations = new java.util.ArrayList<java.util.Map<java.lang.String,java.lang.String>>();
+    }
+    this.annotations.add(elem);
+  }
+
+  @org.apache.thrift.annotation.Nullable
+  public java.util.List<java.util.Map<java.lang.String,java.lang.String>> getAnnotations() {
+    return this.annotations;
+  }
+
+  public TUserDefinedTableFunction setAnnotations(@org.apache.thrift.annotation.Nullable java.util.List<java.util.Map<java.lang.String,java.lang.String>> annotations) {
+    this.annotations = annotations;
+    return this;
+  }
+
+  public void unsetAnnotations() {
+    this.annotations = null;
+  }
+
+  /** Returns true if field annotations is set (has been assigned a value) and false otherwise */
+  public boolean isSetAnnotations() {
+    return this.annotations != null;
+  }
+
+  public void setAnnotationsIsSet(boolean value) {
+    if (!value) {
+      this.annotations = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
     switch (field) {
     case NAME:
@@ -460,6 +522,14 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
       }
       break;
 
+    case ANNOTATIONS:
+      if (value == null) {
+        unsetAnnotations();
+      } else {
+        setAnnotations((java.util.List<java.util.Map<java.lang.String,java.lang.String>>)value);
+      }
+      break;
+
     }
   }
 
@@ -484,6 +554,9 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
     case SQL_ARG_TYPES:
       return getSqlArgTypes();
 
+    case ANNOTATIONS:
+      return getAnnotations();
+
     }
     throw new java.lang.IllegalStateException();
   }
@@ -507,6 +580,8 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
       return isSetOutputArgTypes();
     case SQL_ARG_TYPES:
       return isSetSqlArgTypes();
+    case ANNOTATIONS:
+      return isSetAnnotations();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -580,6 +655,15 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
         return false;
     }
 
+    boolean this_present_annotations = true && this.isSetAnnotations();
+    boolean that_present_annotations = true && that.isSetAnnotations();
+    if (this_present_annotations || that_present_annotations) {
+      if (!(this_present_annotations && that_present_annotations))
+        return false;
+      if (!this.annotations.equals(that.annotations))
+        return false;
+    }
+
     return true;
   }
 
@@ -608,6 +692,10 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
     hashCode = hashCode * 8191 + ((isSetSqlArgTypes()) ? 131071 : 524287);
     if (isSetSqlArgTypes())
       hashCode = hashCode * 8191 + sqlArgTypes.hashCode();
+
+    hashCode = hashCode * 8191 + ((isSetAnnotations()) ? 131071 : 524287);
+    if (isSetAnnotations())
+      hashCode = hashCode * 8191 + annotations.hashCode();
 
     return hashCode;
   }
@@ -680,6 +768,16 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.valueOf(isSetAnnotations()).compareTo(other.isSetAnnotations());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetAnnotations()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.annotations, other.annotations);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -742,6 +840,14 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
       sb.append("null");
     } else {
       sb.append(this.sqlArgTypes);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("annotations:");
+    if (this.annotations == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.annotations);
     }
     first = false;
     sb.append(")");
@@ -876,6 +982,36 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 7: // ANNOTATIONS
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list17 = iprot.readListBegin();
+                struct.annotations = new java.util.ArrayList<java.util.Map<java.lang.String,java.lang.String>>(_list17.size);
+                @org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.lang.String> _elem18;
+                for (int _i19 = 0; _i19 < _list17.size; ++_i19)
+                {
+                  {
+                    org.apache.thrift.protocol.TMap _map20 = iprot.readMapBegin();
+                    _elem18 = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map20.size);
+                    @org.apache.thrift.annotation.Nullable java.lang.String _key21;
+                    @org.apache.thrift.annotation.Nullable java.lang.String _val22;
+                    for (int _i23 = 0; _i23 < _map20.size; ++_i23)
+                    {
+                      _key21 = iprot.readString();
+                      _val22 = iprot.readString();
+                      _elem18.put(_key21, _val22);
+                    }
+                    iprot.readMapEnd();
+                  }
+                  struct.annotations.add(_elem18);
+                }
+                iprot.readListEnd();
+              }
+              struct.setAnnotationsIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -908,9 +1044,9 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
         oprot.writeFieldBegin(INPUT_ARG_TYPES_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, struct.inputArgTypes.size()));
-          for (TExtArgumentType _iter17 : struct.inputArgTypes)
+          for (TExtArgumentType _iter24 : struct.inputArgTypes)
           {
-            oprot.writeI32(_iter17.getValue());
+            oprot.writeI32(_iter24.getValue());
           }
           oprot.writeListEnd();
         }
@@ -920,9 +1056,9 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
         oprot.writeFieldBegin(OUTPUT_ARG_TYPES_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, struct.outputArgTypes.size()));
-          for (TExtArgumentType _iter18 : struct.outputArgTypes)
+          for (TExtArgumentType _iter25 : struct.outputArgTypes)
           {
-            oprot.writeI32(_iter18.getValue());
+            oprot.writeI32(_iter25.getValue());
           }
           oprot.writeListEnd();
         }
@@ -932,9 +1068,29 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
         oprot.writeFieldBegin(SQL_ARG_TYPES_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, struct.sqlArgTypes.size()));
-          for (TExtArgumentType _iter19 : struct.sqlArgTypes)
+          for (TExtArgumentType _iter26 : struct.sqlArgTypes)
           {
-            oprot.writeI32(_iter19.getValue());
+            oprot.writeI32(_iter26.getValue());
+          }
+          oprot.writeListEnd();
+        }
+        oprot.writeFieldEnd();
+      }
+      if (struct.annotations != null) {
+        oprot.writeFieldBegin(ANNOTATIONS_FIELD_DESC);
+        {
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.MAP, struct.annotations.size()));
+          for (java.util.Map<java.lang.String,java.lang.String> _iter27 : struct.annotations)
+          {
+            {
+              oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, _iter27.size()));
+              for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter28 : _iter27.entrySet())
+              {
+                oprot.writeString(_iter28.getKey());
+                oprot.writeString(_iter28.getValue());
+              }
+              oprot.writeMapEnd();
+            }
           }
           oprot.writeListEnd();
         }
@@ -976,7 +1132,10 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
       if (struct.isSetSqlArgTypes()) {
         optionals.set(5);
       }
-      oprot.writeBitSet(optionals, 6);
+      if (struct.isSetAnnotations()) {
+        optionals.set(6);
+      }
+      oprot.writeBitSet(optionals, 7);
       if (struct.isSetName()) {
         oprot.writeString(struct.name);
       }
@@ -989,27 +1148,43 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
       if (struct.isSetInputArgTypes()) {
         {
           oprot.writeI32(struct.inputArgTypes.size());
-          for (TExtArgumentType _iter20 : struct.inputArgTypes)
+          for (TExtArgumentType _iter29 : struct.inputArgTypes)
           {
-            oprot.writeI32(_iter20.getValue());
+            oprot.writeI32(_iter29.getValue());
           }
         }
       }
       if (struct.isSetOutputArgTypes()) {
         {
           oprot.writeI32(struct.outputArgTypes.size());
-          for (TExtArgumentType _iter21 : struct.outputArgTypes)
+          for (TExtArgumentType _iter30 : struct.outputArgTypes)
           {
-            oprot.writeI32(_iter21.getValue());
+            oprot.writeI32(_iter30.getValue());
           }
         }
       }
       if (struct.isSetSqlArgTypes()) {
         {
           oprot.writeI32(struct.sqlArgTypes.size());
-          for (TExtArgumentType _iter22 : struct.sqlArgTypes)
+          for (TExtArgumentType _iter31 : struct.sqlArgTypes)
           {
-            oprot.writeI32(_iter22.getValue());
+            oprot.writeI32(_iter31.getValue());
+          }
+        }
+      }
+      if (struct.isSetAnnotations()) {
+        {
+          oprot.writeI32(struct.annotations.size());
+          for (java.util.Map<java.lang.String,java.lang.String> _iter32 : struct.annotations)
+          {
+            {
+              oprot.writeI32(_iter32.size());
+              for (java.util.Map.Entry<java.lang.String, java.lang.String> _iter33 : _iter32.entrySet())
+              {
+                oprot.writeString(_iter33.getKey());
+                oprot.writeString(_iter33.getValue());
+              }
+            }
           }
         }
       }
@@ -1018,7 +1193,7 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TUserDefinedTableFunction struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(6);
+      java.util.BitSet incoming = iprot.readBitSet(7);
       if (incoming.get(0)) {
         struct.name = iprot.readString();
         struct.setNameIsSet(true);
@@ -1033,15 +1208,15 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
       }
       if (incoming.get(3)) {
         {
-          org.apache.thrift.protocol.TList _list23 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
-          struct.inputArgTypes = new java.util.ArrayList<TExtArgumentType>(_list23.size);
-          @org.apache.thrift.annotation.Nullable TExtArgumentType _elem24;
-          for (int _i25 = 0; _i25 < _list23.size; ++_i25)
+          org.apache.thrift.protocol.TList _list34 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
+          struct.inputArgTypes = new java.util.ArrayList<TExtArgumentType>(_list34.size);
+          @org.apache.thrift.annotation.Nullable TExtArgumentType _elem35;
+          for (int _i36 = 0; _i36 < _list34.size; ++_i36)
           {
-            _elem24 = com.omnisci.thrift.calciteserver.TExtArgumentType.findByValue(iprot.readI32());
-            if (_elem24 != null)
+            _elem35 = com.omnisci.thrift.calciteserver.TExtArgumentType.findByValue(iprot.readI32());
+            if (_elem35 != null)
             {
-              struct.inputArgTypes.add(_elem24);
+              struct.inputArgTypes.add(_elem35);
             }
           }
         }
@@ -1049,15 +1224,15 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
       }
       if (incoming.get(4)) {
         {
-          org.apache.thrift.protocol.TList _list26 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
-          struct.outputArgTypes = new java.util.ArrayList<TExtArgumentType>(_list26.size);
-          @org.apache.thrift.annotation.Nullable TExtArgumentType _elem27;
-          for (int _i28 = 0; _i28 < _list26.size; ++_i28)
+          org.apache.thrift.protocol.TList _list37 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
+          struct.outputArgTypes = new java.util.ArrayList<TExtArgumentType>(_list37.size);
+          @org.apache.thrift.annotation.Nullable TExtArgumentType _elem38;
+          for (int _i39 = 0; _i39 < _list37.size; ++_i39)
           {
-            _elem27 = com.omnisci.thrift.calciteserver.TExtArgumentType.findByValue(iprot.readI32());
-            if (_elem27 != null)
+            _elem38 = com.omnisci.thrift.calciteserver.TExtArgumentType.findByValue(iprot.readI32());
+            if (_elem38 != null)
             {
-              struct.outputArgTypes.add(_elem27);
+              struct.outputArgTypes.add(_elem38);
             }
           }
         }
@@ -1065,19 +1240,43 @@ public class TUserDefinedTableFunction implements org.apache.thrift.TBase<TUserD
       }
       if (incoming.get(5)) {
         {
-          org.apache.thrift.protocol.TList _list29 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
-          struct.sqlArgTypes = new java.util.ArrayList<TExtArgumentType>(_list29.size);
-          @org.apache.thrift.annotation.Nullable TExtArgumentType _elem30;
-          for (int _i31 = 0; _i31 < _list29.size; ++_i31)
+          org.apache.thrift.protocol.TList _list40 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32, iprot.readI32());
+          struct.sqlArgTypes = new java.util.ArrayList<TExtArgumentType>(_list40.size);
+          @org.apache.thrift.annotation.Nullable TExtArgumentType _elem41;
+          for (int _i42 = 0; _i42 < _list40.size; ++_i42)
           {
-            _elem30 = com.omnisci.thrift.calciteserver.TExtArgumentType.findByValue(iprot.readI32());
-            if (_elem30 != null)
+            _elem41 = com.omnisci.thrift.calciteserver.TExtArgumentType.findByValue(iprot.readI32());
+            if (_elem41 != null)
             {
-              struct.sqlArgTypes.add(_elem30);
+              struct.sqlArgTypes.add(_elem41);
             }
           }
         }
         struct.setSqlArgTypesIsSet(true);
+      }
+      if (incoming.get(6)) {
+        {
+          org.apache.thrift.protocol.TList _list43 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.MAP, iprot.readI32());
+          struct.annotations = new java.util.ArrayList<java.util.Map<java.lang.String,java.lang.String>>(_list43.size);
+          @org.apache.thrift.annotation.Nullable java.util.Map<java.lang.String,java.lang.String> _elem44;
+          for (int _i45 = 0; _i45 < _list43.size; ++_i45)
+          {
+            {
+              org.apache.thrift.protocol.TMap _map46 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+              _elem44 = new java.util.HashMap<java.lang.String,java.lang.String>(2*_map46.size);
+              @org.apache.thrift.annotation.Nullable java.lang.String _key47;
+              @org.apache.thrift.annotation.Nullable java.lang.String _val48;
+              for (int _i49 = 0; _i49 < _map46.size; ++_i49)
+              {
+                _key47 = iprot.readString();
+                _val48 = iprot.readString();
+                _elem44.put(_key47, _val48);
+              }
+            }
+            struct.annotations.add(_elem44);
+          }
+        }
+        struct.setAnnotationsIsSet(true);
       }
     }
   }

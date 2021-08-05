@@ -15,6 +15,7 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
   private static final org.apache.thrift.protocol.TField PRIVS_FIELD_DESC = new org.apache.thrift.protocol.TField("privs", org.apache.thrift.protocol.TType.LIST, (short)3);
   private static final org.apache.thrift.protocol.TField GRANTEE_FIELD_DESC = new org.apache.thrift.protocol.TField("grantee", org.apache.thrift.protocol.TType.STRING, (short)4);
   private static final org.apache.thrift.protocol.TField PRIVILEGE_OBJECT_TYPE_FIELD_DESC = new org.apache.thrift.protocol.TField("privilegeObjectType", org.apache.thrift.protocol.TType.I32, (short)5);
+  private static final org.apache.thrift.protocol.TField OBJECT_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("objectId", org.apache.thrift.protocol.TType.I32, (short)6);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TDBObjectStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TDBObjectTupleSchemeFactory();
@@ -32,6 +33,7 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
    * @see TDBObjectType
    */
   public @org.apache.thrift.annotation.Nullable TDBObjectType privilegeObjectType; // required
+  public int objectId; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -47,7 +49,8 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
      * 
      * @see TDBObjectType
      */
-    PRIVILEGE_OBJECT_TYPE((short)5, "privilegeObjectType");
+    PRIVILEGE_OBJECT_TYPE((short)5, "privilegeObjectType"),
+    OBJECT_ID((short)6, "objectId");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -73,6 +76,8 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
           return GRANTEE;
         case 5: // PRIVILEGE_OBJECT_TYPE
           return PRIVILEGE_OBJECT_TYPE;
+        case 6: // OBJECT_ID
+          return OBJECT_ID;
         default:
           return null;
       }
@@ -114,6 +119,8 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
   }
 
   // isset id assignments
+  private static final int __OBJECTID_ISSET_ID = 0;
+  private byte __isset_bitfield = 0;
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -128,6 +135,8 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.PRIVILEGE_OBJECT_TYPE, new org.apache.thrift.meta_data.FieldMetaData("privilegeObjectType", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, TDBObjectType.class)));
+    tmpMap.put(_Fields.OBJECT_ID, new org.apache.thrift.meta_data.FieldMetaData("objectId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TDBObject.class, metaDataMap);
   }
@@ -140,7 +149,8 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
     TDBObjectType objectType,
     java.util.List<java.lang.Boolean> privs,
     java.lang.String grantee,
-    TDBObjectType privilegeObjectType)
+    TDBObjectType privilegeObjectType,
+    int objectId)
   {
     this();
     this.objectName = objectName;
@@ -148,12 +158,15 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
     this.privs = privs;
     this.grantee = grantee;
     this.privilegeObjectType = privilegeObjectType;
+    this.objectId = objectId;
+    setObjectIdIsSet(true);
   }
 
   /**
    * Performs a deep copy on <i>other</i>.
    */
   public TDBObject(TDBObject other) {
+    __isset_bitfield = other.__isset_bitfield;
     if (other.isSetObjectName()) {
       this.objectName = other.objectName;
     }
@@ -170,6 +183,7 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
     if (other.isSetPrivilegeObjectType()) {
       this.privilegeObjectType = other.privilegeObjectType;
     }
+    this.objectId = other.objectId;
   }
 
   public TDBObject deepCopy() {
@@ -183,6 +197,8 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
     this.privs = null;
     this.grantee = null;
     this.privilegeObjectType = null;
+    setObjectIdIsSet(false);
+    this.objectId = 0;
   }
 
   @org.apache.thrift.annotation.Nullable
@@ -342,6 +358,29 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
     }
   }
 
+  public int getObjectId() {
+    return this.objectId;
+  }
+
+  public TDBObject setObjectId(int objectId) {
+    this.objectId = objectId;
+    setObjectIdIsSet(true);
+    return this;
+  }
+
+  public void unsetObjectId() {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __OBJECTID_ISSET_ID);
+  }
+
+  /** Returns true if field objectId is set (has been assigned a value) and false otherwise */
+  public boolean isSetObjectId() {
+    return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __OBJECTID_ISSET_ID);
+  }
+
+  public void setObjectIdIsSet(boolean value) {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __OBJECTID_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
     switch (field) {
     case OBJECT_NAME:
@@ -384,6 +423,14 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
       }
       break;
 
+    case OBJECT_ID:
+      if (value == null) {
+        unsetObjectId();
+      } else {
+        setObjectId((java.lang.Integer)value);
+      }
+      break;
+
     }
   }
 
@@ -404,6 +451,9 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
 
     case PRIVILEGE_OBJECT_TYPE:
       return getPrivilegeObjectType();
+
+    case OBJECT_ID:
+      return getObjectId();
 
     }
     throw new java.lang.IllegalStateException();
@@ -426,6 +476,8 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
       return isSetGrantee();
     case PRIVILEGE_OBJECT_TYPE:
       return isSetPrivilegeObjectType();
+    case OBJECT_ID:
+      return isSetObjectId();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -490,6 +542,15 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
         return false;
     }
 
+    boolean this_present_objectId = true;
+    boolean that_present_objectId = true;
+    if (this_present_objectId || that_present_objectId) {
+      if (!(this_present_objectId && that_present_objectId))
+        return false;
+      if (this.objectId != that.objectId)
+        return false;
+    }
+
     return true;
   }
 
@@ -516,6 +577,8 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
     hashCode = hashCode * 8191 + ((isSetPrivilegeObjectType()) ? 131071 : 524287);
     if (isSetPrivilegeObjectType())
       hashCode = hashCode * 8191 + privilegeObjectType.getValue();
+
+    hashCode = hashCode * 8191 + objectId;
 
     return hashCode;
   }
@@ -574,6 +637,16 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
     }
     if (isSetPrivilegeObjectType()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.privilegeObjectType, other.privilegeObjectType);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = java.lang.Boolean.valueOf(isSetObjectId()).compareTo(other.isSetObjectId());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetObjectId()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.objectId, other.objectId);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -638,6 +711,10 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
       sb.append(this.privilegeObjectType);
     }
     first = false;
+    if (!first) sb.append(", ");
+    sb.append("objectId:");
+    sb.append(this.objectId);
+    first = false;
     sb.append(")");
     return sb.toString();
   }
@@ -657,6 +734,8 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
 
   private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
     try {
+      // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+      __isset_bitfield = 0;
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
     } catch (org.apache.thrift.TException te) {
       throw new java.io.IOException(te);
@@ -731,6 +810,14 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 6: // OBJECT_ID
+            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+              struct.objectId = iprot.readI32();
+              struct.setObjectIdIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -778,6 +865,9 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
         oprot.writeI32(struct.privilegeObjectType.getValue());
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(OBJECT_ID_FIELD_DESC);
+      oprot.writeI32(struct.objectId);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -811,7 +901,10 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
       if (struct.isSetPrivilegeObjectType()) {
         optionals.set(4);
       }
-      oprot.writeBitSet(optionals, 5);
+      if (struct.isSetObjectId()) {
+        optionals.set(5);
+      }
+      oprot.writeBitSet(optionals, 6);
       if (struct.isSetObjectName()) {
         oprot.writeString(struct.objectName);
       }
@@ -833,12 +926,15 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
       if (struct.isSetPrivilegeObjectType()) {
         oprot.writeI32(struct.privilegeObjectType.getValue());
       }
+      if (struct.isSetObjectId()) {
+        oprot.writeI32(struct.objectId);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TDBObject struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(5);
+      java.util.BitSet incoming = iprot.readBitSet(6);
       if (incoming.get(0)) {
         struct.objectName = iprot.readString();
         struct.setObjectNameIsSet(true);
@@ -867,6 +963,10 @@ public class TDBObject implements org.apache.thrift.TBase<TDBObject, TDBObject._
       if (incoming.get(4)) {
         struct.privilegeObjectType = com.omnisci.thrift.server.TDBObjectType.findByValue(iprot.readI32());
         struct.setPrivilegeObjectTypeIsSet(true);
+      }
+      if (incoming.get(5)) {
+        struct.objectId = iprot.readI32();
+        struct.setObjectIdIsSet(true);
       }
     }
   }

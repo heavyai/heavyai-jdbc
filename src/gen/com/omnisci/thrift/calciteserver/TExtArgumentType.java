@@ -43,16 +43,16 @@ public enum TExtArgumentType implements org.apache.thrift.TEnum {
   ColumnDouble(32),
   ColumnBool(33),
   TextEncodingNone(34),
-  TextEncodingDict8(35),
-  TextEncodingDict16(36),
-  TextEncodingDict32(37),
-  ColumnListInt8(38),
-  ColumnListInt16(39),
-  ColumnListInt32(40),
-  ColumnListInt64(41),
-  ColumnListFloat(42),
-  ColumnListDouble(43),
-  ColumnListBool(44);
+  TextEncodingDict(35),
+  ColumnListInt8(36),
+  ColumnListInt16(37),
+  ColumnListInt32(38),
+  ColumnListInt64(39),
+  ColumnListFloat(40),
+  ColumnListDouble(41),
+  ColumnListBool(42),
+  ColumnTextEncodingDict(43),
+  ColumnListTextEncodingDict(44);
 
   private final int value;
 
@@ -145,25 +145,25 @@ public enum TExtArgumentType implements org.apache.thrift.TEnum {
       case 34:
         return TextEncodingNone;
       case 35:
-        return TextEncodingDict8;
+        return TextEncodingDict;
       case 36:
-        return TextEncodingDict16;
-      case 37:
-        return TextEncodingDict32;
-      case 38:
         return ColumnListInt8;
-      case 39:
+      case 37:
         return ColumnListInt16;
-      case 40:
+      case 38:
         return ColumnListInt32;
-      case 41:
+      case 39:
         return ColumnListInt64;
-      case 42:
+      case 40:
         return ColumnListFloat;
-      case 43:
+      case 41:
         return ColumnListDouble;
-      case 44:
+      case 42:
         return ColumnListBool;
+      case 43:
+        return ColumnTextEncodingDict;
+      case 44:
+        return ColumnListTextEncodingDict;
       default:
         return null;
     }

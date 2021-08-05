@@ -17,6 +17,7 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
   private static final org.apache.thrift.protocol.TField IS_SYSTEM_FIELD_DESC = new org.apache.thrift.protocol.TField("is_system", org.apache.thrift.protocol.TType.BOOL, (short)5);
   private static final org.apache.thrift.protocol.TField IS_PHYSICAL_FIELD_DESC = new org.apache.thrift.protocol.TField("is_physical", org.apache.thrift.protocol.TType.BOOL, (short)6);
   private static final org.apache.thrift.protocol.TField COL_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("col_id", org.apache.thrift.protocol.TType.I64, (short)7);
+  private static final org.apache.thrift.protocol.TField DEFAULT_VALUE_FIELD_DESC = new org.apache.thrift.protocol.TField("default_value", org.apache.thrift.protocol.TType.STRING, (short)8);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TColumnTypeStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TColumnTypeTupleSchemeFactory();
@@ -28,6 +29,7 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
   public boolean is_system; // required
   public boolean is_physical; // required
   public long col_id; // required
+  public @org.apache.thrift.annotation.Nullable java.lang.String default_value; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -37,7 +39,8 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
     SRC_NAME((short)4, "src_name"),
     IS_SYSTEM((short)5, "is_system"),
     IS_PHYSICAL((short)6, "is_physical"),
-    COL_ID((short)7, "col_id");
+    COL_ID((short)7, "col_id"),
+    DEFAULT_VALUE((short)8, "default_value");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -67,6 +70,8 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
           return IS_PHYSICAL;
         case 7: // COL_ID
           return COL_ID;
+        case 8: // DEFAULT_VALUE
+          return DEFAULT_VALUE;
         default:
           return null;
       }
@@ -113,6 +118,7 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
   private static final int __IS_PHYSICAL_ISSET_ID = 2;
   private static final int __COL_ID_ISSET_ID = 3;
   private byte __isset_bitfield = 0;
+  private static final _Fields optionals[] = {_Fields.DEFAULT_VALUE};
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -130,6 +136,8 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     tmpMap.put(_Fields.COL_ID, new org.apache.thrift.meta_data.FieldMetaData("col_id", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
+    tmpMap.put(_Fields.DEFAULT_VALUE, new org.apache.thrift.meta_data.FieldMetaData("default_value", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TColumnType.class, metaDataMap);
   }
@@ -178,6 +186,9 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
     this.is_system = other.is_system;
     this.is_physical = other.is_physical;
     this.col_id = other.col_id;
+    if (other.isSetDefault_value()) {
+      this.default_value = other.default_value;
+    }
   }
 
   public TColumnType deepCopy() {
@@ -197,6 +208,7 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
     this.is_physical = false;
     setCol_idIsSet(false);
     this.col_id = 0;
+    this.default_value = null;
   }
 
   @org.apache.thrift.annotation.Nullable
@@ -366,6 +378,31 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
     __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __COL_ID_ISSET_ID, value);
   }
 
+  @org.apache.thrift.annotation.Nullable
+  public java.lang.String getDefault_value() {
+    return this.default_value;
+  }
+
+  public TColumnType setDefault_value(@org.apache.thrift.annotation.Nullable java.lang.String default_value) {
+    this.default_value = default_value;
+    return this;
+  }
+
+  public void unsetDefault_value() {
+    this.default_value = null;
+  }
+
+  /** Returns true if field default_value is set (has been assigned a value) and false otherwise */
+  public boolean isSetDefault_value() {
+    return this.default_value != null;
+  }
+
+  public void setDefault_valueIsSet(boolean value) {
+    if (!value) {
+      this.default_value = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
     switch (field) {
     case COL_NAME:
@@ -424,6 +461,14 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
       }
       break;
 
+    case DEFAULT_VALUE:
+      if (value == null) {
+        unsetDefault_value();
+      } else {
+        setDefault_value((java.lang.String)value);
+      }
+      break;
+
     }
   }
 
@@ -451,6 +496,9 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
     case COL_ID:
       return getCol_id();
 
+    case DEFAULT_VALUE:
+      return getDefault_value();
+
     }
     throw new java.lang.IllegalStateException();
   }
@@ -476,6 +524,8 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
       return isSetIs_physical();
     case COL_ID:
       return isSetCol_id();
+    case DEFAULT_VALUE:
+      return isSetDefault_value();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -558,6 +608,15 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
         return false;
     }
 
+    boolean this_present_default_value = true && this.isSetDefault_value();
+    boolean that_present_default_value = true && that.isSetDefault_value();
+    if (this_present_default_value || that_present_default_value) {
+      if (!(this_present_default_value && that_present_default_value))
+        return false;
+      if (!this.default_value.equals(that.default_value))
+        return false;
+    }
+
     return true;
   }
 
@@ -584,6 +643,10 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
     hashCode = hashCode * 8191 + ((is_physical) ? 131071 : 524287);
 
     hashCode = hashCode * 8191 + org.apache.thrift.TBaseHelper.hashCode(col_id);
+
+    hashCode = hashCode * 8191 + ((isSetDefault_value()) ? 131071 : 524287);
+    if (isSetDefault_value())
+      hashCode = hashCode * 8191 + default_value.hashCode();
 
     return hashCode;
   }
@@ -666,6 +729,16 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.valueOf(isSetDefault_value()).compareTo(other.isSetDefault_value());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetDefault_value()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.default_value, other.default_value);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -726,6 +799,16 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
     sb.append("col_id:");
     sb.append(this.col_id);
     first = false;
+    if (isSetDefault_value()) {
+      if (!first) sb.append(", ");
+      sb.append("default_value:");
+      if (this.default_value == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.default_value);
+      }
+      first = false;
+    }
     sb.append(")");
     return sb.toString();
   }
@@ -831,6 +914,14 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 8: // DEFAULT_VALUE
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.default_value = iprot.readString();
+              struct.setDefault_valueIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -873,6 +964,13 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
       oprot.writeFieldBegin(COL_ID_FIELD_DESC);
       oprot.writeI64(struct.col_id);
       oprot.writeFieldEnd();
+      if (struct.default_value != null) {
+        if (struct.isSetDefault_value()) {
+          oprot.writeFieldBegin(DEFAULT_VALUE_FIELD_DESC);
+          oprot.writeString(struct.default_value);
+          oprot.writeFieldEnd();
+        }
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -912,7 +1010,10 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
       if (struct.isSetCol_id()) {
         optionals.set(6);
       }
-      oprot.writeBitSet(optionals, 7);
+      if (struct.isSetDefault_value()) {
+        optionals.set(7);
+      }
+      oprot.writeBitSet(optionals, 8);
       if (struct.isSetCol_name()) {
         oprot.writeString(struct.col_name);
       }
@@ -934,12 +1035,15 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
       if (struct.isSetCol_id()) {
         oprot.writeI64(struct.col_id);
       }
+      if (struct.isSetDefault_value()) {
+        oprot.writeString(struct.default_value);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TColumnType struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(7);
+      java.util.BitSet incoming = iprot.readBitSet(8);
       if (incoming.get(0)) {
         struct.col_name = iprot.readString();
         struct.setCol_nameIsSet(true);
@@ -968,6 +1072,10 @@ public class TColumnType implements org.apache.thrift.TBase<TColumnType, TColumn
       if (incoming.get(6)) {
         struct.col_id = iprot.readI64();
         struct.setCol_idIsSet(true);
+      }
+      if (incoming.get(7)) {
+        struct.default_value = iprot.readString();
+        struct.setDefault_valueIsSet(true);
       }
     }
   }

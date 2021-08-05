@@ -4,18 +4,15 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package com.omnisci.thrift.calciteserver;
+package com.omnisci.thrift.server;
 
 
-public enum TOutputBufferSizeType implements org.apache.thrift.TEnum {
-  kConstant(0),
-  kUserSpecifiedConstantParameter(1),
-  kUserSpecifiedRowMultiplier(2),
-  kTableFunctionSpecifiedParameter(3);
+public enum TDataSourceType implements org.apache.thrift.TEnum {
+  TABLE(0);
 
   private final int value;
 
-  private TOutputBufferSizeType(int value) {
+  private TDataSourceType(int value) {
     this.value = value;
   }
 
@@ -31,16 +28,10 @@ public enum TOutputBufferSizeType implements org.apache.thrift.TEnum {
    * @return null if the value is not found.
    */
   @org.apache.thrift.annotation.Nullable
-  public static TOutputBufferSizeType findByValue(int value) { 
+  public static TDataSourceType findByValue(int value) { 
     switch (value) {
       case 0:
-        return kConstant;
-      case 1:
-        return kUserSpecifiedConstantParameter;
-      case 2:
-        return kUserSpecifiedRowMultiplier;
-      case 3:
-        return kTableFunctionSpecifiedParameter;
+        return TABLE;
       default:
         return null;
     }

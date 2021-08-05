@@ -35,6 +35,7 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
   private static final org.apache.thrift.protocol.TField GEO_ASSIGN_RENDER_GROUPS_FIELD_DESC = new org.apache.thrift.protocol.TField("geo_assign_render_groups", org.apache.thrift.protocol.TType.BOOL, (short)23);
   private static final org.apache.thrift.protocol.TField GEO_EXPLODE_COLLECTIONS_FIELD_DESC = new org.apache.thrift.protocol.TField("geo_explode_collections", org.apache.thrift.protocol.TType.BOOL, (short)24);
   private static final org.apache.thrift.protocol.TField SOURCE_SRID_FIELD_DESC = new org.apache.thrift.protocol.TField("source_srid", org.apache.thrift.protocol.TType.I32, (short)25);
+  private static final org.apache.thrift.protocol.TField S3_SESSION_TOKEN_FIELD_DESC = new org.apache.thrift.protocol.TField("s3_session_token", org.apache.thrift.protocol.TType.STRING, (short)26);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TCopyParamsStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TCopyParamsTupleSchemeFactory();
@@ -80,6 +81,7 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
   public boolean geo_assign_render_groups; // required
   public boolean geo_explode_collections; // required
   public int source_srid; // required
+  public @org.apache.thrift.annotation.Nullable java.lang.String s3_session_token; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -123,7 +125,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     S3_ENDPOINT((short)22, "s3_endpoint"),
     GEO_ASSIGN_RENDER_GROUPS((short)23, "geo_assign_render_groups"),
     GEO_EXPLODE_COLLECTIONS((short)24, "geo_explode_collections"),
-    SOURCE_SRID((short)25, "source_srid");
+    SOURCE_SRID((short)25, "source_srid"),
+    S3_SESSION_TOKEN((short)26, "s3_session_token");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -189,6 +192,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
           return GEO_EXPLODE_COLLECTIONS;
         case 25: // SOURCE_SRID
           return SOURCE_SRID;
+        case 26: // S3_SESSION_TOKEN
+          return S3_SESSION_TOKEN;
         default:
           return null;
       }
@@ -292,6 +297,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     tmpMap.put(_Fields.SOURCE_SRID, new org.apache.thrift.meta_data.FieldMetaData("source_srid", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+    tmpMap.put(_Fields.S3_SESSION_TOKEN, new org.apache.thrift.meta_data.FieldMetaData("s3_session_token", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TCopyParams.class, metaDataMap);
   }
@@ -344,7 +351,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     java.lang.String s3_endpoint,
     boolean geo_assign_render_groups,
     boolean geo_explode_collections,
-    int source_srid)
+    int source_srid,
+    java.lang.String s3_session_token)
   {
     this();
     this.delimiter = delimiter;
@@ -380,6 +388,7 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     setGeo_explode_collectionsIsSet(true);
     this.source_srid = source_srid;
     setSource_sridIsSet(true);
+    this.s3_session_token = s3_session_token;
   }
 
   /**
@@ -446,6 +455,9 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     this.geo_assign_render_groups = other.geo_assign_render_groups;
     this.geo_explode_collections = other.geo_explode_collections;
     this.source_srid = other.source_srid;
+    if (other.isSetS3_session_token()) {
+      this.s3_session_token = other.s3_session_token;
+    }
   }
 
   public TCopyParams deepCopy() {
@@ -491,6 +503,7 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
 
     this.source_srid = 0;
 
+    this.s3_session_token = null;
   }
 
   @org.apache.thrift.annotation.Nullable
@@ -1134,6 +1147,31 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __SOURCE_SRID_ISSET_ID, value);
   }
 
+  @org.apache.thrift.annotation.Nullable
+  public java.lang.String getS3_session_token() {
+    return this.s3_session_token;
+  }
+
+  public TCopyParams setS3_session_token(@org.apache.thrift.annotation.Nullable java.lang.String s3_session_token) {
+    this.s3_session_token = s3_session_token;
+    return this;
+  }
+
+  public void unsetS3_session_token() {
+    this.s3_session_token = null;
+  }
+
+  /** Returns true if field s3_session_token is set (has been assigned a value) and false otherwise */
+  public boolean isSetS3_session_token() {
+    return this.s3_session_token != null;
+  }
+
+  public void setS3_session_tokenIsSet(boolean value) {
+    if (!value) {
+      this.s3_session_token = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
     switch (field) {
     case DELIMITER:
@@ -1336,6 +1374,14 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       }
       break;
 
+    case S3_SESSION_TOKEN:
+      if (value == null) {
+        unsetS3_session_token();
+      } else {
+        setS3_session_token((java.lang.String)value);
+      }
+      break;
+
     }
   }
 
@@ -1417,6 +1463,9 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     case SOURCE_SRID:
       return getSource_srid();
 
+    case S3_SESSION_TOKEN:
+      return getS3_session_token();
+
     }
     throw new java.lang.IllegalStateException();
   }
@@ -1478,6 +1527,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       return isSetGeo_explode_collections();
     case SOURCE_SRID:
       return isSetSource_srid();
+    case S3_SESSION_TOKEN:
+      return isSetS3_session_token();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -1722,6 +1773,15 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         return false;
     }
 
+    boolean this_present_s3_session_token = true && this.isSetS3_session_token();
+    boolean that_present_s3_session_token = true && that.isSetS3_session_token();
+    if (this_present_s3_session_token || that_present_s3_session_token) {
+      if (!(this_present_s3_session_token && that_present_s3_session_token))
+        return false;
+      if (!this.s3_session_token.equals(that.s3_session_token))
+        return false;
+    }
+
     return true;
   }
 
@@ -1812,6 +1872,10 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     hashCode = hashCode * 8191 + ((geo_explode_collections) ? 131071 : 524287);
 
     hashCode = hashCode * 8191 + source_srid;
+
+    hashCode = hashCode * 8191 + ((isSetS3_session_token()) ? 131071 : 524287);
+    if (isSetS3_session_token())
+      hashCode = hashCode * 8191 + s3_session_token.hashCode();
 
     return hashCode;
   }
@@ -2074,6 +2138,16 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.valueOf(isSetS3_session_token()).compareTo(other.isSetS3_session_token());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetS3_session_token()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.s3_session_token, other.s3_session_token);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -2261,6 +2335,14 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     if (!first) sb.append(", ");
     sb.append("source_srid:");
     sb.append(this.source_srid);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("s3_session_token:");
+    if (this.s3_session_token == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.s3_session_token);
+    }
     first = false;
     sb.append(")");
     return sb.toString();
@@ -2507,6 +2589,14 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 26: // S3_SESSION_TOKEN
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.s3_session_token = iprot.readString();
+              struct.setS3_session_tokenIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -2631,6 +2721,11 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       oprot.writeFieldBegin(SOURCE_SRID_FIELD_DESC);
       oprot.writeI32(struct.source_srid);
       oprot.writeFieldEnd();
+      if (struct.s3_session_token != null) {
+        oprot.writeFieldBegin(S3_SESSION_TOKEN_FIELD_DESC);
+        oprot.writeString(struct.s3_session_token);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -2724,7 +2819,10 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       if (struct.isSetSource_srid()) {
         optionals.set(24);
       }
-      oprot.writeBitSet(optionals, 25);
+      if (struct.isSetS3_session_token()) {
+        optionals.set(25);
+      }
+      oprot.writeBitSet(optionals, 26);
       if (struct.isSetDelimiter()) {
         oprot.writeString(struct.delimiter);
       }
@@ -2800,12 +2898,15 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       if (struct.isSetSource_srid()) {
         oprot.writeI32(struct.source_srid);
       }
+      if (struct.isSetS3_session_token()) {
+        oprot.writeString(struct.s3_session_token);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TCopyParams struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(25);
+      java.util.BitSet incoming = iprot.readBitSet(26);
       if (incoming.get(0)) {
         struct.delimiter = iprot.readString();
         struct.setDelimiterIsSet(true);
@@ -2905,6 +3006,10 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       if (incoming.get(24)) {
         struct.source_srid = iprot.readI32();
         struct.setSource_sridIsSet(true);
+      }
+      if (incoming.get(25)) {
+        struct.s3_session_token = iprot.readString();
+        struct.setS3_session_tokenIsSet(true);
       }
     }
   }

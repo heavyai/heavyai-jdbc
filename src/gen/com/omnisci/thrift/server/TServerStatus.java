@@ -18,6 +18,7 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
   private static final org.apache.thrift.protocol.TField HOST_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("host_name", org.apache.thrift.protocol.TType.STRING, (short)6);
   private static final org.apache.thrift.protocol.TField POLY_RENDERING_ENABLED_FIELD_DESC = new org.apache.thrift.protocol.TField("poly_rendering_enabled", org.apache.thrift.protocol.TType.BOOL, (short)7);
   private static final org.apache.thrift.protocol.TField ROLE_FIELD_DESC = new org.apache.thrift.protocol.TField("role", org.apache.thrift.protocol.TType.I32, (short)8);
+  private static final org.apache.thrift.protocol.TField RENDERER_STATUS_JSON_FIELD_DESC = new org.apache.thrift.protocol.TField("renderer_status_json", org.apache.thrift.protocol.TType.STRING, (short)9);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TServerStatusStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TServerStatusTupleSchemeFactory();
@@ -34,6 +35,7 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
    * @see TRole
    */
   public @org.apache.thrift.annotation.Nullable TRole role; // required
+  public @org.apache.thrift.annotation.Nullable java.lang.String renderer_status_json; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -48,7 +50,8 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
      * 
      * @see TRole
      */
-    ROLE((short)8, "role");
+    ROLE((short)8, "role"),
+    RENDERER_STATUS_JSON((short)9, "renderer_status_json");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -80,6 +83,8 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
           return POLY_RENDERING_ENABLED;
         case 8: // ROLE
           return ROLE;
+        case 9: // RENDERER_STATUS_JSON
+          return RENDERER_STATUS_JSON;
         default:
           return null;
       }
@@ -145,6 +150,8 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     tmpMap.put(_Fields.ROLE, new org.apache.thrift.meta_data.FieldMetaData("role", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, TRole.class)));
+    tmpMap.put(_Fields.RENDERER_STATUS_JSON, new org.apache.thrift.meta_data.FieldMetaData("renderer_status_json", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TServerStatus.class, metaDataMap);
   }
@@ -160,7 +167,8 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
     java.lang.String edition,
     java.lang.String host_name,
     boolean poly_rendering_enabled,
-    TRole role)
+    TRole role,
+    java.lang.String renderer_status_json)
   {
     this();
     this.read_only = read_only;
@@ -175,6 +183,7 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
     this.poly_rendering_enabled = poly_rendering_enabled;
     setPoly_rendering_enabledIsSet(true);
     this.role = role;
+    this.renderer_status_json = renderer_status_json;
   }
 
   /**
@@ -198,6 +207,9 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
     if (other.isSetRole()) {
       this.role = other.role;
     }
+    if (other.isSetRenderer_status_json()) {
+      this.renderer_status_json = other.renderer_status_json;
+    }
   }
 
   public TServerStatus deepCopy() {
@@ -218,6 +230,7 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
     setPoly_rendering_enabledIsSet(false);
     this.poly_rendering_enabled = false;
     this.role = null;
+    this.renderer_status_json = null;
   }
 
   public boolean isRead_only() {
@@ -420,6 +433,31 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
     }
   }
 
+  @org.apache.thrift.annotation.Nullable
+  public java.lang.String getRenderer_status_json() {
+    return this.renderer_status_json;
+  }
+
+  public TServerStatus setRenderer_status_json(@org.apache.thrift.annotation.Nullable java.lang.String renderer_status_json) {
+    this.renderer_status_json = renderer_status_json;
+    return this;
+  }
+
+  public void unsetRenderer_status_json() {
+    this.renderer_status_json = null;
+  }
+
+  /** Returns true if field renderer_status_json is set (has been assigned a value) and false otherwise */
+  public boolean isSetRenderer_status_json() {
+    return this.renderer_status_json != null;
+  }
+
+  public void setRenderer_status_jsonIsSet(boolean value) {
+    if (!value) {
+      this.renderer_status_json = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
     switch (field) {
     case READ_ONLY:
@@ -486,6 +524,14 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
       }
       break;
 
+    case RENDERER_STATUS_JSON:
+      if (value == null) {
+        unsetRenderer_status_json();
+      } else {
+        setRenderer_status_json((java.lang.String)value);
+      }
+      break;
+
     }
   }
 
@@ -516,6 +562,9 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
     case ROLE:
       return getRole();
 
+    case RENDERER_STATUS_JSON:
+      return getRenderer_status_json();
+
     }
     throw new java.lang.IllegalStateException();
   }
@@ -543,6 +592,8 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
       return isSetPoly_rendering_enabled();
     case ROLE:
       return isSetRole();
+    case RENDERER_STATUS_JSON:
+      return isSetRenderer_status_json();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -634,6 +685,15 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
         return false;
     }
 
+    boolean this_present_renderer_status_json = true && this.isSetRenderer_status_json();
+    boolean that_present_renderer_status_json = true && that.isSetRenderer_status_json();
+    if (this_present_renderer_status_json || that_present_renderer_status_json) {
+      if (!(this_present_renderer_status_json && that_present_renderer_status_json))
+        return false;
+      if (!this.renderer_status_json.equals(that.renderer_status_json))
+        return false;
+    }
+
     return true;
   }
 
@@ -664,6 +724,10 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
     hashCode = hashCode * 8191 + ((isSetRole()) ? 131071 : 524287);
     if (isSetRole())
       hashCode = hashCode * 8191 + role.getValue();
+
+    hashCode = hashCode * 8191 + ((isSetRenderer_status_json()) ? 131071 : 524287);
+    if (isSetRenderer_status_json())
+      hashCode = hashCode * 8191 + renderer_status_json.hashCode();
 
     return hashCode;
   }
@@ -756,6 +820,16 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.valueOf(isSetRenderer_status_json()).compareTo(other.isSetRenderer_status_json());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetRenderer_status_json()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.renderer_status_json, other.renderer_status_json);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -822,6 +896,14 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
       sb.append("null");
     } else {
       sb.append(this.role);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("renderer_status_json:");
+    if (this.renderer_status_json == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.renderer_status_json);
     }
     first = false;
     sb.append(")");
@@ -933,6 +1015,14 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 9: // RENDERER_STATUS_JSON
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.renderer_status_json = iprot.readString();
+              struct.setRenderer_status_jsonIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -980,6 +1070,11 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
         oprot.writeI32(struct.role.getValue());
         oprot.writeFieldEnd();
       }
+      if (struct.renderer_status_json != null) {
+        oprot.writeFieldBegin(RENDERER_STATUS_JSON_FIELD_DESC);
+        oprot.writeString(struct.renderer_status_json);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -1022,7 +1117,10 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
       if (struct.isSetRole()) {
         optionals.set(7);
       }
-      oprot.writeBitSet(optionals, 8);
+      if (struct.isSetRenderer_status_json()) {
+        optionals.set(8);
+      }
+      oprot.writeBitSet(optionals, 9);
       if (struct.isSetRead_only()) {
         oprot.writeBool(struct.read_only);
       }
@@ -1047,12 +1145,15 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
       if (struct.isSetRole()) {
         oprot.writeI32(struct.role.getValue());
       }
+      if (struct.isSetRenderer_status_json()) {
+        oprot.writeString(struct.renderer_status_json);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TServerStatus struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(8);
+      java.util.BitSet incoming = iprot.readBitSet(9);
       if (incoming.get(0)) {
         struct.read_only = iprot.readBool();
         struct.setRead_onlyIsSet(true);
@@ -1084,6 +1185,10 @@ public class TServerStatus implements org.apache.thrift.TBase<TServerStatus, TSe
       if (incoming.get(7)) {
         struct.role = com.omnisci.thrift.server.TRole.findByValue(iprot.readI32());
         struct.setRoleIsSet(true);
+      }
+      if (incoming.get(8)) {
+        struct.renderer_status_json = iprot.readString();
+        struct.setRenderer_status_jsonIsSet(true);
       }
     }
   }
