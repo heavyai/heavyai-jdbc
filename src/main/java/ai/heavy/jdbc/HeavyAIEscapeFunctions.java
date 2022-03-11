@@ -1,4 +1,4 @@
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import java.lang.reflect.Method;
 import java.sql.SQLException;
@@ -7,7 +7,7 @@ import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-public final class OmniSciEscapeFunctions {
+public final class HeavyAIEscapeFunctions {
   /**
    * storage for functions implementations
    */
@@ -15,7 +15,7 @@ public final class OmniSciEscapeFunctions {
           createFunctionMap("sql");
 
   private static ConcurrentMap<String, Method> createFunctionMap(String prefix) {
-    Method[] methods = OmniSciEscapeFunctions.class.getMethods();
+    Method[] methods = HeavyAIEscapeFunctions.class.getMethods();
     ConcurrentMap<String, Method> functionMap =
             new ConcurrentHashMap<String, Method>(methods.length * 2);
     for (Method method : methods) {

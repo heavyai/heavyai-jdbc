@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import org.slf4j.LoggerFactory;
 
@@ -31,23 +31,24 @@ import java.util.logging.Logger;
  *
  * @author michael
  */
-public class OmniSciDriver implements java.sql.Driver {
+public class HeavyAIDriver implements java.sql.Driver {
   static int DriverMajorVersion = -1;
   static int DriverMinorVersion = -1;
   static String DriverVersion = "UNKNOWN";
   final static String VERSION_FILE = "version.properties";
-  final static org.slf4j.Logger logger = LoggerFactory.getLogger(OmniSciDriver.class);
+  final static org.slf4j.Logger logger = LoggerFactory.getLogger(HeavyAIDriver.class);
   public static final String OMNISCI_PREFIX = "jdbc:omnisci:";
   public static final String MAPD_PREFIX = "jdbc:mapd:";
+  public static final String HEAVYAI_PREFIX = "jdbc:heavyai:";
 
   static {
     try {
-      DriverManager.registerDriver(new OmniSciDriver());
+      DriverManager.registerDriver(new HeavyAIDriver());
     } catch (SQLException e) {
       e.printStackTrace();
     }
 
-    try (InputStream input = OmniSciDriver.class.getClassLoader().getResourceAsStream(
+    try (InputStream input = HeavyAIDriver.class.getClassLoader().getResourceAsStream(
                  VERSION_FILE)) {
       Properties prop = new Properties();
       if (input == null) {
@@ -77,7 +78,7 @@ public class OmniSciDriver implements java.sql.Driver {
     }
 
     url = url.trim();
-    return new OmniSciConnection(url, info);
+    return new HeavyAIConnection(url, info);
   }
 
   @Override
@@ -94,7 +95,8 @@ public class OmniSciDriver implements java.sql.Driver {
   private static boolean isValidURL(String url) {
     return url != null
             && (url.toLowerCase().startsWith(OMNISCI_PREFIX)
-                    || url.toLowerCase().startsWith(MAPD_PREFIX));
+                    || url.toLowerCase().startsWith(MAPD_PREFIX)
+                    || url.toLowerCase().startsWith(HEAVYAI_PREFIX));
   }
 
   @Override

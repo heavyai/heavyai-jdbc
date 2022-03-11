@@ -1,4 +1,4 @@
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Properties;
 
-public class OmniSciDatabaseMetaDataTest {
+public class HeavyAIDatabaseMetaDataTest {
   // Property_loader loads the values from 'connection.properties in resources
   static Properties PROPERTIES = new Property_loader("metadata_test.properties");
 

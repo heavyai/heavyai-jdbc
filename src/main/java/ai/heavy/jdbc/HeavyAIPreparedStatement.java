@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import com.omnisci.thrift.server.OmniSci;
 import com.omnisci.thrift.server.TColumnType;
@@ -59,9 +59,9 @@ import java.util.regex.Pattern;
  *
  * @author michael
  */
-class OmniSciPreparedStatement implements PreparedStatement {
+class HeavyAIPreparedStatement implements PreparedStatement {
   final static Logger HEAVYDBLOGGER =
-          LoggerFactory.getLogger(OmniSciPreparedStatement.class);
+          LoggerFactory.getLogger(HeavyAIPreparedStatement.class);
   public SQLWarning rootWarning = null;
 
   private String currentSQL;
@@ -74,7 +74,7 @@ class OmniSciPreparedStatement implements PreparedStatement {
   private int repCount;
   private String session;
   private OmniSci.Client client;
-  private OmniSciStatement stmt = null;
+  private HeavyAIStatement stmt = null;
   private boolean isInsert = false;
   private boolean isNewBatch = true;
   private boolean[] parmIsString = null;
@@ -89,12 +89,12 @@ class OmniSciPreparedStatement implements PreparedStatement {
                   Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
   private boolean isClosed = false;
 
-  OmniSciPreparedStatement(String sql, String session, OmniSciConnection connection) {
+  HeavyAIPreparedStatement(String sql, String session, HeavyAIConnection connection) {
     HEAVYDBLOGGER.debug("Entered");
     currentSQL = sql;
     this.client = connection.client;
     this.session = session;
-    this.stmt = new OmniSciStatement(session, connection);
+    this.stmt = new HeavyAIStatement(session, connection);
     HEAVYDBLOGGER.debug("Prepared statement is " + currentSQL);
     // TODO in real life this needs to check if the ? is inside quotes before we assume it
     // a parameter
@@ -478,8 +478,8 @@ class OmniSciPreparedStatement implements PreparedStatement {
     }
     PreparedStatement ps = null;
     try {
-      ps = new OmniSciPreparedStatement(
-              currentSQL, session, (OmniSciConnection) getConnection());
+      ps = new HeavyAIPreparedStatement(
+              currentSQL, session, (HeavyAIConnection) getConnection());
       ps.setMaxRows(0);
       for (int i = 1; i <= this.parmCount; ++i) {
         ps.setNull(i, Types.NULL);

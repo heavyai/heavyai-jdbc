@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import com.omnisci.thrift.server.TDatumType;
 import com.omnisci.thrift.server.TQueryResult;
@@ -29,12 +29,12 @@ import java.sql.SQLException;
  *
  * @author michael
  */
-class OmniSciResultSetMetaData implements ResultSetMetaData {
-  final static Logger logger = LoggerFactory.getLogger(OmniSciResultSetMetaData.class);
+class HeavyAIResultSetMetaData implements ResultSetMetaData {
+  final static Logger logger = LoggerFactory.getLogger(HeavyAIResultSetMetaData.class);
   final TQueryResult sqlResult;
   final String sql;
 
-  public OmniSciResultSetMetaData(TQueryResult sqlResult, String sql) {
+  public HeavyAIResultSetMetaData(TQueryResult sqlResult, String sql) {
     this.sqlResult = sqlResult;
     this.sql = sql;
   }
@@ -137,7 +137,7 @@ class OmniSciResultSetMetaData implements ResultSetMetaData {
           throws SQLException { // logger.debug("Entered "+ sql );
     TDatumType type = sqlResult.row_set.row_desc.get(column - 1).col_type.type;
 
-    return OmniSciType.toJava(type);
+    return HeavyAIType.toJava(type);
   }
 
   @Override

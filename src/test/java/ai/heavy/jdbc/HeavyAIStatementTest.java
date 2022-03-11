@@ -1,4 +1,4 @@
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import static org.junit.Assert.*;
 
@@ -17,7 +17,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 import java.util.function.Supplier;
 
-public class OmniSciStatementTest {
+public class HeavyAIStatementTest {
   static Properties PROPERTIES = new Property_loader("connection.properties");
   static final String url = PROPERTIES.getProperty("default_db_connection_url");
   static final String user = PROPERTIES.getProperty("default_super_user");

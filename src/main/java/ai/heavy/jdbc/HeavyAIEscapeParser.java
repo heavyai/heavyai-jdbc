@@ -1,4 +1,4 @@
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class OmniSciEscapeParser {
+public class HeavyAIEscapeParser {
   private static final char[] QUOTE_OR_ALPHABETIC_MARKER = {'\"', '0'};
   // private static final char[] QUOTE_OR_ALPHABETIC_MARKER_OR_PARENTHESIS = {'\"', '0',
   // '('};
@@ -71,7 +71,7 @@ public class OmniSciEscapeParser {
           }
         } else if (this == EscapeFunctions.ESC_FUNCTION) {
           String fn_name = matcher.group(1);
-          Method method = OmniSciEscapeFunctions.getFunction(fn_name);
+          Method method = HeavyAIEscapeFunctions.getFunction(fn_name);
           matcher = argPattern.matcher(sql);
           if (matcher.find()) {
             if (method == null) {

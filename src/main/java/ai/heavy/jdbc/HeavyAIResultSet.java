@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import com.omnisci.thrift.server.TColumnType;
 import com.omnisci.thrift.server.TDatumType;
@@ -42,8 +42,8 @@ import java.util.Map;
 // Throwable().getStackTrace()[0].getLineNumber() + " class:" + new
 // Throwable().getStackTrace()[0].getClassName() + " method:" + new
 // Throwable().getStackTrace()[0].getMethodName());
-class OmniSciResultSet implements java.sql.ResultSet {
-  final static Logger logger = LoggerFactory.getLogger(OmniSciResultSet.class);
+class HeavyAIResultSet implements java.sql.ResultSet {
+  final static Logger logger = LoggerFactory.getLogger(HeavyAIResultSet.class);
   private TQueryResult sqlResult = null;
   private int offset = -1;
   private int numOfRecords = 0;
@@ -56,7 +56,7 @@ class OmniSciResultSet implements java.sql.ResultSet {
   private SQLWarning warnings = null;
   private boolean isClosed = false;
 
-  public OmniSciResultSet(TQueryResult tsqlResult, String sql)
+  public HeavyAIResultSet(TQueryResult tsqlResult, String sql)
           throws SQLException { // logger.debug("Entered "+ sql );
     sqlResult = tsqlResult;
     offset = -1;
@@ -88,7 +88,7 @@ class OmniSciResultSet implements java.sql.ResultSet {
     // logger.debug("Record is "+ sqlResult.toString());
   }
 
-  OmniSciResultSet() {
+  HeavyAIResultSet() {
     numOfRecords = 0;
   }
 
@@ -540,7 +540,7 @@ class OmniSciResultSet implements java.sql.ResultSet {
   public ResultSetMetaData getMetaData()
           throws SQLException { // logger.debug("Entered "+ sql );
     checkClosed();
-    return new OmniSciResultSetMetaData(sqlResult, sql);
+    return new HeavyAIResultSetMetaData(sqlResult, sql);
   }
 
   @Override
@@ -1367,7 +1367,7 @@ class OmniSciResultSet implements java.sql.ResultSet {
         }
       }
 
-      return new OmniSciArray(rowDesc.get(columnIndex - 1).col_type.type, elements);
+      return new HeavyAIArray(rowDesc.get(columnIndex - 1).col_type.type, elements);
     }
   }
 

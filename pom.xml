@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.omnisci</groupId>
-  <artifactId>omnisci-jdbc</artifactId>
+  <groupId>ai.heavy</groupId>
+  <artifactId>heavyai-jdbc</artifactId>
   <version>5.10.0</version>
-  <name>OmniSci JDBC Driver</name>
-  <description>Java JDBC driver for OmniSciDB</description>
-  <url>https://github.com/omnisci/omnisci-jdbc</url>
+  <name>HeavyAI JDBC Driver</name>
+  <description>Java JDBC driver for HeavyAI</description>
+  <url>https://github.com/heavyai/heavyai-jdbc</url>
   <packaging>jar</packaging>
 
   <licenses>
@@ -19,9 +19,9 @@
   </licenses>
 
   <scm>
-    <url>https://github.com/omnisci/omnisci-jdbc</url>
-    <connection>scm:git:git@github.com:omnisci/omnisci-jdbc.git</connection>
-    <developerConnection>scm:git:git@github.com:omnisci/omnisci-jdbc.git</developerConnection>
+    <url>https://github.com/heavyai/heavyai-jdbc</url>
+    <connection>scm:git:git@github.com:heavyai/heavyai-jdbc.git</connection>
+    <developerConnection>scm:git:git@github.com:heavyai/heavyai-jdbc.git</developerConnection>
   </scm>
 
   <developers>

@@ -1,8 +1,7 @@
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import static org.junit.Assert.*;
 
-import org.apache.thrift.transport.TTransportException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -13,9 +12,7 @@ import java.sql.*;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import javax.net.ssl.SSLPeerUnverifiedException;
-
-public class OmniSciConnectionTest {
+public class HeavyAIConnectionTest {
   // Property_loader loads the values from 'connection.properties in resources
   static Properties PROPERTIES = new Property_loader("connection_test.properties");
   static final String user = PROPERTIES.getProperty("default_super_user");
@@ -162,7 +159,7 @@ public class OmniSciConnectionTest {
       Connection conn = DriverManager.getConnection(url, pt);
     } catch (SQLException sq) {
       assertEquals(sq.getMessage(),
-              "No suitable driver found for jdbc:NOT_omnisci:localhost:6274:heavyai");
+              "No suitable driver found for jdbc:NOT_heavyai:localhost:6274:heavyai");
       return;
     }
     String err = "Connection should have thrown";

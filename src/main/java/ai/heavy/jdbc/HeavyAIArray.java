@@ -1,4 +1,4 @@
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import static java.lang.Math.toIntExact;
 
@@ -11,11 +11,11 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
 
-public class OmniSciArray implements java.sql.Array {
+public class HeavyAIArray implements java.sql.Array {
   private TDatumType type;
   private Object[] elements;
 
-  public OmniSciArray(TDatumType type, Object[] elements) throws SQLException {
+  public HeavyAIArray(TDatumType type, Object[] elements) throws SQLException {
     if (elements == null) {
       throw new SQLException("Elements[] cannot be null");
     }
@@ -75,7 +75,7 @@ public class OmniSciArray implements java.sql.Array {
 
   @Override
   public int getBaseType() throws SQLException {
-    return OmniSciType.toJava(type);
+    return HeavyAIType.toJava(type);
   }
 
   @Override
@@ -197,7 +197,7 @@ public class OmniSciArray implements java.sql.Array {
     columns.add(new TColumn(valuesData, valueNulls));
     TRowSet rowSet = new TRowSet(columnTypes, null, columns, true);
     TQueryResult result = new TQueryResult(rowSet, 0, 0, "", "", true, TQueryType.READ);
-    return new OmniSciResultSet(result, "");
+    return new HeavyAIResultSet(result, "");
   }
 
   @Override

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import com.omnisci.thrift.server.TColumn;
 import com.omnisci.thrift.server.TColumnData;
@@ -44,16 +44,16 @@ import java.util.*;
  *
  * @author michael
  */
-class OmniSciDatabaseMetaData implements DatabaseMetaData {
+class HeavyAIDatabaseMetaData implements DatabaseMetaData {
   final static Logger HEAVYDBLOGGER =
-          LoggerFactory.getLogger(OmniSciDatabaseMetaData.class);
+          LoggerFactory.getLogger(HeavyAIDatabaseMetaData.class);
 
-  OmniSciConnection con = null;
+  HeavyAIConnection con = null;
   int databaseMajorVersion = 0;
   int databaseMinorVersion = 0;
   String databaseVersion = null;
 
-  public OmniSciDatabaseMetaData(OmniSciConnection connection) throws SQLException {
+  public HeavyAIDatabaseMetaData(HeavyAIConnection connection) throws SQLException {
     this.con = connection;
 
     try {
@@ -147,17 +147,17 @@ class OmniSciDatabaseMetaData implements DatabaseMetaData {
   @Override
   public String getDriverVersion() throws SQLException { // logger.debug("Entered");
     HEAVYDBLOGGER.debug("Entered");
-    return OmniSciDriver.DriverVersion;
+    return HeavyAIDriver.DriverVersion;
   }
 
   @Override
   public int getDriverMajorVersion() {
-    return OmniSciDriver.DriverMajorVersion;
+    return HeavyAIDriver.DriverMajorVersion;
   }
 
   @Override
   public int getDriverMinorVersion() {
-    return OmniSciDriver.DriverMinorVersion;
+    return HeavyAIDriver.DriverMinorVersion;
   }
 
   @Override
@@ -933,7 +933,7 @@ SQLException - if a database access error occurs
     TQueryResult result = new TQueryResult(
             rowSet, 0, 0, null, null, true, com.omnisci.thrift.server.TQueryType.UNKNOWN);
 
-    OmniSciResultSet tab = new OmniSciResultSet(result, "GetTables");
+    HeavyAIResultSet tab = new HeavyAIResultSet(result, "GetTables");
     return tab;
   }
 
@@ -997,7 +997,7 @@ SQLException - if a database access error occurs
     TQueryResult result = new TQueryResult(
             rowSet, 0, 0, null, null, true, com.omnisci.thrift.server.TQueryType.UNKNOWN);
 
-    OmniSciResultSet schemas = new OmniSciResultSet(result, "getSchemas");
+    HeavyAIResultSet schemas = new HeavyAIResultSet(result, "getSchemas");
     return schemas;
   }
 
@@ -1015,14 +1015,14 @@ SQLException - if a database access error occurs
             new TTypeInfo(TDatumType.STR, TEncodingType.NONE, false, false, 0, 0, 0);
     TColumnType columns[] = {createTColumnType("TABLE_TYPE", new TTypeInfo(strTTI))};
 
-    Map<String, OmniSciData> dataMap = new HashMap(columns.length);
+    Map<String, HeavyAIData> dataMap = new HashMap(columns.length);
 
     // create component to contain the meta data for the rows
     // and create  a container to store the data and the nul indicators
     List<TColumnType> rowDesc = new ArrayList(columns.length);
     for (TColumnType col : columns) {
       rowDesc.add(col);
-      dataMap.put(col.col_name, new OmniSciData(col.col_type.type));
+      dataMap.put(col.col_name, new HeavyAIData(col.col_type.type));
     }
 
     // Now add some actual details for table name
@@ -1042,7 +1042,7 @@ SQLException - if a database access error occurs
     TQueryResult result = new TQueryResult(
             rowSet, 0, 0, null, null, true, com.omnisci.thrift.server.TQueryType.UNKNOWN);
 
-    OmniSciResultSet tab = new OmniSciResultSet(result, "getTableTypes");
+    HeavyAIResultSet tab = new HeavyAIResultSet(result, "getTableTypes");
 
     // logger.info("Dump result "+ result.toString());
     return tab;
@@ -1151,14 +1151,14 @@ each row is a column description Throws: SQLException - if a database access err
             createTColumnType("IS_AUTOINCREMENT", new TTypeInfo(strTTI)),
             createTColumnType("IS_GENERATEDCOLUMN", new TTypeInfo(strTTI))};
 
-    Map<String, OmniSciData> dataMap = new HashMap(columns.length);
+    Map<String, HeavyAIData> dataMap = new HashMap(columns.length);
 
     // create component to contain the meta data for the rows
     // and create  a container to store the data and the nul indicators
     List<TColumnType> rowDesc = new ArrayList(columns.length);
     for (TColumnType col : columns) {
       rowDesc.add(col);
-      dataMap.put(col.col_name, new OmniSciData(col.col_type.type));
+      dataMap.put(col.col_name, new HeavyAIData(col.col_type.type));
     }
 
     // Now add some actual details for table name
@@ -1190,7 +1190,7 @@ each row is a column description Throws: SQLException - if a database access err
             dataMap.get("TABLE_SCHEM").setNull(true);
             dataMap.get("TABLE_NAME").add(tableName);
             dataMap.get("COLUMN_NAME").add(value.col_name);
-            dataMap.get("DATA_TYPE").add(OmniSciType.toJava(value.col_type.type));
+            dataMap.get("DATA_TYPE").add(HeavyAIType.toJava(value.col_type.type));
             dataMap.get("TYPE_NAME")
                     .add((value.col_type.type.name()
                             + (value.col_type.is_array ? "[]" : "")));
@@ -1219,7 +1219,7 @@ each row is a column description Throws: SQLException - if a database access err
             dataMap.get("SCOPE_CATALOG").setNull(true);
             dataMap.get("SCOPE_SCHEMA").setNull(true);
             dataMap.get("SCOPE_TABLE").setNull(true);
-            dataMap.get("SOURCE_DATA_TYPE").add(OmniSciType.toJava(value.col_type.type));
+            dataMap.get("SOURCE_DATA_TYPE").add(HeavyAIType.toJava(value.col_type.type));
             dataMap.get("IS_AUTOINCREMENT").add("NO");
             dataMap.get("IS_GENERATEDCOLUMN").add("NO");
           }
@@ -1241,7 +1241,7 @@ each row is a column description Throws: SQLException - if a database access err
     TQueryResult result = new TQueryResult(
             rowSet, 0, 0, null, null, true, com.omnisci.thrift.server.TQueryType.UNKNOWN);
 
-    OmniSciResultSet cols = new OmniSciResultSet(result, "getColumns");
+    HeavyAIResultSet cols = new HeavyAIResultSet(result, "getColumns");
     return cols;
   }
 
@@ -1257,17 +1257,17 @@ each row is a column description Throws: SQLException - if a database access err
   }
 
   public ResultSet getEmptyResultSet() {
-    return new OmniSciResultSet();
+    return new HeavyAIResultSet();
   }
 
   // this method is needed to build an empty resultset with columns names and datatypes
   public ResultSet getEmptyResultSetWithDesc(TColumnType columns[])
           throws SQLException { // for compatibility and future
-    Map<String, OmniSciData> dataMap = new HashMap(columns.length);
+    Map<String, HeavyAIData> dataMap = new HashMap(columns.length);
     List<TColumnType> rowDesc = new ArrayList(columns.length);
     for (TColumnType col : columns) {
       rowDesc.add(col);
-      dataMap.put(col.col_name, new OmniSciData(col.col_type.type));
+      dataMap.put(col.col_name, new HeavyAIData(col.col_type.type));
     }
     List<TColumn> columnsList = new ArrayList(columns.length);
     for (TColumnType col : columns) {
@@ -1277,12 +1277,12 @@ each row is a column description Throws: SQLException - if a database access err
     TRowSet rowSet = new TRowSet(rowDesc, null, columnsList, true);
     TQueryResult result = new TQueryResult(
             rowSet, 0, 0, null, null, true, com.omnisci.thrift.server.TQueryType.UNKNOWN);
-    OmniSciResultSet cols = new OmniSciResultSet(result, "getColumns");
+    HeavyAIResultSet cols = new HeavyAIResultSet(result, "getColumns");
     return cols;
   }
 
   private void tablePermProcess(
-          List<String> tables, Map<String, OmniSciData> dataMap, String tableNamePattern)
+          List<String> tables, Map<String, HeavyAIData> dataMap, String tableNamePattern)
           throws TException {
     for (String table : tables) {
       if (tableNamePattern != null && !table.matches(tableNamePattern)) {
@@ -1353,15 +1353,15 @@ each row is a column description Throws: SQLException - if a database access err
             new TTypeInfo(TDatumType.STR, TEncodingType.NONE, false, false, 0, 0, 0);
     final TDatumType datumType = strTTI.type;
 
-    Map<String, OmniSciData> dataMap = new HashMap() {
+    Map<String, HeavyAIData> dataMap = new HashMap() {
       {
-        put("TABLE_CAT", new OmniSciData(datumType));
-        put("TABLE_SCHEM", new OmniSciData(datumType));
-        put("TABLE_NAME", new OmniSciData(datumType));
-        put("GRANTOR", new OmniSciData(datumType));
-        put("GRANTEE", new OmniSciData(datumType));
-        put("PRIVILEGE", new OmniSciData(datumType));
-        put("IS_GRANTABLE", new OmniSciData(datumType));
+        put("TABLE_CAT", new HeavyAIData(datumType));
+        put("TABLE_SCHEM", new HeavyAIData(datumType));
+        put("TABLE_NAME", new HeavyAIData(datumType));
+        put("GRANTOR", new HeavyAIData(datumType));
+        put("GRANTEE", new HeavyAIData(datumType));
+        put("PRIVILEGE", new HeavyAIData(datumType));
+        put("IS_GRANTABLE", new HeavyAIData(datumType));
       }
     };
 
@@ -1380,7 +1380,7 @@ each row is a column description Throws: SQLException - if a database access err
     List<TColumnType> rowDesc = new ArrayList(dataMap.size());
     List<TColumn> columnsList = new ArrayList(dataMap.size());
 
-    for (Map.Entry<String, OmniSciData> pair : dataMap.entrySet()) {
+    for (Map.Entry<String, HeavyAIData> pair : dataMap.entrySet()) {
       columnsList.add(pair.getValue().getTColumn());
       rowDesc.add(createTColumnType(pair.getKey(), new TTypeInfo(strTTI)));
     }
@@ -1391,7 +1391,7 @@ each row is a column description Throws: SQLException - if a database access err
     TQueryResult result = new TQueryResult(
             rowSet, 0, 0, null, null, true, com.omnisci.thrift.server.TQueryType.UNKNOWN);
 
-    OmniSciResultSet cols = new OmniSciResultSet(result, "getPrivileges");
+    HeavyAIResultSet cols = new HeavyAIResultSet(result, "getPrivileges");
     return cols;
   }
 
@@ -1592,14 +1592,14 @@ SQLException - if a database access error occurs
             createTColumnType("SQL_DATETIME_SUB", new TTypeInfo(intTTI)),
             createTColumnType("NUM_PREC_RADIX", new TTypeInfo(intTTI))};
 
-    Map<String, OmniSciData> dataMap = new HashMap(columns.length);
+    Map<String, HeavyAIData> dataMap = new HashMap(columns.length);
 
     // create component to contain the meta data for the rows
     // and create  a container to store the data and the nul indicators
     List<TColumnType> rowDesc = new ArrayList(columns.length);
     for (TColumnType col : columns) {
       rowDesc.add(col);
-      dataMap.put(col.col_name, new OmniSciData(col.col_type.type));
+      dataMap.put(col.col_name, new HeavyAIData(col.col_type.type));
     }
     // TODO this is currently a work in progress need to add actual details here
     // Now add some actual details for table name
@@ -1650,7 +1650,7 @@ SQLException - if a database access error occurs
     TQueryResult result = new TQueryResult(
             rowSet, 0, 0, null, null, true, com.omnisci.thrift.server.TQueryType.UNKNOWN);
 
-    OmniSciResultSet cols = new OmniSciResultSet(result, "getTypeInfo");
+    HeavyAIResultSet cols = new HeavyAIResultSet(result, "getTypeInfo");
     return cols;
   }
 

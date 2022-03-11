@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import com.mapd.common.SockTransportProperties;
 import com.omnisci.thrift.server.OmniSci;
@@ -96,7 +96,7 @@ class KeyLoader {
       s_struct.cert = getX509(cert);
       s_struct.key = keystore.getKey(alias, password.toCharArray());
     } catch (Exception eX) {
-      OmniSciConnection.logger.error(eX.getMessage());
+      HeavyAIConnection.logger.error(eX.getMessage());
       throw eX;
     }
     return s_struct;
@@ -137,8 +137,8 @@ class Options {
           max_rows};
 }
 
-public class OmniSciConnection implements java.sql.Connection, Cloneable {
-  final static Logger logger = LoggerFactory.getLogger(OmniSciConnection.class);
+public class HeavyAIConnection implements java.sql.Connection, Cloneable {
+  final static Logger logger = LoggerFactory.getLogger(HeavyAIConnection.class);
 
   Set<String> protocol_set = new HashSet<String>(
           Arrays.asList("binary", "binary_tls", "http", "https", "https_insecure"));
@@ -150,7 +150,7 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
     // 3. via a Properties param
     //
     // Example url. Note the first two fields are constants and must be present. '
-    // jdbc:omnisci:localhost:4247:db_name?max_rows=2000&protocol=binary
+    // jdbc:heavyai:localhost:4247:db_name?max_rows=2000&protocol=binary
     //
     // Priority is given to the URL data, followed by the query fragment data and
     // lastly the Properties information
@@ -163,12 +163,12 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
     //
     // Note the class java.sql.DriverManager expects the URL to contain three components
     // the literal string JDBC a 'subprotocol' followed by a 'subname', as in
-    // 'jdbc:omnisci:localhost' For this reason host mame must be supplied in the  main
+    // 'jdbc:heavyao:localhost' For this reason host mame must be supplied in the  main
     // part of the URL and should not be supplied in the query portion.
 
     private String extract_and_remove_query_components(
             String connection_url, Properties query_props) throws SQLException {
-      // The omnisci version of the connection_url is a ':' separated list
+      // The heavy.ai version of the connection_url is a ':' separated list
       // with an optional 'query component' at the end (see example above).
       // The query component starts with the first '?' in the string.
       // Its is made up of key=value pairs separated by the '&' character.
@@ -198,7 +198,7 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
             throws SQLException {
       connection_url = extract_and_remove_query_components(connection_url, this);
       String[] url_values = connection_url.split(":");
-      // add 2 for the default jdbc:omnisci at the start of the url.
+      // add 2 for the default jdbc:heavy.ai at the start of the url.
       if (url_values.length > Options.option_order.length + 2) {
         // would be nice to print the url at this stage, but the user may have added their
         // password into the list.
@@ -207,7 +207,8 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
                 + (Options.option_order.length + 2) + "]");
       }
       for (int i = 2; i < url_values.length; i++) {
-        // the offest of 2 is caused by the 2 lables 'jdbc:omnsci' at the start if the URL
+        // the offest of 2 is caused by the 2 lables 'jdbc:heavyai' at the start if the
+        // URL
         String existingValue = getProperty(Options.option_order[i - 2]);
         if (existingValue != null && !existingValue.equals((url_values[i]))) {
           logger.warn("Connection property [" + Options.option_order[i - 2]
@@ -330,17 +331,17 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
   protected String url;
   protected Connection_properties cP = null;
 
-  public OmniSciConnection getAlternateConnection() throws SQLException {
+  public HeavyAIConnection getAlternateConnection() throws SQLException {
     // Clones the orignal java connection object, and then reconnects
     // at the thrift layer - doesn't re-authenticate at the application
     // level.  Instead reuses the orignal connections session number.
     logger.debug("OmniSciConnection clone");
-    OmniSciConnection omniSciConnection = null;
+    HeavyAIConnection omniSciConnection = null;
     try {
-      omniSciConnection = (OmniSciConnection) super.clone();
+      omniSciConnection = (HeavyAIConnection) super.clone();
     } catch (CloneNotSupportedException eE) {
       throw new SQLException(
-              "Error cloning connection [" + OmniSciExceptionText.getExceptionDetail(eE),
+              "Error cloning connection [" + HeavyAIExceptionText.getExceptionDetail(eE),
               eE);
     }
     // Now over write the old connection.
@@ -349,7 +350,7 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
       omniSciConnection.client = new OmniSci.Client(protocol);
     } catch (java.lang.Exception jE) {
       throw new SQLException("Error creating new connection "
-                      + OmniSciExceptionText.getExceptionDetail(jE),
+                      + HeavyAIExceptionText.getExceptionDetail(jE),
               jE);
     }
     return omniSciConnection;
@@ -443,7 +444,7 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
     }
   }
 
-  public OmniSciConnection(String url, Properties base_properties) throws SQLException {
+  public HeavyAIConnection(String url, Properties base_properties) throws SQLException {
     this.url = url;
     this.cP = new Connection_properties(url, base_properties);
     try {
@@ -453,30 +454,30 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
       catalog = (String) this.cP.getProperty(Options.db_name);
     } catch (TTransportException ex) {
       throw new SQLException("Thrift transport connection failed - "
-                      + OmniSciExceptionText.getExceptionDetail(ex),
+                      + HeavyAIExceptionText.getExceptionDetail(ex),
               ex);
     } catch (TDBException ex) {
       throw new SQLException("Omnisci connection failed - "
-                      + OmniSciExceptionText.getExceptionDetail(ex),
+                      + HeavyAIExceptionText.getExceptionDetail(ex),
               ex);
     } catch (TException ex) {
       throw new SQLException(
-              "Thrift failed - " + OmniSciExceptionText.getExceptionDetail(ex), ex);
+              "Thrift failed - " + HeavyAIExceptionText.getExceptionDetail(ex), ex);
     } catch (java.lang.Exception ex) {
       throw new SQLException(
-              "Connection failed - " + OmniSciExceptionText.getExceptionDetail(ex), ex);
+              "Connection failed - " + HeavyAIExceptionText.getExceptionDetail(ex), ex);
     }
   }
 
   @Override
   public Statement createStatement() throws SQLException { // logger.debug("Entered");
-    return new OmniSciStatement(session, this);
+    return new HeavyAIStatement(session, this);
   }
 
   @Override
   public PreparedStatement prepareStatement(String sql)
           throws SQLException { // logger.debug("Entered");
-    return new OmniSciPreparedStatement(sql, session, this);
+    return new HeavyAIPreparedStatement(sql, session, this);
   }
 
   @Override
@@ -551,7 +552,7 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
 
   @Override
   public DatabaseMetaData getMetaData() throws SQLException { // logger.debug("Entered");
-    DatabaseMetaData mapDMetaData = new OmniSciDatabaseMetaData(this);
+    DatabaseMetaData mapDMetaData = new HeavyAIDatabaseMetaData(this);
 
     return mapDMetaData;
   }
@@ -617,14 +618,14 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
   @Override
   public Statement createStatement(int resultSetType, int resultSetConcurrency)
           throws SQLException { // logger.debug("Entered");
-    return new OmniSciStatement(session, this);
+    return new HeavyAIStatement(session, this);
   }
 
   @Override
   public PreparedStatement prepareStatement(
           String sql, int resultSetType, int resultSetConcurrency)
           throws SQLException { // logger.debug("Entered");
-    return new OmniSciPreparedStatement(sql, session, this);
+    return new HeavyAIPreparedStatement(sql, session, this);
   }
 
   @Override
@@ -854,7 +855,7 @@ public class OmniSciConnection implements java.sql.Connection, Cloneable {
     } catch (IllegalArgumentException ex) {
       throw new SQLException("No matching omnisci type for " + typeName);
     }
-    return new OmniSciArray(type, elements);
+    return new HeavyAIArray(type, elements);
   }
 
   @Override

@@ -1,4 +1,4 @@
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.sql.*;
 import java.util.Properties;
 
-public class OmniSciGeomTest {
+public class HeavyAIGeomTest {
   static Properties PROPERTIES = new Property_loader("connection.properties");
   static final String url = PROPERTIES.getProperty("default_db_connection_url");
   static final String user = PROPERTIES.getProperty("default_super_user");

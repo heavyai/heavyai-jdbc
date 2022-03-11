@@ -1,4 +1,4 @@
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -6,12 +6,9 @@ import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 import java.sql.*;
-import java.util.HashMap;
 import java.util.Properties;
 
-import javax.xml.transform.Result;
-
-public class OmniSciColumnTypeTest {
+public class HeavyAIColumnTypeTest {
   static Properties PROPERTIES = new Property_loader("type_test.properties");
   static final String url = PROPERTIES.getProperty("default_db_connection_url");
   static final String user = PROPERTIES.getProperty("default_super_user");

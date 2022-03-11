@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import com.omnisci.thrift.server.TDatumType;
 
@@ -23,7 +23,7 @@ import java.sql.DatabaseMetaData;
  *
  * @author michael
  */
-class OmniSciType {
+class HeavyAIType {
   protected String typeName; // String => Type name
   protected int dataType; // int => SQL data type from java.sql.Types
   protected int precision; // int => maximum precision

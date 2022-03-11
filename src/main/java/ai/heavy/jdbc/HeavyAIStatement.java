@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import com.omnisci.thrift.server.OmniSci;
 import com.omnisci.thrift.server.TDBException;
 import com.omnisci.thrift.server.TQueryResult;
 
 import org.apache.thrift.TException;
-import org.apache.thrift.transport.TTransportException;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
@@ -34,20 +33,20 @@ import java.util.regex.Pattern;
  *
  * @author michael
  */
-public class OmniSciStatement implements java.sql.Statement {
-  final static org.slf4j.Logger logger = LoggerFactory.getLogger(OmniSciStatement.class);
+public class HeavyAIStatement implements java.sql.Statement {
+  final static org.slf4j.Logger logger = LoggerFactory.getLogger(HeavyAIStatement.class);
   public SQLWarning rootWarning = null;
 
   private String session;
   private OmniSci.Client client;
-  private OmniSciConnection connection;
+  private HeavyAIConnection connection;
   private ResultSet currentRS = null;
   private TQueryResult sqlResult = null;
   private int maxRows; // add limit to unlimited queries
   private boolean escapeProcessing = false;
   private boolean isClosed = false;
 
-  OmniSciStatement(String tsession, OmniSciConnection tconnection) {
+  HeavyAIStatement(String tsession, HeavyAIConnection tconnection) {
     session = tsession;
     connection = tconnection;
     client = connection.client;
@@ -90,38 +89,38 @@ public class OmniSciStatement implements java.sql.Statement {
     logger.debug("Before OmniSciEscapeParser [" + sql + "]");
     // The order of these to SQL re-writes is important.
     // EscapeParse needs to come first.
-    String afterEscapeParseSQL = OmniSciEscapeParser.parse(sql);
+    String afterEscapeParseSQL = HeavyAIEscapeParser.parse(sql);
     String afterSimpleParse = simplisticDateTransform(afterEscapeParseSQL);
     logger.debug("After OmniSciEscapeParser [" + afterSimpleParse + "]");
     try {
       sqlResult = client.sql_execute(session, afterSimpleParse + ";", true, null, -1, -1);
     } catch (TDBException ex) {
       throw new SQLException(
-              "Query failed : " + OmniSciExceptionText.getExceptionDetail(ex));
+              "Query failed : " + HeavyAIExceptionText.getExceptionDetail(ex));
     } catch (TException ex) {
       throw new SQLException(
-              "Query failed : " + OmniSciExceptionText.getExceptionDetail(ex));
+              "Query failed : " + HeavyAIExceptionText.getExceptionDetail(ex));
     }
 
-    currentRS = new OmniSciResultSet(sqlResult, sql);
+    currentRS = new HeavyAIResultSet(sqlResult, sql);
     return currentRS;
   }
 
   @Override
   public void cancel() throws SQLException { // logger.debug("Entered");
     checkClosed();
-    OmniSciConnection alternate_connection = null;
+    HeavyAIConnection alternate_connection = null;
     try {
       alternate_connection = connection.getAlternateConnection();
       // Note alternate_connection shares a session with original connection
       alternate_connection.client.interrupt(session, session);
     } catch (TDBException ttE) {
       throw new SQLException("Thrift transport connection failed - "
-                      + OmniSciExceptionText.getExceptionDetail(ttE),
+                      + HeavyAIExceptionText.getExceptionDetail(ttE),
               ttE);
     } catch (TException tE) {
       throw new SQLException(
-              "Thrift failed - " + OmniSciExceptionText.getExceptionDetail(tE), tE);
+              "Thrift failed - " + HeavyAIExceptionText.getExceptionDetail(tE), tE);
     } finally {
       // Note closeConnection only closes the underlying thrft connection
       // not the logical db session connection
@@ -140,11 +139,11 @@ public class OmniSciStatement implements java.sql.Statement {
       sqlResult = client.sql_execute(session, sql + ";", true, null, -1, -1);
     } catch (TDBException ex) {
       throw new SQLException("Query failed :  sql was '" + sql + "' "
-                      + OmniSciExceptionText.getExceptionDetail(ex),
+                      + HeavyAIExceptionText.getExceptionDetail(ex),
               ex);
     } catch (TException ex) {
       throw new SQLException(
-              "Query failed : " + OmniSciExceptionText.getExceptionDetail(ex), ex);
+              "Query failed : " + HeavyAIExceptionText.getExceptionDetail(ex), ex);
     }
 
     // TODO: OmniSciDB supports updates, inserts and deletes, but

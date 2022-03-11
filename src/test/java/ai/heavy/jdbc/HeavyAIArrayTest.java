@@ -1,4 +1,4 @@
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
@@ -15,7 +15,7 @@ import java.util.TimeZone;
 // Create Array and validate
 // Insert arrays and validate it is the same
 
-public class OmniSciArrayTest {
+public class HeavyAIArrayTest {
   static Properties PROPERTIES = new Property_loader("prepare_test.properties");
   static final String url = PROPERTIES.getProperty("default_db_connection_url");
   static final String user = PROPERTIES.getProperty("default_super_user");

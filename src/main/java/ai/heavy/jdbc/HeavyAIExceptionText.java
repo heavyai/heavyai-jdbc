@@ -1,6 +1,6 @@
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
-public class OmniSciExceptionText {
+public class HeavyAIExceptionText {
   static String getExceptionDetail(Exception ex) {
     if (ex.getStackTrace().length < 1) {
       return "Error in stack trace processing";

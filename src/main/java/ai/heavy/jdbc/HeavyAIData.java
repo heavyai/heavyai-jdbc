@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import com.omnisci.thrift.server.TColumn;
 import com.omnisci.thrift.server.TColumnData;
@@ -26,13 +26,13 @@ import org.slf4j.LoggerFactory;
  *
  * @author michael
  */
-class OmniSciData {
-  final static Logger logger = LoggerFactory.getLogger(OmniSciData.class);
+class HeavyAIData {
+  final static Logger logger = LoggerFactory.getLogger(HeavyAIData.class);
   private TDatumType colType;
 
   TColumn tcolumn;
 
-  OmniSciData(TDatumType col_type) {
+  HeavyAIData(TDatumType col_type) {
     tcolumn = new TColumn();
     colType = col_type;
     tcolumn.data = new TColumnData();
