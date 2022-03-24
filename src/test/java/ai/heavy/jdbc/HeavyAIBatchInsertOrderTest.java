@@ -1,4 +1,4 @@
-package com.omnisci.jdbc;
+package ai.heavy.jdbc;
 
 import static org.junit.Assert.*;
 
@@ -32,9 +32,9 @@ import org.slf4j.LoggerFactory;
  * 
  * 
  */
-public class OmniSciBatchInsertOrderTest {
+public class HeavyAIBatchInsertOrderTest {
 
-  private static final Logger log = LoggerFactory.getLogger(OmniSciBatchInsertOrderTest.class);
+  private static final Logger log = LoggerFactory.getLogger(HeavyAIBatchInsertOrderTest.class);
   
   static Properties PROPERTIES = new Property_loader("connection.properties");
   static final String url = PROPERTIES.getProperty("default_db_connection_url");
@@ -119,7 +119,7 @@ public class OmniSciBatchInsertOrderTest {
   
   private Connection getConnection() throws SQLException {
     try {
-      Class.forName("com.omnisci.jdbc.OmniSciDriver");
+      Class.forName("ai.heavy.jdbc.HeavyAIDriver");
     } catch(ClassNotFoundException e) {
       throw new RuntimeException("Cannot load JDBC driver class", e);
     }
