@@ -6,6 +6,16 @@
 <dependency>
   <groupId>ai.heavy</groupId>
   <artifactId>heavyai-jdbc</artifactId>
+  <version>6.0.0</version>
+</dependency>
+```
+
+### Before 6.0.0
+
+```xml
+<dependency>
+  <groupId>com.omnisci</groupId>
+  <artifactId>omnisci-jdbc</artifactId>
   <version>4.8.0</version>
 </dependency>
 ```
@@ -14,7 +24,7 @@
 
 ```xml
 <dependency>
-  <groupId>ai.heavy</groupId>
+  <groupId>com.omnisci</groupId>
   <artifactId>jdbc</artifactId>
   <version>4.7.0</version>
 </dependency>
