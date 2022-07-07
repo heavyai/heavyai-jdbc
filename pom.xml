@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ai.heavy</groupId>
   <artifactId>heavyai-jdbc</artifactId>
-  <version>6.0.0</version>
+  <version>6.1.0</version>
   <name>HeavyAI JDBC Driver</name>
   <description>Java JDBC driver for HeavyAI</description>
   <url>https://github.com/heavyai/heavyai-jdbc</url>
