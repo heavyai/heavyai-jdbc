@@ -27,7 +27,8 @@ public enum TDatumType implements org.apache.thrift.TEnum {
   MULTIPOLYGON(16),
   TINYINT(17),
   GEOMETRY(18),
-  GEOGRAPHY(19);
+  GEOGRAPHY(19),
+  MULTILINESTRING(20);
 
   private final int value;
 
@@ -89,6 +90,8 @@ public enum TDatumType implements org.apache.thrift.TEnum {
         return GEOMETRY;
       case 19:
         return GEOGRAPHY;
+      case 20:
+        return MULTILINESTRING;
       default:
         return null;
     }

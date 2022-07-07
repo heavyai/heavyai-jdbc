@@ -13,6 +13,7 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
   private static final org.apache.thrift.protocol.TField IS_VIEW_OPTIMIZE_FIELD_DESC = new org.apache.thrift.protocol.TField("is_view_optimize", org.apache.thrift.protocol.TType.BOOL, (short)1);
   private static final org.apache.thrift.protocol.TField ENABLE_WATCHDOG_FIELD_DESC = new org.apache.thrift.protocol.TField("enable_watchdog", org.apache.thrift.protocol.TType.BOOL, (short)2);
   private static final org.apache.thrift.protocol.TField FILTER_PUSH_DOWN_INFO_FIELD_DESC = new org.apache.thrift.protocol.TField("filter_push_down_info", org.apache.thrift.protocol.TType.LIST, (short)3);
+  private static final org.apache.thrift.protocol.TField DISTRIBUTED_MODE_FIELD_DESC = new org.apache.thrift.protocol.TField("distributed_mode", org.apache.thrift.protocol.TType.BOOL, (short)4);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TOptimizationOptionStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TOptimizationOptionTupleSchemeFactory();
@@ -20,12 +21,14 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
   public boolean is_view_optimize; // required
   public boolean enable_watchdog; // required
   public @org.apache.thrift.annotation.Nullable java.util.List<TFilterPushDownInfo> filter_push_down_info; // required
+  public boolean distributed_mode; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     IS_VIEW_OPTIMIZE((short)1, "is_view_optimize"),
     ENABLE_WATCHDOG((short)2, "enable_watchdog"),
-    FILTER_PUSH_DOWN_INFO((short)3, "filter_push_down_info");
+    FILTER_PUSH_DOWN_INFO((short)3, "filter_push_down_info"),
+    DISTRIBUTED_MODE((short)4, "distributed_mode");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -47,6 +50,8 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
           return ENABLE_WATCHDOG;
         case 3: // FILTER_PUSH_DOWN_INFO
           return FILTER_PUSH_DOWN_INFO;
+        case 4: // DISTRIBUTED_MODE
+          return DISTRIBUTED_MODE;
         default:
           return null;
       }
@@ -90,6 +95,7 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
   // isset id assignments
   private static final int __IS_VIEW_OPTIMIZE_ISSET_ID = 0;
   private static final int __ENABLE_WATCHDOG_ISSET_ID = 1;
+  private static final int __DISTRIBUTED_MODE_ISSET_ID = 2;
   private byte __isset_bitfield = 0;
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -101,6 +107,8 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
     tmpMap.put(_Fields.FILTER_PUSH_DOWN_INFO, new org.apache.thrift.meta_data.FieldMetaData("filter_push_down_info", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, TFilterPushDownInfo.class))));
+    tmpMap.put(_Fields.DISTRIBUTED_MODE, new org.apache.thrift.meta_data.FieldMetaData("distributed_mode", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TOptimizationOption.class, metaDataMap);
   }
@@ -111,7 +119,8 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
   public TOptimizationOption(
     boolean is_view_optimize,
     boolean enable_watchdog,
-    java.util.List<TFilterPushDownInfo> filter_push_down_info)
+    java.util.List<TFilterPushDownInfo> filter_push_down_info,
+    boolean distributed_mode)
   {
     this();
     this.is_view_optimize = is_view_optimize;
@@ -119,6 +128,8 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
     this.enable_watchdog = enable_watchdog;
     setEnable_watchdogIsSet(true);
     this.filter_push_down_info = filter_push_down_info;
+    this.distributed_mode = distributed_mode;
+    setDistributed_modeIsSet(true);
   }
 
   /**
@@ -135,6 +146,7 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
       }
       this.filter_push_down_info = __this__filter_push_down_info;
     }
+    this.distributed_mode = other.distributed_mode;
   }
 
   public TOptimizationOption deepCopy() {
@@ -148,6 +160,8 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
     setEnable_watchdogIsSet(false);
     this.enable_watchdog = false;
     this.filter_push_down_info = null;
+    setDistributed_modeIsSet(false);
+    this.distributed_mode = false;
   }
 
   public boolean isIs_view_optimize() {
@@ -237,6 +251,29 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
     }
   }
 
+  public boolean isDistributed_mode() {
+    return this.distributed_mode;
+  }
+
+  public TOptimizationOption setDistributed_mode(boolean distributed_mode) {
+    this.distributed_mode = distributed_mode;
+    setDistributed_modeIsSet(true);
+    return this;
+  }
+
+  public void unsetDistributed_mode() {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __DISTRIBUTED_MODE_ISSET_ID);
+  }
+
+  /** Returns true if field distributed_mode is set (has been assigned a value) and false otherwise */
+  public boolean isSetDistributed_mode() {
+    return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __DISTRIBUTED_MODE_ISSET_ID);
+  }
+
+  public void setDistributed_modeIsSet(boolean value) {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __DISTRIBUTED_MODE_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
     switch (field) {
     case IS_VIEW_OPTIMIZE:
@@ -263,6 +300,14 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
       }
       break;
 
+    case DISTRIBUTED_MODE:
+      if (value == null) {
+        unsetDistributed_mode();
+      } else {
+        setDistributed_mode((java.lang.Boolean)value);
+      }
+      break;
+
     }
   }
 
@@ -277,6 +322,9 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
 
     case FILTER_PUSH_DOWN_INFO:
       return getFilter_push_down_info();
+
+    case DISTRIBUTED_MODE:
+      return isDistributed_mode();
 
     }
     throw new java.lang.IllegalStateException();
@@ -295,6 +343,8 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
       return isSetEnable_watchdog();
     case FILTER_PUSH_DOWN_INFO:
       return isSetFilter_push_down_info();
+    case DISTRIBUTED_MODE:
+      return isSetDistributed_mode();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -339,6 +389,15 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
         return false;
     }
 
+    boolean this_present_distributed_mode = true;
+    boolean that_present_distributed_mode = true;
+    if (this_present_distributed_mode || that_present_distributed_mode) {
+      if (!(this_present_distributed_mode && that_present_distributed_mode))
+        return false;
+      if (this.distributed_mode != that.distributed_mode)
+        return false;
+    }
+
     return true;
   }
 
@@ -353,6 +412,8 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
     hashCode = hashCode * 8191 + ((isSetFilter_push_down_info()) ? 131071 : 524287);
     if (isSetFilter_push_down_info())
       hashCode = hashCode * 8191 + filter_push_down_info.hashCode();
+
+    hashCode = hashCode * 8191 + ((distributed_mode) ? 131071 : 524287);
 
     return hashCode;
   }
@@ -395,6 +456,16 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.compare(isSetDistributed_mode(), other.isSetDistributed_mode());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetDistributed_mode()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.distributed_mode, other.distributed_mode);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -430,6 +501,10 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
     } else {
       sb.append(this.filter_push_down_info);
     }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("distributed_mode:");
+    sb.append(this.distributed_mode);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -511,6 +586,14 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 4: // DISTRIBUTED_MODE
+            if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+              struct.distributed_mode = iprot.readBool();
+              struct.setDistributed_modeIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -544,6 +627,9 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
         }
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(DISTRIBUTED_MODE_FIELD_DESC);
+      oprot.writeBool(struct.distributed_mode);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -571,7 +657,10 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
       if (struct.isSetFilter_push_down_info()) {
         optionals.set(2);
       }
-      oprot.writeBitSet(optionals, 3);
+      if (struct.isSetDistributed_mode()) {
+        optionals.set(3);
+      }
+      oprot.writeBitSet(optionals, 4);
       if (struct.isSetIs_view_optimize()) {
         oprot.writeBool(struct.is_view_optimize);
       }
@@ -587,12 +676,15 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
           }
         }
       }
+      if (struct.isSetDistributed_mode()) {
+        oprot.writeBool(struct.distributed_mode);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TOptimizationOption struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(3);
+      java.util.BitSet incoming = iprot.readBitSet(4);
       if (incoming.get(0)) {
         struct.is_view_optimize = iprot.readBool();
         struct.setIs_view_optimizeIsSet(true);
@@ -614,6 +706,10 @@ public class TOptimizationOption implements org.apache.thrift.TBase<TOptimizatio
           }
         }
         struct.setFilter_push_down_infoIsSet(true);
+      }
+      if (incoming.get(3)) {
+        struct.distributed_mode = iprot.readBool();
+        struct.setDistributed_modeIsSet(true);
       }
     }
   }

@@ -54,7 +54,22 @@ public enum TExtArgumentType implements org.apache.thrift.TEnum {
   ColumnTextEncodingDict(43),
   ColumnListTextEncodingDict(44),
   ColumnTimestamp(45),
-  Timestamp(46);
+  Timestamp(46),
+  ColumnArrayInt8(47),
+  ColumnArrayInt16(48),
+  ColumnArrayInt32(49),
+  ColumnArrayInt64(50),
+  ColumnArrayFloat(51),
+  ColumnArrayDouble(52),
+  ColumnArrayBool(53),
+  ColumnListArrayInt8(54),
+  ColumnListArrayInt16(55),
+  ColumnListArrayInt32(56),
+  ColumnListArrayInt64(57),
+  ColumnListArrayFloat(58),
+  ColumnListArrayDouble(59),
+  ColumnListArrayBool(60),
+  GeoMultiLineString(61);
 
   private final int value;
 
@@ -170,6 +185,36 @@ public enum TExtArgumentType implements org.apache.thrift.TEnum {
         return ColumnTimestamp;
       case 46:
         return Timestamp;
+      case 47:
+        return ColumnArrayInt8;
+      case 48:
+        return ColumnArrayInt16;
+      case 49:
+        return ColumnArrayInt32;
+      case 50:
+        return ColumnArrayInt64;
+      case 51:
+        return ColumnArrayFloat;
+      case 52:
+        return ColumnArrayDouble;
+      case 53:
+        return ColumnArrayBool;
+      case 54:
+        return ColumnListArrayInt8;
+      case 55:
+        return ColumnListArrayInt16;
+      case 56:
+        return ColumnListArrayInt32;
+      case 57:
+        return ColumnListArrayInt64;
+      case 58:
+        return ColumnListArrayFloat;
+      case 59:
+        return ColumnListArrayDouble;
+      case 60:
+        return ColumnListArrayBool;
+      case 61:
+        return GeoMultiLineString;
       default:
         return null;
     }

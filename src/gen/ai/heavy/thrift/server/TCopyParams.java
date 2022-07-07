@@ -45,10 +45,12 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
   private static final org.apache.thrift.protocol.TField ODBC_DSN_FIELD_DESC = new org.apache.thrift.protocol.TField("odbc_dsn", org.apache.thrift.protocol.TType.STRING, (short)33);
   private static final org.apache.thrift.protocol.TField ODBC_CONNECTION_STRING_FIELD_DESC = new org.apache.thrift.protocol.TField("odbc_connection_string", org.apache.thrift.protocol.TType.STRING, (short)34);
   private static final org.apache.thrift.protocol.TField ODBC_SQL_SELECT_FIELD_DESC = new org.apache.thrift.protocol.TField("odbc_sql_select", org.apache.thrift.protocol.TType.STRING, (short)35);
-  private static final org.apache.thrift.protocol.TField ODBC_USERNAME_FIELD_DESC = new org.apache.thrift.protocol.TField("odbc_username", org.apache.thrift.protocol.TType.STRING, (short)36);
-  private static final org.apache.thrift.protocol.TField ODBC_PASSWORD_FIELD_DESC = new org.apache.thrift.protocol.TField("odbc_password", org.apache.thrift.protocol.TType.STRING, (short)37);
-  private static final org.apache.thrift.protocol.TField ODBC_CREDENTIAL_STRING_FIELD_DESC = new org.apache.thrift.protocol.TField("odbc_credential_string", org.apache.thrift.protocol.TType.STRING, (short)38);
-  private static final org.apache.thrift.protocol.TField ADD_METADATA_COLUMNS_FIELD_DESC = new org.apache.thrift.protocol.TField("add_metadata_columns", org.apache.thrift.protocol.TType.STRING, (short)39);
+  private static final org.apache.thrift.protocol.TField ODBC_SQL_ORDER_BY_FIELD_DESC = new org.apache.thrift.protocol.TField("odbc_sql_order_by", org.apache.thrift.protocol.TType.STRING, (short)36);
+  private static final org.apache.thrift.protocol.TField ODBC_USERNAME_FIELD_DESC = new org.apache.thrift.protocol.TField("odbc_username", org.apache.thrift.protocol.TType.STRING, (short)37);
+  private static final org.apache.thrift.protocol.TField ODBC_PASSWORD_FIELD_DESC = new org.apache.thrift.protocol.TField("odbc_password", org.apache.thrift.protocol.TType.STRING, (short)38);
+  private static final org.apache.thrift.protocol.TField ODBC_CREDENTIAL_STRING_FIELD_DESC = new org.apache.thrift.protocol.TField("odbc_credential_string", org.apache.thrift.protocol.TType.STRING, (short)39);
+  private static final org.apache.thrift.protocol.TField ADD_METADATA_COLUMNS_FIELD_DESC = new org.apache.thrift.protocol.TField("add_metadata_columns", org.apache.thrift.protocol.TType.STRING, (short)40);
+  private static final org.apache.thrift.protocol.TField TRIM_SPACES_FIELD_DESC = new org.apache.thrift.protocol.TField("trim_spaces", org.apache.thrift.protocol.TType.BOOL, (short)41);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new TCopyParamsStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new TCopyParamsTupleSchemeFactory();
@@ -112,10 +114,12 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
   public @org.apache.thrift.annotation.Nullable java.lang.String odbc_dsn; // required
   public @org.apache.thrift.annotation.Nullable java.lang.String odbc_connection_string; // required
   public @org.apache.thrift.annotation.Nullable java.lang.String odbc_sql_select; // required
+  public @org.apache.thrift.annotation.Nullable java.lang.String odbc_sql_order_by; // required
   public @org.apache.thrift.annotation.Nullable java.lang.String odbc_username; // required
   public @org.apache.thrift.annotation.Nullable java.lang.String odbc_password; // required
   public @org.apache.thrift.annotation.Nullable java.lang.String odbc_credential_string; // required
   public @org.apache.thrift.annotation.Nullable java.lang.String add_metadata_columns; // required
+  public boolean trim_spaces; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -178,10 +182,12 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     ODBC_DSN((short)33, "odbc_dsn"),
     ODBC_CONNECTION_STRING((short)34, "odbc_connection_string"),
     ODBC_SQL_SELECT((short)35, "odbc_sql_select"),
-    ODBC_USERNAME((short)36, "odbc_username"),
-    ODBC_PASSWORD((short)37, "odbc_password"),
-    ODBC_CREDENTIAL_STRING((short)38, "odbc_credential_string"),
-    ADD_METADATA_COLUMNS((short)39, "add_metadata_columns");
+    ODBC_SQL_ORDER_BY((short)36, "odbc_sql_order_by"),
+    ODBC_USERNAME((short)37, "odbc_username"),
+    ODBC_PASSWORD((short)38, "odbc_password"),
+    ODBC_CREDENTIAL_STRING((short)39, "odbc_credential_string"),
+    ADD_METADATA_COLUMNS((short)40, "add_metadata_columns"),
+    TRIM_SPACES((short)41, "trim_spaces");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -267,14 +273,18 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
           return ODBC_CONNECTION_STRING;
         case 35: // ODBC_SQL_SELECT
           return ODBC_SQL_SELECT;
-        case 36: // ODBC_USERNAME
+        case 36: // ODBC_SQL_ORDER_BY
+          return ODBC_SQL_ORDER_BY;
+        case 37: // ODBC_USERNAME
           return ODBC_USERNAME;
-        case 37: // ODBC_PASSWORD
+        case 38: // ODBC_PASSWORD
           return ODBC_PASSWORD;
-        case 38: // ODBC_CREDENTIAL_STRING
+        case 39: // ODBC_CREDENTIAL_STRING
           return ODBC_CREDENTIAL_STRING;
-        case 39: // ADD_METADATA_COLUMNS
+        case 40: // ADD_METADATA_COLUMNS
           return ADD_METADATA_COLUMNS;
+        case 41: // TRIM_SPACES
+          return TRIM_SPACES;
         default:
           return null;
       }
@@ -326,6 +336,7 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
   private static final int __SOURCE_SRID_ISSET_ID = 7;
   private static final int __RASTER_SCANLINES_PER_THREAD_ISSET_ID = 8;
   private static final int __RASTER_POINT_COMPUTE_ANGLE_ISSET_ID = 9;
+  private static final int __TRIM_SPACES_ISSET_ID = 10;
   private short __isset_bitfield = 0;
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -400,6 +411,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.ODBC_SQL_SELECT, new org.apache.thrift.meta_data.FieldMetaData("odbc_sql_select", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.ODBC_SQL_ORDER_BY, new org.apache.thrift.meta_data.FieldMetaData("odbc_sql_order_by", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.ODBC_USERNAME, new org.apache.thrift.meta_data.FieldMetaData("odbc_username", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.ODBC_PASSWORD, new org.apache.thrift.meta_data.FieldMetaData("odbc_password", org.apache.thrift.TFieldRequirementType.DEFAULT, 
@@ -408,6 +421,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.ADD_METADATA_COLUMNS, new org.apache.thrift.meta_data.FieldMetaData("add_metadata_columns", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.TRIM_SPACES, new org.apache.thrift.meta_data.FieldMetaData("trim_spaces", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TCopyParams.class, metaDataMap);
   }
@@ -477,10 +492,12 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     java.lang.String odbc_dsn,
     java.lang.String odbc_connection_string,
     java.lang.String odbc_sql_select,
+    java.lang.String odbc_sql_order_by,
     java.lang.String odbc_username,
     java.lang.String odbc_password,
     java.lang.String odbc_credential_string,
-    java.lang.String add_metadata_columns)
+    java.lang.String add_metadata_columns,
+    boolean trim_spaces)
   {
     this();
     this.delimiter = delimiter;
@@ -528,10 +545,13 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     this.odbc_dsn = odbc_dsn;
     this.odbc_connection_string = odbc_connection_string;
     this.odbc_sql_select = odbc_sql_select;
+    this.odbc_sql_order_by = odbc_sql_order_by;
     this.odbc_username = odbc_username;
     this.odbc_password = odbc_password;
     this.odbc_credential_string = odbc_credential_string;
     this.add_metadata_columns = add_metadata_columns;
+    this.trim_spaces = trim_spaces;
+    setTrim_spacesIsSet(true);
   }
 
   /**
@@ -624,6 +644,9 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     if (other.isSetOdbc_sql_select()) {
       this.odbc_sql_select = other.odbc_sql_select;
     }
+    if (other.isSetOdbc_sql_order_by()) {
+      this.odbc_sql_order_by = other.odbc_sql_order_by;
+    }
     if (other.isSetOdbc_username()) {
       this.odbc_username = other.odbc_username;
     }
@@ -636,6 +659,7 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     if (other.isSetAdd_metadata_columns()) {
       this.add_metadata_columns = other.add_metadata_columns;
     }
+    this.trim_spaces = other.trim_spaces;
   }
 
   public TCopyParams deepCopy() {
@@ -695,10 +719,13 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     this.odbc_dsn = null;
     this.odbc_connection_string = null;
     this.odbc_sql_select = null;
+    this.odbc_sql_order_by = null;
     this.odbc_username = null;
     this.odbc_password = null;
     this.odbc_credential_string = null;
     this.add_metadata_columns = null;
+    setTrim_spacesIsSet(false);
+    this.trim_spaces = false;
   }
 
   @org.apache.thrift.annotation.Nullable
@@ -1605,6 +1632,31 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
   }
 
   @org.apache.thrift.annotation.Nullable
+  public java.lang.String getOdbc_sql_order_by() {
+    return this.odbc_sql_order_by;
+  }
+
+  public TCopyParams setOdbc_sql_order_by(@org.apache.thrift.annotation.Nullable java.lang.String odbc_sql_order_by) {
+    this.odbc_sql_order_by = odbc_sql_order_by;
+    return this;
+  }
+
+  public void unsetOdbc_sql_order_by() {
+    this.odbc_sql_order_by = null;
+  }
+
+  /** Returns true if field odbc_sql_order_by is set (has been assigned a value) and false otherwise */
+  public boolean isSetOdbc_sql_order_by() {
+    return this.odbc_sql_order_by != null;
+  }
+
+  public void setOdbc_sql_order_byIsSet(boolean value) {
+    if (!value) {
+      this.odbc_sql_order_by = null;
+    }
+  }
+
+  @org.apache.thrift.annotation.Nullable
   public java.lang.String getOdbc_username() {
     return this.odbc_username;
   }
@@ -1702,6 +1754,29 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     if (!value) {
       this.add_metadata_columns = null;
     }
+  }
+
+  public boolean isTrim_spaces() {
+    return this.trim_spaces;
+  }
+
+  public TCopyParams setTrim_spaces(boolean trim_spaces) {
+    this.trim_spaces = trim_spaces;
+    setTrim_spacesIsSet(true);
+    return this;
+  }
+
+  public void unsetTrim_spaces() {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __TRIM_SPACES_ISSET_ID);
+  }
+
+  /** Returns true if field trim_spaces is set (has been assigned a value) and false otherwise */
+  public boolean isSetTrim_spaces() {
+    return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __TRIM_SPACES_ISSET_ID);
+  }
+
+  public void setTrim_spacesIsSet(boolean value) {
+    __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __TRIM_SPACES_ISSET_ID, value);
   }
 
   public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
@@ -1986,6 +2061,14 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       }
       break;
 
+    case ODBC_SQL_ORDER_BY:
+      if (value == null) {
+        unsetOdbc_sql_order_by();
+      } else {
+        setOdbc_sql_order_by((java.lang.String)value);
+      }
+      break;
+
     case ODBC_USERNAME:
       if (value == null) {
         unsetOdbc_username();
@@ -2015,6 +2098,14 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         unsetAdd_metadata_columns();
       } else {
         setAdd_metadata_columns((java.lang.String)value);
+      }
+      break;
+
+    case TRIM_SPACES:
+      if (value == null) {
+        unsetTrim_spaces();
+      } else {
+        setTrim_spaces((java.lang.Boolean)value);
       }
       break;
 
@@ -2129,6 +2220,9 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     case ODBC_SQL_SELECT:
       return getOdbc_sql_select();
 
+    case ODBC_SQL_ORDER_BY:
+      return getOdbc_sql_order_by();
+
     case ODBC_USERNAME:
       return getOdbc_username();
 
@@ -2140,6 +2234,9 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
 
     case ADD_METADATA_COLUMNS:
       return getAdd_metadata_columns();
+
+    case TRIM_SPACES:
+      return isTrim_spaces();
 
     }
     throw new java.lang.IllegalStateException();
@@ -2222,6 +2319,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       return isSetOdbc_connection_string();
     case ODBC_SQL_SELECT:
       return isSetOdbc_sql_select();
+    case ODBC_SQL_ORDER_BY:
+      return isSetOdbc_sql_order_by();
     case ODBC_USERNAME:
       return isSetOdbc_username();
     case ODBC_PASSWORD:
@@ -2230,6 +2329,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       return isSetOdbc_credential_string();
     case ADD_METADATA_COLUMNS:
       return isSetAdd_metadata_columns();
+    case TRIM_SPACES:
+      return isSetTrim_spaces();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -2562,6 +2663,15 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         return false;
     }
 
+    boolean this_present_odbc_sql_order_by = true && this.isSetOdbc_sql_order_by();
+    boolean that_present_odbc_sql_order_by = true && that.isSetOdbc_sql_order_by();
+    if (this_present_odbc_sql_order_by || that_present_odbc_sql_order_by) {
+      if (!(this_present_odbc_sql_order_by && that_present_odbc_sql_order_by))
+        return false;
+      if (!this.odbc_sql_order_by.equals(that.odbc_sql_order_by))
+        return false;
+    }
+
     boolean this_present_odbc_username = true && this.isSetOdbc_username();
     boolean that_present_odbc_username = true && that.isSetOdbc_username();
     if (this_present_odbc_username || that_present_odbc_username) {
@@ -2595,6 +2705,15 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       if (!(this_present_add_metadata_columns && that_present_add_metadata_columns))
         return false;
       if (!this.add_metadata_columns.equals(that.add_metadata_columns))
+        return false;
+    }
+
+    boolean this_present_trim_spaces = true;
+    boolean that_present_trim_spaces = true;
+    if (this_present_trim_spaces || that_present_trim_spaces) {
+      if (!(this_present_trim_spaces && that_present_trim_spaces))
+        return false;
+      if (this.trim_spaces != that.trim_spaces)
         return false;
     }
 
@@ -2725,6 +2844,10 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     if (isSetOdbc_sql_select())
       hashCode = hashCode * 8191 + odbc_sql_select.hashCode();
 
+    hashCode = hashCode * 8191 + ((isSetOdbc_sql_order_by()) ? 131071 : 524287);
+    if (isSetOdbc_sql_order_by())
+      hashCode = hashCode * 8191 + odbc_sql_order_by.hashCode();
+
     hashCode = hashCode * 8191 + ((isSetOdbc_username()) ? 131071 : 524287);
     if (isSetOdbc_username())
       hashCode = hashCode * 8191 + odbc_username.hashCode();
@@ -2740,6 +2863,8 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     hashCode = hashCode * 8191 + ((isSetAdd_metadata_columns()) ? 131071 : 524287);
     if (isSetAdd_metadata_columns())
       hashCode = hashCode * 8191 + add_metadata_columns.hashCode();
+
+    hashCode = hashCode * 8191 + ((trim_spaces) ? 131071 : 524287);
 
     return hashCode;
   }
@@ -3102,6 +3227,16 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         return lastComparison;
       }
     }
+    lastComparison = java.lang.Boolean.compare(isSetOdbc_sql_order_by(), other.isSetOdbc_sql_order_by());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetOdbc_sql_order_by()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.odbc_sql_order_by, other.odbc_sql_order_by);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     lastComparison = java.lang.Boolean.compare(isSetOdbc_username(), other.isSetOdbc_username());
     if (lastComparison != 0) {
       return lastComparison;
@@ -3138,6 +3273,16 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     }
     if (isSetAdd_metadata_columns()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.add_metadata_columns, other.add_metadata_columns);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = java.lang.Boolean.compare(isSetTrim_spaces(), other.isSetTrim_spaces());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetTrim_spaces()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.trim_spaces, other.trim_spaces);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -3403,6 +3548,14 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     }
     first = false;
     if (!first) sb.append(", ");
+    sb.append("odbc_sql_order_by:");
+    if (this.odbc_sql_order_by == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.odbc_sql_order_by);
+    }
+    first = false;
+    if (!first) sb.append(", ");
     sb.append("odbc_username:");
     if (this.odbc_username == null) {
       sb.append("null");
@@ -3433,6 +3586,10 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
     } else {
       sb.append(this.add_metadata_columns);
     }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("trim_spaces:");
+    sb.append(this.trim_spaces);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -3759,7 +3916,15 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 36: // ODBC_USERNAME
+          case 36: // ODBC_SQL_ORDER_BY
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.odbc_sql_order_by = iprot.readString();
+              struct.setOdbc_sql_order_byIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 37: // ODBC_USERNAME
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.odbc_username = iprot.readString();
               struct.setOdbc_usernameIsSet(true);
@@ -3767,7 +3932,7 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 37: // ODBC_PASSWORD
+          case 38: // ODBC_PASSWORD
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.odbc_password = iprot.readString();
               struct.setOdbc_passwordIsSet(true);
@@ -3775,7 +3940,7 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 38: // ODBC_CREDENTIAL_STRING
+          case 39: // ODBC_CREDENTIAL_STRING
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.odbc_credential_string = iprot.readString();
               struct.setOdbc_credential_stringIsSet(true);
@@ -3783,10 +3948,18 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 39: // ADD_METADATA_COLUMNS
+          case 40: // ADD_METADATA_COLUMNS
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.add_metadata_columns = iprot.readString();
               struct.setAdd_metadata_columnsIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 41: // TRIM_SPACES
+            if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+              struct.trim_spaces = iprot.readBool();
+              struct.setTrim_spacesIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -3961,6 +4134,11 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         oprot.writeString(struct.odbc_sql_select);
         oprot.writeFieldEnd();
       }
+      if (struct.odbc_sql_order_by != null) {
+        oprot.writeFieldBegin(ODBC_SQL_ORDER_BY_FIELD_DESC);
+        oprot.writeString(struct.odbc_sql_order_by);
+        oprot.writeFieldEnd();
+      }
       if (struct.odbc_username != null) {
         oprot.writeFieldBegin(ODBC_USERNAME_FIELD_DESC);
         oprot.writeString(struct.odbc_username);
@@ -3981,6 +4159,9 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         oprot.writeString(struct.add_metadata_columns);
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(TRIM_SPACES_FIELD_DESC);
+      oprot.writeBool(struct.trim_spaces);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -4104,19 +4285,25 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       if (struct.isSetOdbc_sql_select()) {
         optionals.set(34);
       }
-      if (struct.isSetOdbc_username()) {
+      if (struct.isSetOdbc_sql_order_by()) {
         optionals.set(35);
       }
-      if (struct.isSetOdbc_password()) {
+      if (struct.isSetOdbc_username()) {
         optionals.set(36);
       }
-      if (struct.isSetOdbc_credential_string()) {
+      if (struct.isSetOdbc_password()) {
         optionals.set(37);
       }
-      if (struct.isSetAdd_metadata_columns()) {
+      if (struct.isSetOdbc_credential_string()) {
         optionals.set(38);
       }
-      oprot.writeBitSet(optionals, 39);
+      if (struct.isSetAdd_metadata_columns()) {
+        optionals.set(39);
+      }
+      if (struct.isSetTrim_spaces()) {
+        optionals.set(40);
+      }
+      oprot.writeBitSet(optionals, 41);
       if (struct.isSetDelimiter()) {
         oprot.writeString(struct.delimiter);
       }
@@ -4222,6 +4409,9 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       if (struct.isSetOdbc_sql_select()) {
         oprot.writeString(struct.odbc_sql_select);
       }
+      if (struct.isSetOdbc_sql_order_by()) {
+        oprot.writeString(struct.odbc_sql_order_by);
+      }
       if (struct.isSetOdbc_username()) {
         oprot.writeString(struct.odbc_username);
       }
@@ -4234,12 +4424,15 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
       if (struct.isSetAdd_metadata_columns()) {
         oprot.writeString(struct.add_metadata_columns);
       }
+      if (struct.isSetTrim_spaces()) {
+        oprot.writeBool(struct.trim_spaces);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TCopyParams struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(39);
+      java.util.BitSet incoming = iprot.readBitSet(41);
       if (incoming.get(0)) {
         struct.delimiter = iprot.readString();
         struct.setDelimiterIsSet(true);
@@ -4381,20 +4574,28 @@ public class TCopyParams implements org.apache.thrift.TBase<TCopyParams, TCopyPa
         struct.setOdbc_sql_selectIsSet(true);
       }
       if (incoming.get(35)) {
+        struct.odbc_sql_order_by = iprot.readString();
+        struct.setOdbc_sql_order_byIsSet(true);
+      }
+      if (incoming.get(36)) {
         struct.odbc_username = iprot.readString();
         struct.setOdbc_usernameIsSet(true);
       }
-      if (incoming.get(36)) {
+      if (incoming.get(37)) {
         struct.odbc_password = iprot.readString();
         struct.setOdbc_passwordIsSet(true);
       }
-      if (incoming.get(37)) {
+      if (incoming.get(38)) {
         struct.odbc_credential_string = iprot.readString();
         struct.setOdbc_credential_stringIsSet(true);
       }
-      if (incoming.get(38)) {
+      if (incoming.get(39)) {
         struct.add_metadata_columns = iprot.readString();
         struct.setAdd_metadata_columnsIsSet(true);
+      }
+      if (incoming.get(40)) {
+        struct.trim_spaces = iprot.readBool();
+        struct.setTrim_spacesIsSet(true);
       }
     }
   }
