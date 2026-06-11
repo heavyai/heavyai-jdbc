@@ -1,12 +1,11 @@
 package com.mapd.common;
 
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.SSLSocketFactory;
-import org.apache.http.conn.ssl.X509HostnameVerifier;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContextBuilder;
-import org.apache.http.ssl.SSLContexts;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
+import org.apache.hc.client5.http.ssl.DefaultHostnameVerifier;
+import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
+import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.apache.thrift.transport.THttpClient;
 import org.apache.thrift.transport.TSSLTransportFactory;
 import org.apache.thrift.transport.TServerSocket;
@@ -15,21 +14,14 @@ import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.security.GeneralSecurityException;
 import java.security.KeyStore;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.util.Arrays;
 
+import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
-import javax.net.ssl.X509TrustManager;
 
 public class SockTransportProperties {
   final static org.slf4j.Logger HEAVYDBLOGGER =
@@ -117,9 +109,9 @@ public class SockTransportProperties {
           String store_name,
           String passwd,
           boolean validate_server_name) throws Exception {
-    x509HostnameVerifier_ = (validate_server_name == true)
-            ? SSLConnectionSocketFactory.STRICT_HOSTNAME_VERIFIER
-            : SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
+    hostnameVerifier_ = (validate_server_name == true)
+            ? new DefaultHostnameVerifier()
+            : NoopHostnameVerifier.INSTANCE;
     transportType = tT;
 
     char[] store_password = "".toCharArray();
@@ -162,9 +154,9 @@ public class SockTransportProperties {
 
   private SockTransportProperties(
           TransportType transportType, boolean validate_server_name) throws Exception {
-    x509HostnameVerifier_ = (validate_server_name == true)
-            ? SSLConnectionSocketFactory.STRICT_HOSTNAME_VERIFIER
-            : SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
+    hostnameVerifier_ = (validate_server_name == true)
+            ? new DefaultHostnameVerifier()
+            : NoopHostnameVerifier.INSTANCE;
     this.transportType = transportType;
     switch (transportType) {
       case encryptedClientDefaultTrustStore:
@@ -263,13 +255,14 @@ public class SockTransportProperties {
     try {
       SSLContext sc = SSLContext.getInstance("TLS");
       sc.init(null, trustManagers, new java.security.SecureRandom());
-      SSLConnectionSocketFactory sslConnectionSocketFactory = null;
-      sslConnectionSocketFactory =
-              new SSLConnectionSocketFactory(sc, x509HostnameVerifier_);
+      SSLConnectionSocketFactory sslConnectionSocketFactory =
+              new SSLConnectionSocketFactory(sc, hostnameVerifier_);
 
       CloseableHttpClient closeableHttpClient =
               HttpClients.custom()
-                      .setSSLSocketFactory(sslConnectionSocketFactory)
+                      .setConnectionManager(PoolingHttpClientConnectionManagerBuilder.create()
+                              .setSSLSocketFactory(sslConnectionSocketFactory)
+                              .build())
                       .build();
       transport =
               new THttpClient("https://" + server_host + ":" + port, closeableHttpClient);
@@ -338,6 +331,5 @@ public class SockTransportProperties {
   private KeyManager[] keyManagers;
   private String key_store_name = null;
   private char[] key_store_password = null;
-  X509HostnameVerifier x509HostnameVerifier_ =
-          SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER;
+  HostnameVerifier hostnameVerifier_ = new DefaultHostnameVerifier();
 }
