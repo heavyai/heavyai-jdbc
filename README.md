@@ -1,4 +1,7 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/ai.heavy/heavyai-jdbc/badge.svg)](https://maven-badges.herokuapp.com/maven-central/ai.heavy/heavyai-jdbc)
+> [!IMPORTANT]
+> As of 05/27/2026 this project has been deprecated. **heavyai-jdbc** is not maintained anymore. Updated **heavyai-jdbc** is available in the [heavyDB repo](https://github.com/heavyai/heavydb).
+>
+>
 
 ## Specifying Maven Dependency
 
