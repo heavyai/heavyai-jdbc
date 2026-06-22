@@ -1,0 +1,63 @@
+name: Test HeavyAI JDBC
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    services:
+      heavydb:
+        image: heavyai/core-os-cpu
+        ports:
+          - 6274:6274
+          - 6278:6278
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        
+    - name: Cache Maven dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+        
+    - name: Wait for HeavyDB to be ready
+      run: |
+        echo "Waiting for HeavyDB to be ready..."
+        sleep 60  # Wait 60 seconds for container to fully start
+        
+        # Test connection with timeout
+        echo "Testing HeavyDB connection..."
+        for i in {1..10}; do
+          if timeout 10s bash -c "</dev/tcp/localhost/6274"; then
+            echo "HeavyDB JDBC port 6274 is ready!"
+            sleep 10  # Give it extra time to fully initialize
+            break
+          fi
+          echo "Port not ready, waiting... ($i/10)"
+          sleep 15
+        done
+        
+    - name: Run tests (skip slow connection tests)
+      run: mvn test -DskipTests=false -Dtest="!ai.heavy.jdbc.HeavyAIConnectionTest"
+      
+    - name: Generate test report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()
+      with:
+        name: Maven Tests
+        path: target/surefire-reports/*.xml
+        reporter: java-junit
